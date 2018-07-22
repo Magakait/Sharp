@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 89749b11ebeb99f4e96b3971de855262
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - nodeSprite: {instanceID: 0}
+  - entropyColor: {fileID: 11400000, guid: ffd7b683683b6be4fa9c1f448a68f26f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
