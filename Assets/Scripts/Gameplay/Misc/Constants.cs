@@ -58,7 +58,7 @@ public static class Constants
         Quaternion.Euler(Eulers[3])
     };
 
-    public static readonly string Root = Application.isEditor ? "Sharp/" : string.Empty;
+    public static readonly string Root = Application.isEditor ? "Build/" : string.Empty;
     public static readonly string EditorRoot = Root + "Editor/";
     public static readonly string SettingsRoot = Root + "Settings/";
     public static readonly string ThemeRoot = Root + "Themes/";
