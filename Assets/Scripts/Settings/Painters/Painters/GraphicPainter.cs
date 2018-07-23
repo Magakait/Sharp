@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Graphics))]
 [AddComponentMenu("Painters/Graphic Painter")]
-public class GraphicPainter : BaseCosmetic<ColorVariable>
+public class GraphicPainter : BaseCosmetic
 {
     public override void Refresh()
     {

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public abstract class BaseCosmetic<T> : MonoBehaviour
+public abstract class BaseCosmetic : MonoBehaviour
 {
     [SerializeField]
-    private T variable;
-    public T Variable
+    private ColorVariable variable;
+    public ColorVariable Variable
     {
         get
         {
@@ -21,10 +21,4 @@ public abstract class BaseCosmetic<T> : MonoBehaviour
         Refresh();
 
     public abstract void Refresh();
-
-    public static void RefreshAll()
-    {
-        foreach (BaseCosmetic<T> cosmetic in FindObjectsOfType<BaseCosmetic<T>>())
-            cosmetic.Refresh();
-    }
 }

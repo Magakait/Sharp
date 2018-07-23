@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
 [AddComponentMenu("Painters/Particle Painter")]
-public class ParticlePainter : BaseCosmetic<ColorVariable>
+public class ParticlePainter : BaseCosmetic
 {
     public override void Refresh()
     {

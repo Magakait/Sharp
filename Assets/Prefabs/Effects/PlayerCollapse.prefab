@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 198023628953967264}
   - component: {fileID: 199604910574811964}
   - component: {fileID: 114891659637835030}
-  - component: {fileID: 114893177071988300}
   m_Layer: 0
   m_Name: PlayerCollapse
   m_TagString: Untagged
@@ -55,18 +54,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 2bbe78f7b2a503a4f8630f8681c69519, type: 2}
---- !u!114 &114893177071988300
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577833993516876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc3db34ec00eb644c8676d2ea0025d7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  variable: {fileID: 11400000, guid: b94f1313dd694fe4d829dc837ece58f9, type: 2}
 --- !u!198 &198023628953967264
 ParticleSystem:
   m_ObjectHideFlags: 1

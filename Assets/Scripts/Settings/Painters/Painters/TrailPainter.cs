@@ -2,7 +2,7 @@
 
 [RequireComponent(typeof(TrailRenderer))]
 [AddComponentMenu("Painters/Trail Painter")]
-public class TrailPainter : BaseCosmetic<ColorVariable>
+public class TrailPainter : BaseCosmetic
 {
     public override void Refresh()
     {

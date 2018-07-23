@@ -23,9 +23,12 @@ public class ThemeSettings : MonoBehaviour
         RefreshPainters();
     }
 
-    public void DisplayColor(ColorVariable variable) => 
+    public void DisplayColor(ColorVariable variable) =>
         inputCode.text = ColorUtility.ToHtmlStringRGB(variable);
 
-    public void RefreshPainters() => Debug.Log(1);
-        //BasePainter.RefreshAll();
+    public void RefreshPainters()
+    {
+        foreach (BaseCosmetic painter in FindObjectsOfType<BaseCosmetic>())
+            painter.Refresh();
+    }
 }
