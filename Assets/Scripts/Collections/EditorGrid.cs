@@ -1,5 +1,3 @@
-using System.Linq;
-
 using UnityEngine;
 
 using DG.Tweening;
@@ -19,13 +17,6 @@ public class EditorGrid : MonoBehaviour
 
     public void Toggle(bool value) =>
         animation[0].Play(value);
-
-    public void Find(int id)
-    {
-        SerializableObject target = LevelManager.Main.instances.FirstOrDefault(i => i.Id == id);
-        if (target)
-            CameraManager.Move(target.transform.position);
-    }
 
     public static Vector3 Clamp(Vector3 position)
     {

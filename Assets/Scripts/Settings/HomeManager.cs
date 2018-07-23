@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-class SettingsManager : MonoBehaviour
+class HomeManager : MonoBehaviour
 {
     public VoidEvent onHome;
     public BoolEvent onCheck;
