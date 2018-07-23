@@ -35,7 +35,7 @@ public static class Constants
     public const float Time = .2f;
 
     public static readonly Vector2[] Directions =
-{
+    {
         Vector2.up,
         Vector2.right,
         Vector2.down,
@@ -59,8 +59,7 @@ public static class Constants
     };
 
     public static readonly string Root = Application.isEditor ? "Build/" : string.Empty;
-    public static readonly string EditorRoot = Root + "Editor/";
-    public static readonly string SettingsRoot = Root + "Settings/";
     public static readonly string CollectionRoot = Root + "Collections/";
-    public static readonly string PatternRoot = Root + "Patterns/";
+    public static readonly string SettingsRoot = Root + "Settings/";
+    public static readonly string EditorRoot = Root + "Editor/";
 }

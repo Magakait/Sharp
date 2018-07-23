@@ -1,4 +1,3 @@
-using System.IO;
 using System.Collections;
 
 using UnityEngine;
@@ -8,13 +7,11 @@ public class PatternNothing : MonoBehaviour
     public new SpriteRenderer renderer;
 
     [Space(10)]
-    public ColorVariable colorMatter;
-    public ColorVariable colorHollow;
+    public int size;
+    public int pixelsPerUnit;
+    public float iterationRate;
 
-    [Space(10)]
-    public int size = 251;
-    public int pixelsPerUnit = 10;
-    public float iterationRate = 0.125f;
+    public bool Playing { get; set; } = true;
 
     private Texture2D texture;
 
@@ -42,7 +39,7 @@ public class PatternNothing : MonoBehaviour
     {
         lifeMin = Random.Range(1, 8);
         lifeMax = Random.Range(lifeMin, 8);
-        deathMax = Random.Range(1, 8);
+        deathMax = Random.Range(deathMin, 8);
 
         for (int i = 1; i <= size; i++)
             for (int j = 1; j <= size; j++)
@@ -55,10 +52,9 @@ public class PatternNothing : MonoBehaviour
 
     private void Display()
     {
-        Color empty = new Color(0, 0, 0, 0);
         for (int i = 1; i <= size; i++)
             for (int j = 1; j <= size; j++)
-                texture.SetPixel(i, j, gridNew[i, j] ? colorMatter.Value : empty);
+                texture.SetPixel(i, j, gridNew[i, j] ? Color.white : Color.clear);
 
         texture.Apply();
         renderer.sprite = Sprite.Create
@@ -89,7 +85,9 @@ public class PatternNothing : MonoBehaviour
                 }
 
             Display();
+
             yield return new WaitForSeconds(iterationRate);
+            yield return new WaitUntil(() => Playing);
         }
     }
 
@@ -102,21 +100,5 @@ public class PatternNothing : MonoBehaviour
                     result++;
 
         return gridOld[x, y] ? result - 1 : result;
-    }
-
-    public void Save()
-    {
-        Texture2D image = new Texture2D(size * pixelsPerUnit, size * pixelsPerUnit, TextureFormat.RGB24, false);
-        for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-            {
-                Color color = gridNew[i, j] ? colorMatter : colorHollow;
-                for (int xMin = i * pixelsPerUnit, xMax = (i + 1) * pixelsPerUnit; xMin < xMax; xMin++)
-                    for (int yMin = j * pixelsPerUnit, yMax = (j + 1) * pixelsPerUnit; yMin < yMax; yMin++)
-                        image.SetPixel(xMin, yMin, color);
-            }
-
-        Directory.CreateDirectory(Constants.PatternRoot);
-        File.WriteAllBytes(EngineUtility.NextFile(Constants.PatternRoot, "Pattern", ".png"), image.EncodeToPNG());
     }
 }
