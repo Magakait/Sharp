@@ -566,7 +566,6 @@ GameObject:
   - component: {fileID: 708580501}
   - component: {fileID: 708580500}
   - component: {fileID: 708580499}
-  - component: {fileID: 708580497}
   - component: {fileID: 708580493}
   m_Layer: 5
   m_Name: Canvas
@@ -587,45 +586,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scale: 1
---- !u!114 &708580497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 708580492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967e102883dc952459cd34e853530fe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: {fileID: 11400000, guid: 784da78245aa52640a27ec6f121a02e0, type: 2}
-  onDown:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1478921557}
-        m_MethodName: Toggle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: MainMenu
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 1d3c986977134ec4c8859d40eb386c6a, type: 2}
-        m_MethodName: ToggleCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &708580499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,6 +842,45 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b6b5efa5c976d40a68c971d2343554, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &914840404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1207807647516066, guid: c9b6b5efa5c976d40a68c971d2343554,
+    type: 2}
+  m_PrefabInternal: {fileID: 914840403}
+--- !u!114 &914840405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
+    type: 2}
+  m_PrefabInternal: {fileID: 914840403}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &914840406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 914840404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e102883dc952459cd34e853530fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: {fileID: 11400000, guid: 784da78245aa52640a27ec6f121a02e0, type: 2}
+  onDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1d3c986977134ec4c8859d40eb386c6a, type: 2}
+        m_MethodName: Click
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 914840405}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!224 &1003633508 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224022538055835530, guid: c9b6b5efa5c976d40a68c971d2343554,
@@ -936,7 +935,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1478921556}
   - component: {fileID: 1478921558}
-  - component: {fileID: 1478921557}
   - component: {fileID: 1478921559}
   m_Layer: 5
   m_Name: Menu
@@ -966,20 +964,6 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: 20}
   m_SizeDelta: {x: 35, y: -40}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1478921557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1478921555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774e47994fe22b945ad36dcdd42dca6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visible: 1
-  scale: 1
-  offset: {x: 0, y: 0}
 --- !u!225 &1478921558
 CanvasGroup:
   m_ObjectHideFlags: 0
