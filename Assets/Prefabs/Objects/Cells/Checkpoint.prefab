@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 199608048937679122}
   - component: {fileID: 198392023537164126}
   - component: {fileID: 114642104739494444}
-  - component: {fileID: 114920973451050318}
   m_Layer: 8
   m_Name: Spire
   m_TagString: Untagged
@@ -289,18 +288,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 609f8b3c3151d2f48bf1d7830b720a90, type: 2}
---- !u!114 &114920973451050318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1707631825235394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc3db34ec00eb644c8676d2ea0025d7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  variable: {fileID: 11400000, guid: b94f1313dd694fe4d829dc837ece58f9, type: 2}
 --- !u!198 &198392023537164126
 ParticleSystem:
   m_ObjectHideFlags: 1
