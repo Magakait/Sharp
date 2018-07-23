@@ -934,7 +934,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478921556}
-  - component: {fileID: 1478921558}
   - component: {fileID: 1478921559}
   m_Layer: 5
   m_Name: Menu
@@ -964,17 +963,6 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: 20}
   m_SizeDelta: {x: 35, y: -40}
   m_Pivot: {x: 0, y: 0}
---- !u!225 &1478921558
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1478921555}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1478921559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5868,7 +5856,7 @@ MonoBehaviour:
   renderer: {fileID: 1766551102}
   size: 251
   pixelsPerUnit: 16
-  iterationRate: 0.125
+  iterationRate: 0.1
 --- !u!4 &1766551101
 Transform:
   m_ObjectHideFlags: 0
