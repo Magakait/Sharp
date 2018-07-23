@@ -76,34 +76,6 @@ public class EngineUtility : ScriptableObject
 
     #endregion
 
-    #region cursor
-
-    public void SetCursor(bool visible)
-    {
-        Cursor.visible = visible;
-    }
-
-    public void ToggleCursor()
-    {
-        SetCursor(!Cursor.visible);
-    }
-
-    #endregion
-
-    #region time
-
-    public void SetTime(bool isOne)
-    {
-        Time.timeScale = isOne ? 1 : 0;
-    }
-
-    public void ToggleTime()
-    {
-        SetTime(Time.timeScale == 0);
-    }
-
-    #endregion
-
     #region openers
 
     public void Quit()
