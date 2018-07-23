@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BaseCosmetic : MonoBehaviour
+public abstract class BasePainter : MonoBehaviour
 {
     [SerializeField]
     private ColorVariable variable;

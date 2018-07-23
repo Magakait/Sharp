@@ -28,7 +28,7 @@ public class ThemeSettings : MonoBehaviour
 
     public void RefreshPainters()
     {
-        foreach (BaseCosmetic painter in FindObjectsOfType<BaseCosmetic>())
+        foreach (BasePainter painter in FindObjectsOfType<BasePainter>())
             painter.Refresh();
     }
 }

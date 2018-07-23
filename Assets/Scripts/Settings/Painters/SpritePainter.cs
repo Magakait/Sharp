@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [AddComponentMenu("Painters/Sprite Painter")]
-public class SpritePainter : BaseCosmetic
+public class SpritePainter : BasePainter
 {
     public override void Refresh()
     {
