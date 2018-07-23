@@ -9640,7 +9640,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000008793769
+      value: 0.000035571647
       objectReference: {fileID: 0}
     - target: {fileID: 114008329011282946, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
@@ -19508,6 +19508,7 @@ MonoBehaviour:
     m_TypeName: BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   versionText: {fileID: 1737641685}
   buffer: {fileID: 11400000, guid: 3628f6c979a87354bbd449ad0ca55b90, type: 2}
+  levelManager: {fileID: 11400000, guid: e916e63420c81e44c80cd56daad457fe, type: 2}
 --- !u!114 &1647810566
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class LevelManager : ScriptableObject
     public static LevelManager Main { get; private set; }
     private JsonFile level;
 
-    private void OnEnable()
+    public void OnEnable()
     {
         Main = this;
         Array.Sort(source, (a, b) => a.Id.CompareTo(b.Id));
