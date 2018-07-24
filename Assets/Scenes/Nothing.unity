@@ -5856,7 +5856,7 @@ MonoBehaviour:
   renderer: {fileID: 1766551102}
   size: 251
   pixelsPerUnit: 16
-  iterationRate: 0.1
+  iterationRate: 0.125
 --- !u!4 &1766551101
 Transform:
   m_ObjectHideFlags: 0

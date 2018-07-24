@@ -1,9 +1,11 @@
 using System;
+
 using UnityEngine;
 
 public class DecimalSlider : BaseSlider
 {
     [Range(0, 2)]
+    [SerializeField]
     private int decimals;
     public int Decimals
     {
