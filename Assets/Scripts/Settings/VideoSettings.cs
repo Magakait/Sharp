@@ -26,7 +26,7 @@ public class VideoSettings : MonoBehaviour
     private void Load()
     {
         resolutions = Screen.resolutions
-            .Skip(6)
+            .Skip(7)
             .ToArray();
 
         dropdownResolutions.AddOptions
