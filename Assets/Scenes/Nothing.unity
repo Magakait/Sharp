@@ -6285,7 +6285,7 @@ TrailRenderer:
     alignment: 0
     textureMode: 0
     generateLightingData: 0
-  m_MinVertexDistance: 0.01
+  m_MinVertexDistance: 0.05
   m_Autodestruct: 1
   m_Emitting: 1
 --- !u!4 &2078052180
