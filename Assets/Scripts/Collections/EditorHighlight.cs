@@ -6,7 +6,19 @@ using DG.Tweening;
 public class EditorHighlight : MonoBehaviour
 {
     private void Awake() =>
-        SetAnimation();
+        animation = gameObject.AddComponent<TweenArrayComponent>().Init
+        (
+            DOTween.Sequence().Insert
+            (
+                frameSprite
+                    .DOFade(1, .15f)
+            ),
+            DOTween.Sequence().Insert
+            (
+                selectionSprite
+                    .DOFade(0, .15f)
+            )
+        );
 
     private void Update()
     {
@@ -107,9 +119,9 @@ public class EditorHighlight : MonoBehaviour
         else
             target = collider ? collider.GetComponent<SerializableObject>() : null;
 
-        bodySprite.transform.position = target ? target.transform.position : position;
+        frameSprite.transform.position = target ? target.transform.position : position;
         if (Selected)
-            frameSprite.transform.position = Selected.transform.position;
+            selectionSprite.transform.position = Selected.transform.position;
     }
 
     #endregion
@@ -126,7 +138,7 @@ public class EditorHighlight : MonoBehaviour
 
     private void DisplayInfo()
     {
-        positionText.text = $"{bodySprite.transform.position.x}, {bodySprite.transform.position.y}";
+        positionText.text = $"{frameSprite.transform.position.x}, {frameSprite.transform.position.y}";
         layerText.text = LayerMask.LayerToName(Layer);
         objectText.text = target ? $"<b>{target.name}</b>" : LevelManager.Main.Source(Id).name;
     }
@@ -163,7 +175,7 @@ public class EditorHighlight : MonoBehaviour
                 }
         }
         else if (Input.GetMouseButton(0))
-            LevelManager.Main.AddInstance(Id, bodySprite.transform.position, true);
+            LevelManager.Main.AddInstance(Id, frameSprite.transform.position, true);
     }
 
     public void ClearInput()
@@ -179,26 +191,11 @@ public class EditorHighlight : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField]
-    private SpriteRenderer bodySprite;
-    [SerializeField]
     private SpriteRenderer frameSprite;
+    [SerializeField]
+    private SpriteRenderer selectionSprite;
 
-    private new Sequence[] animation;
-
-    private void SetAnimation() => 
-        animation = new Sequence[]
-        {
-            DOTween.Sequence().Insert
-            (
-                bodySprite.material
-                    .DOFade(bodySprite.material.color.a * 2, .15f)
-            ),
-            DOTween.Sequence().Insert
-            (
-                frameSprite.material
-                    .DOFade(0, .15f)
-            ),
-        };
+    private new TweenArrayComponent animation;
 
     #endregion
 }

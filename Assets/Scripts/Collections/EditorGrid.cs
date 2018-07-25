@@ -6,7 +6,15 @@ public class EditorGrid : MonoBehaviour
 {
     private void Awake()
     {
-        SetAnimation();
+        animation = gameObject.AddComponent<TweenArrayComponent>().Init
+        (
+            DOTween.Sequence().Insert
+            (
+                spriteRenderer
+                    .DOFade(0, .15f)
+            )
+        );
+
         spriteRenderer.size = Vector2.one * (halfSide * 2 + 1);
     }
 
@@ -42,19 +50,9 @@ public class EditorGrid : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField]
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
 
-    private new Sequence[] animation;
-
-    private void SetAnimation() =>
-        animation = new Sequence[]
-        {
-            DOTween.Sequence().Insert
-            (
-                spriteRenderer.material
-                    .DOFade(0, .15f)
-            )
-        };
+    private new TweenArrayComponent animation;
 
     #endregion
 }

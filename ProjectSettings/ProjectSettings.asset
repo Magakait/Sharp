@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.1.24
+  bundleVersion: 1.1.3
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -665,9 +665,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 3
-  cloudProjectId: a1760682-cb78-4ca0-93bd-1e243cd29ea9
-  projectName: Sharp
-  organizationId: magomed-magomedov
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
