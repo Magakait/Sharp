@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114193123979024266}
   - component: {fileID: 114419804231232562}
   m_Layer: 8
-  m_Name: Placeholder
+  m_Name: Placeholder_11
   m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  coreSprite: {fileID: 212163140206583656}
   frameSprite: {fileID: 212240586655844528}
 --- !u!114 &114195248763143498
 MonoBehaviour:

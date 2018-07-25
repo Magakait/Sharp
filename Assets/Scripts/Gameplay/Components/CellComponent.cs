@@ -25,8 +25,6 @@ public class CellComponent : MonoBehaviour
 
     [Space(10)]
     [SerializeField]
-    private SpriteRenderer coreSprite;
-    [SerializeField]
     private SpriteRenderer frameSprite;
 
     private new Tween animation;
@@ -37,9 +35,7 @@ public class CellComponent : MonoBehaviour
             frameSprite.material
                 .DOFade(0, Constants.Time),
             frameSprite.transform
-                .DOScale(3, Constants.Time),
-            coreSprite.transform
-                .DOScale(1, Constants.Time)
+                .DOScale(3, Constants.Time)
         );
 
     private void OnDestroy() =>
