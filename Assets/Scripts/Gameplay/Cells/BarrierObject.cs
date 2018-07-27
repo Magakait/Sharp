@@ -15,7 +15,7 @@ public class BarrierObject : SerializableObject
             if (unit)
                 unit.Kill();
         }
-        else if (Charges == 0 && barrier)
+        else if (Charges == 0 && barrier && collision.GetComponent<PlayerObject>())
             Unregister();
     }
 
