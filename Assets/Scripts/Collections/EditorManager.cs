@@ -52,7 +52,6 @@ public class EditorManager : MonoBehaviour
 
     [Space(10)]
     public JsonFile collectionFile;
-    public BoolVariable isEditing;
 
     private void LoadCollection()
     {
