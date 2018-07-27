@@ -26,7 +26,7 @@ public class CollectionLoader : MonoBehaviour
 
         dropdownCollections.ClearOptions();
         foreach (string folder in Directory
-                .GetDirectories(Constants.CollectionRoot)
+                .GetDirectories(Constants.CollectionsRoot)
                 .Select(i => Path.GetFileName(i)))
             dropdownCollections.options.Add(new Dropdown.OptionData(folder));
 
@@ -42,7 +42,7 @@ public class CollectionLoader : MonoBehaviour
     {
         transformLevels.Clear();
 
-        collectionFile.Load(Constants.CollectionRoot + dropdownCollections.captionText.text + "/Meta.json");
+        collectionFile.Load(Constants.CollectionsRoot + dropdownCollections.captionText.text + "/Meta.json");
 
         JArray levels = (JArray)collectionFile["levels"];
         int current = (int)collectionFile["current"];
@@ -72,7 +72,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void Create()
     {
-        string path = EngineUtility.NextFile(Constants.CollectionRoot, "Collection", string.Empty);
+        string path = EngineUtility.NextFile(Constants.CollectionsRoot, "Collection", string.Empty);
         Directory.CreateDirectory(path);
 
         File.Copy(Constants.EditorRoot + "Meta.json", path + "/Meta.json");

@@ -9,8 +9,11 @@ class HomeManager : MonoBehaviour
 
     [Space(10)]
     public Text versionText;
-    public JsonFile buffer;
     public LevelManager levelManager;
+
+    [Space(10)]
+    public JsonFile buffer;
+    public JsonFile misc;
 
     private static bool loaded;
 
@@ -24,8 +27,10 @@ class HomeManager : MonoBehaviour
         }
 
         loaded = true;
-        buffer.Load(Constants.EditorRoot + "Buffer.json");
         levelManager.OnEnable();
+        
+        buffer.Load(Constants.EditorRoot + "Buffer.json");
+        misc.Load(Constants.SettingsRoot + "Misc.json");
 
         versionText.text = Application.version;
         DontDestroyOnLoad(gameObject);

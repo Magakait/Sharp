@@ -67,10 +67,6 @@ public class EditorHighlight : MonoBehaviour
     [SerializeField]
     public KeyVariable copyKey;
     [SerializeField]
-    private CaptionDisplay caption;
-
-    [Space(10)]
-    [SerializeField]
     private SerializableObjectEvent onSelect;
 
     private SerializableObject selected;
@@ -101,17 +97,13 @@ public class EditorHighlight : MonoBehaviour
         {
             if (!collider)
             {
-                if (Input.GetKey(copyKey) && !copied)
-                    if (target.Id < 2)
-                        caption.Show("Cannot copy this object.");
-                    else
-                    {
-                        copied = true;
+                if (Input.GetKey(copyKey) && !copied && target.Id > 1)
+                {
+                    copied = true;
 
-                        SerializableObject copy =
-                            LevelManager.Main.AddInstance(target.Id, target.transform.position, true);
-                        LevelManager.Main.CopyInstance(target, copy);
-                    }
+                    SerializableObject copy = LevelManager.Main.AddInstance(target.Id, target.transform.position, true);
+                    LevelManager.Main.CopyInstance(target, copy);
+                }
 
                 target.transform.position = position;
             }
@@ -161,18 +153,15 @@ public class EditorHighlight : MonoBehaviour
                 Dragging = false;
                 copied = false;
             }
-            else if (Input.GetMouseButton(1))
-                if (target.Id < 2)
-                    caption.Show("Cannot delete this object.");
-                else
-                {
-                    Dragging = false;
-                    if (Selected == target)
-                        Selected = null;
+            else if (Input.GetMouseButton(1) && target.Id > 1)
+            {
+                Dragging = false;
+                if (Selected == target)
+                    Selected = null;
 
-                    LevelManager.Main.RemoveInstance(target);
-                    target = null;
-                }
+                LevelManager.Main.RemoveInstance(target);
+                target = null;
+            }
         }
         else if (Input.GetMouseButton(0))
             LevelManager.Main.AddInstance(Id, frameSprite.transform.position, true);

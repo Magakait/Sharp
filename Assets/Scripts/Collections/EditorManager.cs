@@ -9,9 +9,6 @@ using Newtonsoft.Json.Linq;
 
 public class EditorManager : MonoBehaviour
 {
-    public CaptionDisplay caption;
-    public BoolVariable isEditing;
-
     private void Start()
     {
         LoadCollection();
@@ -20,8 +17,13 @@ public class EditorManager : MonoBehaviour
         IgnoreCollisions(true);
     }
 
-    private void OnDestroy() => 
-        IgnoreCollisions(false);
+    private void OnDestroy()
+    {
+        IgnoreCollisions(false);      
+
+        collectionFile["current"] = Mathf.Min((int)collectionFile["current"], levels.Count);
+        collectionFile.Save();
+    }
 
     #region engine management
 
@@ -50,6 +52,7 @@ public class EditorManager : MonoBehaviour
 
     [Space(10)]
     public JsonFile collectionFile;
+    public BoolVariable isEditing;
 
     private void LoadCollection()
     {
@@ -61,13 +64,10 @@ public class EditorManager : MonoBehaviour
 
     public void RenameCollection(string name)
     {
-        string path = Constants.CollectionRoot + name;
+        string path = Constants.CollectionsRoot + name;
 
         if (Directory.Exists(path))
-        {
             inputCollection.text = Path.GetFileName(collectionFile.Directory);
-            caption.Show("This name is already taken.");
-        }
         else
         {
             Directory.Move(collectionFile.Directory, path);
@@ -75,12 +75,6 @@ public class EditorManager : MonoBehaviour
             collectionFile.Load(path + "/Meta.json");
             levelFile.Load($"{path}/{levelFile.FileNameWithoutExtension}.#");
         }
-    }
-
-    public void CollectionCurrent(int value)
-    {
-        collectionFile["current"] = value;
-        collectionFile.Save();
     }
 
     #endregion
@@ -140,11 +134,9 @@ public class EditorManager : MonoBehaviour
             .GetChild(Mathf.Max(0, levels.IndexOf(name)))
             .GetComponent<Toggle>()
             .isOn = true;
-
-        CollectionCurrent(levels.Count);
     }
 
-    public void CreateLevel()
+    public void AddLevel()
     {
         string path = EngineUtility.NextFile(collectionFile.Directory + "/", "Level", ".#");
         string name = Path.GetFileNameWithoutExtension(path);
@@ -180,10 +172,7 @@ public class EditorManager : MonoBehaviour
         string path = $"{collectionFile.Directory}/{name}.#";
 
         if (File.Exists(path))
-        {
             inputLevel.text = levelFile.FileNameWithoutExtension;
-            caption.Show("This name is already taken.");
-        }
         else
         {
             levels[levels.IndexOf(levelFile.FileNameWithoutExtension)] = name;
