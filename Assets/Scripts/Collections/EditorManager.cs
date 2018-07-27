@@ -63,7 +63,7 @@ public class EditorManager : MonoBehaviour
 
     public void RenameCollection(string name)
     {
-        string path = Constants.CollectionsRoot + name;
+        string path = Constants.LocalCollectionsRoot + name;
 
         if (Directory.Exists(path))
             inputCollection.text = Path.GetFileName(collectionFile.Directory);

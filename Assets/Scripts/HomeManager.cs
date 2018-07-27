@@ -36,11 +36,15 @@ class HomeManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start() => SceneManager.activeSceneChanged += Check;
-
-    private void Check(Scene oldScene, Scene newScene)
+    private void Start()
     {
-        bool home = newScene.name == "Home";
+        SceneManager.sceneLoaded += Check;
+        Check(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+    }
+
+    private void Check(Scene scene, LoadSceneMode mode)
+    {
+        bool home = scene.name == "Home";
 
         if (home)
             onHome.Invoke();
