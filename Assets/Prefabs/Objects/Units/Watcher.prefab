@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 199140356767804700}
   - component: {fileID: 114853437153083680}
   m_Layer: 9
-  m_Name: Effect
+  m_Name: Pulse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 212422002379943628}
   - component: {fileID: 114197239057185502}
   m_Layer: 9
-  m_Name: Spikes
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 212451043028123170}
   - component: {fileID: 114642725833125032}
   m_Layer: 9
-  m_Name: Frame
+  m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,8 +154,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4535842883306234}
   - {fileID: 4963267846481796}
+  - {fileID: 4535842883306234}
   - {fileID: 4383268286070270}
   m_Father: {fileID: 4530604570585410}
   m_RootOrder: 0
@@ -200,7 +200,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4276732494519922}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4573008995159132
 Transform:
@@ -226,7 +226,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4276732494519922}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50399169246288890
 Rigidbody2D:
@@ -348,9 +348,9 @@ MonoBehaviour:
   id: 13
   distance: 1
   delay: 0.5
+  frameTransform: {fileID: 4535842883306234}
   maskTransform: {fileID: 4383268286070270}
   delayTransform: {fileID: 4206820617698852}
-  spikesTransform: {fileID: 4535842883306234}
   burstParticle: {fileID: 198260807237845002, guid: 525adcf5441de5a4286fcc3d4cfbc05a,
     type: 2}
 --- !u!114 &114853437153083680
@@ -1751,7 +1751,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300004, guid: 96fa0e02346a61145b71f87c7eb752b9, type: 3}
+    - sprite: {fileID: 21300006, guid: 96fa0e02346a61145b71f87c7eb752b9, type: 3}
   VelocityModule:
     enabled: 0
     x:

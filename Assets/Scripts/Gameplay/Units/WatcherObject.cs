@@ -15,9 +15,8 @@ public class WatcherObject : SerializableObject
             (
                 delayTransform
                     .DOScale(1, delay),
-                spikesTransform
-                    .DOScale(0, Constants.Time)
-                    .From()
+                frameTransform
+                    .DOScale(2.5f, Constants.Time)
             )
                 .OnComplete(() => Explode())
         );
@@ -77,11 +76,11 @@ public class WatcherObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
+    private Transform frameTransform;
+    [SerializeField]
     private Transform maskTransform;
     [SerializeField]
     private Transform delayTransform;
-    [SerializeField]
-    private Transform spikesTransform;
 
     [Space(10)]
     [SerializeField]
