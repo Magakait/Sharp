@@ -13,12 +13,10 @@ public class WatcherObject : SerializableObject
         (
             DOTween.Sequence().Insert
             (
-                delaySprite.material
-                    .DOFade(1, delay),
-                delaySprite.transform
-                    .DOScale(0, delay),
-                bodyTransform
-                    .DOScale(2, Constants.Time)
+                delayTransform
+                    .DOScale(1, delay),
+                spikesTransform
+                    .DOScale(1, Constants.Time)
             )
                 .OnComplete(() => Explode())
         );
@@ -44,7 +42,7 @@ public class WatcherObject : SerializableObject
         set
         {
             distance = value;
-            maskTransform.localScale = (Distance * 2 + 1) * Vector3.one;
+            maskTransform.localScale = (1 + Distance * 2) * Vector3.one;
         }
     }
 
@@ -78,11 +76,11 @@ public class WatcherObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform bodyTransform;
+    private Transform spikesTransform;
+    [SerializeField]
+    private Transform delayTransform;
     [SerializeField]
     private Transform maskTransform;
-    [SerializeField]
-    private SpriteRenderer delaySprite;
 
     [Space(10)]
     [SerializeField]

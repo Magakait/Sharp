@@ -15,14 +15,7 @@ public class PortalObject : SerializableObject
                     .DORotate(Constants.Eulers[1], Constants.Time)
                     .SetEase(Ease.Linear)
             )
-                .OnComplete
-                (
-                    () =>
-                    {
-                        if (state.State == 1)
-                            animation[0].Restart();
-                    }
-                )
+                .OnComplete(() => { if (state.State == 1) animation[0].Restart(); })
                 .Play(),
             DOTween.Sequence().Insert
             (
