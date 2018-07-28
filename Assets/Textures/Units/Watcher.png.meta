@@ -6,8 +6,9 @@ TextureImporter:
     21300002: Spark_1
     21300004: Watcher_0
     21300006: Watcher_1
+    21300008: Watcher_2
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -102,7 +103,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02308f2171c822344bc9f56175d735d9
+      spriteID: 4be7571802f4d1d4981aacf619c48f1e
       vertices: []
       indices: 
       edges: []
@@ -122,7 +123,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8d38165b38c2444cab9fabccb1fbaf4
+      spriteID: c8985d53fe98b474ab19afc7039c1444
       vertices: []
       indices: 
       edges: []
@@ -136,6 +137,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

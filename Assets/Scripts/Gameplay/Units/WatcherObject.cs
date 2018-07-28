@@ -13,10 +13,12 @@ public class WatcherObject : SerializableObject
         (
             DOTween.Sequence().Insert
             (
-                delayTransform
-                    .DOScale(1, delay),
-                frameTransform
-                    .DOScale(2.5f, Constants.Time)
+                delaySprite.material
+                    .DOFade(1, delay),
+                delaySprite.transform
+                    .DOScale(0, delay),
+                bodyTransform
+                    .DOScale(2, Constants.Time)
             )
                 .OnComplete(() => Explode())
         );
@@ -76,11 +78,11 @@ public class WatcherObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform frameTransform;
+    private Transform bodyTransform;
     [SerializeField]
     private Transform maskTransform;
     [SerializeField]
-    private Transform delayTransform;
+    private SpriteRenderer delaySprite;
 
     [Space(10)]
     [SerializeField]
