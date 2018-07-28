@@ -43,7 +43,10 @@ class HomeManager : MonoBehaviour
         bool home = next.name == "Home";
 
         if (home)
+        {
+            CameraManager.Position = Vector2.zero;
             onHome.Invoke();
+        }
         onCheck.Invoke(home);
     }
 }
