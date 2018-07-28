@@ -14,8 +14,8 @@ public class CollectionLoader : MonoBehaviour
     public Button baseButton;
 
     [Space(10)]
-    public JsonFile collectionFile;
-    public JsonFile levelFile;
+    public JsonFile meta;
+    public JsonFile level;
 
     public void List()
     {
@@ -35,16 +35,16 @@ public class CollectionLoader : MonoBehaviour
         }
     }
 
-    public void Load()
+    public void Load(string name)
     {
         transformLevels.Clear();
 
-        collectionFile.Load(Constants.LocalCollectionsRoot + dropdownCollections.captionText.text + "/Meta.json");
+        meta.Load(Constants.LocalCollectionsRoot + dropdownCollections.captionText.text + "/Meta.json");
 
-        JArray levels = (JArray)collectionFile["levels"];
-        int current = (int)collectionFile["current"];
+        JArray levels = (JArray)meta["levels"];
+        int current = (int)meta["current"];
 
-        collectionFile["progress"] = (float)current / levels.Count;
+        meta["progress"] = (float)current / levels.Count;
 
         foreach (string item in levels
             .Select(i => (string)i)
@@ -62,7 +62,7 @@ public class CollectionLoader : MonoBehaviour
 
     private void Open(string name)
     {
-        levelFile.Load($"{collectionFile.Directory}/{name}.#");
+        level.Load($"{meta.Directory}/{name}.#");
         SceneManager.LoadScene("Play");
     }
 
@@ -74,6 +74,6 @@ public class CollectionLoader : MonoBehaviour
         File.Copy(Constants.EditorRoot + "Meta.json", path + "/Meta.json");
         File.Copy(Constants.EditorRoot + "Level.#", path + "/Level 1.#");
 
-        collectionFile.Load(path + "/Meta.json");
+        meta.Load(path + "/Meta.json");
     }
 }
