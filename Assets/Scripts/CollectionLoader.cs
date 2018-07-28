@@ -11,7 +11,6 @@ public class CollectionLoader : MonoBehaviour
 {
     public Dropdown dropdownCollections;
     public Transform transformLevels;
-    public Button editorButton;
     public Button baseButton;
 
     [Space(10)]
@@ -25,13 +24,12 @@ public class CollectionLoader : MonoBehaviour
         int index = dropdownCollections.value;
 
         dropdownCollections.ClearOptions();
-        foreach (var option in Directory
-                .GetDirectories(Constants.CollectionsRoot + Category)
-                .Select(path => Path.GetFileName(path))
-                .Select(folder => new Dropdown.OptionData(folder)))
+        foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
+                .GetDirectories()
+                .OrderBy(d => d.CreationTime)
+                .Reverse()
+                .Select(d => new Dropdown.OptionData(d.Name)))
             dropdownCollections.options.Add(option);
-
-        editorButton.interactable = Category == "Local/" && dropdownCollections.options.Count > 0;
 
         if (dropdownCollections.options.Count > 0)
         {
@@ -50,6 +48,7 @@ public class CollectionLoader : MonoBehaviour
         int current = (int)meta["current"];
 
         meta["progress"] = (float)current / levels.Count;
+        meta["editable"] = Category == "Local/";
 
         foreach (string item in levels
             .Select(i => (string)i)
