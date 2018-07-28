@@ -1,8 +1,4 @@
-using System.Linq;
-using System.IO;
-
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ThemeSettings : MonoBehaviour
 {
@@ -12,7 +8,7 @@ public class ThemeSettings : MonoBehaviour
         file.Load(Constants.SettingsRoot + "Theme.json");
 
     public void Reset() =>
-        file.Load(Constants.SettingsRoot + "Defaults/Theme.json");
+        file.LoadFrom(Constants.SettingsRoot + "Defaults/Theme.json");
 
     public void RefreshPainters()
     {

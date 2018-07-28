@@ -21,8 +21,8 @@ public class EditorManager : MonoBehaviour
     {
         IgnoreCollisions(false);      
 
-        collectionFile["current"] = Mathf.Min((int)collectionFile["current"], levels.Count);
-        collectionFile.Save();
+        //collectionFile["current"] = Mathf.Min((int)collectionFile["current"], levels.Count);
+        //collectionFile.Save();
     }
 
     #region engine management
@@ -48,7 +48,6 @@ public class EditorManager : MonoBehaviour
 
     [Header("Collection")]
     public InputField inputCollection;
-    public Button buttonHome;
 
     [Space(10)]
     public JsonFile collectionFile;
@@ -63,7 +62,7 @@ public class EditorManager : MonoBehaviour
 
     public void RenameCollection(string name)
     {
-        string path = Constants.LocalCollectionsRoot + name;
+        string path = Constants.CollectionsRoot + "Local/" + name;
 
         if (Directory.Exists(path))
             inputCollection.text = Path.GetFileName(collectionFile.Directory);
@@ -185,17 +184,18 @@ public class EditorManager : MonoBehaviour
 
     public void DeleteLevel()
     {
-        levels.RemoveAt(levels.IndexOf(levelFile.FileNameWithoutExtension));
-        SaveOrder();
-
+        levels.Remove(levelFile.FileNameWithoutExtension);
         levelFile.Delete();
 
         if (levels.Count > 0)
+        {
+            SaveOrder();
             ListLevels(string.Empty);
+        }
         else
         {
             Directory.Delete(collectionFile.Directory, true);
-            buttonHome.onClick.Invoke();
+            EngineUtility.Main.OpenScene("Home");
         }
     }
 

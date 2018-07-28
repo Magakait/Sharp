@@ -11,21 +11,27 @@ public class CollectionLoader : MonoBehaviour
 {
     public Dropdown dropdownCollections;
     public Transform transformLevels;
+    public Button editorButton;
     public Button baseButton;
 
     [Space(10)]
     public JsonFile meta;
     public JsonFile level;
 
+    public string Category { get; set; }
+
     public void List()
     {
         int index = dropdownCollections.value;
 
         dropdownCollections.ClearOptions();
-        foreach (string folder in Directory
-                .GetDirectories(Constants.LocalCollectionsRoot)
-                .Select(i => Path.GetFileName(i)))
-            dropdownCollections.options.Add(new Dropdown.OptionData(folder));
+        foreach (var option in Directory
+                .GetDirectories(Constants.CollectionsRoot + Category)
+                .Select(path => Path.GetFileName(path))
+                .Select(folder => new Dropdown.OptionData(folder)))
+            dropdownCollections.options.Add(option);
+
+        editorButton.interactable = Category == "Local/" && dropdownCollections.options.Count > 0;
 
         if (dropdownCollections.options.Count > 0)
         {
@@ -35,11 +41,10 @@ public class CollectionLoader : MonoBehaviour
         }
     }
 
-    public void Load(string name)
+    public void Load()
     {
         transformLevels.Clear();
-
-        meta.Load(Constants.LocalCollectionsRoot + dropdownCollections.captionText.text + "/Meta.json");
+        meta.Load(Constants.CollectionsRoot + Category + dropdownCollections.captionText.text + "/Meta.json");
 
         JArray levels = (JArray)meta["levels"];
         int current = (int)meta["current"];
@@ -68,7 +73,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void Create()
     {
-        string path = EngineUtility.NextFile(Constants.LocalCollectionsRoot, "Collection", string.Empty);
+        string path = EngineUtility.NextFile(Constants.CollectionsRoot + "Local/", "Collection", string.Empty);
         Directory.CreateDirectory(path);
 
         File.Copy(Constants.EditorRoot + "Meta.json", path + "/Meta.json");

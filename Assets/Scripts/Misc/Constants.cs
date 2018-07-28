@@ -59,8 +59,7 @@ public static class Constants
     };
 
     public static readonly string Root = Application.isEditor ? "Build/" : string.Empty;
-    public static readonly string LocalCollectionsRoot = Root + "Collections/Local/";
-    public static readonly string WorkshopCollectionsRoot = Root + "Collections/Workshop/";
+    public static readonly string CollectionsRoot = Root + "Collections/";
     public static readonly string EditorRoot = Root + "Editor/";
     public static readonly string SettingsRoot = Root + "Settings/";
 }
