@@ -63,5 +63,4 @@ public static class Constants
     public static readonly string WorkshopCollectionsRoot = Root + "Collections/Workshop/";
     public static readonly string EditorRoot = Root + "Editor/";
     public static readonly string SettingsRoot = Root + "Settings/";
-    public static readonly string ThemesRoot = Root + "Themes/";
 }

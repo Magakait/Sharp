@@ -10,10 +10,7 @@ class HomeManager : MonoBehaviour
     [Space(10)]
     public Text versionText;
     public LevelManager levelManager;
-
-    [Space(10)]
     public JsonFile buffer;
-    public JsonFile misc;
 
     private static bool loaded;
 
@@ -28,9 +25,7 @@ class HomeManager : MonoBehaviour
 
         loaded = true;
         levelManager.OnEnable();
-        
         buffer.Load(Constants.EditorRoot + "Buffer.json");
-        misc.Load(Constants.SettingsRoot + "Misc.json");
 
         versionText.text = Application.version;
         DontDestroyOnLoad(gameObject);
@@ -38,13 +33,14 @@ class HomeManager : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.sceneLoaded += Check;
-        Check(SceneManager.GetActiveScene(), LoadSceneMode.Single);
+        SceneManager.activeSceneChanged += Check;
+        onHome.Invoke();
+        onCheck.Invoke(true);
     }
 
-    private void Check(Scene scene, LoadSceneMode mode)
+    private void Check(Scene current, Scene next)
     {
-        bool home = scene.name == "Home";
+        bool home = next.name == "Home";
 
         if (home)
             onHome.Invoke();
