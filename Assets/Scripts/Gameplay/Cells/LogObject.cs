@@ -24,7 +24,7 @@ public class LogObject : SerializableObject
 
     [Header("Gameplay")]
     public Text text;
-    public RectTransform panelRect;
+    public RectTransform bodyRect;
     public RectTransform emptyRect;
     public CanvasToggle canvasToggle;
 
@@ -64,7 +64,7 @@ public class LogObject : SerializableObject
     public override void Serialize(JToken token)
     {
         token["text"] = text.text;
-        token["size"] = ((Vector3)panelRect.sizeDelta).ToJToken();
+        token["size"] = ((Vector3)bodyRect.sizeDelta).ToJToken();
         token["offset"] = emptyRect.localPosition.ToJToken();
         token["persistent"] = Persistent;
     }
@@ -72,7 +72,7 @@ public class LogObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         text.text = (string)token["text"];
-        panelRect.sizeDelta = token["size"].ToVector();
+        bodyRect.sizeDelta = token["size"].ToVector();
         emptyRect.localPosition = token["offset"].ToVector();
         Persistent = (bool)token["persistent"];
     }
