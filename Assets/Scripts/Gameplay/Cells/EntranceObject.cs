@@ -28,6 +28,8 @@ public class EntranceObject : SerializableObject
     private Transform frameTransform;
     [SerializeField]
     private ParticleSystem orbParticle;
+    [SerializeField]
+    private LineRenderer lineNext;
 
     private new TweenArrayComponent animation;
 
@@ -38,7 +40,23 @@ public class EntranceObject : SerializableObject
     public bool Open { get; private set; } = true;
     public bool Passed { get; private set; }
     public string Level { get; private set; }
-    public Vector2 Next { get; private set; }
+
+    private Vector2 next;
+    public Vector2 Next
+    {
+        get
+        {
+            return next;
+        }
+        set
+        {
+            next = value;
+
+            lineNext.SetPosition(0, transform.position);
+            lineNext.SetPosition(1, (Next + (Vector2)transform.position) / 2);
+            lineNext.SetPosition(2, Next);
+        }
+    }
 
     public override void Serialize(JToken token)
     {
