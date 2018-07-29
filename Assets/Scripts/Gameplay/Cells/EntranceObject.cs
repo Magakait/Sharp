@@ -12,6 +12,11 @@ public class EntranceObject : SerializableObject
             (
                 frameTransform
                     .DOScale(0, Constants.Time)
+            ),
+            DOTween.Sequence().Insert
+            (
+                lineNext.transform
+                    .DOScale(1, Constants.Time)
             )
         );
 
@@ -27,8 +32,6 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private Transform frameTransform;
     [SerializeField]
-    private ParticleSystem orbParticle;
-    [SerializeField]
     private LineRenderer lineNext;
 
     private new TweenArrayComponent animation;
@@ -37,8 +40,40 @@ public class EntranceObject : SerializableObject
 
     #region serialization
 
-    public bool Open { get; private set; } = true;
-    public bool Passed { get; private set; }
+    private bool open;
+    public bool Open
+    {
+        get 
+        {
+            return open;
+        }
+        private set
+        {
+            open = value;
+            animation[0].Play(Open);
+        }
+    }
+    
+    private bool passed;
+    public bool Passed
+    {
+        get
+        {
+            return passed;
+        }
+        set
+        {
+            passed = value;
+            animation[1].Play(!Passed);
+
+            var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
+            if (entrance && !entrance.Open)
+            {
+                entrance.Open = true;
+                CameraManager.Move(Next);
+            }
+        }
+    }
     public string Level { get; private set; }
 
     private Vector2 next;
@@ -48,13 +83,16 @@ public class EntranceObject : SerializableObject
         {
             return next;
         }
-        set
+        private set
         {
             next = value;
 
-            lineNext.SetPosition(0, transform.position);
-            lineNext.SetPosition(1, (Next + (Vector2)transform.position) / 2);
-            lineNext.SetPosition(2, Next);
+            var position = (Vector2)transform.position;
+            var offset = .5f * (Next - position).normalized;
+
+            lineNext.SetPosition(0, position + offset);
+            lineNext.SetPosition(1, (position - Next) / 2);
+            lineNext.SetPosition(2, Next - offset);
         }
     }
 
