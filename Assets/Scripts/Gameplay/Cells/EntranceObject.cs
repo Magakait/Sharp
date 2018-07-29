@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class EntranceObject : SerializableObject
 {
+    [Space(10)]
     [SerializeField]
     private JsonFile level;
     private JsonFile meta;
@@ -24,19 +25,22 @@ public class EntranceObject : SerializableObject
             )
         );
 
+    private void Start()
+    {
+        if (level.FileNameWithoutExtension == Level && ExitObject.Passed)
+        {
+            Passed = true;
+            LevelManager.Main.UpdateInstance(this);
+        }
+    }
+
     private void OnMouseDown()
     {
         if (enabled && Open)
-            Select();
+            CameraManager.Move(transform.position);
     }
 
-    private void Select()
-    {
-        CameraManager.Move(transform.position);
-
-    }
-
-    private void Enter()
+    public void Enter()
     {
         level.Load($"{meta.Directory}/{Level}.#");
         EngineUtility.Main.OpenScene("Play");
@@ -49,6 +53,10 @@ public class EntranceObject : SerializableObject
     private Transform frameTransform;
     [SerializeField]
     private LineRenderer lineNext;
+
+    [Space(10)]
+    [SerializeField]
+    private CanvasToggle canvasToggle;
 
     private new TweenArrayComponent animation;
 
@@ -67,6 +75,7 @@ public class EntranceObject : SerializableObject
         {
             open = value;
             animation[0].Play(Open);
+            canvasToggle.Visible = Open;
         }
     }
 
@@ -88,6 +97,8 @@ public class EntranceObject : SerializableObject
                 if (entrance && !entrance.Open)
                 {
                     entrance.Open = true;
+                    LevelManager.Main.UpdateInstance(entrance);
+
                     CameraManager.Position = transform.position;
                     CameraManager.Move(Next);
                 }
@@ -119,6 +130,7 @@ public class EntranceObject : SerializableObject
     public override void Serialize(JToken token)
     {
         token["open"] = Open;
+        token["passed"] = Passed;
         token["level"] = Level;
         token["next"] = Next.ToJToken();
     }
@@ -126,6 +138,7 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Open = (bool)token["open"];
+        Passed = (bool)token["passed"];
         Level = (string)token["level"];
         Next = token["next"].ToVector();
     }
