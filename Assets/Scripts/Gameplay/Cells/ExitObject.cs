@@ -24,8 +24,8 @@ public class ExitObject : SerializableObject
     public ActionMessage message;
 
     [Space(10)]
-    public JsonFile collectionFile;
-    public JsonFile levelFile;
+    public JsonFile meta;
+    public JsonFile level;
 
     public static bool Passed { get; private set; }
 
@@ -33,34 +33,15 @@ public class ExitObject : SerializableObject
     {
         Passed = true;
 
-        JArray levels = (JArray)collectionFile["levels"];
-        int current = 1 + levels
-            .Select(i => (string)i)
-            .ToList()
-            .IndexOf(levelFile.Name);
-
-        if (current > (int)collectionFile["current"])
+        var passed = (JArray)meta["passed"];
+        if (!passed.Contains(level.Name))
         {
-            collectionFile["current"] = current;
-            collectionFile.Save();
+            passed.Add(level.Name);
+            meta.Save();
         }
 
         Instantiate(message, transform.position, Quaternion.identity)
-            .Setup
-            (
-                "+ + + +",
-                "Next",
-                () =>
-                {
-                    if (current < levels.Count)
-                    {
-                        levelFile.Load($"{levelFile.Directory}/{(string)levels[current]}.#");
-                        EngineUtility.Main.OpenScene();
-                    }
-                    else
-                        EngineUtility.Main.OpenScene("Home");
-                }
-            );
+            .Setup("+ + + +", "Home", () => { EngineUtility.Main.OpenScene("Home"); });
     }
 
     #endregion

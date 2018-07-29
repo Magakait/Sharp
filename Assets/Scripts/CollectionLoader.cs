@@ -9,9 +9,7 @@ using Newtonsoft.Json.Linq;
 
 public class CollectionLoader : MonoBehaviour
 {
-    public Dropdown dropdownCollections;
-    public Transform transformLevels;
-    public Button baseButton;
+    public Dropdown dropdownTitle;
 
     [Space(10)]
     public JsonFile meta;
@@ -21,64 +19,50 @@ public class CollectionLoader : MonoBehaviour
 
     public void List()
     {
-        int index = dropdownCollections.value;
+        int index = dropdownTitle.value;
 
-        dropdownCollections.ClearOptions();
+        dropdownTitle.ClearOptions();
         foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
                 .GetDirectories()
                 .OrderBy(d => d.CreationTime)
                 .Reverse()
                 .Select(d => new Dropdown.OptionData(d.Name)))
-            dropdownCollections.options.Add(option);
-        dropdownCollections.RefreshShownValue();
+            dropdownTitle.options.Add(option);
+        dropdownTitle.RefreshShownValue();
 
-        if (dropdownCollections.options.Count > 0)
+        if (dropdownTitle.options.Count > 0)
         {
-            dropdownCollections.value = index;
-            dropdownCollections.onValueChanged.Invoke(dropdownCollections.value);
+            dropdownTitle.value = index;
+            dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
     }
 
     public void Load()
     {
-        transformLevels.Clear();
-        meta.Load(Constants.CollectionsRoot + Category + dropdownCollections.captionText.text + "/Meta.json");
+        var path = Constants.CollectionsRoot + Category + dropdownTitle.captionText.text + "/";
+        meta.Load(path + "Meta.json");
+        level.Load(path + "Map.#");
 
-        JArray levels = (JArray)meta["levels"];
-        int current = (int)meta["current"];
+        LevelManager.Main.LoadLevel(level);
+        var passed = (JArray)meta["passed"];
+        var entrances = FindObjectsOfType<EntranceObject>();
+        foreach (var entrance in entrances)
+            if (passed.Contains(entrance.Level))
+                entrance.Passed = true;
 
-        meta["progress"] = (float)current / levels.Count;
+        meta["progress"] = (float)passed.Count / entrances.Length;
         meta["editable"] = Category == "Local/";
-
-        foreach (string item in levels
-            .Select(i => (string)i)
-            .Take(current + 1))
-        {
-            Button button = Instantiate(baseButton, transformLevels);
-
-            Text text = button.transform.GetChild(0).GetComponent<Text>();
-            text.text = item;
-            text.alignment = TextAnchor.MiddleCenter;
-
-            button.onClick.AddListener(() => Open(item));
-        }
-    }
-
-    private void Open(string name)
-    {
-        level.Load($"{meta.Directory}/{name}.#");
-        SceneManager.LoadScene("Play");
     }
 
     public void Create()
     {
-        string path = EngineUtility.NextFile(Constants.CollectionsRoot + "Local/", "Collection", string.Empty);
+        var path = EngineUtility.NextFile(Constants.CollectionsRoot + "Local/", "Collection", string.Empty) + "/";
         Directory.CreateDirectory(path);
 
-        File.Copy(Constants.EditorRoot + "Meta.json", path + "/Meta.json");
-        File.WriteAllText(path + "/Map.#", "{}");
-        File.Copy(Constants.EditorRoot + "Level.#", path + "/Level 1.#");
+        File.Copy(Constants.EditorRoot + "Meta.json", path + "Meta.json");
+        File.WriteAllText(path + "Map.#", "{}");
+        File.Copy(Constants.EditorRoot + "Level.#", path + "Level 1.#");
 
-        meta.Load(path + "/Meta.json");
+        meta.Load(path + "Meta.json");
     }
 }

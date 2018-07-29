@@ -25,15 +25,6 @@ public class EntranceObject : SerializableObject
             )
         );
 
-    private void Start()
-    {
-        if (level.Name == Level && ExitObject.Passed)
-        {
-            Passed = true;
-            LevelManager.Main.UpdateInstance(this);
-        }
-    }
-
     private void OnMouseDown()
     {
         if (enabled && Open)
@@ -94,12 +85,11 @@ public class EntranceObject : SerializableObject
             if (Passed)
             {
                 CameraManager.Position = transform.position;
-                
+
                 var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
                 if (entrance && !entrance.Open)
                 {
                     entrance.Open = true;
-                    LevelManager.Main.UpdateInstance(entrance);
                     CameraManager.Move(Next);
                 }
             }
