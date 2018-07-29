@@ -17,13 +17,8 @@ public class EditorManager : MonoBehaviour
         IgnoreCollisions(true);
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() =>
         IgnoreCollisions(false);      
-
-        //collectionFile["current"] = Mathf.Min((int)collectionFile["current"], levels.Count);
-        //collectionFile.Save();
-    }
 
     #region engine management
 
@@ -38,7 +33,7 @@ public class EditorManager : MonoBehaviour
         LevelManager.Main.UnloadLevel();
         LevelManager.Main.LoadLevel(levelFile);
 
-        foreach (SerializableObject instance in LevelManager.Main.instances)
+        foreach (var instance in FindObjectsOfType<SerializableObject>())
             instance.enabled = false;
     }
 

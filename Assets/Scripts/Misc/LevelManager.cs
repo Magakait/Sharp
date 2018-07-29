@@ -13,7 +13,7 @@ public class LevelManager : ScriptableObject
     public SerializableObject Source(int id) => 
         source[id];
 
-    public readonly List<SerializableObject> instances = new List<SerializableObject>();
+    private readonly List<SerializableObject> instances = new List<SerializableObject>();
 
     public static LevelManager Main { get; private set; }
     private JsonFile level;
@@ -28,7 +28,7 @@ public class LevelManager : ScriptableObject
 
     public void UnloadLevel()
     {
-        foreach (SerializableObject instance in LevelManager.Main.instances)
+        foreach (var instance in LevelManager.Main.instances)
             if (instance)
                 Destroy(instance.gameObject);
     }
@@ -38,9 +38,9 @@ public class LevelManager : ScriptableObject
         level = file;
         instances.Clear();
 
-        foreach (JToken token in level.Root)
+        foreach (var token in level.Root)
         {
-            SerializableObject instance = AddInstance((int)token["id"], token["position"].ToVector());
+            var instance = AddInstance((int)token["id"], token["position"].ToVector());
             try
             {
                 instance.Deserialize(token["properties"]);
@@ -55,13 +55,13 @@ public class LevelManager : ScriptableObject
 
     public SerializableObject AddInstance(int id, Vector2 position, bool save = false)
     {
-        SerializableObject instance = Instantiate(source[id], position, Quaternion.identity);
+        var instance = Instantiate(source[id], position, Quaternion.identity);
         instance.name = source[id].name;
         instances.Add(instance);
 
         if (save)
         {
-            JToken data = SerializeInstance(instance);
+            var data = SerializeInstance(instance);
             ((JArray)level.Root).Add(data);
 
             instance.Deserialize(data["properties"]);
@@ -84,7 +84,7 @@ public class LevelManager : ScriptableObject
 
     public void CopyInstance(SerializableObject from, SerializableObject to)
     {
-        JToken properties = new JObject();
+        var properties = new JObject();
         from.Serialize(properties);
         to.Deserialize(properties);
 
@@ -100,7 +100,7 @@ public class LevelManager : ScriptableObject
 
     private JToken SerializeInstance(SerializableObject instance)
     {
-        JToken properties = new JObject();
+        var properties = new JObject();
         instance.Serialize(properties);
 
         return new JObject
