@@ -47,6 +47,7 @@ public class CanvasToggle : MonoBehaviour
                 .DOAnchorPos(offset, .15f)
                 .SetRelative()
         )
+            .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
 
         Visible = Visible;
