@@ -93,13 +93,13 @@ public class EntranceObject : SerializableObject
 
             if (Passed)
             {
+                CameraManager.Position = transform.position;
+                
                 var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
                 if (entrance && !entrance.Open)
                 {
                     entrance.Open = true;
                     LevelManager.Main.UpdateInstance(entrance);
-
-                    CameraManager.Position = transform.position;
                     CameraManager.Move(Next);
                 }
             }
