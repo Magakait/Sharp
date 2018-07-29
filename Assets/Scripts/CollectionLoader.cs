@@ -30,10 +30,10 @@ public class CollectionLoader : MonoBehaviour
                 .Reverse()
                 .Select(d => new Dropdown.OptionData(d.Name)))
             dropdownCollections.options.Add(option);
+        dropdownCollections.RefreshShownValue();
 
         if (dropdownCollections.options.Count > 0)
         {
-            dropdownCollections.RefreshShownValue();
             dropdownCollections.value = index;
             dropdownCollections.onValueChanged.Invoke(dropdownCollections.value);
         }
