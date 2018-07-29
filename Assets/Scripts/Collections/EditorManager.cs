@@ -135,9 +135,7 @@ public class EditorManager : MonoBehaviour
         string name = Path.GetFileNameWithoutExtension(path);
 
         File.Copy(Constants.EditorRoot + "Level.#", path);
-
         levels.Add(name);
-        SaveOrder();
 
         ListLevels(name);
     }
@@ -155,8 +153,6 @@ public class EditorManager : MonoBehaviour
         );
 
         levels.Add(levelFile.FileNameWithoutExtension);
-        SaveOrder();
-
         ListLevels(levelFile.FileNameWithoutExtension);
     }
 
@@ -169,8 +165,6 @@ public class EditorManager : MonoBehaviour
         else
         {
             levels[levels.IndexOf(levelFile.FileNameWithoutExtension)] = name;
-            SaveOrder();
-
             levelFile.Rename(path);
 
             ListLevels(name);
@@ -183,10 +177,7 @@ public class EditorManager : MonoBehaviour
         levelFile.Delete();
 
         if (levels.Count > 0)
-        {
-            SaveOrder();
             ListLevels(string.Empty);
-        }
         else
         {
             Directory.Delete(collectionFile.Directory, true);
@@ -203,14 +194,7 @@ public class EditorManager : MonoBehaviour
         levels[current] = levels[delta];
         levels[delta] = temp;
 
-        SaveOrder();
         ListLevels(levels[delta]);
-    }
-
-    private void SaveOrder()
-    {
-        collectionFile["levels"].Replace(new JArray(levels));
-        collectionFile.Save();
     }
 
     #endregion
