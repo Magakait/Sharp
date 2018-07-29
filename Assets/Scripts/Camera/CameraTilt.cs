@@ -16,7 +16,10 @@ public class CameraTilt : MonoBehaviour
     private void Update()
     {
         if (CameraManager.Position != cameraPosition)
+        {
             Start();
+            return;
+        }
 
         Vector2 mousePosition = CameraManager.Camera.ScreenToViewportPoint(Input.mousePosition);
         CameraManager.Position += scale * (mousePosition - this.mousePosition);
