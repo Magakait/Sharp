@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 using Newtonsoft.Json.Linq;
 using DG.Tweening;
 
-public class EntranceObject : SerializableObject, IPointerClickHandler
+public class EntranceObject : SerializableObject
 {
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -16,7 +15,7 @@ public class EntranceObject : SerializableObject, IPointerClickHandler
             )
         );
 
-    public void OnPointerClick(PointerEventData eventData)
+    private void OnMouseDown()
     {
         if (enabled && Open)
             CameraManager.Move(transform.position);
@@ -26,16 +25,17 @@ public class EntranceObject : SerializableObject, IPointerClickHandler
 
     [Header("Animation")]
     [SerializeField]
-    private ParticleSystem orbParticle;
     private Transform frameTransform;
-    
+    [SerializeField]
+    private ParticleSystem orbParticle;
+
     private new TweenArrayComponent animation;
 
     #endregion
 
     #region serialization
 
-    public bool Open { get; private set; }
+    public bool Open { get; private set; } = true;
     public bool Passed { get; private set; }
     public string Level { get; private set; }
     public Vector2 Next { get; private set; }
