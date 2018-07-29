@@ -58,7 +58,7 @@ public class PlayerObject : SerializableObject
 
     public void CheckSpawn()
     {
-        if (ExitObject.Activated)
+        if (ExitObject.Passed)
             return;
 
         if (spawn)

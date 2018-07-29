@@ -7,13 +7,13 @@ using Newtonsoft.Json.Linq;
 public class ExitObject : SerializableObject
 {
     private void Awake() =>
-        Activated = false;
+        Passed = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!Activated && collision.GetComponent<PlayerObject>())
+        if (!Passed && collision.GetComponent<PlayerObject>())
         {
-            Activate();
+            Pass();
             collision.GetComponent<UnitComponent>().Kill();
         }
     }
@@ -27,11 +27,11 @@ public class ExitObject : SerializableObject
     public JsonFile collectionFile;
     public JsonFile levelFile;
 
-    public static bool Activated { get; private set; }
+    public static bool Passed { get; private set; }
 
-    private void Activate()
+    private void Pass()
     {
-        Activated = true;
+        Passed = true;
 
         JArray levels = (JArray)collectionFile["levels"];
         int current = 1 + levels

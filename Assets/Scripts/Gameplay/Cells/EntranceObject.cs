@@ -5,6 +5,10 @@ using DG.Tweening;
 
 public class EntranceObject : SerializableObject
 {
+    [SerializeField]
+    private JsonFile level;
+    private JsonFile meta;
+
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
@@ -23,7 +27,19 @@ public class EntranceObject : SerializableObject
     private void OnMouseDown()
     {
         if (enabled && Open)
-            CameraManager.Move(transform.position);
+            Select();
+    }
+
+    private void Select()
+    {
+        CameraManager.Move(transform.position);
+
+    }
+
+    private void Enter()
+    {
+        level.Load($"{meta.Directory}/{Level}.#");
+        EngineUtility.Main.OpenScene("Play");
     }
 
     #region animation
@@ -43,7 +59,7 @@ public class EntranceObject : SerializableObject
     private bool open;
     public bool Open
     {
-        get 
+        get
         {
             return open;
         }
@@ -53,7 +69,7 @@ public class EntranceObject : SerializableObject
             animation[0].Play(Open);
         }
     }
-    
+
     private bool passed;
     public bool Passed
     {
@@ -66,11 +82,15 @@ public class EntranceObject : SerializableObject
             passed = value;
             animation[1].Play(!Passed);
 
-            var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
-            if (entrance && !entrance.Open)
+            if (Passed)
             {
-                entrance.Open = true;
-                CameraManager.Move(Next);
+                var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
+                if (entrance && !entrance.Open)
+                {
+                    entrance.Open = true;
+                    CameraManager.Position = transform.position;
+                    CameraManager.Move(Next);
+                }
             }
         }
     }
