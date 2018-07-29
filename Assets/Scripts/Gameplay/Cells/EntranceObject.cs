@@ -27,7 +27,7 @@ public class EntranceObject : SerializableObject
 
     private void Start()
     {
-        if (level.FileNameWithoutExtension == Level && ExitObject.Passed)
+        if (level.Name == Level && ExitObject.Passed)
         {
             Passed = true;
             LevelManager.Main.UpdateInstance(this);

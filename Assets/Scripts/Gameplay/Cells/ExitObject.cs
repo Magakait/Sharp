@@ -37,7 +37,7 @@ public class ExitObject : SerializableObject
         int current = 1 + levels
             .Select(i => (string)i)
             .ToList()
-            .IndexOf(levelFile.FileNameWithoutExtension);
+            .IndexOf(levelFile.Name);
 
         if (current > (int)collectionFile["current"])
         {

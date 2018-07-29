@@ -12,7 +12,7 @@ public class EditorManager : MonoBehaviour
     private void Start()
     {
         LoadCollection();
-        ListLevels(levelFile.FileNameWithoutExtension);
+        ListLevels(level.Name);
 
         IgnoreCollisions(true);
     }
@@ -31,7 +31,7 @@ public class EditorManager : MonoBehaviour
     public void DeserializeLevel()
     {
         LevelManager.Main.UnloadLevel();
-        LevelManager.Main.LoadLevel(levelFile);
+        LevelManager.Main.LoadLevel(level);
 
         foreach (var instance in FindObjectsOfType<SerializableObject>())
             instance.enabled = false;
@@ -45,14 +45,14 @@ public class EditorManager : MonoBehaviour
     public InputField inputCollection;
 
     [Space(10)]
-    public JsonFile collectionFile;
+    public JsonFile meta;
 
     private void LoadCollection()
     {
         levels.Clear();
-        levels.AddRange(((JArray)collectionFile["levels"]).Select(i => (string)i));
+        levels.AddRange(((JArray)meta["levels"]).Select(i => (string)i));
 
-        inputCollection.text = Path.GetFileName(collectionFile.Directory);
+        inputCollection.text = Path.GetFileName(meta.Directory);
     }
 
     public void RenameCollection(string name)
@@ -60,13 +60,13 @@ public class EditorManager : MonoBehaviour
         string path = Constants.CollectionsRoot + "Local/" + name;
 
         if (Directory.Exists(path))
-            inputCollection.text = Path.GetFileName(collectionFile.Directory);
+            inputCollection.text = Path.GetFileName(meta.Directory);
         else
         {
-            Directory.Move(collectionFile.Directory, path);
+            Directory.Move(meta.Directory, path);
 
-            collectionFile.Load(path + "/Meta.json");
-            levelFile.Load($"{path}/{levelFile.FileNameWithoutExtension}.#");
+            meta.Load(path + "/Meta.json");
+            level.Load($"{path}/{level.Name}.#");
         }
     }
 
@@ -80,11 +80,7 @@ public class EditorManager : MonoBehaviour
     public ToggleGroup toggleGroup;
 
     [Space(10)]
-    public Button buttonUp;
-    public Button buttonDown;
-
-    [Space(10)]
-    public JsonFile levelFile;
+    public JsonFile level;
 
     [Space(10)]
     public VoidEvent onLevelLoad;
@@ -93,13 +89,10 @@ public class EditorManager : MonoBehaviour
 
     private void LoadLevel(int index)
     {
-        levelFile.Load($"{collectionFile.Directory}/{levels[index]}.#");
+        level.Load($"{meta.Directory}/{levels[index]}.#");
 
-        inputLevel.text = levelFile.FileNameWithoutExtension;
+        inputLevel.text = level.Name;
         DeserializeLevel();
-
-        buttonUp.interactable = index > 0;
-        buttonDown.interactable = index < levels.Count - 1;
 
         onLevelLoad.Invoke();
     }
@@ -107,7 +100,13 @@ public class EditorManager : MonoBehaviour
     private void ListLevels(string name)
     {
         levels.Clear();
-        levels.AddRange(((JArray)collectionFile["levels"]).Select(i => (string)i));
+        levels.AddRange
+        (
+            new DirectoryInfo(meta.Directory)
+                .GetFiles("*.#")
+                .OrderBy(f => f.CreationTime)
+                .Select(f => f.Name)
+        );
 
         toggleGroup.transform.Clear();
 
@@ -131,7 +130,7 @@ public class EditorManager : MonoBehaviour
 
     public void AddLevel()
     {
-        string path = EngineUtility.NextFile(collectionFile.Directory + "/", "Level", ".#");
+        string path = EngineUtility.NextFile(meta.Directory + "/", "Level", ".#");
         string name = Path.GetFileNameWithoutExtension(path);
 
         File.Copy(Constants.EditorRoot + "Level.#", path);
@@ -142,30 +141,30 @@ public class EditorManager : MonoBehaviour
 
     public void CopyLevel()
     {
-        levelFile.SaveTo
+        level.SaveTo
         (
             EngineUtility.NextFile
             (
-                collectionFile.Directory + "/",
-                levelFile.FileNameWithoutExtension + " - copy",
+                meta.Directory + "/",
+                level.Name + " - copy",
                 ".#"
             )
         );
 
-        levels.Add(levelFile.FileNameWithoutExtension);
-        ListLevels(levelFile.FileNameWithoutExtension);
+        levels.Add(level.Name);
+        ListLevels(level.Name);
     }
 
     public void RenameLevel(string name)
     {
-        string path = $"{collectionFile.Directory}/{name}.#";
+        string path = $"{meta.Directory}/{name}.#";
 
         if (File.Exists(path))
-            inputLevel.text = levelFile.FileNameWithoutExtension;
+            inputLevel.text = level.Name;
         else
         {
-            levels[levels.IndexOf(levelFile.FileNameWithoutExtension)] = name;
-            levelFile.Rename(path);
+            levels[levels.IndexOf(level.Name)] = name;
+            level.Rename(path);
 
             ListLevels(name);
         }
@@ -173,28 +172,16 @@ public class EditorManager : MonoBehaviour
 
     public void DeleteLevel()
     {
-        levels.Remove(levelFile.FileNameWithoutExtension);
-        levelFile.Delete();
+        levels.Remove(level.Name);
+        level.Delete();
 
         if (levels.Count > 0)
             ListLevels(string.Empty);
         else
         {
-            Directory.Delete(collectionFile.Directory, true);
+            Directory.Delete(meta.Directory, true);
             EngineUtility.Main.OpenScene("Home");
         }
-    }
-
-    public void ShiftOrder(int delta)
-    {
-        int current = levels.IndexOf(levelFile.FileNameWithoutExtension);
-        delta += current;
-
-        string temp = levels[current];
-        levels[current] = levels[delta];
-        levels[delta] = temp;
-
-        ListLevels(levels[delta]);
     }
 
     #endregion

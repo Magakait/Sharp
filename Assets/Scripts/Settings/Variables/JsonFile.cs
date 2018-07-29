@@ -7,22 +7,22 @@ using Newtonsoft.Json.Linq;
 [CreateAssetMenu]
 public class JsonFile : ScriptableObject
 {
-    private string fileName;
-    public string FileName
+    private string fullName;
+    public string FullName
     {
         get
         {
-            return fileName;
+            return fullName;
         }
         private set
         {
-            fileName = value;
+            fullName = value;
 
-            FileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileName);
-            Directory = Path.GetDirectoryName(FileName);
+            Name = Path.GetFileNameWithoutExtension(FullName);
+            Directory = Path.GetDirectoryName(FullName);
         }
     }
-    public string FileNameWithoutExtension { get; private set; }
+    public string Name { get; private set; }
     public string Directory { get; private set; }
 
     public JToken Root { get; set; }
@@ -40,7 +40,7 @@ public class JsonFile : ScriptableObject
 
     public void Load(string fileName)
     {
-        FileName = fileName;
+        FullName = fileName;
         Refresh();
     }
 
@@ -51,23 +51,23 @@ public class JsonFile : ScriptableObject
     }
 
     public void Save() =>
-        File.WriteAllText(FileName, Root.ToString());
+        File.WriteAllText(FullName, Root.ToString());
 
     public void SaveTo(string fileName)
     {
-        File.Copy(FileName, fileName);
-        FileName = fileName;
+        File.Copy(FullName, fileName);
+        FullName = fileName;
     }
 
     public void Refresh() =>
-        Root = JToken.Parse(File.ReadAllText(FileName));
+        Root = JToken.Parse(File.ReadAllText(FullName));
 
     public void Rename(string fileName)
     {
-        File.Move(FileName, fileName);
-        FileName = fileName;
+        File.Move(FullName, fileName);
+        FullName = fileName;
     }
 
     public void Delete() =>
-        File.Delete(FileName);
+        File.Delete(FullName);
 }

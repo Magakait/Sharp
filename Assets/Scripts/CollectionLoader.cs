@@ -76,6 +76,7 @@ public class CollectionLoader : MonoBehaviour
         Directory.CreateDirectory(path);
 
         File.Copy(Constants.EditorRoot + "Meta.json", path + "/Meta.json");
+        File.WriteAllText(path + "/Map.#", "{}");
         File.Copy(Constants.EditorRoot + "Level.#", path + "/Level 1.#");
 
         meta.Load(path + "/Meta.json");
