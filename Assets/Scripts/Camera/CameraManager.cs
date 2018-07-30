@@ -2,10 +2,12 @@ using UnityEngine;
 
 using DG.Tweening;
 
-[RequireComponent(typeof(Camera))]
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField]
+    private new Camera camera;
     public static Camera Camera { get; private set; }
+
     private static CameraManager manager;
 
     public static Transform Target { get; set; }
@@ -21,7 +23,7 @@ public class CameraManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        Camera = GetComponent<Camera>();
+        Camera = camera;
         manager = this;
 
         tween = transform

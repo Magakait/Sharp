@@ -36,11 +36,11 @@ public class CanvasToggle : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-
+        
         animation = DOTween.Sequence().Insert
         (
             transform
-                .DOScale(scale, .15f),
+                .DOScale(scale * transform.localScale, .15f),
             canvasGroup
                 .DOFade(0, .15f),
             GetComponent<RectTransform>()

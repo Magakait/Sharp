@@ -15,7 +15,6 @@ public class EntranceObject : SerializableObject
     private JsonFile meta;
 
     public bool Valid { get; private set; }
-    public bool Passed { get; private set; }
 
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init

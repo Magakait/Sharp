@@ -2,28 +2,15 @@
 
 public class CameraTilt : MonoBehaviour
 {
-    public float scale;
+    [SerializeField]
+    private float scale;
 
-    private Vector2 mousePosition;
-    private Vector2 cameraPosition;
+    private static readonly Vector3 offset = new Vector3(.5f, .5f, 0);
 
-    private void Start()
-    {
-        mousePosition = .5f * Vector2.one;
-        cameraPosition = CameraManager.Position;
-    }
+    private void OnDisable() =>
+        CameraManager.Camera.transform.position = Vector3.zero;
 
-    private void Update()
-    {
-        if (CameraManager.Position != cameraPosition)
-            Start();
-        else
-        {
-            Vector2 mousePosition = CameraManager.Camera.ScreenToViewportPoint(Input.mousePosition);
-            CameraManager.Position += scale * (mousePosition - this.mousePosition);
-            this.mousePosition = mousePosition;
-        }
-        
-        cameraPosition = CameraManager.Position;
-    }
+    private void Update() =>
+        CameraManager.Camera.transform.localPosition = scale * 
+            (CameraManager.Camera.ScreenToViewportPoint(Input.mousePosition) - offset);
 }
