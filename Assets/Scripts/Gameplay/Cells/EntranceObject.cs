@@ -28,6 +28,17 @@ public class EntranceObject : SerializableObject
 
     private void Start()
     {
+        var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
+        if (entrance)
+        {
+            var position = (Vector2)transform.position;
+            var offset = .75f * (Next - position).normalized;
+
+            nextLine.SetPosition(0, position + offset);
+            nextLine.SetPosition(1, .5f * (position + Next));
+            nextLine.SetPosition(2, Next - offset);
+        }
+
         if (Open && !Valid)
         {
             canvasToggle.Visible = false;
@@ -53,16 +64,7 @@ public class EntranceObject : SerializableObject
 
         var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
         if (entrance && !entrance.Open)
-        {
             entrance.Open = true;
-
-            var position = (Vector2)transform.position;
-            var offset = .75f * (Next - position).normalized;
-
-            nextLine.SetPosition(0, position + offset);
-            nextLine.SetPosition(1, .5f * (position + Next));
-            nextLine.SetPosition(2, Next - offset);
-        }
     }
 
     #region animation
