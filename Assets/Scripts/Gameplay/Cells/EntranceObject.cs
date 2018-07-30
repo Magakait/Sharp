@@ -1,4 +1,6 @@
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +17,12 @@ public class EntranceObject : SerializableObject
     private JsonFile meta;
 
     public bool Valid { get; private set; }
+    public bool Passed { get; private set; }
 
-    private void Awake() =>
+    public static readonly List<EntranceObject> instances = new List<EntranceObject>();
+
+    private void Awake()
+    {
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             DOTween.Sequence().Insert
@@ -26,18 +32,17 @@ public class EntranceObject : SerializableObject
             )
         );
 
+        instances.Add(this);
+    }
+
+    private void OnDestroy() =>
+        instances.Remove(this);
+
     private void Start()
     {
-        var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
-        if (entrance)
-        {
-            var position = (Vector2)transform.position;
-            var offset = .75f * (Next - position).normalized;
-
-            nextLine.SetPosition(0, position + offset);
-            nextLine.SetPosition(1, .5f * (position + Next));
-            nextLine.SetPosition(2, Next - offset);
-        }
+        var next = instances.FirstOrDefault(e => e.Level == Next);
+        if (next)
+            Connect(next.transform.position);
 
         if (Open && !Valid)
         {
@@ -60,11 +65,24 @@ public class EntranceObject : SerializableObject
 
     public void Pass()
     {
-        coreEffect.Emission(Valid);
+        Passed = true;
+        Open = true;
 
-        var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
-        if (entrance && !entrance.Open)
-            entrance.Open = true;
+        var next = instances.FirstOrDefault(e => e.Level == Next);
+        if (next)
+            next.Open = true;
+
+        coreEffect.Emission(Valid);
+    }
+
+    public void Connect(Vector2 destination)
+    {
+        var position = (Vector2)transform.position;
+        var offset = .75f * (destination - position).normalized;
+
+        connectionLine.SetPosition(0, position + offset);
+        connectionLine.SetPosition(1, .5f * (position + destination));
+        connectionLine.SetPosition(2, destination - offset);
     }
 
     #region animation
@@ -75,7 +93,7 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private ParticleSystem coreEffect;
     [SerializeField]
-    private LineRenderer nextLine;
+    private LineRenderer connectionLine;
 
     [Space(10)]
     [SerializeField]
@@ -114,24 +132,23 @@ public class EntranceObject : SerializableObject
             open = value;
             animation[0].Play(Open);
             canvasToggle.Visible = Open;
-            CameraManager.Position = transform.position;
         }
     }
 
-    public Vector2 Next { get; private set; }
+    public string Next { get; private set; }
 
     public override void Serialize(JToken token)
     {
-        token["level"] = Level;
         token["open"] = Open;
-        token["next"] = Next.ToJToken();
+        token["level"] = Level;
+        token["next"] = Next;
     }
 
     public override void Deserialize(JToken token)
     {
-        Level = (string)token["level"];
         Open = (bool)token["open"];
-        Next = token["next"].ToVector();
+        Level = (string)token["level"];
+        Next = (string)token["next"];
     }
 
     #endregion

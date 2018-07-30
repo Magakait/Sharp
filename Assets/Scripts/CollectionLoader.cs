@@ -52,12 +52,15 @@ public class CollectionLoader : MonoBehaviour
         LevelManager.Main.LoadLevel(level);
 
         var passed = meta["passed"].Select(t => (string)t);
-        var entrances = FindObjectsOfType<EntranceObject>();
-        foreach (var entrance in entrances)
+        foreach (var entrance in EntranceObject.instances)
             if (passed.Contains(entrance.Level))
                 entrance.Pass();
 
-        meta["progress"] = (float)passed.Count() / entrances.Count(e => e.Valid);
+        var last = EntranceObject.instances.FirstOrDefault(e => e.Open && !e.Passed);
+        CameraManager.Position = 
+            (last ? last : EntranceObject.instances[EntranceObject.instances.Count - 1]).transform.position;
+
+        meta["progress"] = (float)passed.Count() / EntranceObject.instances.Count(e => e.Valid);
         meta["editable"] = Category == "Local/";
         meta.Save();
     }
