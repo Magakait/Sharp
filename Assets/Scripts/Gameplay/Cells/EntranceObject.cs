@@ -1,3 +1,5 @@
+using System.IO;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +14,9 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private JsonFile meta;
 
+    public bool Valid { get; private set; }
+    public bool Passed { get; private set; }
+
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
@@ -19,13 +24,17 @@ public class EntranceObject : SerializableObject
             (
                 frameTransform
                     .DOScale(0, Constants.Time)
-            ),
-            DOTween.Sequence().Insert
-            (
-                lineNext.transform
-                    .DOScale(1, Constants.Time)
             )
         );
+
+    private void Start()
+    {
+        if (Open && !Valid)
+        {
+            canvasToggle.Visible = false;
+            Pass();
+        }
+    }
 
     private void OnMouseDown()
     {
@@ -41,16 +50,16 @@ public class EntranceObject : SerializableObject
 
     public void Pass()
     {
-        animation[1].Play();
+        coreEffect.Emission(Valid);
 
         var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
         if (entrance && !entrance.Open)
         {
             entrance.Open = true;
 
-            lineNext.SetPosition(0, (Vector2)transform.position);
-            lineNext.SetPosition(1, ((Vector2)transform.position + Next) / 2);
-            lineNext.SetPosition(2, Next);
+            nextLine.SetPosition(0, (Vector2)transform.position);
+            nextLine.SetPosition(1, ((Vector2)transform.position + Next) / 2);
+            nextLine.SetPosition(2, Next);
         }
     }
 
@@ -60,7 +69,9 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private Transform frameTransform;
     [SerializeField]
-    private LineRenderer lineNext;
+    private ParticleSystem coreEffect;
+    [SerializeField]
+    private LineRenderer nextLine;
 
     [Space(10)]
     [SerializeField]
@@ -83,6 +94,7 @@ public class EntranceObject : SerializableObject
         private set
         {
             titleText.text = value;
+            Valid = File.Exists($"{meta.Directory}/{Level}.#");
         }
     }
 

@@ -49,15 +49,18 @@ public class CanvasToggle : MonoBehaviour
         )
             .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
+    }
 
+    private void Start()
+    {
         Visible = Visible;
         if (!Visible)
             animation.Complete();
     }
 
-    private void OnDestroy() => 
+    private void OnDestroy() =>
         animation.Kill();
 
-    public void Toggle() => 
+    public void Toggle() =>
         Visible = !Visible;
 }

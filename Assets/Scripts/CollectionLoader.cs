@@ -57,7 +57,7 @@ public class CollectionLoader : MonoBehaviour
             if (passed.Contains(entrance.Level))
                 entrance.Pass();
 
-        meta["progress"] = (float)passed.Count() / entrances.Length;
+        meta["progress"] = (float)passed.Count() / entrances.Count(e => e.Valid);
         meta["editable"] = Category == "Local/";
     }
 

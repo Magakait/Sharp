@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 120104959125444114}
   - component: {fileID: 114572715690199354}
   m_Layer: 8
-  m_Name: Orb
+  m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 1398862478754068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4137887037576950}
   m_RootOrder: 3
@@ -315,7 +315,8 @@ MonoBehaviour:
   level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
   meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
   frameTransform: {fileID: 4593532262425922}
-  lineNext: {fileID: 120104959125444114}
+  coreEffect: {fileID: 198885050216963842}
+  nextLine: {fileID: 120104959125444114}
   canvasToggle: {fileID: 114340411981049238}
   titleText: {fileID: 114433222985141724}
 --- !u!114 &114433222985141724
@@ -1363,7 +1364,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
