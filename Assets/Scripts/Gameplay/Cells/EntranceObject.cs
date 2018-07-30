@@ -56,9 +56,12 @@ public class EntranceObject : SerializableObject
         {
             entrance.Open = true;
 
-            nextLine.SetPosition(0, (Vector2)transform.position);
-            nextLine.SetPosition(1, ((Vector2)transform.position + Next) / 2);
-            nextLine.SetPosition(2, Next);
+            var position = (Vector2)transform.position;
+            var offset = .75f * (Next - position).normalized;
+
+            nextLine.SetPosition(0, position + offset);
+            nextLine.SetPosition(1, .5f * (position + Next));
+            nextLine.SetPosition(2, Next - offset);
         }
     }
 
