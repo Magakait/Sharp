@@ -165,8 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   message: {fileID: 114208053780329140, guid: e324eeef860ae2b439df4899469b7570, type: 2}
-  collectionFile: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
-  levelFile: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
+  meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
+  level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
 --- !u!114 &114386804539931478
 MonoBehaviour:
   m_ObjectHideFlags: 1

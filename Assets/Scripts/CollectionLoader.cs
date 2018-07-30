@@ -35,6 +35,8 @@ public class CollectionLoader : MonoBehaviour
             dropdownTitle.value = index;
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
+        else
+            LevelManager.Main.UnloadLevel();
     }
 
     public void Load()
@@ -43,14 +45,16 @@ public class CollectionLoader : MonoBehaviour
         meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
+        LevelManager.Main.UnloadLevel();
         LevelManager.Main.LoadLevel(level);
-        var passed = (JArray)meta["passed"];
+
+        var passed = meta["passed"].Select(t => (string)t);
         var entrances = FindObjectsOfType<EntranceObject>();
         foreach (var entrance in entrances)
             if (passed.Contains(entrance.Level))
-                entrance.Passed = true;
+                entrance.Pass();
 
-        meta["progress"] = (float)passed.Count / entrances.Length;
+        meta["progress"] = (float)passed.Count() / entrances.Length;
         meta["editable"] = Category == "Local/";
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 using Newtonsoft.Json.Linq;
 using DG.Tweening;
@@ -8,6 +9,7 @@ public class EntranceObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private JsonFile level;
+    [SerializeField]
     private JsonFile meta;
 
     private void Awake() =>
@@ -37,6 +39,23 @@ public class EntranceObject : SerializableObject
         EngineUtility.Main.OpenScene("Play");
     }
 
+    public void Pass()
+    {
+        animation[1].Play();
+        CameraManager.Position = transform.position;
+
+        var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
+        if (entrance && !entrance.Open)
+        {
+            entrance.Open = true;
+            CameraManager.Move(Next);
+
+            lineNext.SetPosition(0, (Vector2)transform.position);
+            lineNext.SetPosition(1, ((Vector2)transform.position + Next) / 2);
+            lineNext.SetPosition(2, Next);
+        }
+    }
+
     #region animation
 
     [Header("Animation")]
@@ -48,12 +67,26 @@ public class EntranceObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private CanvasToggle canvasToggle;
+    [SerializeField]
+    private Text titleText;
 
     private new TweenArrayComponent animation;
 
     #endregion
 
     #region serialization
+
+    public string Level
+    {
+        get
+        {
+            return titleText.text;
+        }
+        private set
+        {
+            titleText.text = value;
+        }
+    }
 
     private bool open;
     public bool Open
@@ -70,66 +103,19 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    private bool passed;
-    public bool Passed
-    {
-        get
-        {
-            return passed;
-        }
-        set
-        {
-            passed = value;
-            animation[1].Play(!Passed);
-
-            if (Passed)
-            {
-                CameraManager.Position = transform.position;
-
-                var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
-                if (entrance && !entrance.Open)
-                {
-                    entrance.Open = true;
-                    CameraManager.Move(Next);
-                }
-            }
-        }
-    }
-    public string Level { get; private set; }
-
-    private Vector2 next;
-    public Vector2 Next
-    {
-        get
-        {
-            return next;
-        }
-        private set
-        {
-            next = value;
-
-            var position = (Vector2)transform.position;
-            var offset = .5f * (Next - position).normalized;
-
-            lineNext.SetPosition(0, position + offset);
-            lineNext.SetPosition(1, (position - Next) / 2);
-            lineNext.SetPosition(2, Next - offset);
-        }
-    }
+    public Vector2 Next { get; private set; }
 
     public override void Serialize(JToken token)
     {
-        token["open"] = Open;
-        token["passed"] = Passed;
         token["level"] = Level;
+        token["open"] = Open;
         token["next"] = Next.ToJToken();
     }
 
     public override void Deserialize(JToken token)
     {
-        Open = (bool)token["open"];
-        Passed = (bool)token["passed"];
         Level = (string)token["level"];
+        Open = (bool)token["open"];
         Next = token["next"].ToVector();
     }
 

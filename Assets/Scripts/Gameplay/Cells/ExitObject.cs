@@ -34,7 +34,7 @@ public class ExitObject : SerializableObject
         Passed = true;
 
         var passed = (JArray)meta["passed"];
-        if (!passed.Contains(level.Name))
+        if (!passed.Select(t => (string)t).Contains(level.Name))
         {
             passed.Add(level.Name);
             meta.Save();

@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 1398862478754068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 4137887037576950}
   m_RootOrder: 3
@@ -313,9 +313,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 11
   level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
+  meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
   frameTransform: {fileID: 4593532262425922}
   lineNext: {fileID: 120104959125444114}
   canvasToggle: {fileID: 114340411981049238}
+  titleText: {fileID: 114433222985141724}
 --- !u!114 &114433222985141724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -404,9 +406,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1742398349221448}
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 114421921248546010}
+        m_MethodName: Enter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -560,8 +562,8 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 0}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0.5882353}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 1}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -576,8 +578,8 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 16384
-      atime2: 16384
+      atime1: 32768
+      atime2: 65535
       atime3: 49151
       atime4: 65535
       atime5: 0
@@ -585,7 +587,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 5
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 1
