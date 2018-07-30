@@ -22,7 +22,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void List()
     {
-        int index = dropdownTitle.value;
+        var index = dropdownTitle.value;
 
         dropdownTitle.ClearOptions();
         foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
