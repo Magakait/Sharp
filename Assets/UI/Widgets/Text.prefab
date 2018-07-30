@@ -127,7 +127,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 2
+  m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
   m_CharacterLimit: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   title: {fileID: 114452733895385290}
   buffer: {fileID: 11400000, guid: 3628f6c979a87354bbd449ad0ca55b90, type: 2}
   input: {fileID: 114175195564650436}
+  panel: {fileID: 224233899855823990}
 --- !u!222 &222139636634792194
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -423,8 +424,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 583, y: 184}
-  m_SizeDelta: {x: 200, y: 150}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 65}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224574616251083942
 RectTransform:

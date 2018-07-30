@@ -22,7 +22,7 @@ public class VectorWidget : BaseWidget
         ready = true;
     }
 
-    protected override void Read(JToken value, JToken attribute)
+    protected override void Read(JToken value, JToken attributes)
     {
         Vector2 vector = value.ToVector();
 
