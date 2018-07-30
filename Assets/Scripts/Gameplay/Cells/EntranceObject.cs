@@ -42,13 +42,11 @@ public class EntranceObject : SerializableObject
     public void Pass()
     {
         animation[1].Play();
-        CameraManager.Position = transform.position;
 
         var entrance = PhysicsUtility.Overlap<EntranceObject>(Next, Constants.CellMask);
         if (entrance && !entrance.Open)
         {
             entrance.Open = true;
-            CameraManager.Move(Next);
 
             lineNext.SetPosition(0, (Vector2)transform.position);
             lineNext.SetPosition(1, ((Vector2)transform.position + Next) / 2);
@@ -100,6 +98,7 @@ public class EntranceObject : SerializableObject
             open = value;
             animation[0].Play(Open);
             canvasToggle.Visible = Open;
+            CameraManager.Position = transform.position;
         }
     }
 

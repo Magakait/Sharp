@@ -15,6 +15,9 @@ public class CollectionLoader : MonoBehaviour
     public JsonFile meta;
     public JsonFile level;
 
+    [Space(10)]
+    public VoidEvent onEmptyList;
+
     public string Category { get; set; }
 
     public void List()
@@ -36,7 +39,7 @@ public class CollectionLoader : MonoBehaviour
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
         else
-            LevelManager.Main.UnloadLevel();
+            onEmptyList.Invoke();
     }
 
     public void Load()
