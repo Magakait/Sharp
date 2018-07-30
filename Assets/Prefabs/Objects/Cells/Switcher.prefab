@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114625290788715922}
   m_Layer: 8
   m_Name: Switcher
-  m_TagString: Cell
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
