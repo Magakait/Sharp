@@ -18,7 +18,7 @@ public class EditorManager : MonoBehaviour
     }
 
     private void OnDestroy() =>
-        IgnoreCollisions(false);      
+        IgnoreCollisions(false);
 
     #region engine management
 
@@ -175,7 +175,16 @@ public class EditorManager : MonoBehaviour
         level.Delete();
 
         if (levels.Count > 0)
+        {
+            var passed = meta["passed"].FirstOrDefault(t => (string)t == level.Name);
+            if (passed != null)
+            {
+                passed.Remove();
+                meta.Save();
+            }
+
             ListLevels(string.Empty);
+        }
         else
         {
             Directory.Delete(meta.Directory, true);
