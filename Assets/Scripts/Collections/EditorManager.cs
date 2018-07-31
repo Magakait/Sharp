@@ -50,7 +50,15 @@ public class EditorManager : MonoBehaviour
     private void LoadCollection()
     {
         levels.Clear();
-        levels.AddRange(((JArray)meta["levels"]).Select(i => (string)i));
+        levels.AddRange
+        (
+            new DirectoryInfo(meta.Directory)
+                .GetFiles("*.#")
+                .OrderBy(f => f.CreationTime)
+                .Select(f => Path.GetFileNameWithoutExtension(f.Name))
+        );
+        levels.Remove("Map");
+        levels.Insert(0, "Map");
 
         inputCollection.text = Path.GetFileName(meta.Directory);
     }
@@ -83,7 +91,7 @@ public class EditorManager : MonoBehaviour
     public JsonFile level;
 
     [Space(10)]
-    public VoidEvent onLevelLoad;
+    public BoolEvent onLevelLoad;
 
     private static readonly List<string> levels = new List<string>();
 
@@ -94,20 +102,11 @@ public class EditorManager : MonoBehaviour
         inputLevel.text = level.Name;
         DeserializeLevel();
 
-        onLevelLoad.Invoke();
+        onLevelLoad.Invoke(level.Name != "Map");
     }
 
     private void ListLevels(string name)
     {
-        levels.Clear();
-        levels.AddRange
-        (
-            new DirectoryInfo(meta.Directory)
-                .GetFiles("*.#")
-                .OrderBy(f => f.CreationTime)
-                .Select(f => f.Name)
-        );
-
         toggleGroup.transform.Clear();
 
         for (int i = 0; i < levels.Count; i++)

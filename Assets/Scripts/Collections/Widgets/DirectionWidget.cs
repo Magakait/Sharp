@@ -11,8 +11,11 @@ public class DirectionWidget : BaseWidget
 
     public int Direction { get; set; }
 
-    protected override void Read(JToken value, JToken attributes) =>
+    protected override void Read(JToken value, JToken attributes)
+    {
+        Direction = (int)value;
         toggles[Direction].isOn = true;
+    }
 
     protected override JToken Write() =>
         Direction;

@@ -21,19 +21,8 @@ public class EntranceObject : SerializableObject
 
     public static readonly List<EntranceObject> instances = new List<EntranceObject>();
 
-    private void Awake()
-    {
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
-            (
-                frameTransform
-                    .DOScale(0, Constants.Time)
-            )
-        );
-
+    private void Awake() =>
         instances.Add(this);
-    }
 
     private void OnDestroy() =>
         instances.Remove(this);
@@ -44,10 +33,13 @@ public class EntranceObject : SerializableObject
         if (next)
             Connect(next.transform.position);
 
-        if (Open && !Valid)
+        if (Valid)
+            enterButton.gameObject.SetActive(true);
+        else
         {
-            canvasToggle.Visible = false;
-            Pass();
+            canvasToggle.gameObject.SetActive(false);
+            if (Open)
+                Pass();
         }
     }
 
@@ -89,8 +81,6 @@ public class EntranceObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform frameTransform;
-    [SerializeField]
     private ParticleSystem coreEffect;
     [SerializeField]
     private LineRenderer connectionLine;
@@ -100,8 +90,8 @@ public class EntranceObject : SerializableObject
     private CanvasToggle canvasToggle;
     [SerializeField]
     private Text titleText;
-
-    private new TweenArrayComponent animation;
+    [SerializeField]
+    private Button enterButton;
 
     #endregion
 
@@ -130,7 +120,6 @@ public class EntranceObject : SerializableObject
         private set
         {
             open = value;
-            animation[0].Play(Open);
             canvasToggle.Visible = Open;
         }
     }
