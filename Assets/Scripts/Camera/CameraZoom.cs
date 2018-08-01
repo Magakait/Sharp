@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
 {
-    public float scale;
-    public float zoom;
+    [SerializeField]
+    private float scale;
 
+    [Space(10)]
+    [SerializeField]
     private float minFOV;
+    [SerializeField]
     private float maxFOV;
 
-    private void Awake()
-    {
-        minFOV = CameraManager.Camera.fieldOfView;
-        maxFOV = minFOV + zoom;
-    }
-
-    private void OnDestroy() =>
+    private void OnEnable() =>
         CameraManager.Camera.fieldOfView = minFOV;
+
+    private void OnDisable() =>
+        OnEnable();
 
     private void Update()
     {
