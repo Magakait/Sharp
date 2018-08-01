@@ -9,22 +9,6 @@ public class CameraMove : MonoBehaviour
     [SerializeField]
     private KeyVariable[] keys;
 
-    private Tweener tween;
-
-    private void Awake() =>
-        tween = DOTween
-            .To
-            (
-                () => CameraManager.Position, 
-                v => CameraManager.Position = v, 
-                Vector2.zero, 
-                .25f * Constants.Time
-            )
-            .Pause();
-
-    private void OnDestroy() =>
-        tween.Kill();
-
     private void Update()
     {
         if (EngineUtility.IsInput)
@@ -38,13 +22,15 @@ public class CameraMove : MonoBehaviour
         offset *= scale;
         if (offset != Vector2.zero)
         {
-            tween
-                .ChangeValues
-                (
-                    CameraManager.Position,
-                    EditorGrid.Clamp(CameraManager.Position + offset)
-                )
-                .Restart();
+            DOTween.To
+            (
+                () => CameraManager.Position, 
+                v => CameraManager.Position = v, 
+                (Vector2)EditorGrid.Clamp(CameraManager.Position + offset), 
+                .25f * Constants.Time
+            )
+                .SetAutoKill()
+                .Play();
         }
     }
 }
