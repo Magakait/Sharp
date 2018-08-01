@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
 
         tween = transform
             .DOMove(Position, 2 * Constants.Time)
-            .SetEase(Ease.OutSine);
+            .Pause();
     }
 
     private void Update()

@@ -12598,6 +12598,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 846253549}
   m_CullTransparentMesh: 0
+--- !u!114 &884780550 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114370449068959834, guid: ba9ef56e5a831864ba472ce3e9b5a330,
+    type: 2}
+  m_PrefabInternal: {fileID: 2031795579}
+  m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &917461366
 Prefab:
   m_ObjectHideFlags: 0
@@ -17886,7 +17892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00004011313}
+  m_AnchoredPosition: {x: 0, y: 0.000058569476}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -20726,6 +20732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1740491021}
+  - component: {fileID: 1740491022}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -20753,6 +20760,34 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: -20}
   m_SizeDelta: {x: 300, y: -40}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1740491022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1740491020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e102883dc952459cd34e853530fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: {fileID: 11400000, guid: 784da78245aa52640a27ec6f121a02e0, type: 2}
+  onDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1d3c986977134ec4c8859d40eb386c6a, type: 2}
+        m_MethodName: Toggle
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 884780550}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1744847895
 Prefab:
   m_ObjectHideFlags: 0

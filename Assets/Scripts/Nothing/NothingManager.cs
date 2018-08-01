@@ -12,7 +12,7 @@ public class NothingManager : MonoBehaviour
     {
         CameraManager.Position = Vector3.zero;
 
-        for (int i = 0; i < objects.Length; i++)
+        for (var i = 0; i < objects.Length; i++)
             if (objects[i].name == code.Value)
             {
                 objects[i].SetActive(true);
