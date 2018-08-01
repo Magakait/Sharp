@@ -174,7 +174,7 @@ public class EditorManager : MonoBehaviour
         levels.Remove(level.Name);
         level.Delete();
 
-        if (levels.Count > 0)
+        if (levels.Count > 1)
         {
             var passed = meta["passed"].FirstOrDefault(t => (string)t == level.Name);
             if (passed != null)
