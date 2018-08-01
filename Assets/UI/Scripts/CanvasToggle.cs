@@ -36,7 +36,7 @@ public class CanvasToggle : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        
+
         animation = DOTween.Sequence().Insert
         (
             transform
@@ -49,10 +49,7 @@ public class CanvasToggle : MonoBehaviour
         )
             .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
-    }
 
-    private void Start()
-    {
         Visible = Visible;
         if (!Visible)
             animation.Complete();
