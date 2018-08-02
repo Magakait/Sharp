@@ -6,7 +6,7 @@ TextureImporter:
     21300002: Switcher_1
     21300004: Switcher_2
   externalObjects: {}
-  serializedVersion: 6
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -101,7 +101,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 336b2806b36344f439069add1aa0d24a
+      spriteID: 49350a1426a32a6439ae76a98c929404
       vertices: []
       indices: 
       edges: []
@@ -121,7 +121,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da516421fe897e049bdb8ab556d4b0f6
+      spriteID: 67df99021b8730c4c8443c1229088792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Switcher_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3316a85b6e77fcf4a9efb9591b0e78a5
       vertices: []
       indices: 
       edges: []
@@ -135,6 +155,8 @@ TextureImporter:
     edges: []
     weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

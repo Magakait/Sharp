@@ -277,13 +277,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1565220803041620}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4055515708777898}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!4 &4858013183319252
 Transform:
   m_ObjectHideFlags: 1
@@ -305,13 +305,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1900379837412402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4055515708777898}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!4 &4975088770313106
 Transform:
   m_ObjectHideFlags: 1
@@ -766,7 +766,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1913,7 +1913,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: f1b88707a2347284caca6323463f168d, type: 3}
+    - sprite: {fileID: 21300004, guid: 8c48012755a007a43aca0acff3c07fe3, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -5308,7 +5308,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6455,7 +6455,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: f1b88707a2347284caca6323463f168d, type: 3}
+    - sprite: {fileID: 21300004, guid: 8c48012755a007a43aca0acff3c07fe3, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -9850,7 +9850,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10262,7 +10262,7 @@ ParticleSystem:
       speed:
         serializedVersion: 2
         minMaxState: 0
-        scalar: -0.5
+        scalar: 0.5
         minScalar: 1
         maxCurve:
           serializedVersion: 2
@@ -10997,7 +10997,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: f1b88707a2347284caca6323463f168d, type: 3}
+    - sprite: {fileID: 21300004, guid: 8c48012755a007a43aca0acff3c07fe3, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -14392,7 +14392,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -14804,7 +14804,7 @@ ParticleSystem:
       speed:
         serializedVersion: 2
         minMaxState: 0
-        scalar: -0.5
+        scalar: 0.5
         minScalar: 1
         maxCurve:
           serializedVersion: 2
@@ -15539,7 +15539,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: f1b88707a2347284caca6323463f168d, type: 3}
+    - sprite: {fileID: 21300004, guid: 8c48012755a007a43aca0acff3c07fe3, type: 3}
   VelocityModule:
     enabled: 0
     x:
