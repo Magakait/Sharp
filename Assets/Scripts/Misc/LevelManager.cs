@@ -28,9 +28,11 @@ public class LevelManager : ScriptableObject
 
     public void UnloadLevel()
     {
-        foreach (var instance in LevelManager.Main.instances)
+        foreach (var instance in instances)
             if (instance)
                 Destroy(instance.gameObject);
+
+        instances.Clear();
     }
 
     public void LoadLevel(JsonFile file)

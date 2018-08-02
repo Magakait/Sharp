@@ -14,15 +14,10 @@ public class TrapObject : SerializableObject
                     .DOScale(0, Constants.Time)
             )
         );
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (state.State == 1)
-        {
-            UnitComponent unit = collision.GetComponent<UnitComponent>();
-            if (unit)
-                unit.Kill();
-        }
+            collision.GetComponent<UnitComponent>().Kill();
     }
 
     #region gameplay

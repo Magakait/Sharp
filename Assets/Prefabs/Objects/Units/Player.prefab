@@ -309,9 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bb78a3266d6a24a8e3f89027295032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fragile: 0
   virus: 0
-  onKilled:
+  onKill:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114472221765468056}
@@ -329,6 +328,9 @@ MonoBehaviour:
   collapseTransform: {fileID: 4191218868910922}
   collapseEffect: {fileID: 198023628953967264, guid: 9366753aff95d65448586300a8f2ef5b,
     type: 2}
+  toDisable:
+  - {fileID: 58037687431684254}
+  - {fileID: 114472221765468056}
 --- !u!212 &212216298836003388
 SpriteRenderer:
   m_ObjectHideFlags: 1

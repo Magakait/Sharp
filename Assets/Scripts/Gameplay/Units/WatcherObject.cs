@@ -51,8 +51,7 @@ public class WatcherObject : SerializableObject
 
     private readonly List<UnitComponent> units = new List<UnitComponent>();
 
-    private void Cast()
-    {
+    private void Cast() =>
         PhysicsUtility.CastBox
         (
             units,
@@ -60,11 +59,10 @@ public class WatcherObject : SerializableObject
             maskTransform.localScale,
             Constants.UnitMask
         );
-    }
 
     public void Explode()
     {
-        foreach (UnitComponent unit in units.Where(unit => !unit.Virus))
+        foreach (var unit in units.Where(unit => !unit.Virus))
             unit.Kill();
 
         Instantiate(burstParticle, maskTransform);
