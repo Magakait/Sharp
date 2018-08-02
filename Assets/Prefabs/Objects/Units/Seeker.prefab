@@ -344,7 +344,9 @@ MonoBehaviour:
   collapseTransform: {fileID: 4658882679023252}
   collapseEffect: {fileID: 198881881313992332, guid: 1493ba24be7dbb640ad5253fb1592079,
     type: 2}
-  toDisable: []
+  toDisable:
+  - {fileID: 58077410916082182}
+  - {fileID: 114987037225517828}
 --- !u!114 &114987037225517828
 MonoBehaviour:
   m_ObjectHideFlags: 1

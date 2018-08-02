@@ -48,6 +48,7 @@ public class SwitcherObject : SerializableObject
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print("Enter: " + collision.name);
         if (Enter)
         {
             Switch(true);
@@ -57,6 +58,7 @@ public class SwitcherObject : SerializableObject
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        print("Exit: " + collision.name);
         if (Exit)
         {
             Switch(false);

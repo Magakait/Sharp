@@ -162,25 +162,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bb78a3266d6a24a8e3f89027295032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fragile: 1
   virus: 0
-  onKilled:
+  onKill:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Unregister
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: VoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   collapseTransform: {fileID: 4287372747313228}
   collapseEffect: {fileID: 0}
+  toDisable:
+  - {fileID: 58114519158310738}
 --- !u!198 &198145552374800228
 ParticleSystem:
   m_ObjectHideFlags: 1

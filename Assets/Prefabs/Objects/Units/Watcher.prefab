@@ -333,7 +333,9 @@ MonoBehaviour:
     m_TypeName: VoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   collapseTransform: {fileID: 4276732494519922}
   collapseEffect: {fileID: 0}
-  toDisable: []
+  toDisable:
+  - {fileID: 114699553135788580}
+  - {fileID: 58345730410153458}
 --- !u!114 &114699553135788580
 MonoBehaviour:
   m_ObjectHideFlags: 1
