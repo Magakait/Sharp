@@ -25,12 +25,13 @@ public class CollectionLoader : MonoBehaviour
         var index = dropdownTitle.value;
 
         dropdownTitle.ClearOptions();
-        foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
-                .GetDirectories()
-                .OrderBy(d => d.CreationTime)
-                .Reverse()
-                .Select(d => new Dropdown.OptionData(d.Name)))
-            dropdownTitle.options.Add(option);
+        if (Directory.Exists(Constants.CollectionsRoot + Category))
+            foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
+                    .GetDirectories()
+                    .OrderBy(d => d.CreationTime)
+                    .Reverse()
+                    .Select(d => new Dropdown.OptionData(d.Name)))
+                dropdownTitle.options.Add(option);
         dropdownTitle.RefreshShownValue();
 
         if (dropdownTitle.options.Count > 0)
