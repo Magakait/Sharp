@@ -18,7 +18,7 @@ public class FogObject : SerializableObject
         );
 
     private void Start() =>
-        collider.radius = 1.1f;
+        collider.radius = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

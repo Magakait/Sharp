@@ -255,7 +255,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.1
 --- !u!114 &114001154655315596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +318,7 @@ MonoBehaviour:
   id: 11
   level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
   meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
+  collider: {fileID: 58645538801001102}
   coreEffect: {fileID: 198885050216963842}
   haloEffect: {fileID: 198659457995338746}
   connectionLine: {fileID: 120760523166981242}

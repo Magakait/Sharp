@@ -16,6 +16,10 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private JsonFile meta;
 
+    [Space(10)]
+    [SerializeField]
+    private new CircleCollider2D collider;
+
     public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
@@ -37,6 +41,8 @@ public class EntranceObject : SerializableObject
         }
         else
             canvasToggle.gameObject.SetActive(false);
+
+        collider.radius = 1;
     }
 
     private void OnMouseDown()
@@ -77,7 +83,7 @@ public class EntranceObject : SerializableObject
         connectionLine.SetPosition(2, destination - offset);
     }
 
-    public void Focus()
+    private void Focus()
     {
         CameraManager.Position = transform.position;
         if (!Passed)
