@@ -6,7 +6,7 @@ public class PlayManager : MonoBehaviour
 
     private void Awake()
     {
-        LevelManager.Main.LoadLevel(level);
+        LevelManager.LoadLevel(level);
         Cursor.visible = false;
     }
 

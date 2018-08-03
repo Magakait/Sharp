@@ -8,14 +8,14 @@ public class CameraManager : MonoBehaviour
     private new Camera camera;
     public static Camera Camera { get; private set; }
 
-    private static CameraManager manager;
+    private static CameraManager main;
 
     public static Transform Target { get; set; }
     private static Tweener tween;
 
     private void Awake()
     {
-        if (manager)
+        if (main)
         {
             Destroy(gameObject);
             return;
@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Camera = camera;
-        manager = this;
+        main = this;
 
         tween = transform
             .DOMove(Position, 2 * Constants.Time)
@@ -44,17 +44,17 @@ public class CameraManager : MonoBehaviour
     {
         get
         {
-            return new Vector2(manager.transform.position.x, manager.transform.position.y);
+            return new Vector2(main.transform.position.x, main.transform.position.y);
         }
         set
         {
-            manager.transform.position = Offset(value);
+            main.transform.position = Offset(value);
             tween.Pause();
         }
     }
 
     public static void Move(Vector3 destination) =>
         tween
-            .ChangeValues(manager.transform.position, Offset(destination))
+            .ChangeValues(main.transform.position, Offset(destination))
             .Restart();
 }

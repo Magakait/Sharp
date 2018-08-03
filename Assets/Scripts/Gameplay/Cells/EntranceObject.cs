@@ -19,28 +19,24 @@ public class EntranceObject : SerializableObject
     public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
-    public static readonly List<EntranceObject> instances = new List<EntranceObject>();
-
-    private void Awake() =>
-        instances.Add(this);
-
-    private void OnDestroy() =>
-        instances.Remove(this);
-
     private void Start()
     {
-        var next = instances.FirstOrDefault(e => e.Level == Next);
+        var next = LevelManager.instances.FirstOrDefault
+        (
+            e => e.Id == Id &&
+            e.GetComponent<EntranceObject>().Level == Next
+        );
         if (next)
             Connect(next.transform.position);
 
         if (Valid)
-            enterButton.gameObject.SetActive(true);
-        else
         {
-            canvasToggle.gameObject.SetActive(false);
-            if (Open)
-                Pass();
+            enterButton.gameObject.SetActive(true);
+            if (Open && (!next || !next.GetComponent<EntranceObject>().Open))
+                Focus();
         }
+        else
+            canvasToggle.gameObject.SetActive(false);
     }
 
     private void OnMouseDown()
@@ -60,11 +56,15 @@ public class EntranceObject : SerializableObject
         Passed = true;
         Open = true;
 
-        var next = instances.FirstOrDefault(e => e.Level == Next);
+        var next = LevelManager.instances.FirstOrDefault
+        (
+            e => e.Id == Id &&
+            e.GetComponent<EntranceObject>().Level == Next
+        );
         if (next)
-            next.Open = true;
+            next.GetComponent<EntranceObject>().Open = true;
 
-        coreEffect.Emission(Valid);
+        coreEffect.Emission(true);
     }
 
     public void Connect(Vector2 destination)
@@ -77,11 +77,20 @@ public class EntranceObject : SerializableObject
         connectionLine.SetPosition(2, destination - offset);
     }
 
+    public void Focus()
+    {
+        CameraManager.Position = transform.position;
+        if (!Passed)
+            haloEffect.Emission(true);
+    }
+
     #region animation
 
     [Header("Animation")]
     [SerializeField]
     private ParticleSystem coreEffect;
+    [SerializeField]
+    private ParticleSystem haloEffect;
     [SerializeField]
     private LineRenderer connectionLine;
 

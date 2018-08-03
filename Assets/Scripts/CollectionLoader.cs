@@ -48,20 +48,21 @@ public class CollectionLoader : MonoBehaviour
         meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
-        LevelManager.Main.UnloadLevel();
-        LevelManager.Main.LoadLevel(level);
+        LevelManager.UnloadLevel();
+        LevelManager.LoadLevel(level);
 
-        if (EntranceObject.instances.Count > 0)
+        var entrances = LevelManager.instances
+            .Select(i => i.GetComponent<EntranceObject>())
+            .Where(i => i);
+
+        if (entrances.Count() > 0)
         {
             var passed = meta["passed"].Select(t => (string)t);
-            foreach (var entrance in EntranceObject.instances)
+            foreach (var entrance in entrances)
                 if (passed.Contains(entrance.Level))
                     entrance.Pass();
 
-            var last = EntranceObject.instances.FirstOrDefault(e => e.Open && !e.Passed);
-            CameraManager.Position = (last ? last : EntranceObject.instances[0]).transform.position;
-
-            meta["progress"] = (float)passed.Count() / EntranceObject.instances.Count(e => e.Valid);
+            meta["progress"] = (float)passed.Count() / entrances.Count(e => e.Valid);
         }
         else
             meta["progress"] = 1;
