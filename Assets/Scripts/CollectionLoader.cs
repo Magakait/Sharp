@@ -39,7 +39,10 @@ public class CollectionLoader : MonoBehaviour
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
         else
+        {
+            LevelManager.UnloadLevel();
             onEmptyList.Invoke();
+        }
     }
 
     public void Load()
