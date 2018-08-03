@@ -18,7 +18,7 @@ public class CameraZoom : MonoBehaviour
     private void Awake()
     {
         CameraManager.Camera.fieldOfView = minFOV;  
-        tween = CameraManager.Camera.DOFieldOfView(minFOV, .25f * Constants.Time);
+        tween = CameraManager.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
     }
 
     private void OnDestroy() =>

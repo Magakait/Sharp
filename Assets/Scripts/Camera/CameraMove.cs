@@ -27,7 +27,7 @@ public class CameraMove : MonoBehaviour
                 () => CameraManager.Position, 
                 v => CameraManager.Position = v, 
                 (Vector2)EditorGrid.Clamp(CameraManager.Position + offset), 
-                .25f * Constants.Time
+                .35f * Constants.Time
             )
                 .SetAutoKill()
                 .Play();
