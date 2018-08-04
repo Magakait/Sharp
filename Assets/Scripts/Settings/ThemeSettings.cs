@@ -12,7 +12,7 @@ public class ThemeSettings : MonoBehaviour
 
     public void RefreshPainters()
     {
-        foreach (BasePainter painter in FindObjectsOfType<BasePainter>())
+        foreach (var painter in FindObjectsOfType<BasePainter>())
             painter.Refresh();
     }
 }
