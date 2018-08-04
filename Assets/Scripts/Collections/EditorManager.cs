@@ -183,7 +183,7 @@ public class EditorManager : MonoBehaviour
                 meta.Save();
             }
 
-            ListLevels(string.Empty);
+            ListLevels(levels[levels.Count - 1]);
         }
         else
         {
