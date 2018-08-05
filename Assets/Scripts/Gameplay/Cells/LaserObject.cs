@@ -29,6 +29,7 @@ public class LaserObject : SerializableObject
     private void OnTriggerEnter2D(Collider2D other)
     {
         active = true;
+        enabled = true;
 
         var main = distanceEffect.main;
         main.startColor = main.startColor.color.Fade(1);
@@ -53,10 +54,9 @@ public class LaserObject : SerializableObject
         else
         {
             var main = distanceEffect.main;
-            if (main.startColor.color.a == .2f)
-                distanceEffect.Refresh();
-
             main.startColor = main.startColor.color.Fade(.2f);
+            
+            enabled = false;
         }
     }
 
