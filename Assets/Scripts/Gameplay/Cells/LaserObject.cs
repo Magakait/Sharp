@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -7,15 +8,15 @@ using Newtonsoft.Json.Linq;
 
 public class LaserObject : SerializableObject
 {
-    private void Start() =>
+    private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             DOTween.Sequence().Insert
             (
                 leftTransform
-                    .DOLocalMoveX(-.15f, Constants.Time),
+                    .DOLocalMoveX(-.2f, Constants.Time),
                 rightTransform
-                    .DOLocalMoveX(.15f, Constants.Time)
+                    .DOLocalMoveX(.2f, Constants.Time)
             )
                 .SetLoops(2, LoopType.Yoyo),
             DOTween.Sequence().Insert
@@ -27,19 +28,24 @@ public class LaserObject : SerializableObject
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Shoot();
-        if (Persistent)
-            shooting = true;
+        Active = true;
+        distanceEffect.Refresh();
+
+        Burst();
+
+        animation[0].Restart();
+        if (!persistent)
+            Active = false;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (shooting)
-            Shoot();
+        if (Active)
+            Burst();
     }
 
     private void OnTriggerExit2D(Collider2D other) =>
-        shooting = false;
+        Active = false;
 
     #region gameplay
 
@@ -48,9 +54,24 @@ public class LaserObject : SerializableObject
     private StateComponent state;
 
     private readonly static List<UnitComponent> units = new List<UnitComponent>();
-    private bool shooting;
 
-    private void Shoot()
+    private bool active;
+    public bool Active
+    {
+        get
+        {
+            return active;
+        }
+        set
+        {
+            active = value;
+
+            var main = distanceEffect.main;
+            main.startColor = main.startColor.color.Fade(Active ? 1 : .2f);
+        }
+    }
+
+    private void Burst()
     {
         var from = (Vector2)transform.position + .5f * Constants.Directions[Direction];
         var to = from + Distance * Constants.Directions[Direction];
@@ -74,7 +95,9 @@ public class LaserObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
-    private ParticleScalerComponent distanceEffect;
+    private ParticleSystem distanceEffect;
+    [SerializeField]
+    private ParticleScalerComponent distanceScaler;
 
     private new TweenArrayComponent animation;
 
@@ -94,6 +117,8 @@ public class LaserObject : SerializableObject
         }
     }
 
+    [Header("Serialization")]
+    [SerializeField]
     private int distance;
     public int Distance
     {
@@ -104,10 +129,12 @@ public class LaserObject : SerializableObject
         set
         {
             distance = value;
-            distanceEffect.Scale(new Vector3(0, Distance, 0));
+            distanceScaler.Scale(new Vector3(Distance, 0, 0));
+            distanceScaler.transform.localPosition = .5f * new Vector3(0, Distance, 0);
         }
     }
 
+    [SerializeField]
     private bool persistent;
     public bool Persistent
     {
