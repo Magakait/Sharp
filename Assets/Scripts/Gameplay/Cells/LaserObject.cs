@@ -14,38 +14,41 @@ public class LaserObject : SerializableObject
             DOTween.Sequence().Insert
             (
                 leftTransform
-                    .DOLocalMoveX(-.2f, Constants.Time),
+                    .DOLocalMoveX(-.1f, Constants.Time),
                 rightTransform
-                    .DOLocalMoveX(.2f, Constants.Time)
-            )
-                .SetLoops(2, LoopType.Yoyo),
-            DOTween.Sequence().Insert
-            (
-                persistencyTransform
-                    .DOScale(0, Constants.Time)
+                    .DOLocalMoveX(.1f, Constants.Time)
             )
         );
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Active = true;
+        active = true;
+
+        var main = distanceEffect.main;
+        main.startColor = main.startColor.color.Fade(1);
+
         distanceEffect.Refresh();
-
-        Burst();
-
-        animation[0].Restart();
-        if (!persistent)
-            Active = false;
+        animation[0].PlayForward();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other) =>
+        active = true;
+
+    private void FixedUpdate()
     {
-        if (Active)
+        if (active)
+        {
             Burst();
-    }
+            active = false;
+        }
+        else
+        {
+            var main = distanceEffect.main;
+            main.startColor = main.startColor.color.Fade(.2f);
 
-    private void OnTriggerExit2D(Collider2D other) =>
-        Active = false;
+            animation[0].PlayBackwards();
+        }
+    }
 
     #region gameplay
 
@@ -56,20 +59,6 @@ public class LaserObject : SerializableObject
     private readonly static List<UnitComponent> units = new List<UnitComponent>();
 
     private bool active;
-    public bool Active
-    {
-        get
-        {
-            return active;
-        }
-        set
-        {
-            active = value;
-
-            var main = distanceEffect.main;
-            main.startColor = main.startColor.color.Fade(Active ? 1 : .2f);
-        }
-    }
 
     private void Burst()
     {
@@ -90,8 +79,6 @@ public class LaserObject : SerializableObject
     private Transform leftTransform;
     [SerializeField]
     private Transform rightTransform;
-    [SerializeField]
-    private Transform persistencyTransform;
 
     [Space(10)]
     [SerializeField]
@@ -111,7 +98,7 @@ public class LaserObject : SerializableObject
         {
             return state.State;
         }
-        set
+        private set
         {
             state.State = value;
         }
@@ -126,7 +113,7 @@ public class LaserObject : SerializableObject
         {
             return distance;
         }
-        set
+        private set
         {
             distance = value;
             distanceScaler.Scale(new Vector3(Distance, 0, 0));
@@ -134,33 +121,16 @@ public class LaserObject : SerializableObject
         }
     }
 
-    [SerializeField]
-    private bool persistent;
-    public bool Persistent
-    {
-        get
-        {
-            return persistent;
-        }
-        set
-        {
-            persistent = value;
-            animation[1].Play(Persistent);
-        }
-    }
-
     public override void Serialize(JToken token)
     {
         token["direction"] = Direction;
         token["distance"] = Distance;
-        token["persistent"] = Persistent;
     }
 
     public override void Deserialize(JToken token)
     {
         Direction = (int)token["direction"];
         Distance = (int)token["distance"];
-        Persistent = (bool)token["persistent"];
     }
 
     #endregion

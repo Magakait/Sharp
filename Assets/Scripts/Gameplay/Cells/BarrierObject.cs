@@ -4,9 +4,6 @@ using Newtonsoft.Json.Linq;
 
 public class BarrierObject : SerializableObject
 {
-    private void Start() =>
-        Charges = Charges;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (Charges > 0)
