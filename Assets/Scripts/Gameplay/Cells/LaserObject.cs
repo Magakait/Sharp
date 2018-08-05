@@ -12,12 +12,17 @@ public class LaserObject : SerializableObject
         (
             DOTween.Sequence().Insert
             (
-                leftWing
-                    .DOLocalMoveX(-.2f, Constants.Time),
-                rightWing
-                    .DOLocalMoveX(.2f, Constants.Time)
+                leftTransform
+                    .DOLocalMoveX(-.15f, Constants.Time),
+                rightTransform
+                    .DOLocalMoveX(.15f, Constants.Time)
             )
-                .SetLoops(2, LoopType.Yoyo)
+                .SetLoops(2, LoopType.Yoyo),
+            DOTween.Sequence().Insert
+            (
+                persistencyTransform
+                    .DOScale(0, Constants.Time)
+            )
         );
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -61,15 +66,15 @@ public class LaserObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform leftWing;
+    private Transform leftTransform;
     [SerializeField]
-    private Transform rightWing;
+    private Transform rightTransform;
+    [SerializeField]
+    private Transform persistencyTransform;
 
     [Space(10)]
     [SerializeField]
     private ParticleScalerComponent distanceEffect;
-    [SerializeField]
-    private ParticleSystem persistencyEffect;
 
     private new TweenArrayComponent animation;
 
@@ -113,7 +118,7 @@ public class LaserObject : SerializableObject
         set
         {
             persistent = value;
-            persistencyEffect.Emission(Persistent);
+            animation[1].Play(Persistent);
         }
     }
 

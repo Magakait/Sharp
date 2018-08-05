@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virus: 0
+  killed: 0
   onKill:
     m_PersistentCalls:
       m_Calls:
