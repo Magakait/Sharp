@@ -10,7 +10,6 @@ public class StateComponent : MonoBehaviour
         {
             return state;
         }
-
         set
         {
             state = (int)Mathf.Repeat(value, Capacity);
@@ -26,7 +25,6 @@ public class StateComponent : MonoBehaviour
         {
             return capacity;
         }
-
         set
         {
             capacity = value;

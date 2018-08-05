@@ -14,9 +14,15 @@ public class LaserObject : SerializableObject
             DOTween.Sequence().Insert
             (
                 leftTransform
-                    .DOLocalMoveX(-.1f, Constants.Time),
+                    .DOLocalMoveX(-.15f, Constants.Time),
                 rightTransform
-                    .DOLocalMoveX(.1f, Constants.Time)
+                    .DOLocalMoveX(.15f, Constants.Time)
+            )
+                .SetLoops(2, LoopType.Yoyo),
+            DOTween.Sequence().Insert
+            (
+                persistencyTransform
+                    .DOScale(0, Constants.Time)
             )
         );
 
@@ -28,11 +34,14 @@ public class LaserObject : SerializableObject
         main.startColor = main.startColor.color.Fade(1);
 
         distanceEffect.Refresh();
-        animation[0].PlayForward();
+        animation[0].Restart();
     }
 
-    private void OnTriggerStay2D(Collider2D other) =>
-        active = true;
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (Persistent)
+            active = true;
+    }
 
     private void FixedUpdate()
     {
@@ -44,9 +53,10 @@ public class LaserObject : SerializableObject
         else
         {
             var main = distanceEffect.main;
-            main.startColor = main.startColor.color.Fade(.2f);
+            if (main.startColor.color.a == .2f)
+                distanceEffect.Refresh();
 
-            animation[0].PlayBackwards();
+            main.startColor = main.startColor.color.Fade(.2f);
         }
     }
 
@@ -79,6 +89,8 @@ public class LaserObject : SerializableObject
     private Transform leftTransform;
     [SerializeField]
     private Transform rightTransform;
+    [SerializeField]
+    private Transform persistencyTransform;
 
     [Space(10)]
     [SerializeField]
@@ -121,16 +133,33 @@ public class LaserObject : SerializableObject
         }
     }
 
+    [SerializeField]
+    private bool persistent;
+    public bool Persistent
+    {
+        get
+        {
+            return persistent;
+        }
+        private set
+        {
+            persistent = value;
+            animation[1].Play(Persistent);
+        }
+    }
+
     public override void Serialize(JToken token)
     {
         token["direction"] = Direction;
         token["distance"] = Distance;
+        token["persistent"] = Persistent;
     }
 
     public override void Deserialize(JToken token)
     {
         Direction = (int)token["direction"];
         Distance = (int)token["distance"];
+        Persistent = (bool)token["persistent"];
     }
 
     #endregion
