@@ -32,7 +32,7 @@ public class SwitcherObject : SerializableObject
     }
 
     private void Start() =>
-        PhysicsUtility.CastBox
+        PhysicsUtility.OverlapBox
         (
             targets,
             effectTransform.position,

@@ -49,10 +49,10 @@ public class WatcherObject : SerializableObject
     [SerializeField]
     private float delay;
 
-    private readonly List<UnitComponent> units = new List<UnitComponent>();
+    private static readonly List<UnitComponent> units = new List<UnitComponent>();
 
     private void Cast() =>
-        PhysicsUtility.CastBox
+        PhysicsUtility.OverlapBox
         (
             units,
             transform.position,
@@ -62,6 +62,7 @@ public class WatcherObject : SerializableObject
 
     public void Explode()
     {
+        Cast();
         foreach (var unit in units.Where(unit => !unit.Killed && !unit.Virus))
             unit.Kill();
 
