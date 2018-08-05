@@ -7,6 +7,20 @@ public class UnitComponent : MonoBehaviour
     [SerializeField]
     private bool virus;
     public bool Virus => virus;
+    [SerializeField]
+    private bool killed;
+    public bool Killed
+    {
+        get
+        {
+            return killed;
+        }
+        set
+        {
+            killed = value;
+        }
+    }
+
     public VoidEvent onKill;
 
     [Space(10)]
@@ -17,7 +31,6 @@ public class UnitComponent : MonoBehaviour
     [SerializeField]
     private Behaviour[] toDisable;
 
-    private bool killed;
     private Tweener tween;
 
     private void Awake() =>

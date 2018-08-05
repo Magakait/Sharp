@@ -41,9 +41,9 @@ GameObject:
   - component: {fileID: 50318051965375324}
   - component: {fileID: 114377439288712616}
   - component: {fileID: 114960494564778680}
-  - component: {fileID: 114635541324869098}
+  - component: {fileID: 114924567079822628}
   m_Layer: 9
-  m_Name: Placeholder_3
+  m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1982125065126296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4287372747313228}
@@ -127,18 +127,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   transition: 0.15
---- !u!114 &114635541324869098
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1982125065126296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744b7e7b2dfc3c643ac91e608fc046ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 3
 --- !u!114 &114922923751658794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +139,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 2bbe78f7b2a503a4f8630f8681c69519, type: 2}
+--- !u!114 &114924567079822628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982125065126296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06dd5eeb7327fd94ba8753ca3c3eacbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
+  unit: {fileID: 114960494564778680}
+  pointerEffect: {fileID: 198841886333743356, guid: cb2dfb0e8868d1b4e9a7a8bdb68a03db,
+    type: 2}
+  ambientEffect: {fileID: 198221732973142946, guid: 3a363f01018d7ea48b8413b359a5a3c0,
+    type: 2}
 --- !u!114 &114960494564778680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virus: 0
+  killed: 1
   onKill:
     m_PersistentCalls:
       m_Calls: []
@@ -735,7 +741,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 25
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -944,7 +950,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2

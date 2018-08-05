@@ -36,13 +36,13 @@ public class EditorProperties : MonoBehaviour
         this.selected = selected;
         header.text = selected.name;
 
-        JArray properties = (JArray)catalog[selected.Id.ToString()];
+        var properties = (JArray)catalog[selected.Id.ToString()];
         if (properties != null)
         {
             buffer.Root = new JObject();
             selected.Serialize(buffer.Root);
 
-            foreach (JToken property in properties)
+            foreach (var property in properties)
                 Instantiate(widgets[(int)property["type"]], parentPanel)
                     .Load(property);
         }

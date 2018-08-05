@@ -62,7 +62,7 @@ public class WatcherObject : SerializableObject
 
     public void Explode()
     {
-        foreach (var unit in units.Where(unit => !unit.Virus))
+        foreach (var unit in units.Where(unit => !unit.Killed && !unit.Virus))
             unit.Kill();
 
         Instantiate(burstParticle, maskTransform);
