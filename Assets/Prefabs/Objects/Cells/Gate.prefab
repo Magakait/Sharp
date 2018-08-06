@@ -162,6 +162,7 @@ MonoBehaviour:
   id: 5
   cell: {fileID: 114634138602594816}
   state: {fileID: 114026821614539986}
+  cellTransform: {fileID: 4843652728202138}
 --- !u!114 &114181408167716476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,7 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212835186167474696}
 --- !u!212 &212236067016050404
 SpriteRenderer:
   m_ObjectHideFlags: 1

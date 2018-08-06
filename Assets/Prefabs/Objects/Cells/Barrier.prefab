@@ -163,7 +163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212160545992076326}
 --- !u!114 &114455313722985272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 15
   cell: {fileID: 114189870529679310}
+  cellTransform: {fileID: 4834985413792568}
   haloEffect: {fileID: 198518649512827346}
 --- !u!198 &198518649512827346
 ParticleSystem:

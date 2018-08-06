@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using DG.Tweening;
-
-[RequireComponent(typeof(Collider2D))]
 public class CellComponent : MonoBehaviour
 {
     [SerializeField]
@@ -19,27 +16,8 @@ public class CellComponent : MonoBehaviour
         set
         {
             hollowed = value;
-            animation.Play(!Hollowed);
         }
     }
-
-    [Space(10)]
-    [SerializeField]
-    private SpriteRenderer frameSprite;
-
-    private new Tween animation;
-
-    private void Awake() =>
-        animation = DOTween.Sequence().Insert
-        (
-            frameSprite.material
-                .DOFade(0, Constants.Time),
-            frameSprite.transform
-                .DOScale(3, Constants.Time)
-        );
-
-    private void OnDestroy() =>
-        animation.Kill();
 
     private void OnTriggerEnter2D(Collider2D collision) =>
         collisions.Add(collision);
@@ -49,7 +27,7 @@ public class CellComponent : MonoBehaviour
 
     private readonly List<Collider2D> collisions = new List<Collider2D>();
 
-    public IEnumerable<T> GetCollisions<T>() where T : Component => 
+    public IEnumerable<T> GetCollisions<T>() where T : Component =>
         collisions
             .Where(i => i)
             .Select(i => i.GetComponent<T>())
