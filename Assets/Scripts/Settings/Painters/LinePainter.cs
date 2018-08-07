@@ -1,13 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-[AddComponentMenu("Painters/Line Painter")]
-public class LinePainter : BasePainter
+public class LinePainter : BasePainter<LineRenderer>
 {
     public override void Refresh()
     {
-        LineRenderer lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startColor = Variable.Value.Fade(lineRenderer.startColor.a);
-        lineRenderer.endColor = Variable.Value.Fade(lineRenderer.endColor.a);
+        component.startColor = Variable.Value.Fade(component.startColor.a);
+        component.endColor = Variable.Value.Fade(component.endColor.a);
     }
 }

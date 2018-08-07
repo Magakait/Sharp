@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BasePainter : MonoBehaviour
+public abstract class BasePainter<T> : MonoBehaviour where T : Component
 {
     [SerializeField]
     private ColorVariable variable;
@@ -17,8 +17,13 @@ public abstract class BasePainter : MonoBehaviour
         }
     }
 
-    private void Awake() => 
+    protected T component;
+
+    private void Awake()
+    {
+        component = GetComponent<T>();
         Refresh();
+    }
 
     public abstract void Refresh();
 }
