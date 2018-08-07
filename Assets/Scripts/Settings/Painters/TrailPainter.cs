@@ -6,7 +6,7 @@ public class TrailPainter : BasePainter
 {
     public override void Refresh()
     {
-        TrailRenderer trailRenderer = GetComponent<TrailRenderer>();
+        var trailRenderer = GetComponent<TrailRenderer>();
         trailRenderer.startColor = Variable.Value.Fade(trailRenderer.startColor.a);
         trailRenderer.endColor = Variable.Value.Fade(trailRenderer.endColor.a);
     }

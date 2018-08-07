@@ -6,7 +6,7 @@ public class SpritePainter : BasePainter
 {
     public override void Refresh()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        var spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Variable.Value.Fade(spriteRenderer.color.a);
     }
 }

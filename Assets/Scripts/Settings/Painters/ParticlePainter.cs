@@ -6,9 +6,9 @@ public class ParticlePainter : BasePainter
 {
     public override void Refresh()
     {
-        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+        var particleSystem = GetComponent<ParticleSystem>();
 
-        ParticleSystem.MainModule main = particleSystem.main;
+        var main = particleSystem.main;
         main.startColor = Variable.Value.Fade(main.startColor.color.a);
 
         particleSystem.Refresh();

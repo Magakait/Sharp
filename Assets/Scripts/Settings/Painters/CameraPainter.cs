@@ -4,8 +4,6 @@ using UnityEngine;
 [AddComponentMenu("Painters/Camera Painter")]
 public class CameraPainter : BasePainter
 {
-    public override void Refresh()
-    {
+    public override void Refresh() =>
         GetComponent<Camera>().backgroundColor = Variable.Value;
-    }
 }
