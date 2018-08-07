@@ -1,8 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpritePainter : BasePainter<SpriteRenderer>
+[AddComponentMenu("Painters/Sprite Painter")]
+public class SpritePainter : BasePainter
 {
-    public override void Refresh() =>
-        component.color = Variable.Value.Fade(component.color.a);
+    public override void Refresh()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Variable.Value.Fade(spriteRenderer.color.a);
+    }
 }

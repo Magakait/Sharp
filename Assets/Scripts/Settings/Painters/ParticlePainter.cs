@@ -1,13 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class ParticlePainter : BasePainter<ParticleSystem>
+[AddComponentMenu("Painters/Particle Painter")]
+public class ParticlePainter : BasePainter
 {
     public override void Refresh()
     {
-        var main = component.main;
+        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+
+        ParticleSystem.MainModule main = particleSystem.main;
         main.startColor = Variable.Value.Fade(main.startColor.color.a);
 
-        component.Refresh();
+        particleSystem.Refresh();
     }
 }

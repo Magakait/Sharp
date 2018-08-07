@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(TrailRenderer))]
-public class TrailPainter : BasePainter<TrailRenderer>
+[AddComponentMenu("Painters/Trail Painter")]
+public class TrailPainter : BasePainter
 {
     public override void Refresh()
     {
-        component.startColor = Variable.Value.Fade(component.startColor.a);
-        component.endColor = Variable.Value.Fade(component.endColor.a);
+        TrailRenderer trailRenderer = GetComponent<TrailRenderer>();
+        trailRenderer.startColor = Variable.Value.Fade(trailRenderer.startColor.a);
+        trailRenderer.endColor = Variable.Value.Fade(trailRenderer.endColor.a);
     }
 }

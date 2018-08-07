@@ -1,8 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class CameraPainter : BasePainter<Camera>
+[AddComponentMenu("Painters/Camera Painter")]
+public class CameraPainter : BasePainter
 {
-    public override void Refresh() =>
-        component.backgroundColor = Variable.Value;
+    public override void Refresh()
+    {
+        GetComponent<Camera>().backgroundColor = Variable.Value;
+    }
 }

@@ -12,7 +12,7 @@ public class FogObject : SerializableObject
         (
             DOTween.Sequence().Insert
             (
-                maskSprite
+                maskSprite.material
                     .DOFade(0, Constants.Time)
             ) 
         );
