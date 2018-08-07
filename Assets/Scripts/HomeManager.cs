@@ -27,7 +27,7 @@ class HomeManager : MonoBehaviour
         levelManager.OnEnable();
         buffer.Load(Constants.EditorRoot + "Buffer.json");
 
-        versionText.text = Application.version;
+        versionText.text = "Version " + Application.version;
         DontDestroyOnLoad(gameObject);
     }
 
