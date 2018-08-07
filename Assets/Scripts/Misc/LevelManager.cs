@@ -33,12 +33,13 @@ public class LevelManager : ScriptableObject
                 Destroy(instance.gameObject);
 
         instances.Clear();
+        System.GC.Collect();
     }
 
     public static void LoadLevel(JsonFile file)
     {
+        UnloadLevel();
         level = file;
-        instances.Clear();
 
         foreach (var token in level.Root)
         {
