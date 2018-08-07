@@ -52,7 +52,6 @@ public class CollectionLoader : MonoBehaviour
         meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
-        LevelManager.UnloadLevel();
         LevelManager.LoadLevel(level);
 
         var entrances = LevelManager.instances

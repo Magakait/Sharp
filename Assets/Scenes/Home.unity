@@ -2398,6 +2398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 3167e5944a70deb4e86e50acdb97bf0b, type: 2}
+  camera: {fileID: 298274603}
 --- !u!20 &298274603
 Camera:
   m_ObjectHideFlags: 0
@@ -6857,6 +6858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 609f8b3c3151d2f48bf1d7830b720a90, type: 2}
+  renderer: {fileID: 0}
 --- !u!199 &700040326
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -17914,7 +17916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000026299327}
+  m_AnchoredPosition: {x: 0, y: 0.00004248985}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703

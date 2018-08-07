@@ -33,13 +33,15 @@ public class LevelManager : ScriptableObject
                 Destroy(instance.gameObject);
 
         instances.Clear();
+        Resources.UnloadUnusedAssets();
+        System.GC.Collect();
     }
 
     public static void LoadLevel(JsonFile file)
     {
-        level = file;
-        instances.Clear();
+        UnloadLevel();
 
+        level = file;
         foreach (var token in level.Root)
         {
             var instance = AddInstance((int)token["id"], token["position"].ToVector());
@@ -49,8 +51,6 @@ public class LevelManager : ScriptableObject
             }
             catch { }
         }
-
-        System.GC.Collect();
     }
 
     #endregion

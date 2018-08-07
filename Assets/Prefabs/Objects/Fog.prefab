@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4097612086331340}
   - component: {fileID: 212511758965987014}
-  - component: {fileID: 114704346929952356}
+  - component: {fileID: 114304919138402820}
   m_Layer: 10
   m_Name: Mask
   m_TagString: Untagged
@@ -87,6 +87,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &114304919138402820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070604559902798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723607a09499cbc49becc09cee6f3a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variable: {fileID: 11400000, guid: 3167e5944a70deb4e86e50acdb97bf0b, type: 2}
+  renderer: {fileID: 212511758965987014}
 --- !u!114 &114518600996659524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,18 +115,6 @@ MonoBehaviour:
   collider: {fileID: 58859365424033746}
   spread: 1
   maskSprite: {fileID: 212511758965987014}
---- !u!114 &114704346929952356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070604559902798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba3dfe0ac36ae934fb9bd924238acf78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  variable: {fileID: 11400000, guid: 3167e5944a70deb4e86e50acdb97bf0b, type: 2}
 --- !u!212 &212511758965987014
 SpriteRenderer:
   m_ObjectHideFlags: 1
