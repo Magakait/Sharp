@@ -5,15 +5,20 @@ using Newtonsoft.Json.Linq;
 
 public class EditorProperties : MonoBehaviour
 {
-    public Text header;
-    public CanvasToggle canvasToggle;
+    [SerializeField]
+    private JsonFile catalog;
 
     [Space(10)]
-    public JsonFile catalog;
+    [SerializeField]
+    private Text header;
+    [SerializeField]
+    private CanvasToggle canvasToggle;
 
     [Space(10)]
-    public Transform parentPanel;
-    public BaseWidget[] widgets;
+    [SerializeField]
+    private Transform parentPanel;
+    [SerializeField]
+    private BaseWidget[] widgets;
 
     private SerializableObject selected;
     private JToken buffer = new JObject();
