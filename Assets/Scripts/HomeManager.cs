@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 
 class HomeManager : MonoBehaviour
 {
-    public VoidEvent onHome;
-    public BoolEvent onCheck;
+    [SerializeField]
+    private Text versionText;
+    [SerializeField]
+    private LevelManager levelManager;
 
     [Space(10)]
-    public Text versionText;
-    public LevelManager levelManager;
-    public JsonFile buffer;
+    [SerializeField]
+    private VoidEvent onHome;
+    [SerializeField]
+    private BoolEvent onCheck;
 
     private static bool loaded;
 
@@ -25,7 +28,6 @@ class HomeManager : MonoBehaviour
 
         loaded = true;
         levelManager.OnEnable();
-        buffer.Load(Constants.EditorRoot + "Buffer.json");
 
         versionText.text = "Version " + Application.version;
         DontDestroyOnLoad(gameObject);
