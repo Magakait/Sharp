@@ -10,13 +10,13 @@ public class EditorProperties : MonoBehaviour
 
     [Space(10)]
     public JsonFile catalog;
-    public JsonFile buffer;
 
     [Space(10)]
     public Transform parentPanel;
     public BaseWidget[] widgets;
 
     private SerializableObject selected;
+    private JToken buffer = new JObject();
 
     private void Awake()
     {
@@ -39,12 +39,11 @@ public class EditorProperties : MonoBehaviour
         var properties = (JArray)catalog[selected.Id.ToString()];
         if (properties != null)
         {
-            buffer.Root = new JObject();
-            selected.Serialize(buffer.Root);
+            selected.Serialize(buffer);
 
             foreach (var property in properties)
                 Instantiate(widgets[(int)property["type"]], parentPanel)
-                    .Load(property);
+                    .Load(property, buffer);
         }
 
         canvasToggle.Visible = parentPanel.childCount > 0;
@@ -52,7 +51,7 @@ public class EditorProperties : MonoBehaviour
 
     public void Save()
     {
-        selected.Deserialize(buffer.Root);
+        selected.Deserialize(buffer);
         LevelManager.UpdateInstance(selected);
     }
 }

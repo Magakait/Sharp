@@ -7,18 +7,18 @@ public abstract class BaseWidget : MonoBehaviour
 {
     [SerializeField]
     private Text title;
-    [SerializeField]
-    private JsonFile buffer;
 
     public static EditorProperties editorProperties;
 
     protected bool ready;
+    private JToken buffer;
 
-    public void Load(JToken property)
+    public void Load(JToken property, JToken buffer)
     {
         ready = false;
 
         title.text = (string)property["name"];
+        this.buffer = buffer;
         Read(buffer[title.text], property["attributes"]);
 
         ready = true;
