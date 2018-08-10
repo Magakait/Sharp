@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212017785086782186}
 --- !u!114 &114611329752814168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +226,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

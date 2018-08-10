@@ -31,10 +31,10 @@ public class LaserObject : SerializableObject
         active = true;
         enabled = true;
 
-        var main = distanceEffect.main;
+        var main = distanceScaler.ParticleSystem.main;
         main.startColor = main.startColor.color.Fade(1);
 
-        distanceEffect.Refresh();
+        distanceScaler.ParticleSystem.Refresh();
         animation[0].Restart();
     }
 
@@ -53,7 +53,7 @@ public class LaserObject : SerializableObject
         }
         else
         {
-            var main = distanceEffect.main;
+            var main = distanceScaler.ParticleSystem.main;
             main.startColor = main.startColor.color.Fade(.2f);
             
             enabled = false;
@@ -93,8 +93,6 @@ public class LaserObject : SerializableObject
     private Transform persistencyTransform;
 
     [Space(10)]
-    [SerializeField]
-    private ParticleSystem distanceEffect;
     [SerializeField]
     private ParticleScalerComponent distanceScaler;
 

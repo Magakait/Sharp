@@ -9,7 +9,7 @@ public class ParticleScalerComponent : MonoBehaviour
     public Transform referenceTransform;
     public bool global;
 
-    private new ParticleSystem particleSystem;
+    public ParticleSystem ParticleSystem { get; private set; }
 
     private int maxParticles;
     private float rateOverTime;
@@ -18,14 +18,14 @@ public class ParticleScalerComponent : MonoBehaviour
 
     private void Awake()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        ParticleSystem = GetComponent<ParticleSystem>();
 
-        maxParticles = particleSystem.main.maxParticles;
-        rateOverTime = particleSystem.emission.rateOverTime.constant;
-        rateOverDistance = particleSystem.emission.rateOverDistance.constant;
+        maxParticles = ParticleSystem.main.maxParticles;
+        rateOverTime = ParticleSystem.emission.rateOverTime.constant;
+        rateOverDistance = ParticleSystem.emission.rateOverDistance.constant;
 
-        bursts = new ParticleSystem.Burst[particleSystem.emission.burstCount];
-        particleSystem.emission.GetBursts(bursts);
+        bursts = new ParticleSystem.Burst[ParticleSystem.emission.burstCount];
+        ParticleSystem.emission.GetBursts(bursts);
     }
 
     private void Start()
@@ -35,26 +35,26 @@ public class ParticleScalerComponent : MonoBehaviour
 
     public void Scale()
     {
-        Vector2 scale = Vector2.Scale(global ? referenceTransform.lossyScale : referenceTransform.localScale, scalar);
-        float multiplier = Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.x * scale.y));
+        var scale = Vector2.Scale(global ? referenceTransform.lossyScale : referenceTransform.localScale, scalar);
+        var multiplier = Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.x * scale.y));
 
-        ParticleSystem.MainModule main = particleSystem.main;
+        var main = ParticleSystem.main;
         main.maxParticles = (int)(maxParticles * multiplier);
 
-        ParticleSystem.EmissionModule emission = particleSystem.emission;
+        var emission = ParticleSystem.emission;
         emission.rateOverTime = rateOverTime * multiplier;
         emission.rateOverDistance = rateOverDistance * multiplier;
 
-        for (int i = 0; i < bursts.Length; i++)
+        for (var i = 0; i < bursts.Length; i++)
             bursts[i].count = bursts[i].count.constant * multiplier;
 
         emission.SetBursts(bursts);
 
-        for (int i = 0; i < bursts.Length; i++)
+        for (var i = 0; i < bursts.Length; i++)
             bursts[i].count = bursts[i].count.constant / multiplier;
 
-        particleSystem.Simulate(Time.time);
-        particleSystem.Play();
+        ParticleSystem.Simulate(Time.time);
+        ParticleSystem.Play();
     }
 
     public void Scale(Vector3 scale)
