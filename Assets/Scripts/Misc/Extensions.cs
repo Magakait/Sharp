@@ -7,7 +7,7 @@ public static class Extensions
 {
     public static void Emission(this ParticleSystem particleSystem, bool enabled)
     {
-        ParticleSystem.EmissionModule emission = particleSystem.emission;
+        var emission = particleSystem.emission;
         emission.enabled = enabled;
     }
 
@@ -15,6 +15,7 @@ public static class Extensions
     {
         if (particleSystem.isPlaying)
         {
+            particleSystem.Clear();
             particleSystem.Stop();
             particleSystem.Play();
         }
@@ -38,8 +39,8 @@ public static class Extensions
 
     public static Sequence Insert(this Sequence sequence, params Tween[] tweens)
     {
-        foreach (Tween i in tweens)
-            sequence.Insert(0, i);
+        foreach (var tween in tweens)
+            sequence.Insert(0, tween);
 
         return sequence;
     }
