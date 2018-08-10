@@ -54,7 +54,7 @@ public class LaserObject : SerializableObject
         else
         {
             var main = distanceScaler.ParticleSystem.main;
-            main.startColor = main.startColor.color.Fade(.2f);
+            main.startColor = main.startColor.color.Fade(0.3f);
             
             enabled = false;
         }
