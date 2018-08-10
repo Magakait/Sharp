@@ -13,10 +13,11 @@ public static class Extensions
 
     public static void Refresh(this ParticleSystem particleSystem)
     {
-        bool playing = particleSystem.isPlaying;
-        particleSystem.Simulate(Time.time);
-        if (playing)
+        if (particleSystem.isPlaying)
+        {
+            particleSystem.Stop();
             particleSystem.Play();
+        }
     }
 
     public static void Clear(this Transform transform)
@@ -43,7 +44,7 @@ public static class Extensions
         return sequence;
     }
 
-    public static Vector3 ToVector(this JToken token) => 
+    public static Vector3 ToVector(this JToken token) =>
         new Vector3((int)token["x"], (int)token["y"]);
 
     public static JToken ToJToken(this Vector2 vector)
@@ -56,7 +57,7 @@ public static class Extensions
         };
     }
 
-    public static JToken ToJToken(this Vector3 vector) => 
+    public static JToken ToJToken(this Vector3 vector) =>
         ((Vector2)vector).ToJToken();
 
     public static Color Fade(this Color color, float alpha = 0)
