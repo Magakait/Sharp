@@ -434,12 +434,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1207807647516066, guid: c9b6b5efa5c976d40a68c971d2343554,
     type: 2}
   m_PrefabInternal: {fileID: 145040068}
---- !u!114 &145040071 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
-    type: 2}
-  m_PrefabInternal: {fileID: 145040068}
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &145040072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,8 +478,8 @@ MonoBehaviour:
   onLoad:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145040071}
-        m_MethodName: set_interactable
+      - m_Target: {fileID: 145040070}
+        m_MethodName: SetActive
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
