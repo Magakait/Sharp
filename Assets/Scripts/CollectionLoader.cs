@@ -9,16 +9,32 @@ using Newtonsoft.Json.Linq;
 
 public class CollectionLoader : MonoBehaviour
 {
-    public Dropdown dropdownTitle;
+    [SerializeField]
+    private Dropdown dropdownTitle;
 
     [Space(10)]
-    public JsonFile meta;
-    public JsonFile level;
+    [SerializeField]
+    private JsonFile meta;
+    [SerializeField]
+    private JsonFile level;
 
     [Space(10)]
-    public VoidEvent onEmptyList;
+    [SerializeField]
+    private VoidEvent onEmptyList;
 
-    public string Category { get; set; }
+    private string category;
+    public string Category
+    {
+        get
+        {
+            return category;
+        }
+        set
+        {
+            category = value + "/";
+            List();
+        }
+    }
 
     public void List()
     {
