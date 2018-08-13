@@ -6,6 +6,7 @@ using DG.Tweening;
 public class MovableComponent : MonoBehaviour
 {
     public int Direction { get; private set; }
+    
     public Vector2 Position
     {
         get
@@ -18,8 +19,11 @@ public class MovableComponent : MonoBehaviour
             Stop();
         }
     }
-    public Vector2 IntPosition => 
+    public Vector2 IntPosition =>
         Vector2Int.RoundToInt(Position);
+
+    public bool IsMoving =>
+        tweener.IsPlaying();
 
     [Space(10)]
     public IntEvent onMove;
@@ -51,11 +55,8 @@ public class MovableComponent : MonoBehaviour
             .SetUpdate(UpdateType.Fixed);
     }
 
-    private void OnDestroy() => 
+    private void OnDestroy() =>
         tweener.Kill();
-
-    public bool Moving() =>
-        tweener.IsPlaying();
 
     public void Stop() =>
         tweener.Pause();
@@ -67,7 +68,7 @@ public class MovableComponent : MonoBehaviour
         return cell && !cell.Hollowed;
     }
 
-    public void Move(int direction) => 
+    public void Move(int direction) =>
         Move(IntPosition + Constants.Directions[direction]);
 
     public void Move(Vector2 destination)

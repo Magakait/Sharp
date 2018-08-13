@@ -41,13 +41,13 @@ public class PlayerObject : SerializableObject
                     press = true;
                     break;
                 }
-                else if (!press && sprint && !movable.Moving() && Input.GetKey(directionKeys[i]))
+                else if (!press && sprint && !movable.IsMoving && Input.GetKey(directionKeys[i]))
                     direction = i;
     }
 
     private void Move()
     {
-        if (direction >= 0 && !movable.Moving() && movable.CanMove(direction))
+        if (direction >= 0 && !movable.IsMoving && movable.CanMove(direction))
         {
             movable.Move(direction);
 

@@ -23,7 +23,7 @@ public class SeekerObject : SerializableObject
 
     private void Update()
     {
-        if (!movable.Moving() && !string.IsNullOrEmpty(sequence))
+        if (!movable.IsMoving && !string.IsNullOrEmpty(sequence))
         {
             Check();
             Move();
