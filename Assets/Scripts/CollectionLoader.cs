@@ -14,6 +14,8 @@ public class CollectionLoader : MonoBehaviour
 
     [Space(10)]
     [SerializeField]
+    private JsonFile info;
+    [SerializeField]
     private JsonFile meta;
     [SerializeField]
     private JsonFile level;
@@ -65,6 +67,7 @@ public class CollectionLoader : MonoBehaviour
     public void Load()
     {
         var path = Constants.CollectionsRoot + Category + dropdownTitle.captionText.text + "/";
+        info.Load(path + "Info.json");
         meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
@@ -92,6 +95,7 @@ public class CollectionLoader : MonoBehaviour
         foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
             File.Copy(file, path + Path.GetFileName(file));
 
+        info.Load(path + "Info.json");
         meta.Load(path + "Meta.json");
     }
 }

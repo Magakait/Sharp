@@ -798,7 +798,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000029417353
+      value: 0.00000075201433
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -2903,7 +2903,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1162803115163666, guid: a8a1a7ecc3c79974d8d5a50da9eb7d78, type: 2}
       propertyPath: m_Name
-      value: Collection
+      value: Info
       objectReference: {fileID: 0}
     - target: {fileID: 114210193785049032, guid: a8a1a7ecc3c79974d8d5a50da9eb7d78,
         type: 2}
@@ -5776,7 +5776,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1162803115163666, guid: a8a1a7ecc3c79974d8d5a50da9eb7d78, type: 2}
       propertyPath: m_Name
-      value: Level
+      value: Levels
       objectReference: {fileID: 0}
     - target: {fileID: 224114805387240158, guid: a8a1a7ecc3c79974d8d5a50da9eb7d78,
         type: 2}
@@ -6637,10 +6637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c3c2efb38e6a547a6eb6ca15c00efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  catalog: {fileID: 11400000, guid: ef126473375e9a544810cd28b7c6b379, type: 2}
   header: {fileID: 590425468}
   canvasToggle: {fileID: 1418370413}
-  catalog: {fileID: 11400000, guid: ef126473375e9a544810cd28b7c6b379, type: 2}
-  buffer: {fileID: 11400000, guid: 3628f6c979a87354bbd449ad0ca55b90, type: 2}
   parentPanel: {fileID: 1916676126}
   widgets:
   - {fileID: 114456526542789108, guid: 9622a993613f3404cbc6b2b5b76c2c59, type: 2}
@@ -9417,7 +9416,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000010420896
+      value: -0.000010224334
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -10887,7 +10886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8966fef5fdc9b8d41ae83d75f1367015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
+  file: {fileID: 11400000, guid: 054c7f9a0d7c0b6458831f3cbd8b202c, type: 2}
   path: description
   onLoad:
     m_PersistentCalls:

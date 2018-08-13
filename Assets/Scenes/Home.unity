@@ -3102,6 +3102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropdownTitle: {fileID: 1536210917}
+  info: {fileID: 11400000, guid: 054c7f9a0d7c0b6458831f3cbd8b202c, type: 2}
   meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
   level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
   onEmptyList:
@@ -14005,7 +14006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8966fef5fdc9b8d41ae83d75f1367015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
+  file: {fileID: 11400000, guid: 054c7f9a0d7c0b6458831f3cbd8b202c, type: 2}
   path: description
   onLoad:
     m_PersistentCalls:
@@ -17349,7 +17350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000036533092}
+  m_AnchoredPosition: {x: 0, y: 0.000035745576}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
