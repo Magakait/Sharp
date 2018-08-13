@@ -42,8 +42,14 @@ public class LevelManager : ScriptableObject
         level = file;
 
         foreach (var token in level.Root)
-            AddInstance((int)token["id"], token["position"].ToVector())
-                .Deserialize(token["properties"]);
+        {
+            var instance = AddInstance((int)token["id"], token["position"].ToVector());
+            try
+            {
+                instance.Deserialize(token["properties"]);
+            }
+            catch { }
+        }
 
         System.GC.Collect();
     }
