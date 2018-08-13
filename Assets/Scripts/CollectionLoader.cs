@@ -74,18 +74,12 @@ public class CollectionLoader : MonoBehaviour
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
 
-        if (entrances.Count() > 0)
-        {
-            var passed = meta["passed"].Select(t => (string)t);
-            foreach (var entrance in entrances)
-                if (passed.Contains(entrance.Level))
-                    entrance.Pass();
+        var passed = meta["passed"].Select(t => (string)t);
+        foreach (var entrance in entrances)
+            if (passed.Contains(entrance.Level))
+                entrance.Pass();
 
-            meta["progress"] = (float)passed.Count() / entrances.Count(e => e.Valid);
-        }
-        else
-            meta["progress"] = 1;
-
+        meta["progress"] = entrances.Count() > 0 ? (float)passed.Count() / entrances.Count(e => e.Valid) : 1;
         meta["editable"] = Category == "Local/";
         meta.Save();
     }
@@ -95,9 +89,8 @@ public class CollectionLoader : MonoBehaviour
         var path = EngineUtility.NextFile(Constants.CollectionsRoot + "Local/", "Collection", string.Empty) + "/";
         Directory.CreateDirectory(path);
 
-        File.Copy(Constants.EditorRoot + "Meta.json", path + "Meta.json");
-        File.WriteAllText(path + "Map.#", "[]");
-        File.Copy(Constants.EditorRoot + "Level.#", path + "Level 1.#");
+        foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
+            File.Copy(file, path + Path.GetFileName(file));
 
         meta.Load(path + "Meta.json");
     }

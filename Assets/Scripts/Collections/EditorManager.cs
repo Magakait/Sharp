@@ -131,7 +131,7 @@ public class EditorManager : MonoBehaviour
         string path = EngineUtility.NextFile(meta.Directory + "/", "Level", ".#");
         string name = Path.GetFileNameWithoutExtension(path);
 
-        File.Copy(Constants.EditorRoot + "Level.#", path);
+        File.Copy(Constants.EditorRoot + "Collection/Level.#", path);
         levels.Add(name);
 
         ListLevels(name);
