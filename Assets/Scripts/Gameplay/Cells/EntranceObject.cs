@@ -44,7 +44,7 @@ public class EntranceObject : SerializableObject
 
     private void OnMouseDown()
     {
-        if (enabled && Open)
+        if (enabled && Open && !EngineUtility.IsOverUI)
             CameraManager.Move(transform.position);
     }
 
