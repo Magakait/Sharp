@@ -25,17 +25,14 @@ public class EntranceObject : SerializableObject
 
     private void Start()
     {
-        var next = LevelManager.instances.FirstOrDefault
-        (
-            e => e.Id == Id &&
-            e.GetComponent<EntranceObject>().Level == Next
-        );
-        if (next)
-            Connect(next.transform.position);
-
         if (Valid)
         {
             enterButton.gameObject.SetActive(true);
+            var next = LevelManager.instances.FirstOrDefault
+            (
+                e => e.Id == Id &&
+                e.GetComponent<EntranceObject>().Level == Next
+            );
             if (Open && (!next || !next.GetComponent<EntranceObject>().Open))
                 Focus();
         }
@@ -68,7 +65,10 @@ public class EntranceObject : SerializableObject
             e.GetComponent<EntranceObject>().Level == Next
         );
         if (next)
+        {
             next.GetComponent<EntranceObject>().Open = true;
+            Connect(next.transform.position);
+        }
 
         coreEffect.Emission(true);
     }
