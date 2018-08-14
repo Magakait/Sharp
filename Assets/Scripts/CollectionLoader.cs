@@ -68,6 +68,8 @@ public class CollectionLoader : MonoBehaviour
     {
         var path = Constants.CollectionsRoot + Category + dropdownTitle.captionText.text + "/";
         info.Load(path + "Info.json");
+        if (!File.Exists(path + "Meta.json"))
+            File.Copy(Constants.EditorRoot + "Collection/Meta.json", path + "Meta.json");
         meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
