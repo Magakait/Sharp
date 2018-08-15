@@ -25,26 +25,15 @@ public class CollectionLoader : MonoBehaviour
     private VoidEvent onEmptyList;
 
     private string category;
-    public string Category
-    {
-        get
-        {
-            return category;
-        }
-        set
-        {
-            category = value + "/";
-            List();
-        }
-    }
 
-    public void List()
+    public void List(string category)
     {
+        this.category = category + "/";
         var index = dropdownTitle.value;
 
         dropdownTitle.ClearOptions();
-        if (Directory.Exists(Constants.CollectionsRoot + Category))
-            foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + Category)
+        if (Directory.Exists(Constants.CollectionsRoot + category))
+            foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + category)
                     .GetDirectories()
                     .OrderBy(d => d.CreationTime)
                     .Reverse()
@@ -66,7 +55,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void Load()
     {
-        var path = Constants.CollectionsRoot + Category + dropdownTitle.captionText.text + "/";
+        var path = Constants.CollectionsRoot + category + dropdownTitle.captionText.text + "/";
         info.Load(path + "Info.json");
         if (!File.Exists(path + "Meta.json"))
             File.Copy(Constants.EditorRoot + "Collection/Meta.json", path + "Meta.json");
@@ -87,13 +76,13 @@ public class CollectionLoader : MonoBehaviour
         var valid = (float)entrances.Count(e => e.Valid);
         meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
 
-        meta["editable"] = Category == "Local/";
+        meta["editable"] = category == "Local/";
         meta.Save();
     }
 
     public void Create()
     {
-        var path = EngineUtility.NextFile(Constants.CollectionsRoot + "Local/", "Collection", string.Empty) + "/";
+        var path = EngineUtility.NextFile(Constants.CollectionsRoot + category, "Collection", string.Empty) + "/";
         Directory.CreateDirectory(path);
 
         foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
