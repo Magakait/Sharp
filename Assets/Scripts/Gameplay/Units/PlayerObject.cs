@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerObject : SerializableObject
@@ -10,8 +12,11 @@ public class PlayerObject : SerializableObject
 
     private void Update()
     {
-        Read();
-        Move();
+        if (Time.timeScale > 0)
+        {
+            Read();
+            Move();
+        }
     }
 
     #region gameplay
@@ -27,33 +32,44 @@ public class PlayerObject : SerializableObject
     [HideInInspector]
     public CheckpointObject spawn;
 
-    private int direction = -1;
+    private readonly List<int> moves = new List<int>();
     private bool press;
 
     private void Read()
     {
-        bool sprint = Input.GetKey(sprintKey);
-        for (int i = 0; i < 4; i++)
-            if (movable.CanMove(i))
-                if (Input.GetKeyDown(directionKeys[i]))
-                {
-                    direction = i;
-                    press = true;
-                    break;
-                }
-                else if (!press && sprint && !movable.IsMoving && Input.GetKey(directionKeys[i]))
-                    direction = i;
+        var sprint = Input.GetKey(sprintKey);
+        for (var i = 0; i < 4; i++)
+            if (Input.GetKeyDown(directionKeys[i]))
+            {
+                press = true;
+
+                moves.Remove(i);
+                moves.Add(i);
+
+                break;
+            }
+            else if (!press && sprint && Input.GetKey(directionKeys[i]))
+            {
+                moves.Remove(i);
+                moves.Add(i);
+            }
     }
 
     private void Move()
     {
-        if (direction >= 0 && !movable.IsMoving && movable.CanMove(direction))
-        {
-            movable.Move(direction);
+        if (movable.IsMoving)
+            return;
 
-            press = false;
-            direction = -1;
-        }
+        moves.Reverse();
+        foreach (var i in moves)
+            if (movable.CanMove(i))
+            {
+                movable.Move(i);
+                break;
+            }
+
+        moves.Clear();
+        press = false;
     }
 
     public void CheckSpawn()
