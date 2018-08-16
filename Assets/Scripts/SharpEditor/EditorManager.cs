@@ -106,6 +106,7 @@ public class EditorManager : MonoBehaviour
 
     private void ListLevels(string name)
     {
+        PassLevels();
         toggleGroup.transform.Clear();
 
         for (int i = 0; i < levels.Count; i++)
@@ -188,6 +189,12 @@ public class EditorManager : MonoBehaviour
 
     private void PassLevels()
     {
+        var passed = (JArray)meta["passed"];
+        passed.Clear();
+
+        foreach (var level in levels)
+            passed.Add(level);
+
         meta.Save();
     }
 
