@@ -33,6 +33,16 @@ public class EngineUtility : ScriptableObject
     public void Toggle(Toggle toggle) =>
         toggle.isOn = !toggle.isOn;
 
+    private static readonly char[] invalidChars = Path.GetInvalidPathChars()
+        .Union(Path.GetInvalidFileNameChars())
+        .ToArray();
+    public void Filter(InputField inputField)
+    {
+        inputField.text = new string(inputField.text
+            .Where(i => !invalidChars.Contains(i))
+            .ToArray());
+    }
+
     #endregion
 
     #region statics
