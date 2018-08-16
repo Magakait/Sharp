@@ -50,8 +50,6 @@ public class LevelManager : ScriptableObject
             }
             catch { }
         }
-
-        System.GC.Collect();
     }
 
     #endregion
