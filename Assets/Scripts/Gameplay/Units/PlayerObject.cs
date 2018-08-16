@@ -33,26 +33,26 @@ public class PlayerObject : SerializableObject
     public CheckpointObject spawn;
 
     private readonly List<int> moves = new List<int>();
-    private bool press;
 
     private void Read()
     {
         var sprint = Input.GetKey(sprintKey);
+        var stopSprint = Input.GetKeyUp(sprintKey);
+
         for (var i = 0; i < 4; i++)
             if (Input.GetKeyDown(directionKeys[i]))
             {
-                press = true;
-
                 moves.Remove(i);
                 moves.Add(i);
-
                 break;
             }
-            else if (!press && sprint && Input.GetKey(directionKeys[i]))
+            else if (sprint && Input.GetKey(directionKeys[i]))
             {
                 moves.Remove(i);
                 moves.Add(i);
             }
+            else if (stopSprint || Input.GetKeyUp(directionKeys[i]))
+                moves.Remove(i);
     }
 
     private void Move()
@@ -69,7 +69,6 @@ public class PlayerObject : SerializableObject
             }
 
         moves.Clear();
-        press = false;
     }
 
     public void CheckSpawn()
