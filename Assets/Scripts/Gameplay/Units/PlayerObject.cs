@@ -81,7 +81,7 @@ public class PlayerObject : SerializableObject
             spawn.StartCoroutine(spawn.Spawn());
         else
             Instantiate(message, movable.IntPosition, Quaternion.identity)
-                .Setup("- - - -", "Restart", () => EngineUtility.Main.OpenScene());
+                .Setup("- - - -", "Restart", () => EngineUtility.Main.LoadScene());
     }
 
     #endregion

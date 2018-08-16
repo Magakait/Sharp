@@ -798,7 +798,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00000075201433
+      value: -0.00000836875
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -2387,7 +2387,7 @@ Prefab:
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenScene
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 2}
@@ -4541,7 +4541,7 @@ Prefab:
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenScene
+      value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 2}
@@ -9416,7 +9416,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000010224334
+      value: -0.000019383573
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name

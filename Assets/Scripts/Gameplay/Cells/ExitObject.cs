@@ -41,7 +41,7 @@ public class ExitObject : SerializableObject
         }
 
         Instantiate(message, transform.position, Quaternion.identity)
-            .Setup("+ + + +", "Home", () => { EngineUtility.Main.OpenScene("Home"); });
+            .Setup("+ + + +", "Home", () => { EngineUtility.Main.LoadScene("Home"); });
     }
 
     #endregion

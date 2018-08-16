@@ -51,7 +51,7 @@ public class EntranceObject : SerializableObject
     public void Enter()
     {
         level.Load($"{meta.Directory}/{Level}.#");
-        EngineUtility.Main.OpenScene("Play");
+        EngineUtility.Main.LoadScene("Play");
     }
 
     public void Pass()

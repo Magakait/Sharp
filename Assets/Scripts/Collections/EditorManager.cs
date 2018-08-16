@@ -187,7 +187,7 @@ public class EditorManager : MonoBehaviour
         else
         {
             Directory.Delete(meta.Directory, true);
-            EngineUtility.Main.OpenScene("Home");
+            EngineUtility.Main.LoadScene("Home");
         }
     }
 

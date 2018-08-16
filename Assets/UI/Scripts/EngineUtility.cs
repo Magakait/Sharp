@@ -19,7 +19,7 @@ public class EngineUtility : ScriptableObject
 
     public void Select(ToggleGroup group)
     {
-        foreach (Toggle toggle in group.ActiveToggles())
+        foreach (var toggle in group.ActiveToggles())
         {
             toggle.isOn = false;
             toggle.isOn = true;
@@ -27,25 +27,11 @@ public class EngineUtility : ScriptableObject
         }
     }
 
-    public void Click(Button button)
-    {
+    public void Click(Button button) =>
         button.onClick.Invoke();
-    }
 
-    public void Toggle(Toggle toggle)
-    {
+    public void Toggle(Toggle toggle) =>
         toggle.isOn = !toggle.isOn;
-    }
-
-    private static readonly char[] invalidChars = Path.GetInvalidPathChars()
-        .Union(Path.GetInvalidFileNameChars())
-        .ToArray();
-    public void Filter(InputField inputField)
-    {
-        inputField.text = new string(inputField.text
-            .Where(i => !invalidChars.Contains(i))
-            .ToArray());
-    }
 
     #endregion
 
@@ -59,12 +45,12 @@ public class EngineUtility : ScriptableObject
 
     public static string NextFile(string directory, string name, string extension)
     {
-        string result = string.Empty;
+        var result = string.Empty;
         Func<String, bool> Exists = String.IsNullOrEmpty(extension)
             ? (Func<string, bool>)((path) => Directory.Exists(path))
             : (path) => File.Exists(path);
 
-        for (int i = 1; i <= int.MaxValue; i++)
+        for (var i = 1; i <= int.MaxValue; i++)
         {
             result = $"{directory}{name} {i}{extension}";
             if (!Exists(result))
@@ -78,20 +64,14 @@ public class EngineUtility : ScriptableObject
 
     #region openers
 
-    public void Quit()
-    {
+    public void Quit() =>
         Application.Quit();
-    }
 
-    public void OpenScene(string name = null)
-    {
+    public void LoadScene(string name = null) =>
         SceneManager.LoadScene(String.IsNullOrEmpty(name) ? SceneManager.GetActiveScene().name : name);
-    }
 
-    public void OpenUrl(string url)
-    {
+    public void OpenURL(string url) =>
         Application.OpenURL(url);
-    }
 
     #endregion
 }
