@@ -51,7 +51,7 @@ public class EditorManager : MonoBehaviour
         levels.Clear();
         levels.AddRange
         (
-            new DirectoryInfo(meta.Directory)
+            new DirectoryInfo(level.Directory)
                 .GetFiles("*.#")
                 .OrderBy(f => f.CreationTime)
                 .Select(f => Path.GetFileNameWithoutExtension(f.Name))
@@ -59,7 +59,7 @@ public class EditorManager : MonoBehaviour
         levels.Remove("Map");
         levels.Insert(0, "Map");
 
-        inputCollection.text = Path.GetFileName(meta.Directory);
+        inputCollection.text = Path.GetFileName(level.Directory);
     }
 
     public void RenameCollection(string name)
@@ -67,12 +67,12 @@ public class EditorManager : MonoBehaviour
         string path = Constants.CollectionsRoot + "Local/" + name;
 
         if (Directory.Exists(path))
-            inputCollection.text = Path.GetFileName(meta.Directory);
+            inputCollection.text = Path.GetFileName(level.Directory);
         else
         {
-            Directory.Move(meta.Directory, path);
+            Directory.Move(level.Directory, path);
 
-            meta.Load(path + "/Meta.json");
+            meta.Rename($"{new DirectoryInfo(level.Directory).Parent.Name}.{name}.json");
             level.Load($"{path}/{level.Name}.#");
         }
     }
@@ -96,7 +96,7 @@ public class EditorManager : MonoBehaviour
 
     private void LoadLevel(int index)
     {
-        level.Load($"{meta.Directory}/{levels[index]}.#");
+        level.Load($"{level.Directory}/{levels[index]}.#");
 
         inputLevel.text = level.Name;
         DeserializeLevel();
@@ -128,7 +128,7 @@ public class EditorManager : MonoBehaviour
 
     public void AddLevel()
     {
-        string path = EngineUtility.NextFile(meta.Directory + "/", "Level", ".#");
+        string path = EngineUtility.NextFile(level.Directory + "/", "Level", ".#");
         string name = Path.GetFileNameWithoutExtension(path);
 
         File.Copy(Constants.EditorRoot + "Collection/Level.#", path);
@@ -143,7 +143,7 @@ public class EditorManager : MonoBehaviour
         (
             EngineUtility.NextFile
             (
-                meta.Directory + "/",
+                level.Directory + "/",
                 level.Name + " - copy",
                 ".#"
             )
@@ -155,12 +155,14 @@ public class EditorManager : MonoBehaviour
 
     public void RenameLevel(string name)
     {
-        string path = $"{meta.Directory}/{name}.#";
+        string path = $"{level.Directory}/{name}.#";
 
         if (File.Exists(path))
             inputLevel.text = level.Name;
         else
         {
+
+
             levels[levels.IndexOf(level.Name)] = name;
             level.Rename(path);
 
@@ -174,21 +176,19 @@ public class EditorManager : MonoBehaviour
         level.Delete();
 
         if (levels.Count > 1)
-        {
-            var passed = meta["passed"].FirstOrDefault(t => (string)t == level.Name);
-            if (passed != null)
-            {
-                passed.Remove();
-                meta.Save();
-            }
-
             ListLevels(levels[levels.Count - 1]);
-        }
         else
         {
-            Directory.Delete(meta.Directory, true);
+            Directory.Delete(level.Directory, true);
+            meta.Delete();
+
             EngineUtility.Main.LoadScene("Home");
         }
+    }
+
+    private void PassLevels()
+    {
+        meta.Save();
     }
 
     #endregion
