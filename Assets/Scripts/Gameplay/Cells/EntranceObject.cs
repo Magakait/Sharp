@@ -13,8 +13,6 @@ public class EntranceObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private JsonFile level;
-    [SerializeField]
-    private JsonFile meta;
 
     [Space(10)]
     [SerializeField]
@@ -50,7 +48,7 @@ public class EntranceObject : SerializableObject
 
     public void Enter()
     {
-        level.Load($"{meta.Directory}/{Level}.#");
+        level.Load($"{level.Info.Directory}/{Level}.#");
         EngineUtility.Main.LoadScene("Play");
     }
 
@@ -121,7 +119,7 @@ public class EntranceObject : SerializableObject
         private set
         {
             titleText.text = value;
-            Valid = File.Exists($"{meta.Directory}/{Level}.#");
+            Valid = File.Exists($"{level.Info.Directory}/{Level}.#");
         }
     }
 

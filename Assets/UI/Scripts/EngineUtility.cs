@@ -38,9 +38,12 @@ public class EngineUtility : ScriptableObject
         .ToArray();
     public void Filter(InputField inputField)
     {
-        inputField.text = new string(inputField.text
-            .Where(i => !invalidChars.Contains(i))
-            .ToArray());
+        inputField.text = new string
+        (
+            inputField.text
+                .Where(i => !invalidChars.Contains(i))
+                .ToArray()
+        );
     }
 
     #endregion
@@ -53,16 +56,19 @@ public class EngineUtility : ScriptableObject
     public static bool IsInput =>
         EventSystem.current.currentSelectedGameObject;
 
-    public static string NextFile(string directory, string name, string extension)
+    public static string NextFile(string directory, string file)
     {
+        var extension = Path.GetExtension(file);
+        file = Path.GetFileNameWithoutExtension(file);
+
         var result = string.Empty;
-        Func<String, bool> Exists = String.IsNullOrEmpty(extension)
+        var Exists = String.IsNullOrEmpty(extension)
             ? (Func<string, bool>)((path) => Directory.Exists(path))
             : (path) => File.Exists(path);
 
         for (var i = 1; i <= int.MaxValue; i++)
         {
-            result = $"{directory}{name} {i}{extension}";
+            result = $"{directory}/{file} {i}{extension}";
             if (!Exists(result))
                 break;
         }
@@ -77,8 +83,8 @@ public class EngineUtility : ScriptableObject
     public void Quit() =>
         Application.Quit();
 
-    public void LoadScene(string name = null) =>
-        SceneManager.LoadScene(String.IsNullOrEmpty(name) ? SceneManager.GetActiveScene().name : name);
+    public void LoadScene(string scene = null) =>
+        SceneManager.LoadScene(String.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().name : scene);
 
     public void OpenURL(string url) =>
         Application.OpenURL(url);

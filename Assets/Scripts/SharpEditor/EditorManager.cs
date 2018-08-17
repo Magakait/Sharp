@@ -12,7 +12,7 @@ public class EditorManager : MonoBehaviour
     private void Start()
     {
         LoadCollection();
-        ListLevels(level.Name);
+        ListLevels(level.ShortName);
 
         IgnoreCollisions(true);
     }
@@ -51,29 +51,31 @@ public class EditorManager : MonoBehaviour
         levels.Clear();
         levels.AddRange
         (
-            new DirectoryInfo(level.Directory)
+            level.Info.Directory
                 .GetFiles("*.#")
                 .OrderBy(f => f.CreationTime)
                 .Select(f => Path.GetFileNameWithoutExtension(f.Name))
         );
+
         levels.Remove("Map");
         levels.Insert(0, "Map");
 
-        inputCollection.text = Path.GetFileName(level.Directory);
+        inputCollection.text = level.Info.Directory.Name;
     }
 
     public void RenameCollection(string name)
     {
-        string path = Constants.CollectionsRoot + "Local/" + name;
+        string category = level.Info.Directory.Parent.FullName;
+        string path = category + "/" + name;
 
         if (Directory.Exists(path))
-            inputCollection.text = Path.GetFileName(level.Directory);
+            inputCollection.text = level.Info.Directory.Name;
         else
         {
-            Directory.Move(level.Directory, path);
+            level.Info.Directory.MoveTo(path);
 
-            meta.Rename($"{new DirectoryInfo(level.Directory).Parent.Name}.{name}.json");
-            level.Load($"{path}/{level.Name}.#");
+            meta.MoveTo($"{Constants.MetaRoot}{category}.{name}.json");
+            level.Load(path + "/" + level.Info.Name);
         }
     }
 
@@ -96,12 +98,12 @@ public class EditorManager : MonoBehaviour
 
     private void LoadLevel(int index)
     {
-        level.Load($"{level.Directory}/{levels[index]}.#");
+        level.Load($"{level.Info.DirectoryName}/{levels[index]}.#");
 
-        inputLevel.text = level.Name;
+        inputLevel.text = level.ShortName;
         DeserializeLevel();
 
-        onLevelLoad.Invoke(level.Name != "Map");
+        onLevelLoad.Invoke(level.ShortName != "Map");
     }
 
     private void ListLevels(string name)
@@ -129,7 +131,7 @@ public class EditorManager : MonoBehaviour
 
     public void AddLevel()
     {
-        string path = EngineUtility.NextFile(level.Directory + "/", "Level", ".#");
+        string path = EngineUtility.NextFile(level.Info.DirectoryName, "Level.#");
         string name = Path.GetFileNameWithoutExtension(path);
 
         File.Copy(Constants.EditorRoot + "Collection/Level.#", path);
@@ -140,32 +142,22 @@ public class EditorManager : MonoBehaviour
 
     public void CopyLevel()
     {
-        level.SaveTo
-        (
-            EngineUtility.NextFile
-            (
-                level.Directory + "/",
-                level.Name + " - copy",
-                ".#"
-            )
-        );
+        level.SaveTo(EngineUtility.NextFile(level.Info.DirectoryName, level.ShortName + " - copy.#"));
 
-        levels.Add(level.Name);
-        ListLevels(level.Name);
+        levels.Add(level.ShortName);
+        ListLevels(level.ShortName);
     }
 
     public void RenameLevel(string name)
     {
-        string path = $"{level.Directory}/{name}.#";
+        string path = $"{level.Info.DirectoryName}/{name}.#";
 
         if (File.Exists(path))
-            inputLevel.text = level.Name;
+            inputLevel.text = level.ShortName;
         else
         {
-
-
-            levels[levels.IndexOf(level.Name)] = name;
-            level.Rename(path);
+            levels[levels.IndexOf(level.ShortName)] = name;
+            level.MoveTo(path);
 
             ListLevels(name);
         }
@@ -173,14 +165,14 @@ public class EditorManager : MonoBehaviour
 
     public void DeleteLevel()
     {
-        levels.Remove(level.Name);
+        levels.Remove(level.ShortName);
         level.Delete();
 
         if (levels.Count > 1)
             ListLevels(levels[levels.Count - 1]);
         else
         {
-            Directory.Delete(level.Directory, true);
+            level.Info.Directory.Delete(true);
             meta.Delete();
 
             EngineUtility.Main.LoadScene("Home");

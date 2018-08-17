@@ -28,12 +28,12 @@ public class CollectionLoader : MonoBehaviour
 
     public void List(string category)
     {
-        this.category = category + "/";
+        this.category = category;
         var index = dropdownTitle.value;
 
         dropdownTitle.ClearOptions();
-        if (Directory.Exists(Constants.CollectionsRoot + category))
-            foreach (var option in new DirectoryInfo(Constants.CollectionsRoot + category)
+        if (Directory.Exists(Constants.CollectionRoot + category))
+            foreach (var option in new DirectoryInfo(Constants.CollectionRoot + category)
                     .GetDirectories()
                     .OrderBy(d => d.CreationTime)
                     .Reverse()
@@ -53,15 +53,22 @@ public class CollectionLoader : MonoBehaviour
         }
     }
 
-    public void Load()
+    public void Load(string collection)
     {
-        var path = Constants.CollectionsRoot + category + dropdownTitle.captionText.text + "/";
+        if (string.IsNullOrEmpty(collection))
+            collection = dropdownTitle.captionText.text;
+        var path = Constants.CollectionRoot + category + "/" + collection + "/";
+
+        CheckMeta(collection);
         info.Load(path + "Info.json");
-        meta.Load(path + "Meta.json");
         level.Load(path + "Map.#");
 
         LevelManager.LoadLevel(level);
+        Process();
+    }
 
+    private void Process()
+    {
         var entrances = LevelManager.instances
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
@@ -74,19 +81,27 @@ public class CollectionLoader : MonoBehaviour
         var valid = (float)entrances.Count(e => e.Valid);
         meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
 
-        meta["editable"] = category == "Local/";
+        meta["editable"] = category == "Local";
         meta.Save();
+    }
+
+    private void CheckMeta(string collection)
+    {
+        var path = Constants.MetaRoot + category + "." + collection + ".json";
+        if (!File.Exists(path))
+            File.Copy(Constants.MetaRoot + "Meta.json", path);
+
+        meta.Load(path);
     }
 
     public void Create()
     {
-        var path = EngineUtility.NextFile(Constants.CollectionsRoot + category, "Collection", string.Empty) + "/";
+        var path = EngineUtility.NextFile(Constants.CollectionRoot + category, "Collection") + "/";
         Directory.CreateDirectory(path);
 
         foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
             File.Copy(file, path + Path.GetFileName(file));
 
-        info.Load(path + "Info.json");
-        meta.Load(path + "Meta.json");
+        Load(Path.GetFileName(path));
     }
 }

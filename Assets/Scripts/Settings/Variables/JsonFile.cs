@@ -7,25 +7,23 @@ using Newtonsoft.Json.Linq;
 [CreateAssetMenu]
 public class JsonFile : ScriptableObject
 {
-    private string fullName;
-    public string FullName
+    private FileInfo info;
+    public FileInfo Info
     {
         get
         {
-            return fullName;
+            return info;
         }
-        private set
+        set
         {
-            fullName = value;
-
-            Name = Path.GetFileNameWithoutExtension(FullName);
-            Directory = Path.GetDirectoryName(FullName);
+            info = value;
+            Root = JToken.Parse(File.ReadAllText(Info.FullName));
         }
     }
-    public string Name { get; private set; }
-    public string Directory { get; private set; }
 
-    public JToken Root { get; set; }
+    public string ShortName => Path.GetFileNameWithoutExtension(Info.Name);
+
+    public JToken Root { get; private set; }
     public JToken this[string path]
     {
         get
@@ -38,36 +36,28 @@ public class JsonFile : ScriptableObject
         }
     }
 
-    public void Load(string fileName)
-    {
-        FullName = fileName;
-        Refresh();
-    }
+    public void Load(string fileName) =>
+        Info = new FileInfo(fileName);
 
     public void LoadFrom(string fileName)
     {
-        Root = JToken.Parse(File.ReadAllText(fileName));
-        Save();
+        File.Copy(fileName, Info.FullName, true);
+        Load(Info.FullName);
     }
 
     public void Save() =>
-        File.WriteAllText(FullName, Root.ToString());
+        File.WriteAllText(Info.FullName, Root.ToString());
 
     public void SaveTo(string fileName)
     {
-        File.Copy(FullName, fileName);
-        FullName = fileName;
+        Save();
+        Info.CopyTo(fileName, true);
+        Load(fileName);
     }
 
-    public void Refresh() =>
-        Root = JToken.Parse(File.ReadAllText(FullName));
-
-    public void Rename(string fileName)
-    {
-        File.Move(FullName, fileName);
-        FullName = fileName;
-    }
+    public void MoveTo(string fileName) =>
+        Info.MoveTo(fileName);
 
     public void Delete() =>
-        File.Delete(FullName);
+        Info.Delete();
 }
