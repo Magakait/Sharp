@@ -9,10 +9,33 @@ public abstract class BaseLoader<T> : MonoBehaviour
     [SerializeField]
     private string path;
 
-    private void Start() =>
-        Load();
+    private static void Restore(JsonFile file, string path)
+    {
+        var token = file.Root;
+        foreach (var key in path.Split('.'))
+        {
+            if (token[key] == null)
+                token[key] = new JObject();
 
-    public void Load() => 
+            token = token[key];
+        }
+    }
+
+    private void Start()
+    {
+        try
+        {
+            Load();
+        }
+        catch
+        {
+            Restore(file, path);
+            Save(default(T));
+            Load();
+        }
+    }
+
+    public void Load() =>
         Read(file.Root.SelectToken(path));
 
     public void Save(T value)
