@@ -21,17 +21,23 @@ public class EntranceObject : SerializableObject
     public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
+    private EntranceObject NextEntrance()
+    {
+        var result = LevelManager.instances.FirstOrDefault
+        (
+            e => e.Id == Id &&
+            e.GetComponent<EntranceObject>().Level.ToLower() == Next.ToLower()
+        );
+        return result ? result.GetComponent<EntranceObject>() : null;
+    }
+
     private void Start()
     {
         if (Valid)
         {
             enterButton.gameObject.SetActive(true);
-            var next = LevelManager.instances.FirstOrDefault
-            (
-                e => e.Id == Id &&
-                e.GetComponent<EntranceObject>().Level == Next
-            );
-            if (Open && (!next || !next.GetComponent<EntranceObject>().Open))
+            var next = NextEntrance();
+            if (Open && (!next || !next.Open))
                 Focus();
         }
         else
@@ -57,14 +63,10 @@ public class EntranceObject : SerializableObject
         Passed = true;
         Open = true;
 
-        var next = LevelManager.instances.FirstOrDefault
-        (
-            e => e.Id == Id &&
-            e.GetComponent<EntranceObject>().Level == Next
-        );
+        var next = NextEntrance();
         if (next)
         {
-            next.GetComponent<EntranceObject>().Open = true;
+            next.Open = true;
             Connect(next.transform.position);
         }
 

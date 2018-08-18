@@ -184,7 +184,7 @@ public class EditorManager : MonoBehaviour
         var passed = (JArray)meta["passed"];
         passed.Clear();
 
-        foreach (var level in levels)
+        foreach (var level in levels.Skip(1))
             passed.Add(level);
 
         meta.Save();
