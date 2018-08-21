@@ -1,20 +1,16 @@
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
 
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 public class EntranceObject : SerializableObject
 {
     [Space(10)]
     [SerializeField]
     private JsonFile level;
-
-    [Space(10)]
     [SerializeField]
     private new CircleCollider2D collider;
 
@@ -33,20 +29,18 @@ public class EntranceObject : SerializableObject
 
     private void Start()
     {
-        if (Valid)
+        if (!Valid || !Open)
         {
-            enterButton.gameObject.SetActive(true);
-            var next = NextEntrance();
-            if (Open && (!next || !next.Open))
-                Focus();
+            gameObject.SetActive(false);
+            return;
         }
-        else
-            canvasToggle.gameObject.SetActive(false);
-            
-        if (!Open)
-            transform.localScale = Vector3.zero;
-        else
-            collider.radius = 1;
+
+        enterButton.gameObject.SetActive(true);
+        var next = NextEntrance();
+        if (Open && (!next || !next.Open))
+            Focus();
+
+        collider.radius = 1;
     }
 
     private void OnMouseDown()
@@ -105,8 +99,6 @@ public class EntranceObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
-    private CanvasToggle canvasToggle;
-    [SerializeField]
     private Text titleText;
     [SerializeField]
     private Button enterButton;
@@ -128,19 +120,7 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    private bool open;
-    public bool Open
-    {
-        get
-        {
-            return open;
-        }
-        private set
-        {
-            open = value;
-            canvasToggle.Visible = Open;
-        }
-    }
+    public bool Open { get; private set; }
 
     public string Next { get; private set; }
 
