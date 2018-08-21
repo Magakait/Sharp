@@ -42,8 +42,11 @@ public class EntranceObject : SerializableObject
         }
         else
             canvasToggle.gameObject.SetActive(false);
-
-        collider.radius = 1;
+            
+        if (!Open)
+            transform.localScale = Vector3.zero;
+        else
+            collider.radius = 1;
     }
 
     private void OnMouseDown()
