@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visible: 0
-  scale: 0.5
+  scale: 0
   offset: {x: 0, y: 0}
 --- !u!114 &114681664969104168
 MonoBehaviour:
