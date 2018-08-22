@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 114208053780329140}
   - component: {fileID: 114998333331516820}
   m_Layer: 10
-  m_Name: ActionMessage
+  m_Name: Prompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
