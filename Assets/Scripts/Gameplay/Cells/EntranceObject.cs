@@ -44,14 +44,17 @@ public class EntranceObject : SerializableObject
 
     private void OnMouseDown()
     {
-        if (enabled && Open && !EngineUtility.IsOverUI)
+        if (enabled && !EngineUtility.IsOverUI)
             CameraManager.Move(transform.position);
     }
 
     public void Enter()
     {
-        level.Load($"{level.Info.Directory}/{Level}.#");
-        EngineUtility.Main.LoadScene("Play");
+        if (enabled)
+        {
+            level.Load($"{level.Info.Directory}/{Level}.#");
+            EngineUtility.Main.LoadScene("Play");
+        }
     }
 
     public void Pass()
