@@ -7,7 +7,7 @@ public class CheckpointObject : SerializableObject
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerObject player = collision.GetComponent<PlayerObject>();
-        if (player && player.spawn != this)
+        if (player && player.Checkpoint != this)
             Activate(player);
     }
 
@@ -15,11 +15,11 @@ public class CheckpointObject : SerializableObject
 
     private void Activate(PlayerObject player)
     {
-        if (player.spawn)
-            player.spawn.spire.Emission(false);
+        if (player.Checkpoint)
+            player.Checkpoint.spire.Emission(false);
 
-        player.spawn = this;
-        player.spawn.spire.Emission(true);
+        player.Checkpoint = this;
+        player.Checkpoint.spire.Emission(true);
 
         Instantiate(burst, transform.position, Quaternion.identity);
     }

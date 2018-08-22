@@ -22,15 +22,18 @@ public class PlayerObject : SerializableObject
     #region gameplay
 
     [Header("Gameplay")]
-    public MovableComponent movable;
+    [SerializeField]
+    private MovableComponent movable;
+    [SerializeField]
+    private Prompt prompt;
 
     [Space(10)]
-    public KeyVariable sprintKey;
-    public KeyVariable[] directionKeys = new KeyVariable[4];
+    [SerializeField]
+    private KeyVariable sprintKey;
+    [SerializeField]
+    private KeyVariable[] directionKeys = new KeyVariable[4];
 
-    public Prompt message;
-    [HideInInspector]
-    public CheckpointObject spawn;
+    public CheckpointObject Checkpoint { get; set; }
 
     private readonly List<int> moves = new List<int>();
 
@@ -73,14 +76,16 @@ public class PlayerObject : SerializableObject
 
     public void CheckSpawn()
     {
-        if (ExitObject.Passed)
-            return;
-
-        if (spawn)
-            spawn.StartCoroutine(spawn.Spawn());
+        if (Checkpoint)
+            Checkpoint.StartCoroutine(Checkpoint.Spawn());
         else
-            Instantiate(message, movable.Position, Quaternion.identity)
-                .Setup("Restart", () => EngineUtility.Main.LoadScene());
+        {
+            var prompt = Instantiate(this.prompt, movable.Position, Quaternion.identity);
+            if (ExitObject.Passed)
+                prompt.Setup("Home", () => EngineUtility.Main.LoadScene("Home"));
+            else
+                prompt.Setup("Restart", () => EngineUtility.Main.LoadScene());
+        }
     }
 
     #endregion

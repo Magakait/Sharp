@@ -21,11 +21,10 @@ public class ExitObject : SerializableObject
     #region gameplay
 
     [Header("Gameplay")]
-    public Prompt message;
-
-    [Space(10)]
-    public JsonFile meta;
-    public JsonFile level;
+    [SerializeField]
+    private JsonFile meta;
+    [SerializeField]
+    private JsonFile level;
 
     public static bool Passed { get; private set; }
 
@@ -39,9 +38,6 @@ public class ExitObject : SerializableObject
             passed.Add(level.ShortName);
             meta.Save();
         }
-
-        Instantiate(message, transform.position, Quaternion.identity)
-            .Setup("Home", () => { EngineUtility.Main.LoadScene("Home"); });
     }
 
     #endregion

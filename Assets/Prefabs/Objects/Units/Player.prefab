@@ -290,14 +290,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   movable: {fileID: 114004512183173264}
+  prompt: {fileID: 114208053780329140, guid: e324eeef860ae2b439df4899469b7570, type: 2}
   sprintKey: {fileID: 11400000, guid: 7cd5e52d9a251434d8c120e161e492a5, type: 2}
   directionKeys:
   - {fileID: 11400000, guid: 31b7af95854231d47b742cae4f8427bf, type: 2}
   - {fileID: 11400000, guid: 48a2fc27a8a8edf4da2809c5e847a86b, type: 2}
   - {fileID: 11400000, guid: c16990673ebfacb4da575862ded9da1a, type: 2}
   - {fileID: 11400000, guid: 2d00cf3a39877b84c9a559daefc52453, type: 2}
-  message: {fileID: 114208053780329140, guid: e324eeef860ae2b439df4899469b7570, type: 2}
-  spawn: {fileID: 0}
 --- !u!114 &114892075849192640
 MonoBehaviour:
   m_ObjectHideFlags: 1
