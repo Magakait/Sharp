@@ -7,21 +7,24 @@ public class PlayManager : MonoBehaviour
     private void Awake()
     {
         LevelManager.LoadLevel(level);
-        ToggleCursor(false);
+        SetCursor(false);
     }
 
     public void TogglePause()
     {
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-        ToggleCursor(Time.timeScale == 0);
+        SetCursor(Time.timeScale == 0);
     }
 
-    private void ToggleCursor(bool value)
+    private void SetCursor(bool value)
     {
         Cursor.visible = value;
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
-    private void OnDestroy() =>
+    private void OnDestroy()
+    {
         Time.timeScale = 1;
+        SetCursor(true);
+    }
 }
