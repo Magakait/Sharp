@@ -28,7 +28,7 @@ public class PlayerObject : SerializableObject
     public KeyVariable sprintKey;
     public KeyVariable[] directionKeys = new KeyVariable[4];
 
-    public ActionMessage message;
+    public Prompt message;
     [HideInInspector]
     public CheckpointObject spawn;
 
@@ -79,8 +79,8 @@ public class PlayerObject : SerializableObject
         if (spawn)
             spawn.StartCoroutine(spawn.Spawn());
         else
-            Instantiate(message, movable.IntPosition, Quaternion.identity)
-                .Setup("- - - -", "Restart", () => EngineUtility.Main.LoadScene());
+            Instantiate(message, movable.Position, Quaternion.identity)
+                .Setup("Restart", () => EngineUtility.Main.LoadScene());
     }
 
     #endregion

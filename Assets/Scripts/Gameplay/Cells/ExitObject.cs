@@ -21,7 +21,7 @@ public class ExitObject : SerializableObject
     #region gameplay
 
     [Header("Gameplay")]
-    public ActionMessage message;
+    public Prompt message;
 
     [Space(10)]
     public JsonFile meta;
@@ -41,7 +41,7 @@ public class ExitObject : SerializableObject
         }
 
         Instantiate(message, transform.position, Quaternion.identity)
-            .Setup("+ + + +", "Home", () => { EngineUtility.Main.LoadScene("Home"); });
+            .Setup("Home", () => { EngineUtility.Main.LoadScene("Home"); });
     }
 
     #endregion
