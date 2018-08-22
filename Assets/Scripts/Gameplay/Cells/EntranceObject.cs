@@ -35,7 +35,6 @@ public class EntranceObject : SerializableObject
             return;
         }
 
-        enterButton.gameObject.SetActive(true);
         var next = NextEntrance();
         if (Open && (!next || !next.Open))
             Focus();
@@ -100,8 +99,6 @@ public class EntranceObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private Text titleText;
-    [SerializeField]
-    private Button enterButton;
 
     #endregion
 
