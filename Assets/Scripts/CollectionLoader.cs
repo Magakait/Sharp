@@ -89,7 +89,12 @@ public class CollectionLoader : MonoBehaviour
     {
         var path = Constants.MetaRoot + category + "." + collection + ".json";
         if (!File.Exists(path))
-            File.Copy(Constants.MetaRoot + "Meta.json", path);
+        {
+            if (!Directory.Exists(Constants.MetaRoot))
+                Directory.CreateDirectory(Constants.MetaRoot);
+
+            File.Copy(Constants.EditorRoot + "Meta.json", path);
+        }
 
         meta.Load(path);
     }
