@@ -8,7 +8,7 @@ public class VideoSettings : MonoBehaviour
 {
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 144;
         file.Load(Constants.SettingsRoot + "Video.json");
         Load();
     }
