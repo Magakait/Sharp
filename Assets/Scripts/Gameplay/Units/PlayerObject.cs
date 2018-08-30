@@ -76,16 +76,14 @@ public class PlayerObject : SerializableObject
 
     public void CheckSpawn()
     {
-        if (Checkpoint)
+        if (ExitObject.Passed)
+            Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                .Setup("Home", () => EngineUtility.Main.LoadScene("Home"));
+        else if (Checkpoint)
             Checkpoint.StartCoroutine(Checkpoint.Spawn());
         else
-        {
-            var prompt = Instantiate(this.prompt, movable.Position, Quaternion.identity);
-            if (ExitObject.Passed)
-                prompt.Setup("Home", () => EngineUtility.Main.LoadScene("Home"));
-            else
-                prompt.Setup("Restart", () => EngineUtility.Main.LoadScene());
-        }
+            Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                .Setup("Restart", () => EngineUtility.Main.LoadScene());
     }
 
     #endregion
