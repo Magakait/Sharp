@@ -47,16 +47,6 @@ public class VideoSettings : MonoBehaviour
 
     #endregion
 
-    #region rendering
-
-    public void TargetFrameRate(int value) =>
-        Application.targetFrameRate = value;
-
-    public void VSync(bool value) =>
-        QualitySettings.vSyncCount = value ? 1 : 0;
-
-    #endregion
-
     #region effects
 
     public PostProcessProfile postProcessProfile;
