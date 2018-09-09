@@ -33,6 +33,24 @@ public class PlayerObject : SerializableObject
     [SerializeField]
     private KeyVariable[] directionKeys = new KeyVariable[4];
 
+    [Space(10)]
+    [SerializeField]
+    private ParticleSystem assignEffect;
+    [SerializeField]
+    private BaseMovement movement;
+    public BaseMovement Movement
+    {
+        get
+        {
+            return movement;
+        }
+        set
+        {
+            movement = value;
+            Instantiate(assignEffect, transform.position, Quaternion.identity);
+        }
+    }
+
     public CheckpointObject Checkpoint { get; set; }
 
     private readonly List<int> moves = new List<int>();
@@ -63,13 +81,19 @@ public class PlayerObject : SerializableObject
         if (movable.IsMoving)
             return;
 
+        bool moved = false;
         moves.Reverse();
+
         foreach (var i in moves)
             if (movable.CanMove(i))
             {
-                movable.Move(i);
+                movement.Move(movable, i);
+                moved = true;
                 break;
             }
+
+        if (!moved)
+            movement.Idle(movable);
 
         moves.Clear();
     }
