@@ -297,6 +297,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48a2fc27a8a8edf4da2809c5e847a86b, type: 2}
   - {fileID: 11400000, guid: c16990673ebfacb4da575862ded9da1a, type: 2}
   - {fileID: 11400000, guid: 2d00cf3a39877b84c9a559daefc52453, type: 2}
+  effect: {fileID: 198020077223855264, guid: ee31da93d49db2f48a38145b304aabcf, type: 2}
+  movement: {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
+  checkpoint: {fileID: 0}
 --- !u!114 &114892075849192640
 MonoBehaviour:
   m_ObjectHideFlags: 1

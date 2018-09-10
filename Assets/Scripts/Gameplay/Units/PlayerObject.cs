@@ -35,7 +35,8 @@ public class PlayerObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
-    private ParticleSystem assignEffect;
+    private ParticleSystem effect;
+
     [SerializeField]
     private BaseMovement movement;
     public BaseMovement Movement
@@ -47,11 +48,24 @@ public class PlayerObject : SerializableObject
         set
         {
             movement = value;
-            Instantiate(assignEffect, transform.position, Quaternion.identity);
+            Instantiate(effect, transform.position, Quaternion.identity);
         }
     }
-
-    public CheckpointObject Checkpoint { get; set; }
+    
+    [SerializeField]
+    private CheckpointObject checkpoint;
+    public CheckpointObject Checkpoint
+    {
+        get
+        {
+            return checkpoint;
+        }
+        set
+        {
+            checkpoint = value;
+            Instantiate(effect, transform.position, Quaternion.identity);
+        }
+    }
 
     private readonly List<int> moves = new List<int>();
 

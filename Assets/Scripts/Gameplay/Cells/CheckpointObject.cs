@@ -20,8 +20,6 @@ public class CheckpointObject : SerializableObject
 
         player.Checkpoint = this;
         player.Checkpoint.spire.Emission(true);
-
-        Instantiate(burst, transform.position, Quaternion.identity);
     }
 
     public IEnumerator Spawn()
@@ -39,8 +37,6 @@ public class CheckpointObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private ParticleSystem spire;
-    [SerializeField]
-    private ParticleSystem burst;
 
     #endregion
 }
