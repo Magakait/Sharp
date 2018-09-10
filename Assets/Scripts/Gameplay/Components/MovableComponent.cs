@@ -6,7 +6,7 @@ using DG.Tweening;
 public class MovableComponent : MonoBehaviour
 {
     public int Direction { get; private set; }
-    
+
     public Vector2 Position
     {
         get
@@ -61,12 +61,8 @@ public class MovableComponent : MonoBehaviour
     public void Stop() =>
         tweener.Pause();
 
-    public bool CanMove(int direction)
-    {
-        CellComponent cell = PhysicsUtility
-            .Overlap<CellComponent>(IntPosition + Constants.Directions[direction], Constants.CellMask);
-        return cell && !cell.Hollowed;
-    }
+    public bool CanMove(int direction) =>
+        CanMove(IntPosition + Constants.Directions[direction]);
 
     public void Move(int direction) =>
         Move(IntPosition + Constants.Directions[direction]);
@@ -88,5 +84,12 @@ public class MovableComponent : MonoBehaviour
             return vector.x > 0 ? 1 : 3;
         else
             return vector.y > 0 ? 0 : 2;
+    }
+
+    public static bool CanMove(Vector2 position)
+    {
+        CellComponent cell = PhysicsUtility
+            .Overlap<CellComponent>(position, Constants.CellMask);
+        return cell && !cell.Hollowed;
     }
 }

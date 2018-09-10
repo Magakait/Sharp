@@ -178,7 +178,7 @@ MonoBehaviour:
   movements:
   - {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
   - {fileID: 11400000, guid: b320cccbb2106c142ae21e5af4d630dd, type: 2}
-  - {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
+  - {fileID: 11400000, guid: a4ac313e6be641347bb28f21ecc59d92, type: 2}
   sprites:
   - {fileID: 21300002, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
   - {fileID: 21300004, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
