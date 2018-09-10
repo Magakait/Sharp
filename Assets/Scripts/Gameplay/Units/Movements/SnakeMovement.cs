@@ -15,6 +15,4 @@ public class SnakeMovement : BaseMovement
             }
         }
     }
-
-    public override void Move(MovableComponent movable, int direction) => movable.Move(direction);
 }
