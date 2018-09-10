@@ -48,9 +48,13 @@ public class PlayerObject : SerializableObject
         set
         {
             if (Movement != value)
-                Instantiate(effect, transform.position, Quaternion.identity);
+            {
+                Movement.Dispose(movable);
+                movement = value;
+                Movement.Assign(movable);
 
-            movement = value;
+                Instantiate(effect, transform.position, Quaternion.identity);
+            }
         }
     }
 
@@ -65,9 +69,10 @@ public class PlayerObject : SerializableObject
         set
         {
             if (Checkpoint != value)
+            {
+                checkpoint = value;
                 Instantiate(effect, transform.position, Quaternion.identity);
-
-            checkpoint = value;
+            }
         }
     }
 

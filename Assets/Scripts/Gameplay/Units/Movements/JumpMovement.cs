@@ -3,10 +3,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Movements/Jump")]
 public class JumpMovement : BaseMovement
 {
-    public override void OnAssign(MovableComponent movable) =>
+    public override void Assign(MovableComponent movable) =>
         movable.Transition /= 2;
 
-    public override void OnDispose(MovableComponent movable) =>
+    public override void Dispose(MovableComponent movable) =>
         movable.Transition *= 2;
 
     public override void Move(MovableComponent movable, int direction)
