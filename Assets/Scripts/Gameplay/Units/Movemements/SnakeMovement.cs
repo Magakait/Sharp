@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movements/Default")]
+[CreateAssetMenu(menuName = "Movements/Snake")]
 public class SnakeMovement : BaseMovement
 {
     public override void Idle(MovableComponent movable) => movable.Move(movable.Direction);
