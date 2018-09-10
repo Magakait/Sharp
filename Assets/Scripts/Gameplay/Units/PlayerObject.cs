@@ -47,11 +47,13 @@ public class PlayerObject : SerializableObject
         }
         set
         {
+            if (Movement != value)
+                Instantiate(effect, transform.position, Quaternion.identity);
+
             movement = value;
-            Instantiate(effect, transform.position, Quaternion.identity);
         }
     }
-    
+
     [SerializeField]
     private CheckpointObject checkpoint;
     public CheckpointObject Checkpoint
@@ -62,8 +64,10 @@ public class PlayerObject : SerializableObject
         }
         set
         {
+            if (Checkpoint != value)
+                Instantiate(effect, transform.position, Quaternion.identity);
+
             checkpoint = value;
-            Instantiate(effect, transform.position, Quaternion.identity);
         }
     }
 
