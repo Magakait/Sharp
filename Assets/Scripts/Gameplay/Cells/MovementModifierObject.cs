@@ -5,18 +5,6 @@ using Newtonsoft.Json.Linq;
 
 public class MovementModifierObject : SerializableObject
 {
-    private void Awake() =>
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
-            (
-                frameTransform
-                    .DOScale(1.25f, 1)
-            )
-                .SetLoops(-1, LoopType.Yoyo)
-                .Play()
-        );
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerObject player = collision.GetComponent<PlayerObject>();
@@ -24,7 +12,7 @@ public class MovementModifierObject : SerializableObject
             player.Movement = movements[Movement];
     }
 
-    [Header("Gameplay")]
+    [Space(10)]
     [SerializeField]
     private BaseMovement[] movements;
     [SerializeField]
@@ -42,29 +30,19 @@ public class MovementModifierObject : SerializableObject
         set
         {
             movement = value;
-            movementRenderer.sprite = sprites[Movement];
+
+            var animation = renderer.textureSheetAnimation;
+            animation.SetSprite(0, sprites[Movement]);
         }
     }
 
-    #region animation 
-
-    [Header("Animation")]
+    [Space(10)]
     [SerializeField]
-    private Transform frameTransform;
-    [SerializeField]
-    private SpriteRenderer movementRenderer;
-
-    private new TweenArrayComponent animation;
-
-    #endregion
-
-    #region serialization
+    private new ParticleSystem renderer;
 
     public override void Serialize(JToken token) =>
         token["movement"] = Movement;
 
     public override void Deserialize(JToken token) =>
         Movement = (int)token["movement"];
-
-    #endregion
 }
