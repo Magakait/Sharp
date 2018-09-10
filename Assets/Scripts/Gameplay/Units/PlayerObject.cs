@@ -15,13 +15,12 @@ public class PlayerObject : SerializableObject
         if (Time.timeScale > 0)
         {
             Read();
-            Move();
+            if (!movable.IsMoving)
+                Move();
         }
     }
 
-    #region gameplay
-
-    [Header("Gameplay")]
+    [Space(10)]
     [SerializeField]
     private MovableComponent movable;
     [SerializeField]
@@ -95,15 +94,12 @@ public class PlayerObject : SerializableObject
                 moves.Remove(i);
                 moves.Add(i);
             }
-            else if (stopSprint || Input.GetKeyUp(directionKeys[i]))
+            else if (stopSprint || (sprint && Input.GetKeyUp(directionKeys[i])))
                 moves.Remove(i);
     }
 
     private void Move()
     {
-        if (movable.IsMoving)
-            return;
-
         bool moved = false;
         moves.Reverse();
 
@@ -132,6 +128,4 @@ public class PlayerObject : SerializableObject
             Instantiate(this.prompt, movable.Position, Quaternion.identity)
                 .Setup("Restart", () => EngineUtility.Main.LoadScene());
     }
-
-    #endregion
 }
