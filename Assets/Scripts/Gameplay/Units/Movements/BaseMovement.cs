@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public abstract class BaseMovement : ScriptableObject
+[CreateAssetMenu(menuName = "Movements/Base")]
+public class BaseMovement : ScriptableObject
 {
     public virtual void Idle(MovableComponent movable) { }
 
