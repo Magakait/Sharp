@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 212628786420677556}
   - component: {fileID: 114988131263785518}
   m_Layer: 8
-  m_Name: Modifier
+  m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 17
-  renderer: {fileID: 212628786420677556}
   movements:
   - {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
   - {fileID: 11400000, guid: b320cccbb2106c142ae21e5af4d630dd, type: 2}
@@ -184,6 +183,8 @@ MonoBehaviour:
   - {fileID: 21300004, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
   - {fileID: 21300006, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
   movement: 0
+  movementRenderer: {fileID: 212628786420677556}
+  frameTransform: {fileID: 4498329019900910}
 --- !u!114 &114894962523115358
 MonoBehaviour:
   m_ObjectHideFlags: 1
