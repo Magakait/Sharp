@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114894962523115358}
   - component: {fileID: 114615731771967286}
   m_Layer: 8
-  m_Name: Movement modifier
+  m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
-public class MovementModifierObject : SerializableObject
+public class MovementObject : SerializableObject
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {

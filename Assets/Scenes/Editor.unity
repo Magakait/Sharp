@@ -620,11 +620,11 @@ Prefab:
     - target: {fileID: 114563996933183546, guid: a12ac9087339c2743a08406adba01ee5,
         type: 2}
       propertyPath: m_Text
-      value: Movement modifier
+      value: Movement
       objectReference: {fileID: 0}
     - target: {fileID: 1929989565694750, guid: a12ac9087339c2743a08406adba01ee5, type: 2}
       propertyPath: m_Name
-      value: Movement modifier
+      value: Movement
       objectReference: {fileID: 0}
     - target: {fileID: 1995511125019850, guid: a12ac9087339c2743a08406adba01ee5, type: 2}
       propertyPath: m_Name
@@ -986,7 +986,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00001956861
+      value: 0.000024963387
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -9604,7 +9604,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000031708023
+      value: -0.00000025676658
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -9613,7 +9613,7 @@ Prefab:
     - target: {fileID: 224842696398395260, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.000000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
