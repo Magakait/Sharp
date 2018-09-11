@@ -80,7 +80,7 @@ public class CollectionLoader : MonoBehaviour
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
 
-        var valid = (float)entrances.Count(e => e.isActiveAndEnabled);
+        var valid = (float)entrances.Count(e => e.gameObject.activeSelf);
         meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
 
         meta["editable"] = category == "Local";

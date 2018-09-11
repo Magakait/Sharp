@@ -18,23 +18,11 @@ public class EntranceObject : SerializableObject
 
     public bool Passed { get; private set; }
 
-    public EntranceObject NextEntrance()
-    {
-        var result = LevelManager.instances.FirstOrDefault
-        (
-            e => e.Id == Id &&
-            e.GetComponent<EntranceObject>().Level.ToLower() == Level.ToLower()
-        );
-        return result ? result.GetComponent<EntranceObject>() : null;
-    }
-
     private void Awake()
     {
         if (meta["passed"].Any(t => ((string)t).ToLower() == Level.ToLower()))
         {
             Passed = true;
-            Open = true;
-
             coreEffect.Emission(true);
         }
 
@@ -46,6 +34,9 @@ public class EntranceObject : SerializableObject
         if ((string)meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
+        Threshold = Threshold;
+
+        enterButton.interactable = File.Exists($"{level.Info.Directory}/{Level}.#");
         collider.radius = 1;
     }
 
@@ -69,11 +60,14 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    public void Connect(Vector2 destination)
+    public void Connect(EntranceObject target)
     {
+        target.Threshold--;
+
         var line = Instantiate(connectionLine, connectionLine.transform.parent);
 
         var position = (Vector2)transform.position;
+        var destination = (Vector2)target.transform.position;
         var offset = .75f * (destination - position).normalized;
 
         line.SetPosition(0, position + offset);
@@ -112,7 +106,6 @@ public class EntranceObject : SerializableObject
         private set
         {
             titleText.text = value;
-            enterButton.interactable = File.Exists($"{level.Info.Directory}/{Level}.#");
         }
     }
 
@@ -123,20 +116,18 @@ public class EntranceObject : SerializableObject
         {
             return threshold;
         }
-        set
+        private set
         {
             threshold = value;
             gameObject.SetActive(Threshold <= 0);
+            haloEffect.Emission(gameObject.activeSelf && !Passed);
         }
     }
-
-    public bool Open { get; private set; }
 
     public string Next { get; private set; }
 
     public override void Serialize(JToken token)
     {
-        token["open"] = Open;
         token["level"] = Level;
         token["threshold"] = Threshold;
         token["description"] = descriptionText.text;
@@ -145,7 +136,6 @@ public class EntranceObject : SerializableObject
 
     public override void Deserialize(JToken token)
     {
-        Open = (bool)token["open"];
         Level = (string)token["level"];
         Threshold = (int)token["threshold"];
         descriptionText.text = (string)token["description"];
