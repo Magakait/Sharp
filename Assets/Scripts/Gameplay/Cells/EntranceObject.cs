@@ -19,33 +19,26 @@ public class EntranceObject : SerializableObject
     public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
-    public static EntranceObject FindByLevel(string level)
+    public EntranceObject NextEntrance()
     {
-        // level = level.ToLower();
-        // var result = LevelManager.instances.FirstOrDefault
-        // (
-        //     e => e.Id == Id &&
-        //     e.GetComponent<EntranceObject>().Level.ToLower() == level
-        // );
-        // return result ? result.GetComponent<EntranceObject>() : null;
-        return null;
+        var result = LevelManager.instances.FirstOrDefault
+        (
+            e => e.Id == Id &&
+            e.GetComponent<EntranceObject>().Level.ToLower() == Level.ToLower()
+        );
+        return result ? result.GetComponent<EntranceObject>() : null;
     }
 
     private void Start()
     {
-        // if (!Valid || !Open)
-        // {
-        //     gameObject.SetActive(false);
-        //     return;
-        // }
-
-        // var next = NextEntrance();
-        // if (Open && (!next || !next.Open))
-        // {
-        //     CameraManager.Position = transform.position;
-        //     if (!Passed)
-        //         haloEffect.Emission(true);
-        // }
+        if (!Valid || !Open)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
+        if ((string)meta["selected"] == Level)
+            CameraManager.Position = transform.position;
 
         collider.radius = 1;
     }
@@ -72,15 +65,15 @@ public class EntranceObject : SerializableObject
 
     public void Pass()
     {
-        // Passed = true;
-        // Open = true;
+        Passed = true;
+        Open = true;
 
-        // var next = NextEntrance();
-        // if (next)
-        // {
-        //     next.Open = true;
-        //     Connect(next.transform.position);
-        // }
+        var next = NextEntrance();
+        if (next)
+        {
+            next.Open = true;
+            Connect(next.transform.position);
+        }
 
         coreEffect.Emission(true);
     }
@@ -88,7 +81,6 @@ public class EntranceObject : SerializableObject
     public void Connect(Vector2 destination)
     {
         var line = Instantiate(connectionLine, connectionLine.transform.parent);
-        line.gameObject.SetActive(true);
 
         var position = (Vector2)transform.position;
         var offset = .75f * (destination - position).normalized;
@@ -131,24 +123,24 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    public int Threshold { get; private set; }
+    public bool Open { get; private set; }
 
-    public string Connections { get; private set; }
+    public string Next { get; private set; }
 
     public override void Serialize(JToken token)
     {
-        token["threshold"] = Threshold;
+        token["open"] = Open;
         token["level"] = Level;
         token["description"] = descriptionText.text;
-        token["connections"] = Connections;
+        token["next"] = Next;
     }
 
     public override void Deserialize(JToken token)
     {
-        Threshold = (int)token["threshold"];
+        Open = (bool)token["open"];
         Level = (string)token["level"];
         descriptionText.text = (string)token["description"];
-        Connections = (string)token["connections"];
+        Next = (string)token["next"];
     }
 
     #endregion
