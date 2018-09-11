@@ -96,6 +96,8 @@ public class EntranceObject : SerializableObject
     private Text titleText;
     [SerializeField]
     private Text descriptionText;
+    [SerializeField]
+    private Button enterButton;
 
     #endregion
 
@@ -110,8 +112,21 @@ public class EntranceObject : SerializableObject
         private set
         {
             titleText.text = value;
-            if (enabled && !File.Exists($"{level.Info.Directory}/{Level}.#"))
-                gameObject.SetActive(false);
+            enterButton.interactable = File.Exists($"{level.Info.Directory}/{Level}.#");
+        }
+    }
+
+    private int threshold;
+    public int Threshold
+    {
+        get
+        {
+            return threshold;
+        }
+        set
+        {
+            threshold = value;
+            gameObject.SetActive(Threshold <= 0);
         }
     }
 
@@ -123,6 +138,7 @@ public class EntranceObject : SerializableObject
     {
         token["open"] = Open;
         token["level"] = Level;
+        token["threshold"] = Threshold;
         token["description"] = descriptionText.text;
         token["next"] = Next;
     }
@@ -131,6 +147,7 @@ public class EntranceObject : SerializableObject
     {
         Open = (bool)token["open"];
         Level = (string)token["level"];
+        Threshold = (int)token["threshold"];
         descriptionText.text = (string)token["description"];
         Next = (string)token["next"];
     }
