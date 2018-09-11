@@ -74,7 +74,7 @@ public class EditorManager : MonoBehaviour
         {
             level.Info.Directory.MoveTo(path);
 
-            meta.MoveTo($"{Constants.MetaRoot}{category}.{name}.json");
+            meta.MoveTo($"{Constants.CollectionRoot}{category}.{name}.json");
             level.Load(path + "/" + level.Info.Name);
         }
     }

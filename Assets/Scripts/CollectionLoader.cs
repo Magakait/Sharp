@@ -57,11 +57,16 @@ public class CollectionLoader : MonoBehaviour
     {
         if (string.IsNullOrEmpty(collection))
             collection = dropdownTitle.captionText.text;
-        var path = Constants.CollectionRoot + category + "/" + collection + "/";
 
-        CheckMeta(collection);
-        info.Load(path + "Info.json");
-        level.Load(path + "Map.#");
+        var collectionPath = Constants.CollectionRoot + category + "/" + collection + "/";
+        var metaPath = Constants.CollectionRoot + category + "." + collection + ".json";
+
+        if (!File.Exists(metaPath))
+            File.Copy(Constants.EditorRoot + "Meta.json", metaPath);
+
+        meta.Load(metaPath);
+        info.Load(collectionPath + "Info.json");
+        level.Load(collectionPath + "Map.#");
 
         LevelManager.LoadLevel(level);
         Process();
@@ -83,20 +88,6 @@ public class CollectionLoader : MonoBehaviour
 
         meta["editable"] = category == "Local";
         meta.Save();
-    }
-
-    private void CheckMeta(string collection)
-    {
-        var path = Constants.MetaRoot + category + "." + collection + ".json";
-        if (!File.Exists(path))
-        {
-            if (!Directory.Exists(Constants.MetaRoot))
-                Directory.CreateDirectory(Constants.MetaRoot);
-
-            File.Copy(Constants.EditorRoot + "Meta.json", path);
-        }
-
-        meta.Load(path);
     }
 
     public void Create()

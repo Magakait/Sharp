@@ -12,17 +12,20 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private JsonFile level;
     [SerializeField]
+    private JsonFile meta;
+    [SerializeField]
     private new CircleCollider2D collider;
 
     public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
-    private EntranceObject NextEntrance()
+    public static EntranceObject FindByLevel(string level)
     {
+        level = level.ToLower();
         var result = LevelManager.instances.FirstOrDefault
         (
             e => e.Id == Id &&
-            e.GetComponent<EntranceObject>().Level.ToLower() == Next.ToLower()
+            e.GetComponent<EntranceObject>().Level.ToLower() == level
         );
         return result ? result.GetComponent<EntranceObject>() : null;
     }
@@ -37,7 +40,11 @@ public class EntranceObject : SerializableObject
 
         var next = NextEntrance();
         if (Open && (!next || !next.Open))
-            Focus();
+        {
+            CameraManager.Position = transform.position;
+            if (!Passed)
+                haloEffect.Emission(true);
+        }
 
         collider.radius = 1;
     }
@@ -45,7 +52,12 @@ public class EntranceObject : SerializableObject
     private void OnMouseDown()
     {
         if (enabled && !EngineUtility.IsOverUI)
+        {
+            meta["selected"] = Level;
+            meta.Save();
+
             CameraManager.Move(transform.position);
+        }
     }
 
     public void Enter()
@@ -74,19 +86,15 @@ public class EntranceObject : SerializableObject
 
     public void Connect(Vector2 destination)
     {
+        var line = Instantiate(connectionLine, connectionLine.transform.parent);
+        line.gameObject.SetActive(true);
+
         var position = (Vector2)transform.position;
         var offset = .75f * (destination - position).normalized;
 
-        connectionLine.SetPosition(0, position + offset);
-        connectionLine.SetPosition(1, .5f * (position + destination));
-        connectionLine.SetPosition(2, destination - offset);
-    }
-
-    private void Focus()
-    {
-        CameraManager.Position = transform.position;
-        if (!Passed)
-            haloEffect.Emission(true);
+        line.SetPosition(0, position + offset);
+        line.SetPosition(1, .5f * (position + destination));
+        line.SetPosition(2, destination - offset);
     }
 
     #region animation
@@ -102,6 +110,8 @@ public class EntranceObject : SerializableObject
     [Space(10)]
     [SerializeField]
     private Text titleText;
+    [SerializeField]
+    private Text descriptionText;
 
     #endregion
 
@@ -120,22 +130,24 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    public bool Open { get; private set; }
+    public int Threshold { get; private set; }
 
-    public string Next { get; private set; }
+    public string Connections { get; private set; }
 
     public override void Serialize(JToken token)
     {
-        token["open"] = Open;
+        token["threshold"] = Threshold;
         token["level"] = Level;
-        token["next"] = Next;
+        token["description"] = descriptionText.text;
+        token["connections"] = Connections;
     }
 
     public override void Deserialize(JToken token)
     {
-        Open = (bool)token["open"];
+        Threshold = (int)token["threshold"];
         Level = (string)token["level"];
-        Next = (string)token["next"];
+        descriptionText.text = (string)token["description"];
+        Connections = (string)token["connections"];
     }
 
     #endregion
