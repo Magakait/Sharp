@@ -16,7 +16,6 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private new CircleCollider2D collider;
 
-    public bool Valid { get; private set; }
     public bool Passed { get; private set; }
 
     public EntranceObject NextEntrance()
@@ -29,14 +28,11 @@ public class EntranceObject : SerializableObject
         return result ? result.GetComponent<EntranceObject>() : null;
     }
 
+    private void Awake() =>
+        CameraManager.Position = transform.position;
+
     private void Start()
     {
-        if (!Valid || !Open)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-        
         if ((string)meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
@@ -119,7 +115,8 @@ public class EntranceObject : SerializableObject
         private set
         {
             titleText.text = value;
-            Valid = File.Exists($"{level.Info.Directory}/{Level}.#");
+            if (enabled && !File.Exists($"{level.Info.Directory}/{Level}.#"))
+                gameObject.SetActive(false);
         }
     }
 
