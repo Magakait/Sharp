@@ -124,22 +124,22 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    public string Next { get; private set; }
+    public string Connections { get; private set; }
 
     public override void Serialize(JToken token)
     {
         token["level"] = Level;
-        token["threshold"] = Threshold;
         token["description"] = descriptionText.text;
-        token["next"] = Next;
+        token["threshold"] = Threshold;
+        token["connections"] = Connections;
     }
 
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
-        Threshold = (int)token["threshold"];
         descriptionText.text = (string)token["description"];
-        Next = (string)token["next"];
+        Threshold = (int)token["threshold"];
+        Connections = (string)token["connections"];
     }
 
     #endregion

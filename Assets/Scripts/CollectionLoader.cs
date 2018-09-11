@@ -1,11 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
-using Newtonsoft.Json.Linq;
 
 public class CollectionLoader : MonoBehaviour
 {
@@ -71,14 +69,21 @@ public class CollectionLoader : MonoBehaviour
         level.Load(collectionPath + "Map.#");
 
         LevelManager.LoadLevel(level);
-        Process();
     }
 
-    public void Process()
+    public void Connect()
     {
         var entrances = LevelManager.instances
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
+
+        foreach (var entrance in entrances)
+            foreach (var connection in entrance.Connections.Split('\r', '\n'))
+            {
+                var target = entrances.FirstOrDefault(e => e.Level.ToLower() == connection.ToLower());
+                if (target)
+                    entrance.Connect(target);
+            }
 
         var valid = (float)entrances.Count(e => e.gameObject.activeSelf);
         meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
