@@ -25,25 +25,26 @@ public class CollectionLoader : MonoBehaviour
     private VoidEvent onEmptyList;
 
     private string category;
+    private string root;
 
     public void List(string category)
     {
         this.category = category;
-        var index = dropdownTitle.value;
+        root = Constants.CollectionRoot + category;
 
         dropdownTitle.ClearOptions();
-        if (Directory.Exists(Constants.CollectionRoot + category))
-            foreach (var option in new DirectoryInfo(Constants.CollectionRoot + category)
-                    .GetDirectories()
-                    .OrderBy(d => d.CreationTime)
-                    .Reverse()
-                    .Select(d => new Dropdown.OptionData(d.Name)))
-                dropdownTitle.options.Add(option);
+        foreach (var option in new DirectoryInfo(root)
+                .GetDirectories()
+                .OrderBy(d => d.CreationTime)
+                .Reverse()
+                .Select(d => new Dropdown.OptionData(d.Name)))
+            dropdownTitle.options.Add(option);
         dropdownTitle.RefreshShownValue();
 
         if (dropdownTitle.options.Count > 0)
         {
-            dropdownTitle.value = index;
+            var selected = File.ReadAllText(root + "/Selected.txt");
+            dropdownTitle.value = dropdownTitle.options.FindIndex(o => o.text == selected);
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
         else
@@ -57,9 +58,10 @@ public class CollectionLoader : MonoBehaviour
     {
         if (string.IsNullOrEmpty(collection))
             collection = dropdownTitle.captionText.text;
+        File.WriteAllText(root + "/Selected.txt", collection);
 
-        var collectionPath = Constants.CollectionRoot + category + "/" + collection + "/";
-        var metaPath = Constants.CollectionRoot + category + "." + collection + ".json";
+        var collectionPath = root + "/" + collection + "/";
+        var metaPath = root + "." + collection + ".json";
 
         if (!File.Exists(metaPath))
             File.Copy(Constants.EditorRoot + "Meta.json", metaPath);
@@ -72,7 +74,7 @@ public class CollectionLoader : MonoBehaviour
         Process();
     }
 
-    private void Process()
+    public void Process()
     {
         var entrances = LevelManager.instances
             .Select(i => i.GetComponent<EntranceObject>())
@@ -92,7 +94,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void Create()
     {
-        var path = EngineUtility.NextFile(Constants.CollectionRoot + category, "Collection");
+        var path = EngineUtility.NextFile(root, "Collection");
         Directory.CreateDirectory(path);
 
         foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))

@@ -21,30 +21,31 @@ public class EntranceObject : SerializableObject
 
     public static EntranceObject FindByLevel(string level)
     {
-        level = level.ToLower();
-        var result = LevelManager.instances.FirstOrDefault
-        (
-            e => e.Id == Id &&
-            e.GetComponent<EntranceObject>().Level.ToLower() == level
-        );
-        return result ? result.GetComponent<EntranceObject>() : null;
+        // level = level.ToLower();
+        // var result = LevelManager.instances.FirstOrDefault
+        // (
+        //     e => e.Id == Id &&
+        //     e.GetComponent<EntranceObject>().Level.ToLower() == level
+        // );
+        // return result ? result.GetComponent<EntranceObject>() : null;
+        return null;
     }
 
     private void Start()
     {
-        if (!Valid || !Open)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
+        // if (!Valid || !Open)
+        // {
+        //     gameObject.SetActive(false);
+        //     return;
+        // }
 
-        var next = NextEntrance();
-        if (Open && (!next || !next.Open))
-        {
-            CameraManager.Position = transform.position;
-            if (!Passed)
-                haloEffect.Emission(true);
-        }
+        // var next = NextEntrance();
+        // if (Open && (!next || !next.Open))
+        // {
+        //     CameraManager.Position = transform.position;
+        //     if (!Passed)
+        //         haloEffect.Emission(true);
+        // }
 
         collider.radius = 1;
     }
@@ -71,15 +72,15 @@ public class EntranceObject : SerializableObject
 
     public void Pass()
     {
-        Passed = true;
-        Open = true;
+        // Passed = true;
+        // Open = true;
 
-        var next = NextEntrance();
-        if (next)
-        {
-            next.Open = true;
-            Connect(next.transform.position);
-        }
+        // var next = NextEntrance();
+        // if (next)
+        // {
+        //     next.Open = true;
+        //     Connect(next.transform.position);
+        // }
 
         coreEffect.Emission(true);
     }
