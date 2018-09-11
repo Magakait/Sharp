@@ -28,8 +28,18 @@ public class EntranceObject : SerializableObject
         return result ? result.GetComponent<EntranceObject>() : null;
     }
 
-    private void Awake() =>
+    private void Awake()
+    {
+        if (meta["passed"].Any(t => ((string)t).ToLower() == Level.ToLower()))
+        {
+            Passed = true;
+            Open = true;
+
+            coreEffect.Emission(true);
+        }
+
         CameraManager.Position = transform.position;
+    }
 
     private void Start()
     {
@@ -57,21 +67,6 @@ public class EntranceObject : SerializableObject
             level.Load($"{level.Info.Directory}/{Level}.#");
             EngineUtility.Main.LoadScene("Play");
         }
-    }
-
-    public void Pass()
-    {
-        Passed = true;
-        Open = true;
-
-        var next = NextEntrance();
-        if (next)
-        {
-            next.Open = true;
-            Connect(next.transform.position);
-        }
-
-        coreEffect.Emission(true);
     }
 
     public void Connect(Vector2 destination)

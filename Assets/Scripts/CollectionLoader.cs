@@ -80,11 +80,6 @@ public class CollectionLoader : MonoBehaviour
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
 
-        var passed = meta["passed"].Select(t => ((string)t).ToLower());
-        foreach (var entrance in entrances)
-            if (passed.Contains(entrance.Level.ToLower()))
-                entrance.Pass();
-
         var valid = (float)entrances.Count(e => e.isActiveAndEnabled);
         meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
 
