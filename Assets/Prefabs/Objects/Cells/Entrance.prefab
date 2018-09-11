@@ -421,6 +421,7 @@ MonoBehaviour:
   connectionLine: {fileID: 120760523166981242}
   titleText: {fileID: 114579005856377140}
   descriptionText: {fileID: 114005167120195122}
+  enterButton: {fileID: 114443499287779796}
 --- !u!114 &114431102188179504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,7 +484,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 114001154655315596}
   m_OnClick:
     m_PersistentCalls:
