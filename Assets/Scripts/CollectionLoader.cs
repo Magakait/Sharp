@@ -72,7 +72,11 @@ public class CollectionLoader : MonoBehaviour
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
 
-        foreach (var entrance in entrances)
+        var focus = entrances.FirstOrDefault(e => e.Threshold == 0);
+        if (focus)
+            CameraManager.Position = focus.transform.position;
+            
+        foreach (var entrance in entrances.Where(e => !string.IsNullOrEmpty(e.Connections)))
             foreach (var connection in entrance.Connections.Split('\r', '\n'))
             {
                 var target = entrances.FirstOrDefault(e => e.Level.ToLower() == connection.ToLower());

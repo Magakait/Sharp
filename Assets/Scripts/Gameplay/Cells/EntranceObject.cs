@@ -25,8 +25,6 @@ public class EntranceObject : SerializableObject
             Passed = true;
             coreEffect.Emission(true);
         }
-
-        CameraManager.Position = transform.position;
     }
 
     private void Start()
@@ -116,8 +114,11 @@ public class EntranceObject : SerializableObject
         private set
         {
             threshold = value;
-            gameObject.SetActive(Threshold <= 0);
-            haloEffect.Emission(gameObject.activeSelf && !Passed);
+            if (enabled)
+            {
+                gameObject.SetActive(Threshold <= 0);
+                haloEffect.Emission(gameObject.activeSelf && !Passed);
+            }
         }
     }
 
