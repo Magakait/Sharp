@@ -49,10 +49,7 @@ public class LevelManager : ScriptableObject
             {
                 instance.Deserialize(token["properties"]);
             }
-            catch
-            {
-                UpdateInstance(instance);
-            }
+            catch { }
         }
     }
 
