@@ -79,7 +79,7 @@ public class CollectionLoader : MonoBehaviour
         foreach (var entrance in entrances.Where(e => e.Passed && e.Connections != null))
             foreach (var connection in entrance.Connections.Split('\r', '\n'))
             {
-                var target = entrances.FirstOrDefault(e => e.Level.ToLower() == connection.ToLower());
+                var target = entrances.FirstOrDefault(e => e.Level == connection);
                 if (target)
                     entrance.Connect(target);
             }

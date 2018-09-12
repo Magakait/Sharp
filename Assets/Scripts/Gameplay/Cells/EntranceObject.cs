@@ -113,7 +113,7 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
-        if (meta["passed"].Any(t => ((string)t).ToLower() == Level.ToLower()))
+        if (meta["passed"].Any(t => (string)t == Level))
         {
             Passed = true;
             coreEffect.Emission(true);
