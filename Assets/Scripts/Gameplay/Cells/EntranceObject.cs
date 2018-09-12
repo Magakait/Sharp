@@ -18,15 +18,6 @@ public class EntranceObject : SerializableObject
 
     public bool Passed { get; private set; }
 
-    private void Awake()
-    {
-        if (meta["passed"].Any(t => ((string)t).ToLower() == Level.ToLower()))
-        {
-            Passed = true;
-            coreEffect.Emission(true);
-        }
-    }
-
     private void Start()
     {
         if ((string)meta["selected"] == Level)
@@ -60,12 +51,7 @@ public class EntranceObject : SerializableObject
 
     public void Connect(EntranceObject target)
     {
-        if (--target.Threshold == 0)
-        {
-            gameObject.SetActive(true);
-            if (!Passed)
-                haloEffect.Emission(true);
-        }
+        target.Threshold--;
 
         var line = Instantiate(connectionLine, connectionLine.transform.parent);
 
@@ -127,6 +113,12 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
+        if (meta["passed"].Any(t => ((string)t).ToLower() == Level.ToLower()))
+        {
+            Passed = true;
+            coreEffect.Emission(true);
+        }
+
         descriptionText.text = (string)token["description"];
         Threshold = (int)token["threshold"];
         Connections = (string)token["connections"];
