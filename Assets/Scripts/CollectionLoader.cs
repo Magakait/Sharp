@@ -84,9 +84,7 @@ public class CollectionLoader : MonoBehaviour
                     entrance.Connect(target);
             }
 
-        var valid = (float)entrances.Count(e => e.gameObject.activeSelf);
-        meta["progress"] = valid > 0 ? entrances.Count(e => e.Passed) / valid : 1;
-
+        meta["completed"] = entrances.All(e => e.Passed);
         meta["editable"] = category == "Local";
         meta.Save();
     }
