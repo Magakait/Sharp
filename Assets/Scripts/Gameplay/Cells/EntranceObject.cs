@@ -32,7 +32,10 @@ public class EntranceObject : SerializableObject
         if ((string)meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
-        Threshold = Threshold;
+        if (Threshold > 0)
+            gameObject.SetActive(false);
+        else if (!Passed)
+            haloEffect.Emission(true);
 
         enterButton.interactable = File.Exists($"{level.Info.Directory}/{Level}.#");
         collider.radius = 1;
@@ -57,7 +60,12 @@ public class EntranceObject : SerializableObject
 
     public void Connect(EntranceObject target)
     {
-        target.Threshold--;
+        if (--target.Threshold == 0)
+        {
+            gameObject.SetActive(true);
+            if (!Passed)
+                haloEffect.Emission(true);
+        }
 
         var line = Instantiate(connectionLine, connectionLine.transform.parent);
 
@@ -104,23 +112,7 @@ public class EntranceObject : SerializableObject
         }
     }
 
-    private int threshold;
-    public int Threshold
-    {
-        get
-        {
-            return threshold;
-        }
-        private set
-        {
-            threshold = value;
-            if (enabled)
-            {
-                gameObject.SetActive(Threshold <= 0);
-                haloEffect.Emission(gameObject.activeSelf && !Passed);
-            }
-        }
-    }
+    public int Threshold { get; private set; }
 
     public string Connections { get; private set; }
 

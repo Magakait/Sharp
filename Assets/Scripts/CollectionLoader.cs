@@ -76,7 +76,7 @@ public class CollectionLoader : MonoBehaviour
         if (focus)
             CameraManager.Position = focus.transform.position;
             
-        foreach (var entrance in entrances.Where(e => e.Connections != null))
+        foreach (var entrance in entrances.Where(e => e.Passed && e.Connections != null))
             foreach (var connection in entrance.Connections.Split('\r', '\n'))
             {
                 var target = entrances.FirstOrDefault(e => e.Level.ToLower() == connection.ToLower());
