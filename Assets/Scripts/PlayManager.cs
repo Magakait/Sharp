@@ -2,11 +2,9 @@
 
 public class PlayManager : MonoBehaviour
 {
-    public JsonFile level;
-
     private void Awake()
     {
-        LevelManager.LoadLevel(level);
+        LevelManager.Main.LoadLevel();
         SetCursor(false);
     }
 

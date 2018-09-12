@@ -46,10 +46,7 @@ public class CollectionLoader : MonoBehaviour
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
         else
-        {
-            LevelManager.UnloadLevel();
             onEmptyList.Invoke();
-        }
     }
 
     public void Load(string collection)
@@ -67,8 +64,6 @@ public class CollectionLoader : MonoBehaviour
         meta.Load(metaPath);
         info.Load(collectionPath + "Info.json");
         level.Load(collectionPath + "Map.#");
-
-        LevelManager.LoadLevel(level);
     }
 
     public void Connect()

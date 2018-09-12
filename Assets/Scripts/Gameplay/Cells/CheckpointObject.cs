@@ -27,7 +27,7 @@ public class CheckpointObject : SerializableObject
         yield return new WaitForSeconds(2 * Constants.Time);
         CameraManager.Move(transform.position);
         yield return new WaitForSeconds(2 * Constants.Time);
-        Activate(LevelManager.AddInstance(0, transform.position).GetComponent<PlayerObject>());
+        Activate(LevelManager.Main.AddInstance(0, transform.position).GetComponent<PlayerObject>());
     }
 
     #endregion

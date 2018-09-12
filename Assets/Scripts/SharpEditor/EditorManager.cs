@@ -30,7 +30,7 @@ public class EditorManager : MonoBehaviour
 
     public void DeserializeLevel()
     {
-        LevelManager.LoadLevel(level);
+        LevelManager.Main.LoadLevel();
 
         foreach (var instance in FindObjectsOfType<SerializableObject>())
             instance.enabled = false;

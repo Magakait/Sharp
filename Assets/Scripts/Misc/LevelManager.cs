@@ -9,24 +9,26 @@ using Newtonsoft.Json.Linq;
 public class LevelManager : ScriptableObject
 {
     [SerializeField]
+    private JsonFile level;
+    [SerializeField]
     private SerializableObject[] source;
-    private static LevelManager main;
+
+    public static LevelManager Main { get; private set; }
 
     public static readonly List<SerializableObject> instances = new List<SerializableObject>();
-    private static JsonFile level;
 
     public void OnEnable()
     {
-        main = this;
+        Main = this;
         Array.Sort(source, (a, b) => a.Id.CompareTo(b.Id));
     }
 
     public static SerializableObject Source(int id) =>
-        main.source[id];
+        Main.source[id];
 
     #region level management
 
-    public static void UnloadLevel()
+    public void UnloadLevel()
     {
         foreach (var instance in instances)
             if (instance)
@@ -36,10 +38,9 @@ public class LevelManager : ScriptableObject
         System.GC.Collect();
     }
 
-    public static void LoadLevel(JsonFile file)
+    public void LoadLevel()
     {
         UnloadLevel();
-        level = file;
 
         foreach (var token in level.Root)
         {
@@ -59,7 +60,7 @@ public class LevelManager : ScriptableObject
 
     #region instance management
 
-    public static SerializableObject AddInstance(int id, Vector2 position, bool save = false)
+    public SerializableObject AddInstance(int id, Vector2 position, bool save = false)
     {
         var instance = Instantiate(Source(id), position, Quaternion.identity);
         instance.name = Source(id).name;
@@ -79,7 +80,7 @@ public class LevelManager : ScriptableObject
         return instance;
     }
 
-    public static void RemoveInstance(SerializableObject instance)
+    public void RemoveInstance(SerializableObject instance)
     {
         ((JArray)level.Root)[instances.IndexOf(instance)].Remove();
         level.Save();
@@ -88,7 +89,7 @@ public class LevelManager : ScriptableObject
         Destroy(instance.gameObject);
     }
 
-    public static void CopyInstance(SerializableObject from, SerializableObject to)
+    public void CopyInstance(SerializableObject from, SerializableObject to)
     {
         var properties = new JObject();
         from.Serialize(properties);
@@ -98,7 +99,7 @@ public class LevelManager : ScriptableObject
         level.Save();
     }
 
-    public static void UpdateInstance(SerializableObject instance)
+    public void UpdateInstance(SerializableObject instance)
     {
         ((JArray)level.Root)[instances.IndexOf(instance)].Replace(SerializeInstance(instance));
         level.Save();

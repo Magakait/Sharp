@@ -57,6 +57,6 @@ public class EditorProperties : MonoBehaviour
     public void Save()
     {
         selected.Deserialize(buffer);
-        LevelManager.UpdateInstance(selected);
+        LevelManager.Main.UpdateInstance(selected);
     }
 }
