@@ -53,11 +53,8 @@ public class EntranceObject : SerializableObject
 
     public void Enter()
     {
-        if (enabled)
-        {
-            level.Load($"{level.Info.Directory}/{Level}.#");
-            EngineUtility.Main.LoadScene("Play");
-        }
+        level.Load($"{level.Info.Directory}/{Level}.#");
+        EngineUtility.Main.LoadScene("Play");
     }
 
     public void Connect(EntranceObject target)
