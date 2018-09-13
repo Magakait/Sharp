@@ -30,15 +30,13 @@ public class MovementObject : SerializableObject
         set
         {
             movement = value;
-
-            var animation = renderer.textureSheetAnimation;
-            animation.SetSprite(0, sprites[Movement]);
+            renderer.sprite = sprites[Movement];
         }
     }
 
     [Space(10)]
     [SerializeField]
-    private new ParticleSystem renderer;
+    private new SpriteRenderer renderer;
 
     public override void Serialize(JToken token) =>
         token["movement"] = Movement;
