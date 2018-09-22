@@ -9,7 +9,10 @@ public class MovementObject : SerializableObject
     {
         PlayerObject player = collision.GetComponent<PlayerObject>();
         if (player && player.Checkpoint != this)
+        {
             player.Movement = movements[Movement];
+            player.GetComponent<MovableComponent>().Transition = Transition;
+        }
     }
 
     [Space(10)]
@@ -27,10 +30,24 @@ public class MovementObject : SerializableObject
         {
             return movement;
         }
-        set
+        private set
         {
             movement = value;
             renderer.sprite = sprites[Movement];
+        }
+    }
+
+    [SerializeField]
+    private float transition;
+    public float Transition
+    {
+        get
+        {
+            return transition;
+        }
+        private set
+        {
+            transition = value;
         }
     }
 
@@ -38,9 +55,15 @@ public class MovementObject : SerializableObject
     [SerializeField]
     private new SpriteRenderer renderer;
 
-    public override void Serialize(JToken token) =>
+    public override void Serialize(JToken token)
+    {
         token["movement"] = Movement;
+        token["transition"] = Transition;
+    }
 
-    public override void Deserialize(JToken token) =>
+    public override void Deserialize(JToken token)
+    {
         Movement = (int)token["movement"];
+        Transition = (float)token["transition"];
+    }
 }

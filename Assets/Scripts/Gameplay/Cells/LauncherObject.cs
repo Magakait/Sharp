@@ -61,9 +61,9 @@ public class LauncherObject : SerializableObject
 
     public void Launch(MovableComponent movable)
     {
-        movable.Transition /= 2;
+        movable.Transition *= Scale;
         movable.Move(targets[state.State].position);
-        movable.Transition *= 2;
+        movable.Transition /= Scale;
 
         Instantiate(burst, transform.position, Constants.Rotations[state.State]);
         animation[1].Restart();
@@ -93,11 +93,32 @@ public class LauncherObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token) =>
-        token["direction"] = state.State;
+    [Space(10)]
+    [SerializeField]
+    private float scale;
+    public float Scale
+    {
+        get
+        {
+            return scale;
+        }
+        private set
+        {
+            scale = value;
+        }
+    }
 
-    public override void Deserialize(JToken token) =>
+    public override void Serialize(JToken token)
+    {
+        token["direction"] = state.State;
+        token["scale"] = Scale;
+    }
+
+    public override void Deserialize(JToken token)
+    {
         state.State = (int)token["direction"];
+        Scale = (float)token["scale"];
+    }
 
     #endregion
 }

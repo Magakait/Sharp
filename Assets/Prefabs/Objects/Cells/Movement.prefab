@@ -196,6 +196,7 @@ MonoBehaviour:
   - {fileID: 21300004, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
   - {fileID: 21300006, guid: bb7a208f51186b647959bba3f2e9121c, type: 3}
   movement: 0
+  transition: 0.15
   renderer: {fileID: 212113021469823078}
 --- !u!114 &114894962523115358
 MonoBehaviour:

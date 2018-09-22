@@ -278,7 +278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212611701502580340}
 --- !u!114 &114365185748684230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +309,7 @@ MonoBehaviour:
   rightWing: {fileID: 4576367980929710}
   halo: {fileID: 198343548241458912}
   burst: {fileID: 198317893408823420, guid: 5b64c027adce6e34ea50b5d3cff58e6d, type: 2}
+  scale: 0.5
 --- !u!114 &114559943014772096
 MonoBehaviour:
   m_ObjectHideFlags: 1
