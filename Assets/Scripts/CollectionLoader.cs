@@ -91,11 +91,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void Create()
     {
-        var path = EngineUtility.NextFile(root, "Collection");
-        Directory.CreateDirectory(path);
-
-        foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
-            File.Copy(file, path + "/" + Path.GetFileName(file));
+        CollectionManager.Load(CollectionManager.Create(root));
 
         Load(Path.GetFileName(path));
     }
