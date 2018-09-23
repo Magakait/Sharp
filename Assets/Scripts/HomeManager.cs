@@ -8,6 +8,8 @@ class HomeManager : MonoBehaviour
     private Text versionText;
     [SerializeField]
     private LevelManager levelManager;
+    [SerializeField]
+    private CollectionManager collectionManager;
 
     [Space(10)]
     [SerializeField]
