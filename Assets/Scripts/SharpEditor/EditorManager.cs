@@ -65,18 +65,12 @@ public class EditorManager : MonoBehaviour
 
     public void RenameCollection(string name)
     {
-        string category = level.Info.Directory.Parent.FullName;
-        string path = category + "/" + name;
+        string path = CollectionManager.FullCategory + name;
 
         if (Directory.Exists(path))
-            inputCollection.text = level.Info.Directory.Name;
+            inputCollection.text = CollectionManager.Name;
         else
-        {
-            level.Info.Directory.MoveTo(path);
-
-            meta.MoveTo($"{Constants.CollectionRoot}{category}.{name}.json");
-            level.Load(path + "/" + level.Info.Name);
-        }
+            CollectionManager.MoveTo(path);
     }
 
     #endregion

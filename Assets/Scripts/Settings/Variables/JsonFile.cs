@@ -36,8 +36,7 @@ public class JsonFile : ScriptableObject
         }
     }
 
-    public void Load(string fileName) =>
-        Info = new FileInfo(fileName);
+    public void Load(string fileName) => Info = new FileInfo(fileName);
 
     public void LoadFrom(string fileName)
     {
@@ -45,8 +44,7 @@ public class JsonFile : ScriptableObject
         Load(Info.FullName);
     }
 
-    public void Save() =>
-        File.WriteAllText(Info.FullName, Root.ToString());
+    public void Save() => File.WriteAllText(Info.FullName, Root.ToString());
 
     public void SaveTo(string fileName)
     {
@@ -55,9 +53,7 @@ public class JsonFile : ScriptableObject
         Load(fileName);
     }
 
-    public void MoveTo(string fileName) =>
-        Info.MoveTo(fileName);
+    public void MoveTo(string fileName) => Info.MoveTo(fileName);
 
-    public void Delete() =>
-        Info.Delete();
+    public void Delete() => Info.Delete();
 }

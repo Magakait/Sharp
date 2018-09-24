@@ -12,16 +12,14 @@ public class CollectionLoader : MonoBehaviour
     [SerializeField]
     private VoidEvent onEmptyList;
 
-    private string category;
-    private string root;
+    private string path;
 
     public void List(string category)
     {
-        this.category = category;
-        root = Constants.CollectionRoot + category;
+        path = Constants.CollectionRoot + category;
 
         dropdownTitle.ClearOptions();
-        foreach (var option in new DirectoryInfo(root)
+        foreach (var option in new DirectoryInfo(path)
                 .GetDirectories()
                 .OrderBy(d => d.CreationTime)
                 .Reverse()
@@ -31,7 +29,7 @@ public class CollectionLoader : MonoBehaviour
 
         if (dropdownTitle.options.Count > 0)
         {
-            var selected = File.ReadAllText(root + "/Selected.txt");
+            var selected = File.ReadAllText(path + "/Selected.txt");
             dropdownTitle.value = dropdownTitle.options.FindIndex(o => o.text == selected);
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
@@ -43,9 +41,9 @@ public class CollectionLoader : MonoBehaviour
     {
         if (string.IsNullOrEmpty(collection))
             collection = dropdownTitle.captionText.text;
-            
-        File.WriteAllText(root + "/Selected.txt", collection);
-        CollectionManager.Load(root + "/" + collection);
+
+        File.WriteAllText(path + "/Selected.txt", collection);
+        CollectionManager.Load(path + "/" + collection);
     }
 
     public void Connect()
@@ -67,9 +65,14 @@ public class CollectionLoader : MonoBehaviour
             }
 
         CollectionManager.Meta["completed"] = entrances.All(e => e.Passed);
-        CollectionManager.Meta["editable"] = category == "Local";
+        CollectionManager.Meta["editable"] = CollectionManager.Category == "Local";
         CollectionManager.Meta.Save();
     }
 
-    public void Create() => Load(Path.GetFileName(CollectionManager.Create(root)));
+    public void Create()
+    {
+        var collection = EngineUtility.NextFile(path, "Collection");
+        CollectionManager.Create(collection);
+        Load(Path.GetFileName(collection));
+    }
 }
