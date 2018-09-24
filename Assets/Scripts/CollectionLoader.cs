@@ -9,16 +9,6 @@ public class CollectionLoader : MonoBehaviour
 {
     [SerializeField]
     private Dropdown dropdownTitle;
-
-    [Space(10)]
-    [SerializeField]
-    private JsonFile info;
-    [SerializeField]
-    private JsonFile meta;
-    [SerializeField]
-    private JsonFile level;
-
-    [Space(10)]
     [SerializeField]
     private VoidEvent onEmptyList;
 
@@ -53,17 +43,9 @@ public class CollectionLoader : MonoBehaviour
     {
         if (string.IsNullOrEmpty(collection))
             collection = dropdownTitle.captionText.text;
+            
         File.WriteAllText(root + "/Selected.txt", collection);
-
-        var collectionPath = root + "/" + collection + "/";
-        var metaPath = root + "." + collection + ".json";
-
-        if (!File.Exists(metaPath))
-            File.Copy(Constants.EditorRoot + "Meta.json", metaPath);
-
-        meta.Load(metaPath);
-        info.Load(collectionPath + "Info.json");
-        level.Load(collectionPath + "Map.#");
+        CollectionManager.Load(root + "/" + collection);
     }
 
     public void Connect()
@@ -75,7 +57,7 @@ public class CollectionLoader : MonoBehaviour
         var focus = entrances.FirstOrDefault(e => e.Threshold == 0);
         if (focus)
             CameraManager.Position = focus.transform.position;
-            
+
         foreach (var entrance in entrances.Where(e => e.Passed && e.Connections != null))
             foreach (var connection in entrance.Connections.Split('\r', '\n'))
             {
@@ -84,15 +66,10 @@ public class CollectionLoader : MonoBehaviour
                     entrance.Connect(target);
             }
 
-        meta["completed"] = entrances.All(e => e.Passed);
-        meta["editable"] = category == "Local";
-        meta.Save();
+        CollectionManager.Meta["completed"] = entrances.All(e => e.Passed);
+        CollectionManager.Meta["editable"] = category == "Local";
+        CollectionManager.Meta.Save();
     }
 
-    public void Create()
-    {
-        CollectionManager.Load(CollectionManager.Create(root));
-
-        Load(Path.GetFileName(path));
-    }
+    public void Create() => Load(Path.GetFileName(CollectionManager.Create(root)));
 }

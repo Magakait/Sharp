@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -22,22 +23,34 @@ public class CollectionManager : ScriptableObject
 
     public static CollectionManager Main { get; private set; }
 
+    public static DirectoryInfo Directory { get; private set; }
+
     private void OnEnable() => Main = this;
 
     public static string Create(string path)
     {
-        var path = EngineUtility.NextFile(path, "Collection");
-        Directory.CreateDirectory(path);
+        path = EngineUtility.NextFile(path, "Collection");
+        System.IO.Directory.CreateDirectory(path);
 
-        foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
+        foreach (var file in System.IO.Directory.GetFiles(Constants.EditorRoot + "Collection"))
             File.Copy(file, path + "/" + Path.GetFileName(file));
 
         return path;
     }
 
-    public static Load(string path)
+    public static void Load(string path)
     {
-        level.Load(path + "Map.#");
-        info.Load(path + "Info.json");
+        Directory = new DirectoryInfo(path);
+
+        Level.Load(path + "/Map.#");
+        Info.Load(path + "/Info.json");
+
+        var metaPath = Constants.CollectionRoot + Directory.Parent.Name + "." + Directory.Name + ".json";
+        if (!File.Exists(metaPath))
+            File.Copy(Constants.EditorRoot + "Meta.json", metaPath);
+
+        Meta.Load(metaPath);
     }
+
+    public static void Delete() => Directory.Delete();
 }
