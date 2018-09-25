@@ -8,7 +8,7 @@ public class ThemeSettings : MonoBehaviour
         file.Load(Constants.SettingsRoot + "Theme.json");
 
     public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults/Theme.json");
+        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Theme.json");
 
     public void RefreshPainters()
     {

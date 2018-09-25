@@ -31,7 +31,7 @@ class InputSettings : MonoBehaviour
         file.Load(Constants.SettingsRoot + "Input.json");
 
     public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults/Input.json");
+        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Input.json");
 
     public void Stop() =>
         Picker = null;

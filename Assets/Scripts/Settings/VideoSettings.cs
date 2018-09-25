@@ -14,7 +14,7 @@ public class VideoSettings : MonoBehaviour
     }
 
     public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults/Video.json");
+        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Video.json");
 
     #region resolution
 

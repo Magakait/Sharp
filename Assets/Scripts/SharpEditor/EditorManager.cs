@@ -33,7 +33,7 @@ public class EditorManager : MonoBehaviour
 
     public void RenameCollection(string name)
     {
-        string path = CollectionManager.FullCategory + "/" + name;
+        string path = CollectionManager.FullCategory + "\\" + name;
 
         if (Directory.Exists(path))
             inputCollection.text = CollectionManager.Name;
@@ -91,7 +91,7 @@ public class EditorManager : MonoBehaviour
     {
         LevelManager.Load(level);
         LevelManager.InstantiateAll();
-        
+
         foreach (var instance in LevelManager.Instances)
             instance.enabled = false;
 
@@ -103,7 +103,7 @@ public class EditorManager : MonoBehaviour
     {
         string path = EngineUtility.NextFile(CollectionManager.FullName, "Level.#");
 
-        File.Copy(Constants.EditorRoot + "Collection/Level.#", path);
+        File.Copy(Constants.EditorRoot + "Collection\\Level.#", path);
         ListLevels(Path.GetFileNameWithoutExtension(path));
     }
 

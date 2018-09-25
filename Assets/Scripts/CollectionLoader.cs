@@ -28,7 +28,7 @@ public class CollectionLoader : MonoBehaviour
 
         if (dropdownTitle.options.Count > 0)
         {
-            var selected = File.ReadAllText(path + "/Selected.txt");
+            var selected = File.ReadAllText(path + "\\Selected.txt");
             dropdownTitle.value = dropdownTitle.options.FindIndex(o => o.text == selected);
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
@@ -44,9 +44,9 @@ public class CollectionLoader : MonoBehaviour
         if (string.IsNullOrEmpty(collection))
             collection = dropdownTitle.captionText.text;
 
-        File.WriteAllText(path + "/Selected.txt", collection);
+        File.WriteAllText(path + "\\Selected.txt", collection);
 
-        CollectionManager.Load(path + "/" + collection);
+        CollectionManager.Load(path + "\\" + collection);
         LevelManager.Load("Map");
     }
 

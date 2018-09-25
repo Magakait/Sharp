@@ -10,11 +10,11 @@ using UnityEngine.Events;
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField]
+    private float duration;
+    [SerializeField]
     private CanvasGroup canvas;
 
     private Tween tween;
-
-    private const float duration = .15f;
     private static LoadingScreen main;
 
     private void Awake()
@@ -41,16 +41,12 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator Transition(UnityAction action)
     {
-        Show();
-        yield return new WaitForSecondsRealtime(main.tween.IsPlaying() ? duration : 0);
-
+        Play(false);
+        yield return new WaitForSecondsRealtime(duration);
         action.Invoke();
-        Hide();
+        yield return new WaitForSecondsRealtime(duration);
+        Play(true);
     }
-
-    public static void Show() => Play(false);
-
-    public static void Hide() => Play(true);
 
     public static void MakeTransition(UnityAction action) => main.StartCoroutine(main.Transition(action));
 }

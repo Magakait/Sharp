@@ -32,8 +32,6 @@ public class LevelManager : ScriptableObject
 
     public static void DestroyAll()
     {
-        LoadingScreen.Show();
-
         foreach (var instance in Instances)
             if (instance)
                 Destroy(instance.gameObject);
@@ -55,8 +53,6 @@ public class LevelManager : ScriptableObject
             }
             catch { }
         }
-
-        LoadingScreen.Hide();
     }
 
     #endregion

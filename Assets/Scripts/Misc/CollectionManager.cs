@@ -19,7 +19,7 @@ public class CollectionManager : ScriptableObject
     public static JsonFile Meta => main.meta;
 
     public static string GetMetaFullName => $"{Constants.CollectionRoot}{Category}.{Name}.json";
-    public static string GetLevelFullName(string level) => $"{FullName}/{level}.#";
+    public static string GetLevelFullName(string level) => $"{FullName}\\{level}.#";
 
     public static string Name => directory.Name;
     public static string FullName => directory.FullName;
@@ -39,7 +39,7 @@ public class CollectionManager : ScriptableObject
         Directory.CreateDirectory(path);
 
         foreach (var file in Directory.GetFiles(Constants.EditorRoot + "Collection"))
-            File.Copy(file, path + "/" + Path.GetFileName(file));
+            File.Copy(file, path + "\\" + Path.GetFileName(file));
     }
 
     public static void Load(string path)
@@ -51,7 +51,7 @@ public class CollectionManager : ScriptableObject
             File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
 
         Meta.Load(metaFullName);
-        Info.Load(FullName + "/Info.json");
+        Info.Load(FullName + "\\Info.json");
 
         UpdateLevels();
     }
