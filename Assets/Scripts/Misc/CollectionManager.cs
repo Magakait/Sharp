@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -21,7 +22,7 @@ public class CollectionManager : ScriptableObject
     private JsonFile meta;
     public static JsonFile Meta => main.meta;
 
-    private static string metaPath => $"{Constants.CollectionRoot}{Category}.{Name}.json";
+    private static string metaFullName => $"{Constants.CollectionRoot}{Category}.{Name}.json";
     private static DirectoryInfo directory;
     private static CollectionManager main;
 
@@ -30,6 +31,8 @@ public class CollectionManager : ScriptableObject
 
     public static string Category => directory.Parent.Name;
     public static string FullCategory => directory.Parent.FullName;
+
+    public static List<string> Levels { get; private set; } = new List<string>();
 
     private void OnEnable() => main = this;
 
@@ -45,20 +48,31 @@ public class CollectionManager : ScriptableObject
     {
         directory = new DirectoryInfo(path);
 
+        Levels.Clear();
+        Levels.AddRange
+        (
+            directory.GetFiles("*.#")
+                .OrderBy(f => f.CreationTime)
+                .Select(f => Path.GetFileNameWithoutExtension(f.Name))
+        );
+
+        Levels.Remove("Map");
+        Levels.Insert(0, "Map");
+
         Level.Load(path + "/Map.#");
         Info.Load(path + "/Info.json");
 
-        var metaPath = CollectionManager.metaPath;
-        if (!File.Exists(metaPath))
-            File.Copy(Constants.EditorRoot + "Meta.json", metaPath);
+        var metaFullName = CollectionManager.metaFullName;
+        if (!File.Exists(metaFullName))
+            File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
 
-        Meta.Load(metaPath);
+        Meta.Load(metaFullName);
     }
 
     public static void MoveTo(string path)
     {
         directory.MoveTo(path);
-        Meta.MoveTo(metaPath);
+        Meta.MoveTo(metaFullName);
     }
 
     public static void Delete() => directory.Delete();
