@@ -82,6 +82,8 @@ public class CollectionManager : ScriptableObject
         LevelManager.InstantiateAll();
     }
 
+    public static void RenameLevel(string level) => Level.MoveTo(FullName + level + ".#");
+
     public static void DeleteLevel()
     {
         LevelManager.DestroyAll();
