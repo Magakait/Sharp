@@ -101,8 +101,8 @@ public class EditorHighlight : MonoBehaviour
                 {
                     copied = true;
 
-                    SerializableObject copy = LevelManager.Main.AddInstance(target.Id, target.transform.position, true);
-                    LevelManager.Main.CopyInstance(target, copy);
+                    SerializableObject copy = LevelManager.AddInstance(target.Id, target.transform.position, true);
+                    LevelManager.CopyInstance(target, copy);
                 }
 
                 target.transform.position = position;
@@ -148,7 +148,7 @@ public class EditorHighlight : MonoBehaviour
             }
             else if (Dragging && !Input.GetMouseButton(0))
             {
-                LevelManager.Main.UpdateInstance(target);
+                LevelManager.UpdateInstance(target);
 
                 Dragging = false;
                 copied = false;
@@ -159,12 +159,12 @@ public class EditorHighlight : MonoBehaviour
                 if (Selected == target)
                     Selected = null;
 
-                LevelManager.Main.RemoveInstance(target);
+                LevelManager.RemoveInstance(target);
                 target = null;
             }
         }
         else if (Input.GetMouseButton(0))
-            LevelManager.Main.AddInstance(Id, frameSprite.transform.position, true);
+            LevelManager.AddInstance(Id, frameSprite.transform.position, true);
     }
 
     public void ClearInput()

@@ -28,14 +28,6 @@ public class EditorManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(Constants.UnitLayer, Constants.FogLayer, value);
     }
 
-    public void DeserializeLevel()
-    {
-        LevelManager.Main.LoadLevel();
-
-        foreach (var instance in FindObjectsOfType<SerializableObject>())
-            instance.enabled = false;
-    }
-
     #endregion
 
     #region collection management
@@ -95,9 +87,11 @@ public class EditorManager : MonoBehaviour
         level.Load($"{level.Info.DirectoryName}/{levels[index]}.#");
 
         inputLevel.text = level.ShortName;
-        DeserializeLevel();
 
-        onLevelLoad.Invoke(level.ShortName != "Map");
+        foreach (var instance in FindObjectsOfType<SerializableObject>())
+            instance.enabled = false;
+
+        onLevelLoad.Invoke(CollectionManager.Level.ShortName != "Map");
     }
 
     private void ListLevels(string name)

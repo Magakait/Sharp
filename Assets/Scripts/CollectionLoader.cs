@@ -19,8 +19,7 @@ public class CollectionLoader : MonoBehaviour
         path = Constants.CollectionRoot + category;
 
         dropdownTitle.ClearOptions();
-        foreach (var option in new DirectoryInfo(path)
-                .GetDirectories()
+        foreach (var option in new DirectoryInfo(path).GetDirectories()
                 .OrderBy(d => d.CreationTime)
                 .Reverse()
                 .Select(d => new Dropdown.OptionData(d.Name)))
@@ -34,7 +33,10 @@ public class CollectionLoader : MonoBehaviour
             dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
         }
         else
+        {
             onEmptyList.Invoke();
+            LevelManager.Unload();
+        }
     }
 
     public void Load(string collection)
@@ -44,11 +46,12 @@ public class CollectionLoader : MonoBehaviour
 
         File.WriteAllText(path + "/Selected.txt", collection);
         CollectionManager.Load(path + "/" + collection);
+        LevelManager.Load();
     }
 
     public void Connect()
     {
-        var entrances = LevelManager.instances
+        var entrances = LevelManager.Instances
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
 
