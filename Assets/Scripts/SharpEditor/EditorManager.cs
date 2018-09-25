@@ -19,20 +19,17 @@ public class EditorManager : MonoBehaviour
 
     private void OnDestroy() => IgnoreCollisions(false);
 
-    #region engine management
-
     private void IgnoreCollisions(bool value)
     {
         Physics2D.IgnoreLayerCollision(Constants.UnitLayer, Constants.CellLayer, value);
         Physics2D.IgnoreLayerCollision(Constants.UnitLayer, Constants.FogLayer, value);
     }
 
-    #endregion
-
     #region collection management
 
     [Header("Collection")]
-    public InputField inputCollection;
+    [SerializeField]
+    private InputField inputCollection;
 
     public void RenameCollection(string name)
     {
@@ -57,22 +54,16 @@ public class EditorManager : MonoBehaviour
     #region level management
 
     [Header("Level")]
-    public InputField inputLevel;
-    public Toggle baseToggle;
-    public ToggleGroup toggleGroup;
+    [SerializeField]
+    private InputField inputLevel;
+    [SerializeField]
+    private Toggle baseToggle;
+    [SerializeField]
+    private ToggleGroup toggleGroup;
 
     [Space(10)]
-    public BoolEvent onLevelLoad;
-
-    private void LoadLevel(string level)
-    {
-        LevelManager.Load(level, true);
-        foreach (var instance in LevelManager.Instances)
-            instance.enabled = false;
-
-        inputLevel.text = LevelManager.Level.ShortName;
-        onLevelLoad.Invoke(LevelManager.Level.ShortName != "Map");
-    }
+    [SerializeField]
+    private BoolEvent onLevelLoad;
 
     private void ListLevels(string selection)
     {
@@ -94,6 +85,16 @@ public class EditorManager : MonoBehaviour
             .GetChild(Mathf.Max(0, CollectionManager.Levels.IndexOf(selection)))
             .GetComponent<Toggle>()
             .isOn = true;
+    }
+
+    private void LoadLevel(string level)
+    {
+        LevelManager.Load(level, true);
+        foreach (var instance in LevelManager.Instances)
+            instance.enabled = false;
+
+        inputLevel.text = LevelManager.Level.ShortName;
+        onLevelLoad.Invoke(LevelManager.Level.ShortName != "Map");
     }
 
     public void AddLevel()
