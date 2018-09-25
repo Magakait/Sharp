@@ -41,12 +41,16 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator Transition(UnityAction action)
     {
-        Play(false);
-        yield return new WaitForSeconds(duration);
+        Show();
+        yield return new WaitForSecondsRealtime(main.tween.IsPlaying() ? duration : 0);
 
         action.Invoke();
-        Play(true);
+        Hide();
     }
+
+    public static void Show() => Play(false);
+
+    public static void Hide() => Play(true);
 
     public static void MakeTransition(UnityAction action) => main.StartCoroutine(main.Transition(action));
 }

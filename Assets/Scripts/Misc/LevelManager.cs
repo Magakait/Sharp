@@ -28,15 +28,12 @@ public class LevelManager : ScriptableObject
 
     #region level management
 
-    public static void Load(string level, bool instantiate = false)
-    {
-        Level.Load(CollectionManager.GetLevelFullName(level));
-        if (instantiate)
-            InstantiateAll();
-    }
+    public static void Load(string level) => Level.Load(CollectionManager.GetLevelFullName(level));
 
     public static void DestroyAll()
     {
+        LoadingScreen.Show();
+
         foreach (var instance in Instances)
             if (instance)
                 Destroy(instance.gameObject);
@@ -58,6 +55,8 @@ public class LevelManager : ScriptableObject
             }
             catch { }
         }
+
+        LoadingScreen.Hide();
     }
 
     #endregion

@@ -89,7 +89,9 @@ public class EditorManager : MonoBehaviour
 
     private void LoadLevel(string level)
     {
-        LevelManager.Load(level, true);
+        LevelManager.Load(level);
+        LevelManager.InstantiateAll();
+        
         foreach (var instance in LevelManager.Instances)
             instance.enabled = false;
 
