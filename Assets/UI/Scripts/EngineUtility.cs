@@ -78,7 +78,7 @@ public class EngineUtility : ScriptableObject
 
     public void Quit() => Application.Quit();
 
-    public void LoadScene(string scene) => SceneManager.LoadScene(scene);
+    public void LoadScene(string scene) => LoadingScreen.MakeTransition(() => SceneManager.LoadScene(scene));
 
     public void ReloadScene() => LoadScene(SceneManager.GetActiveScene().name);
 
