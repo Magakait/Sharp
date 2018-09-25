@@ -344,7 +344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hello
+  m_Text: Hello, world!
 --- !u!114 &114097938927204446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,12 +413,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 11
-  level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
-  meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}
   collider: {fileID: 58645538801001102}
   coreEffect: {fileID: 198885050216963842}
   haloEffect: {fileID: 198659457995338746}
   connectionLine: {fileID: 120760523166981242}
+  canvas: {fileID: 223271237410657112}
   titleText: {fileID: 114579005856377140}
   descriptionText: {fileID: 114005167120195122}
   enterButton: {fileID: 114443499287779796}
@@ -10014,10 +10013,10 @@ RectTransform:
   m_Father: {fileID: 224483099688038762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 32, y: -15}
-  m_SizeDelta: {x: 44, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224483099688038762
 RectTransform:
@@ -10036,5 +10035,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -136, y: 30}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0}

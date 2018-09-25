@@ -19,9 +19,13 @@ public class EntranceObject : SerializableObject
         if ((string)CollectionManager.Meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
-        if (Threshold > 0)
+        if (Connected == 0 && Threshold > 0)
             gameObject.SetActive(false);
-        else if (!Passed)
+        else if (Connected > 0 && Connected < Threshold)
+            canvas.gameObject.SetActive(false);
+        else if (Passed)
+            coreEffect.Emission(true);
+        else
             haloEffect.Emission(true);
 
         enterButton.interactable = CollectionManager.Levels.Contains(Level);
@@ -42,12 +46,12 @@ public class EntranceObject : SerializableObject
     public void Enter()
     {
         LevelManager.Load(Level);
-        EngineUtility.Main.LoadScene("Play");      
+        EngineUtility.Main.LoadScene("Play");
     }
 
     public void Connect(EntranceObject target)
     {
-        target.Threshold--;
+        target.Connected++;
 
         var line = Instantiate(connectionLine, connectionLine.transform.parent);
 
@@ -71,6 +75,8 @@ public class EntranceObject : SerializableObject
     private LineRenderer connectionLine;
 
     [Space(10)]
+    [SerializeField]
+    private Canvas canvas;
     [SerializeField]
     private Text titleText;
     [SerializeField]
@@ -96,6 +102,8 @@ public class EntranceObject : SerializableObject
 
     public int Threshold { get; private set; }
 
+    public int Connected { get; private set; }
+
     public string Connections { get; private set; }
 
     public override void Serialize(JToken token)
@@ -109,11 +117,7 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
-        if (CollectionManager.Meta["passed"].Any(t => (string)t == Level))
-        {
-            Passed = true;
-            coreEffect.Emission(true);
-        }
+        Passed = CollectionManager.Meta["passed"].Any(t => (string)t == Level);
 
         descriptionText.text = (string)token["description"];
         Threshold = (int)token["threshold"];
