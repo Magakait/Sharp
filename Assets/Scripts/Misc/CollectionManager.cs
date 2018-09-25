@@ -59,14 +59,13 @@ public class CollectionManager : ScriptableObject
         Levels.Remove("Map");
         Levels.Insert(0, "Map");
 
-        Level.Load(path + "/Map.#");
-        Info.Load(path + "/Info.json");
-
         var metaFullName = CollectionManager.metaFullName;
         if (!File.Exists(metaFullName))
             File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
 
         Meta.Load(metaFullName);
+        Info.Load(FullName + "Info.json");
+        LoadLevel("Map");
     }
 
     public static void MoveTo(string path)
@@ -76,4 +75,17 @@ public class CollectionManager : ScriptableObject
     }
 
     public static void Delete() => directory.Delete();
+
+    public static void LoadLevel(string level)
+    {
+        Level.Load(FullName + level + ".#");
+        LevelManager.InstantiateAll();
+    }
+
+    public static void DeleteLevel()
+    {
+        LevelManager.DestroyAll();
+        Levels.Remove(Level.ShortName);
+        Level.Delete();
+    }
 }

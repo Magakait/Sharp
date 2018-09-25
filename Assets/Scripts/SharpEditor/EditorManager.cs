@@ -12,9 +12,7 @@ public class EditorManager : MonoBehaviour
     private void Start()
     {
         inputCollection.text = CollectionManager.Name;
-
-        ListLevels(level.ShortName);
-
+        ListLevels(CollectionManager.Level.ShortName);
         IgnoreCollisions(true);
     }
 
@@ -58,35 +56,30 @@ public class EditorManager : MonoBehaviour
     [Space(10)]
     public BoolEvent onLevelLoad;
 
-    private static readonly List<string> levels = new List<string>();
-
-    private void LoadLevel(int index)
+    private void LoadLevel(string level)
     {
-        level.Load($"{level.Info.DirectoryName}/{levels[index]}.#");
-
-        inputLevel.text = level.ShortName;
-
-        foreach (var instance in FindObjectsOfType<SerializableObject>())
+        CollectionManager.LoadLevel(level);
+        foreach (var instance in LevelManager.Instances)
             instance.enabled = false;
 
+        inputLevel.text = CollectionManager.Level.ShortName;
         onLevelLoad.Invoke(CollectionManager.Level.ShortName != "Map");
     }
 
     private void ListLevels(string name)
     {
-        Complete();
+        CompleteCollection();
         toggleGroup.transform.Clear();
 
-        for (int i = 0; i < levels.Count; i++)
+        foreach (var level in CollectionManager.Levels)
         {
             Toggle toggle = Instantiate(baseToggle, toggleGroup.transform);
             toggle.group = toggleGroup;
 
             Text text = toggle.transform.GetChild(1).GetComponent<Text>();
-            text.text = levels[i];
+            text.text = level;
 
-            int index = i;
-            toggle.onValueChanged.AddListener(value => { if (value) LoadLevel(index); });
+            toggle.onValueChanged.AddListener(value => { if (value) LoadLevel(level); });
         }
 
         toggleGroup.transform
@@ -131,28 +124,20 @@ public class EditorManager : MonoBehaviour
 
     public void DeleteLevel()
     {
-        levels.Remove(level.ShortName);
-        level.Delete();
+        CollectionManager.DeleteLevel();
 
-        if (levels.Count > 1)
-            ListLevels(levels[levels.Count - 1]);
+        if (CollectionManager.Levels.Count > 1)
+            ListLevels(CollectionManager.Levels.Last());
         else
         {
-            level.Info.Directory.Delete(true);
-            meta.Delete();
-
+            CollectionManager.Delete();
             EngineUtility.Main.LoadScene("Home");
         }
     }
 
-    private void Complete()
+    private void CompleteCollection()
     {
-        var passed = (JArray)CollectionManager.Meta["passed"];
-        passed.Clear();
-
-        foreach (var level in levels.Skip(1))
-            passed.Add(level);
-
+        ((JArray)CollectionManager.Meta["passed"]).ReplaceAll(CollectionManager.Levels);
         CollectionManager.Meta.Save();
     }
 

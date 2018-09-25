@@ -25,7 +25,7 @@ public class LevelManager : ScriptableObject
 
     #region level management
 
-    public static void Unload()
+    public static void DestroyAll()
     {
         foreach (var instance in Instances)
             if (instance)
@@ -35,9 +35,9 @@ public class LevelManager : ScriptableObject
         System.GC.Collect();
     }
 
-    public static void Load()
+    public static void InstantiateAll()
     {
-        Unload();
+        DestroyAll();
 
         foreach (var token in CollectionManager.Level.Root)
         {

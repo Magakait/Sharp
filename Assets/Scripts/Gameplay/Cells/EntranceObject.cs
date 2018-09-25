@@ -10,17 +10,13 @@ public class EntranceObject : SerializableObject
 {
     [Space(10)]
     [SerializeField]
-    private JsonFile level;
-    [SerializeField]
-    private JsonFile meta;
-    [SerializeField]
     private new CircleCollider2D collider;
 
     public bool Passed { get; private set; }
 
     private void Start()
     {
-        if ((string)meta["selected"] == Level)
+        if ((string)CollectionManager.Meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
         if (Threshold > 0)
@@ -36,8 +32,8 @@ public class EntranceObject : SerializableObject
     {
         if (enabled && !EngineUtility.IsOverUI)
         {
-            meta["selected"] = Level;
-            meta.Save();
+            CollectionManager.Meta["selected"] = Level;
+            CollectionManager.Meta.Save();
 
             CameraManager.Move(transform.position);
         }
@@ -45,8 +41,8 @@ public class EntranceObject : SerializableObject
 
     public void Enter()
     {
-        level.Load($"{level.Info.Directory}/{Level}.#");
         EngineUtility.Main.LoadScene("Play");
+        CollectionManager.LoadLevel(Level);       
     }
 
     public void Connect(EntranceObject target)
@@ -113,7 +109,7 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
-        if (meta["passed"].Any(t => (string)t == Level))
+        if (CollectionManager.Meta["passed"].Any(t => (string)t == Level))
         {
             Passed = true;
             coreEffect.Emission(true);

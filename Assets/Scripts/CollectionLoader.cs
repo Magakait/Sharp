@@ -35,7 +35,7 @@ public class CollectionLoader : MonoBehaviour
         else
         {
             onEmptyList.Invoke();
-            LevelManager.Unload();
+            LevelManager.DestroyAll();
         }
     }
 
@@ -46,7 +46,6 @@ public class CollectionLoader : MonoBehaviour
 
         File.WriteAllText(path + "/Selected.txt", collection);
         CollectionManager.Load(path + "/" + collection);
-        LevelManager.Load();
     }
 
     public void Connect()

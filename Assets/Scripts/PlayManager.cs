@@ -4,7 +4,7 @@ public class PlayManager : MonoBehaviour
 {
     private void Awake()
     {
-        LevelManager.Load();
+        LevelManager.InstantiateAll();
         SetCursor(false);
     }
 
