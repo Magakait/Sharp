@@ -51,7 +51,7 @@ public class CollectionManager : ScriptableObject
             File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
 
         Meta.Load(metaFullName);
-        Info.Load(FullName + "Info.json");
+        Info.Load(FullName + "/Info.json");
 
         UpdateLevels();
     }
