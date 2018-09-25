@@ -9,13 +9,16 @@ using Newtonsoft.Json.Linq;
 public class LevelManager : ScriptableObject
 {
     [SerializeField]
-    private SerializableObject[] source;
+    private JsonFile level;
+    public static JsonFile Level => main.level;
 
+    [SerializeField]
+    private SerializableObject[] source;
     public static SerializableObject Source(int id) => main.source[id];
 
-    private static LevelManager main;
-
     public static List<SerializableObject> Instances { get; private set; } = new List<SerializableObject>();
+
+    private static LevelManager main;
 
     public void OnEnable()
     {
@@ -24,6 +27,13 @@ public class LevelManager : ScriptableObject
     }
 
     #region level management
+
+    public static void Load(string level, bool instantiate = false)
+    {
+        Level.Load(CollectionManager.GetLevelFullName(level));
+        if (instantiate)
+            InstantiateAll();
+    }
 
     public static void DestroyAll()
     {
@@ -39,7 +49,7 @@ public class LevelManager : ScriptableObject
     {
         DestroyAll();
 
-        foreach (var token in CollectionManager.Level.Root)
+        foreach (var token in Level.Root)
         {
             var instance = AddInstance((int)token["id"], token["position"].ToVector());
             try
@@ -63,12 +73,12 @@ public class LevelManager : ScriptableObject
         if (save)
         {
             var data = SerializeInstance(instance);
-            ((JArray)CollectionManager.Level.Root).Add(data);
+            ((JArray)Level.Root).Add(data);
 
             instance.Deserialize(data["properties"]);
             instance.enabled = false;
 
-            CollectionManager.Level.Save();
+            Level.Save();
         }
 
         return instance;
@@ -76,27 +86,27 @@ public class LevelManager : ScriptableObject
 
     public static void RemoveInstance(SerializableObject instance)
     {
-        ((JArray)CollectionManager.Level.Root)[Instances.IndexOf(instance)].Remove();
-        CollectionManager.Level.Save();
+        ((JArray)Level.Root)[Instances.IndexOf(instance)].Remove();
+        Level.Save();
 
         Instances.Remove(instance);
         Destroy(instance.gameObject);
     }
 
-    public static void CopyInstance(SerializableObject from, SerializableObject to)
+    public static void CopyProperties(SerializableObject from, SerializableObject to)
     {
         var properties = new JObject();
         from.Serialize(properties);
         to.Deserialize(properties);
 
         UpdateInstance(to);
-        CollectionManager.Level.Save();
+        Level.Save();
     }
 
     public static void UpdateInstance(SerializableObject instance)
     {
-        ((JArray)CollectionManager.Level.Root)[Instances.IndexOf(instance)].Replace(SerializeInstance(instance));
-        CollectionManager.Level.Save();
+        ((JArray)Level.Root)[Instances.IndexOf(instance)].Replace(SerializeInstance(instance));
+        Level.Save();
     }
 
     private static JToken SerializeInstance(SerializableObject instance)

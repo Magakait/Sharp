@@ -41,8 +41,8 @@ public class EntranceObject : SerializableObject
 
     public void Enter()
     {
-        EngineUtility.Main.LoadScene("Play");
-        CollectionManager.LoadLevel(Level);       
+        LevelManager.Load(Level);
+        EngineUtility.Main.LoadScene("Play");      
     }
 
     public void Connect(EntranceObject target)

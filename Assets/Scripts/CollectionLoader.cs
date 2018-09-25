@@ -45,11 +45,14 @@ public class CollectionLoader : MonoBehaviour
             collection = dropdownTitle.captionText.text;
 
         File.WriteAllText(path + "/Selected.txt", collection);
+
         CollectionManager.Load(path + "/" + collection);
+        LevelManager.Load("Map");
     }
 
     public void Connect()
     {
+        LevelManager.InstantiateAll();
         var entrances = LevelManager.Instances
             .Select(i => i.GetComponent<EntranceObject>())
             .Where(i => i);
@@ -74,6 +77,7 @@ public class CollectionLoader : MonoBehaviour
     public void Create()
     {
         var collection = EngineUtility.NextFile(path, "Collection");
+        
         CollectionManager.Create(collection);
         Load(Path.GetFileName(collection));
     }

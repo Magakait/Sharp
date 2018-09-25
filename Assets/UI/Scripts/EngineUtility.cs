@@ -12,8 +12,7 @@ public class EngineUtility : ScriptableObject
 {
     public static EngineUtility Main { get; private set; }
 
-    private void OnEnable() =>
-        Main = this;
+    private void OnEnable() => Main = this;
 
     #region UI
 
@@ -27,15 +26,14 @@ public class EngineUtility : ScriptableObject
         }
     }
 
-    public void Click(Button button) =>
-        button.onClick.Invoke();
+    public void Click(Button button) => button.onClick.Invoke();
 
-    public void Toggle(Toggle toggle) =>
-        toggle.isOn = !toggle.isOn;
+    public void Toggle(Toggle toggle) => toggle.isOn = !toggle.isOn;
 
     private static readonly char[] invalidChars = Path.GetInvalidPathChars()
         .Union(Path.GetInvalidFileNameChars())
         .ToArray();
+
     public void Filter(InputField inputField)
     {
         inputField.text = new string
@@ -50,11 +48,9 @@ public class EngineUtility : ScriptableObject
 
     #region statics
 
-    public static bool IsOverUI =>
-        EventSystem.current.IsPointerOverGameObject();
+    public static bool IsOverUI => EventSystem.current.IsPointerOverGameObject();
 
-    public static bool IsInput =>
-        EventSystem.current.currentSelectedGameObject;
+    public static bool IsInput => EventSystem.current.currentSelectedGameObject;
 
     public static string NextFile(string directory, string file)
     {
@@ -80,14 +76,11 @@ public class EngineUtility : ScriptableObject
 
     #region openers
 
-    public void Quit() =>
-        Application.Quit();
+    public void Quit() => Application.Quit();
 
-    public void LoadScene(string scene = null) =>
-        SceneManager.LoadScene(String.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().name : scene);
+    public void LoadScene(string scene = null) => SceneManager.LoadScene(String.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().name : scene);
 
-    public void OpenURL(string url) =>
-        Application.OpenURL(url);
+    public void OpenURL(string url) => Application.OpenURL(url);
 
     #endregion
 }

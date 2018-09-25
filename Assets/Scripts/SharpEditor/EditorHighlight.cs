@@ -102,7 +102,7 @@ public class EditorHighlight : MonoBehaviour
                     copied = true;
 
                     SerializableObject copy = LevelManager.AddInstance(target.Id, target.transform.position, true);
-                    LevelManager.CopyInstance(target, copy);
+                    LevelManager.CopyProperties(target, copy);
                 }
 
                 target.transform.position = position;
