@@ -28,7 +28,7 @@ public class EntranceObject : SerializableObject
         else if (!Passed)
             haloEffect.Emission(true);
 
-        enterButton.interactable = File.Exists($"{level.Info.Directory}/{Level}.#");
+        enterButton.interactable = CollectionManager.Levels.Contains(Level);
         collider.radius = 1;
     }
 

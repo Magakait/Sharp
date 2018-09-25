@@ -11,7 +11,8 @@ public class EditorManager : MonoBehaviour
 {
     private void Start()
     {
-        LoadCollection();
+        inputCollection.text = CollectionManager.Name;
+
         ListLevels(level.ShortName);
 
         IgnoreCollisions(true);
@@ -35,26 +36,6 @@ public class EditorManager : MonoBehaviour
     [Header("Collection")]
     public InputField inputCollection;
 
-    [Space(10)]
-    public JsonFile meta;
-
-    private void LoadCollection()
-    {
-        levels.Clear();
-        levels.AddRange
-        (
-            level.Info.Directory
-                .GetFiles("*.#")
-                .OrderBy(f => f.CreationTime)
-                .Select(f => Path.GetFileNameWithoutExtension(f.Name))
-        );
-
-        levels.Remove("Map");
-        levels.Insert(0, "Map");
-
-        inputCollection.text = level.Info.Directory.Name;
-    }
-
     public void RenameCollection(string name)
     {
         string path = CollectionManager.FullCategory + name;
@@ -75,9 +56,6 @@ public class EditorManager : MonoBehaviour
     public ToggleGroup toggleGroup;
 
     [Space(10)]
-    public JsonFile level;
-
-    [Space(10)]
     public BoolEvent onLevelLoad;
 
     private static readonly List<string> levels = new List<string>();
@@ -96,7 +74,7 @@ public class EditorManager : MonoBehaviour
 
     private void ListLevels(string name)
     {
-        PassLevels();
+        Complete();
         toggleGroup.transform.Clear();
 
         for (int i = 0; i < levels.Count; i++)
@@ -167,15 +145,15 @@ public class EditorManager : MonoBehaviour
         }
     }
 
-    private void PassLevels()
+    private void Complete()
     {
-        var passed = (JArray)meta["passed"];
+        var passed = (JArray)CollectionManager.Meta["passed"];
         passed.Clear();
 
         foreach (var level in levels.Skip(1))
             passed.Add(level);
 
-        meta.Save();
+        CollectionManager.Meta.Save();
     }
 
     #endregion

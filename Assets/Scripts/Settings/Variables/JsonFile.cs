@@ -7,21 +7,11 @@ using Newtonsoft.Json.Linq;
 [CreateAssetMenu]
 public class JsonFile : ScriptableObject
 {
-    private FileInfo info;
-    public FileInfo Info
-    {
-        get
-        {
-            return info;
-        }
-        set
-        {
-            info = value;
-            Root = JToken.Parse(File.ReadAllText(Info.FullName));
-        }
-    }
+    private FileInfo file;
 
-    public string ShortName => Path.GetFileNameWithoutExtension(Info.Name);
+    public string ShortName => Path.GetFileNameWithoutExtension(file.Name);
+    public string Name => file.Name;
+    public string FullName => file.FullName;
 
     public JToken Root { get; private set; }
     public JToken this[string path]
@@ -36,24 +26,28 @@ public class JsonFile : ScriptableObject
         }
     }
 
-    public void Load(string fileName) => Info = new FileInfo(fileName);
-
-    public void LoadFrom(string fileName)
+    public void Load(string path)
     {
-        File.Copy(fileName, Info.FullName, true);
-        Load(Info.FullName);
+        file = new FileInfo(path);
+        Root = JToken.Parse(File.ReadAllText(file.FullName));
     }
 
-    public void Save() => File.WriteAllText(Info.FullName, Root.ToString());
+    public void LoadFrom(string path)
+    {
+        File.Copy(path, file.FullName, true);
+        Load(file.FullName);
+    }
 
-    public void SaveTo(string fileName)
+    public void Save() => File.WriteAllText(file.FullName, Root.ToString());
+
+    public void SaveTo(string path)
     {
         Save();
-        Info.CopyTo(fileName, true);
-        Load(fileName);
+        file.CopyTo(path, true);
+        Load(path);
     }
 
-    public void MoveTo(string fileName) => Info.MoveTo(fileName);
+    public void MoveTo(string path) => file.MoveTo(path);
 
-    public void Delete() => Info.Delete();
+    public void Delete() => file.Delete();
 }
