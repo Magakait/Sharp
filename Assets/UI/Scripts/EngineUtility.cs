@@ -78,7 +78,9 @@ public class EngineUtility : ScriptableObject
 
     public void Quit() => Application.Quit();
 
-    public void LoadScene(string scene = null) => SceneManager.LoadScene(String.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().name : scene);
+    public void LoadScene(string scene) => SceneManager.LoadScene(scene);
+
+    public void ReloadScene() => LoadScene(SceneManager.GetActiveScene().name);
 
     public void OpenURL(string url) => Application.OpenURL(url);
 

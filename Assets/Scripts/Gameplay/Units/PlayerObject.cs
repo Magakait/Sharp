@@ -126,6 +126,6 @@ public class PlayerObject : SerializableObject
             Checkpoint.StartCoroutine(Checkpoint.Spawn());
         else
             Instantiate(this.prompt, movable.Position, Quaternion.identity)
-                .Setup("Restart", () => EngineUtility.Main.LoadScene());
+                .Setup("Restart", () => EngineUtility.Main.ReloadScene());
     }
 }

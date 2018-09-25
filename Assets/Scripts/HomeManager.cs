@@ -6,6 +6,8 @@ class HomeManager : MonoBehaviour
 {
     [SerializeField]
     private Text versionText;
+
+    [Space(10)]
     [SerializeField]
     private LevelManager levelManager;
     [SerializeField]
