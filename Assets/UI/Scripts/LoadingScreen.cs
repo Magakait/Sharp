@@ -29,6 +29,7 @@ public class LoadingScreen : MonoBehaviour
 
         tween = canvas
             .DOFade(1, duration)
+            .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
 
         main = this;
