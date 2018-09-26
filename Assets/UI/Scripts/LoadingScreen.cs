@@ -48,5 +48,9 @@ public class LoadingScreen : MonoBehaviour
         Play(true);
     }
 
-    public static void MakeTransition(UnityAction action) => main.StartCoroutine(main.Transition(action));
+    public static void MakeTransition(UnityAction action)
+    {
+        if (!main.canvas.blocksRaycasts)
+            main.StartCoroutine(main.Transition(action));
+    }
 }
