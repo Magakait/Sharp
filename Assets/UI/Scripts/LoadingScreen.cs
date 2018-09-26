@@ -1,6 +1,8 @@
 using System.Collections;
 
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using DG.Tweening;
 using UnityEngine.Events;
@@ -20,8 +22,13 @@ public class LoadingScreen : MonoBehaviour
     private void Awake()
     {
         if (main)
+        {
+            Destroy(gameObject);
             return;
+        }
+
         main = this;
+        DontDestroyOnLoad(gameObject);
 
         tween = canvas
             .DOFade(1, duration)
