@@ -17,6 +17,8 @@ public class LoadingScreen : MonoBehaviour
     private Tween tween;
     private static LoadingScreen main;
 
+    public static bool Ready => !main.canvas.blocksRaycasts;
+
     private void Awake()
     {
         if (main)
@@ -50,7 +52,7 @@ public class LoadingScreen : MonoBehaviour
 
     public static void MakeTransition(UnityAction action)
     {
-        if (!main.canvas.blocksRaycasts)
+        if (Ready)
             main.StartCoroutine(main.Transition(action));
     }
 }

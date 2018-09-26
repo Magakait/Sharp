@@ -3,17 +3,16 @@ using UnityEngine.Events;
 
 public class KeyListener : MonoBehaviour
 {
-    public KeyVariable key;
-
-    [Space(10)]
-    public UnityEvent onDown;
+    [SerializeField]
+    private KeyVariable key;
+    [SerializeField]
+    private UnityEvent onDown;
 
     private void Update()
     {
-        if (Input.GetKeyDown(key) && !EngineUtility.IsInput)
+        if (Input.GetKeyDown(key) && LoadingScreen.Ready && !EngineUtility.IsInput)
             Invoke();
     }
 
-    public void Invoke() =>
-        onDown.Invoke();
+    public void Invoke() => onDown.Invoke();
 }
