@@ -27,14 +27,17 @@ public class LoadingScreen : MonoBehaviour
             return;
         }
 
+        main = this;
+        DontDestroyOnLoad(gameObject);
+
         tween = canvas
             .DOFade(1, duration)
             .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
-
-        main = this;
-        DontDestroyOnLoad(gameObject);
+        tween.Complete();
     }
+
+    private void Start() => MakeTransition(() => { });
 
     private static void Play(bool isBackwards)
     {

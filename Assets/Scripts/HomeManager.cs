@@ -31,10 +31,12 @@ class HomeManager : MonoBehaviour
         }
 
         loaded = true;
+        DontDestroyOnLoad(gameObject);
+
         levelManager.OnEnable();
+        collectionManager.OnEnable();
 
         versionText.text = "Version " + Application.version;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

@@ -32,7 +32,7 @@ public class CollectionManager : ScriptableObject
     private static DirectoryInfo directory;
     private static CollectionManager main;
 
-    private void OnEnable() => main = this;
+    public void OnEnable() => main = this;
 
     public static void Create(string path)
     {
