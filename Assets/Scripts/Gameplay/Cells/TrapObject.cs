@@ -5,16 +5,6 @@ using Newtonsoft.Json.Linq;
 
 public class TrapObject : SerializableObject
 {
-    private void Awake() =>
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
-            (
-                spikesTransform
-                    .DOScale(0, Constants.Time)
-            )
-        );
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (state.State == 1)
@@ -37,7 +27,7 @@ public class TrapObject : SerializableObject
             foreach (UnitComponent unit in cell.GetCollisions<UnitComponent>())
                 unit.Kill();
 
-        animation[0].Play(active);
+        effect.Emission(active);
     }
 
     #endregion
@@ -46,9 +36,7 @@ public class TrapObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform spikesTransform;
-
-    private new TweenArrayComponent animation;
+    private ParticleSystem effect;
 
     #endregion
 
