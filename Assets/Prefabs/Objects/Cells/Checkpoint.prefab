@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212126861916704554}
 --- !u!114 &114120311234651598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,7 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   spire: {fileID: 198392023537164126}
-  burst: {fileID: 198954474209333456, guid: cdb2ae3889efb404ebe4b7b1dea88445, type: 2}
 --- !u!114 &114642104739494444
 MonoBehaviour:
   m_ObjectHideFlags: 1

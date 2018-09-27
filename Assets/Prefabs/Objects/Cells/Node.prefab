@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212851964506844248}
 --- !u!212 &212701698322285100
 SpriteRenderer:
   m_ObjectHideFlags: 1

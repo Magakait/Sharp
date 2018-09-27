@@ -404,7 +404,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hollowed: 0
-  frameSprite: {fileID: 212582296626510788}
 --- !u!114 &114471367228691088
 MonoBehaviour:
   m_ObjectHideFlags: 1
