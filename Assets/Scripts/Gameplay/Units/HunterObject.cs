@@ -10,34 +10,58 @@ public class HunterObject : SerializableObject
 {
     private void Start()
     {
-        projectile.transform.SetParent(null);
-        projectile.transform.localScale = Vector3.one;
+        animation = gameObject.AddComponent<TweenArrayComponent>().Init
+        (
+            body
+                .DOFade(.25f, Constants.Time)
+        );
+
+        mark.transform.SetParent(null);
+        mark.transform.localScale = Vector3.one;
+        ready = true;
     }
 
     private void OnDestroy()
     {
-        if (projectile)
-            Destroy(projectile.gameObject);
+        if (mark)
+            Destroy(mark);
     }
 
     private void FixedUpdate()
     {
-        if (projectile.IsMoving)
+        if (movable.IsMoving)
             return;
+
+        if (!ready)
+        {
+            ready = true;
+            return;
+        }
 
         Cast();
         if (players.Count > 0)
-            projectile.Move(Vector2Int.RoundToInt(players[0].transform.position));
+        {
+            var destination = Vector2Int.RoundToInt(players[0].transform.position);
+            mark.transform.position = new Vector3(destination.x, destination.y);
+
+            ready = false;
+            Shift(false);
+            rotator.Rotate(new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, destination - movable.Position)));
+            movable.Move(destination);
+        }
     }
 
     #region gameplay
 
     [Header("Gameplay")]
     [SerializeField]
+    private new Collider2D collider;
+    [SerializeField]
     private MovableComponent movable;
     [SerializeField]
-    private MovableComponent projectile;
+    private RotatorComponent rotator;
 
+    [Space(10)]
     [SerializeField]
     private int distance;
     public int Distance
@@ -51,11 +75,13 @@ public class HunterObject : SerializableObject
         {
             distance = value;
             effectTransform.localScale = 2 * Distance * Vector3.one;
-            
+
             foreach (var scaler in particleScalers)
                 scaler.Scale();
         }
     }
+
+    private bool ready;
 
     private static readonly List<PlayerObject> players = new List<PlayerObject>();
 
@@ -68,7 +94,12 @@ public class HunterObject : SerializableObject
             Constants.UnitMask
         );
 
-    public void Teleport() => movable.Position = projectile.Position;
+    public void Shift(bool active)
+    {
+        collider.enabled = active;
+        mark.Emission(!active);
+        animation[0].Play(active);
+    }
 
     #endregion
 
@@ -76,9 +107,17 @@ public class HunterObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
+    private ParticleSystem mark;
+    [SerializeField]
+    private SpriteRenderer body;
+
+    [Space(10)]
+    [SerializeField]
     private Transform effectTransform;
     [SerializeField]
     private ParticleScalerComponent[] particleScalers;
+
+    private new TweenArrayComponent animation;
 
     #endregion
 
@@ -87,13 +126,13 @@ public class HunterObject : SerializableObject
     public override void Serialize(JToken token)
     {
         token["distance"] = Distance;
-        token["transition"] = projectile.Transition;
+        token["transition"] = movable.Transition;
     }
 
     public override void Deserialize(JToken token)
     {
         Distance = (int)token["distance"];
-        projectile.Transition = (float)token["transition"];
+        movable.Transition = (float)token["transition"];
     }
 
     #endregion
