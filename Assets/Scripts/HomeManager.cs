@@ -15,6 +15,10 @@ class HomeManager : MonoBehaviour
 
     [Space(10)]
     [SerializeField]
+    private GameObject[] singletons;
+
+    [Space(10)]
+    [SerializeField]
     private VoidEvent onHome;
     [SerializeField]
     private BoolEvent onCheck;
@@ -26,12 +30,15 @@ class HomeManager : MonoBehaviour
         if (loaded)
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            foreach (var singleton in singletons)
+                Destroy(singleton);
             return;
         }
 
+        foreach (var singleton in singletons)
+            DontDestroyOnLoad(singleton);
+
         loaded = true;
-        DontDestroyOnLoad(gameObject);
 
         levelManager.OnEnable();
         collectionManager.OnEnable();
@@ -51,10 +58,7 @@ class HomeManager : MonoBehaviour
         bool home = next.name == "Home";
 
         if (home)
-        {
-            CameraManager.Position = Vector2.zero;
             onHome.Invoke();
-        }
         onCheck.Invoke(home);
     }
 }

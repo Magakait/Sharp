@@ -17,15 +17,15 @@ public class CameraZoom : MonoBehaviour
 
     private void Awake()
     {
-        CameraManager.Camera.fieldOfView = minFOV;  
-        tween = CameraManager.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
+        CameraMain.Camera.fieldOfView = minFOV;  
+        tween = CameraMain.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
     }
 
     private void OnDestroy() =>
         tween.Kill();
 
     private void OnEnable() =>
-        CameraManager.Camera.fieldOfView = minFOV;
+        CameraMain.Camera.fieldOfView = minFOV;
 
     private void OnDisable()
     {
@@ -43,8 +43,8 @@ public class CameraZoom : MonoBehaviour
             tween
                 .ChangeValues
                 (
-                    CameraManager.Camera.fieldOfView,
-                    Mathf.Clamp(CameraManager.Camera.fieldOfView - scroll, minFOV, maxFOV)
+                    CameraMain.Camera.fieldOfView,
+                    Mathf.Clamp(CameraMain.Camera.fieldOfView - scroll, minFOV, maxFOV)
                 )
                 .Restart();
     }

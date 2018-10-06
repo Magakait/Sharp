@@ -36,7 +36,7 @@ public class EditorGrid : MonoBehaviour
 
     public static Vector2 MousePosition()
     {
-        Ray ray = CameraManager.Camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraMain.Camera.ScreenPointToRay(Input.mousePosition);
 
         float distance;
         plane.Raycast(ray, out distance);

@@ -17,7 +17,7 @@ public class EntranceObject : SerializableObject
     private void Start()
     {
         if ((string)CollectionManager.Meta["selected"] == Level)
-            CameraManager.Position = transform.position;
+            CameraFollow.Position = transform.position;
 
         if (Connected == 0 && Threshold > 0)
             gameObject.SetActive(false);
@@ -39,7 +39,7 @@ public class EntranceObject : SerializableObject
             CollectionManager.Meta["selected"] = Level;
             CollectionManager.Meta.Save();
 
-            CameraManager.Move(transform.position);
+            CameraFollow.Move(transform.position);
         }
     }
 

@@ -8,9 +8,9 @@ public class CameraTilt : MonoBehaviour
     private static readonly Vector3 offset = new Vector3(.5f, .5f, 0);
 
     private void Update() =>
-        CameraManager.Camera.transform.localPosition = scale *
-            (CameraManager.Camera.ScreenToViewportPoint(Input.mousePosition) - offset);
+        CameraMain.Camera.transform.localPosition = scale *
+            (CameraMain.Camera.ScreenToViewportPoint(Input.mousePosition) - offset);
 
     private void OnDisable() =>
-        CameraManager.Camera.transform.localPosition = Vector3.zero;
+        CameraMain.Camera.transform.localPosition = Vector3.zero;
 }

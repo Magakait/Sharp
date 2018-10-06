@@ -24,9 +24,9 @@ public class CameraMove : MonoBehaviour
         {
             DOTween.To
             (
-                () => CameraManager.Position, 
-                v => CameraManager.Position = v, 
-                (Vector2)EditorGrid.Clamp(CameraManager.Position + offset), 
+                () => CameraFollow.Position, 
+                v => CameraFollow.Position = v, 
+                (Vector2)EditorGrid.Clamp(CameraFollow.Position + offset), 
                 .35f * Constants.Time
             )
                 .SetAutoKill()

@@ -14,9 +14,9 @@ public class LayerToggle : MonoBehaviour
             visible = value;
 
             if (Visible)
-                CameraManager.Camera.cullingMask |= mask;
+                CameraMain.Camera.cullingMask |= mask;
             else
-                CameraManager.Camera.cullingMask &= ~mask;
+                CameraMain.Camera.cullingMask &= ~mask;
         }
     }
 

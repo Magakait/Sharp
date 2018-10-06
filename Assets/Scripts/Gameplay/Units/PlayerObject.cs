@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerObject : SerializableObject
 {
     private void Awake() =>
-        CameraManager.Position = transform.position;
+        CameraFollow.Position = transform.position;
 
     private void Start() =>
-        CameraManager.Target = transform;
+        CameraFollow.Target = transform;
 
     private void Update()
     {

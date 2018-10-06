@@ -25,7 +25,7 @@ public class CheckpointObject : SerializableObject
     public IEnumerator Spawn()
     {
         yield return new WaitForSeconds(2 * Constants.Time);
-        CameraManager.Move(transform.position);
+        CameraFollow.Move(transform.position);
         yield return new WaitForSeconds(2 * Constants.Time);
         LevelManager.AddInstance(0, transform.position);
     }

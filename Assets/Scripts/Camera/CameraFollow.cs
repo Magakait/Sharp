@@ -2,13 +2,9 @@ using UnityEngine;
 
 using DG.Tweening;
 
-public class CameraManager : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    [SerializeField]
-    private new Camera camera;
-    public static Camera Camera { get; private set; }
-
-    private static CameraManager main;
+    private static CameraFollow main;
 
     public static Transform Target { get; set; }
     private static Tweener tween;
@@ -16,16 +12,9 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         if (main)
-        {
-            Destroy(gameObject);
             return;
-        }
 
-        DontDestroyOnLoad(gameObject);
-
-        Camera = camera;
         main = this;
-
         tween = transform.DOMove(Position, 2 * Constants.Time);
     }
 
@@ -35,7 +24,7 @@ public class CameraManager : MonoBehaviour
             Move(Target.position);
     }
 
-    private static Vector3 Offset(Vector3 vector) =>
+    private static Vector3 Offset(Vector3 vector) => 
         new Vector3(vector.x, vector.y, -10);
 
     public static Vector2 Position
@@ -51,7 +40,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public static void Move(Vector3 destination) =>
+    public static void Move(Vector3 destination) => 
         tween
             .ChangeValues(main.transform.position, Offset(destination))
             .Restart();
