@@ -50,7 +50,10 @@ public class HunterObject : SerializableObject
         set
         {
             distance = value;
-            maskTransform.localScale = (1 + Distance * 2) * Vector3.one;
+            effectTransform.localScale = 2 * Distance * Vector3.one;
+            
+            foreach (var scaler in particleScalers)
+                scaler.Scale();
         }
     }
 
@@ -61,7 +64,7 @@ public class HunterObject : SerializableObject
         (
             players,
             transform.position,
-            maskTransform.localScale,
+            effectTransform.localScale,
             Constants.UnitMask
         );
 
@@ -73,7 +76,9 @@ public class HunterObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform maskTransform;
+    private Transform effectTransform;
+    [SerializeField]
+    private ParticleScalerComponent[] particleScalers;
 
     #endregion
 

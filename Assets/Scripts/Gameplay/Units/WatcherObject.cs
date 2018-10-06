@@ -42,7 +42,7 @@ public class WatcherObject : SerializableObject
         set
         {
             distance = value;
-            maskTransform.localScale = (1 + Distance * 2) * Vector3.one;
+            maskTransform.localScale = 2 * Distance * Vector3.one;
         }
     }
 

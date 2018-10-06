@@ -114,7 +114,7 @@ public class SwitcherObject : SerializableObject
         effectTransform.position = origin + .5f * offset;
         effectTransform.localScale = Vector2.one + new Vector2(Mathf.Abs(offset.x), Mathf.Abs(offset.y));
 
-        foreach (ParticleScalerComponent scaler in particleScalers)
+        foreach (var scaler in particleScalers)
             scaler.Scale();
     }
 
