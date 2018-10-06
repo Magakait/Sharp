@@ -26,7 +26,10 @@ public class MovableComponent : MonoBehaviour
         tweener.IsPlaying();
 
     [Space(10)]
-    public IntEvent onMove;
+    [SerializeField]
+    private IntEvent onMove;
+    [SerializeField]
+    private VoidEvent onComplete;
 
     [SerializeField]
     private float transition = .15f;
@@ -52,7 +55,8 @@ public class MovableComponent : MonoBehaviour
         tweener = rigidbody
             .DOMove(Position, 0)
             .SetEase(Ease.Linear)
-            .SetUpdate(UpdateType.Fixed);
+            .SetUpdate(UpdateType.Fixed)
+            .OnComplete(() => onComplete.Invoke());
     }
 
     private void OnDestroy() =>
