@@ -13,7 +13,7 @@ public class HunterObject : SerializableObject
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             body
-                .DOFade(.25f, Constants.Time)
+                .DOFade(.35f, Constants.Time)
         );
 
         mark.transform.SetParent(null);
@@ -124,15 +124,15 @@ public class HunterObject : SerializableObject
     #region serialization
 
     public override void Serialize(JToken token)
-    {
-        token["distance"] = Distance;
+    {   
         token["transition"] = movable.Transition;
+        token["distance"] = Distance;
     }
 
     public override void Deserialize(JToken token)
     {
-        Distance = (int)token["distance"];
         movable.Transition = (float)token["transition"];
+        Distance = (int)token["distance"];
     }
 
     #endregion
