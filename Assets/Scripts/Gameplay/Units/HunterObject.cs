@@ -13,7 +13,7 @@ public class HunterObject : SerializableObject
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             body
-                .DOFade(.35f, Constants.Time)
+                .DOFade(.4f, Constants.Time)
         );
 
         mark.transform.SetParent(null);
