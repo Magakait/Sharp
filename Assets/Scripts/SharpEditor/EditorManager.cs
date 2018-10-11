@@ -128,7 +128,7 @@ public class EditorManager : MonoBehaviour
     {
         LevelManager.Level.Delete();
 
-        if (CollectionManager.Levels.Count > 1)
+        if (CollectionManager.Levels.Count > 2)
             ListLevels(string.Empty);
         else
         {
