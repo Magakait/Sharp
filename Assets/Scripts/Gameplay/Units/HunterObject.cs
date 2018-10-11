@@ -45,10 +45,9 @@ public class HunterObject : SerializableObject
             mark.transform.position = new Vector3(destination.x, destination.y);
 
             ready = false;
-            Shift(false);
-            
-            rotator.Rotate(new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, destination - movable.Position)));
+
             movable.Move(destination);
+            rotator.Rotate(new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, destination - movable.Position)));
         }
     }
 
@@ -125,7 +124,7 @@ public class HunterObject : SerializableObject
     #region serialization
 
     public override void Serialize(JToken token)
-    {   
+    {
         token["transition"] = movable.Transition;
         token["distance"] = Distance;
     }
