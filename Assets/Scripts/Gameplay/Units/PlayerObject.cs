@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PlayerObject : SerializableObject
 {
-    private void Awake() =>
-        CameraFollow.Position = transform.position;
+    private void Awake() => CameraFollow.Position = transform.position;
 
-    private void Start() =>
-        CameraFollow.Target = transform;
+    private void Start() => CameraFollow.Target = transform;
 
     private void Update()
     {
@@ -34,6 +32,8 @@ public class PlayerObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
+    private SpriteRenderer icon;
+    [SerializeField]
     private ParticleSystem effect;
 
     [SerializeField]
@@ -52,6 +52,7 @@ public class PlayerObject : SerializableObject
                 movement = value;
                 Movement.Assign(movable);
 
+                icon.sprite = Movement.Icon;
                 Instantiate(effect, transform.position, Quaternion.identity);
             }
         }

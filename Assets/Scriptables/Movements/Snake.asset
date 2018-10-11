@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f4b3f2309f3ed44bfc9622e7c48514, type: 3}
   m_Name: Snake
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300004, guid: f42b9ff040880bd4c8bc13072975ce71, type: 3}

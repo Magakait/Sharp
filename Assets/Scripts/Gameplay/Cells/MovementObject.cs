@@ -19,7 +19,7 @@ public class MovementObject : SerializableObject
     [SerializeField]
     private BaseMovement[] movements;
     [SerializeField]
-    private Sprite[] sprites;
+    private SpriteRenderer[] icons;
 
     [Space(10)]
     [SerializeField]
@@ -33,7 +33,9 @@ public class MovementObject : SerializableObject
         private set
         {
             movement = value;
-            renderer.sprite = sprites[Movement];
+
+            foreach (var icon in icons)
+                icon.sprite = movements[Movement].Icon;
         }
     }
 
@@ -50,10 +52,6 @@ public class MovementObject : SerializableObject
             transition = value;
         }
     }
-
-    [Space(10)]
-    [SerializeField]
-    private new SpriteRenderer renderer;
 
     public override void Serialize(JToken token)
     {

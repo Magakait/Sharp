@@ -46,6 +46,7 @@ public class HunterObject : SerializableObject
 
             ready = false;
             Shift(false);
+            
             rotator.Rotate(new Vector3(0, 0, Vector2.SignedAngle(Vector2.up, destination - movable.Position)));
             movable.Move(destination);
         }
