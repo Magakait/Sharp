@@ -6,23 +6,45 @@ using Newtonsoft.Json.Linq;
 
 public class ZoomObject : SerializableObject
 {
-    private Tweener tweener;
+    private Tweener tween;
 
-    private void Awake() =>
-        tweener = CameraMain.Camera
-            .DOFieldOfView(Zoom, Constants.Time);
+    private void Awake()
+    {
+        tween = CameraMain.Camera.DOFieldOfView(CameraMain.Camera.fieldOfView, Constants.Time);
+
+        animation = gameObject.AddComponent<TweenArrayComponent>().Init
+        (
+            DOTween.Sequence().Insert
+            (
+                frame
+                    .DORotate(Constants.Eulers[1], Constants.Time)
+            )
+        );
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerObject>())
-            tweener
-                .ChangeValues(CameraMain.Camera.fieldOfView, Zoom)
-                .Restart();
+        {
+            var fieldOfView = 45 - 15 * Zoom;
 
+            tween.Kill();
+            tween = CameraMain.Camera
+                .DOFieldOfView(fieldOfView, Constants.Time)
+                .Play();
+
+            if (fieldOfView > 45)
+            {
+                animation[0].Complete();
+                animation[0].SmoothRewind();
+            }
+            else
+                animation[0].Restart();
+        }
     }
 
-    private void OnDestroy() => tweener.Kill();
+    private void OnDestroy() => tween.Kill();
 
     #region gameplay
 
@@ -47,9 +69,9 @@ public class ZoomObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
-    private Transform body;
-    [SerializeField]
     private Transform frame;
+
+    private new TweenArrayComponent animation;
 
     #endregion
 
