@@ -74,10 +74,7 @@ public class HunterObject : SerializableObject
         set
         {
             distance = value;
-            effectTransform.localScale = 2 * Distance * Vector3.one;
-
-            foreach (var scaler in particleScalers)
-                scaler.Scale();
+            area.Scale(2 * Distance * Vector3.one);
         }
     }
 
@@ -90,7 +87,7 @@ public class HunterObject : SerializableObject
         (
             players,
             transform.position,
-            effectTransform.localScale,
+            area.transform.localScale,
             Constants.UnitMask
         );
 
@@ -110,12 +107,8 @@ public class HunterObject : SerializableObject
     private ParticleSystem mark;
     [SerializeField]
     private SpriteRenderer body;
-
-    [Space(10)]
     [SerializeField]
-    private Transform effectTransform;
-    [SerializeField]
-    private ParticleScalerComponent[] particleScalers;
+    private ParticleScalerComponent area;
 
     private new TweenArrayComponent animation;
 

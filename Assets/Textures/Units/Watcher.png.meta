@@ -103,7 +103,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7e523a4bf3539e4a9a57a783b2265e1
+      spriteID: 98aacd0e61caf91439307b2117ebf4ce
       vertices: []
       indices: 
       edges: []
@@ -123,7 +123,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad864681f307e184c9aaf63793dc92ba
+      spriteID: 5fe46a3a9c32f8f4c87b5295b587e2fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Watcher_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9efef036383ba8a4280b735fd1f4c03e
       vertices: []
       indices: 
       edges: []
