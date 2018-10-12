@@ -4,11 +4,9 @@ using DG.Tweening;
 
 public class RotatorComponent : MonoBehaviour
 {
-    public float transition;
-
     private Tweener tweener;
 
-    private void Awake() => tweener = transform.DORotate(Vector3.zero, transition);
+    private void Awake() => tweener = transform.DORotate(Vector3.zero, Constants.Time);
 
     private void Start() => tweener.Complete();
 

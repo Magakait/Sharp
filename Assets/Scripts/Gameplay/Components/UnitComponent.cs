@@ -7,6 +7,7 @@ public class UnitComponent : MonoBehaviour
     [SerializeField]
     private bool virus;
     public bool Virus => virus;
+    
     [SerializeField]
     private bool killed;
     public bool Killed
