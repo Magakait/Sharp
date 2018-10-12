@@ -25,8 +25,6 @@ public class EntranceObject : SerializableObject
             canvas.gameObject.SetActive(false);
         else if (Passed)
             coreEffect.Emission(true);
-        else
-            haloEffect.Emission(true);
 
         enterButton.interactable = CollectionManager.Levels.Contains(Level);
         collider.radius = 1;
@@ -69,8 +67,6 @@ public class EntranceObject : SerializableObject
     [Header("Animation")]
     [SerializeField]
     private ParticleSystem coreEffect;
-    [SerializeField]
-    private ParticleSystem haloEffect;
     [SerializeField]
     private LineRenderer connectionLine;
 

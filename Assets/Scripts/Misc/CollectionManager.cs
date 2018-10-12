@@ -62,7 +62,7 @@ public class CollectionManager : ScriptableObject
         Meta.MoveTo(GetMetaFullName);
     }
 
-    public static void Delete() => directory.Delete();
+    public static void Delete() => directory.Delete(true);
 
     public static void UpdateLevels()
     {
