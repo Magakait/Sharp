@@ -585,7 +585,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00003468881
+      value: 0.000040737854
       objectReference: {fileID: 0}
     - target: {fileID: 224393501016118530, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -2927,7 +2927,6 @@ GameObject:
   m_Component:
   - component: {fileID: 405990973}
   - component: {fileID: 405990972}
-  - component: {fileID: 405990971}
   m_Layer: 5
   m_Name: Info
   m_TagString: Untagged
@@ -2935,18 +2934,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &405990971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 405990970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c3ee186035fe4dbf59ac14d58afa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 1
 --- !u!114 &405990972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11399,6 +11386,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 748226693}
+  - component: {fileID: 748226695}
+  - component: {fileID: 748226694}
   m_Layer: 5
   m_Name: Collection
   m_TagString: Untagged
@@ -11426,6 +11415,32 @@ RectTransform:
   m_AnchoredPosition: {x: 20, y: -20}
   m_SizeDelta: {x: 500, y: -40}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &748226694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748226692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a33e4f9e2b02d43b6b262ce4240098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 10
+  minFOV: 45
+  maxFOV: 90
+--- !u!114 &748226695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748226692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6c3ee186035fe4dbf59ac14d58afa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
 --- !u!1 &767746650
 GameObject:
   m_ObjectHideFlags: 0
@@ -17112,7 +17127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000026654167}
+  m_AnchoredPosition: {x: 0, y: 0.00005143595}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -18203,7 +18218,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 405990971}
+      - m_Target: {fileID: 748226695}
         m_MethodName: set_enabled
         m_Mode: 0
         m_Arguments:
@@ -18217,6 +18232,17 @@ MonoBehaviour:
       - m_Target: {fileID: 2140393272}
         m_MethodName: ResetCamera
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 748226694}
+        m_MethodName: set_enabled
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

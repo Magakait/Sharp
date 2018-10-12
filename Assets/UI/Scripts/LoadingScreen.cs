@@ -8,8 +8,6 @@ using UnityEngine.Events;
 public class LoadingScreen : MonoBehaviour
 {
     [SerializeField]
-    private float duration;
-    [SerializeField]
     private CanvasGroup canvas;
 
     private Tween tween;
@@ -25,7 +23,7 @@ public class LoadingScreen : MonoBehaviour
         main = this;
 
         tween = canvas
-            .DOFade(1, duration)
+            .DOFade(1, .15f)
             .SetEase(Ease.InOutQuad)
             .SetUpdate(true);
         tween.Complete();
@@ -42,11 +40,13 @@ public class LoadingScreen : MonoBehaviour
     private IEnumerator Transition(UnityAction action)
     {
         Play(false);
-        yield return new WaitForSecondsRealtime(duration);
+        yield return Wait();
         action.Invoke();
-        yield return new WaitForSecondsRealtime(duration);
+        yield return Wait();
         Play(true);
     }
+
+    private WaitForSecondsRealtime Wait() => new WaitForSecondsRealtime(tween.Duration());
 
     public static void MakeTransition(UnityAction action)
     {

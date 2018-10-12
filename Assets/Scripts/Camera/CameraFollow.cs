@@ -24,8 +24,7 @@ public class CameraFollow : MonoBehaviour
             Move(Target.position);
     }
 
-    private static Vector3 Offset(Vector3 vector) => 
-        new Vector3(vector.x, vector.y, -10);
+    private static Vector3 Offset(Vector3 vector) =>  new Vector3(vector.x, vector.y, -10);
 
     public static Vector2 Position
     {

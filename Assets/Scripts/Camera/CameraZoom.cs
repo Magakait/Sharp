@@ -15,23 +15,11 @@ public class CameraZoom : MonoBehaviour
 
     private Tweener tween;
 
-    private void Awake()
-    {
-        CameraMain.Camera.fieldOfView = minFOV;  
-        tween = CameraMain.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
-    }
+    private void Start() => tween = CameraMain.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
 
-    private void OnDestroy() =>
-        tween.Kill();
+    private void OnDestroy() => tween.Kill();
 
-    private void OnEnable() =>
-        CameraMain.Camera.fieldOfView = minFOV;
-
-    private void OnDisable()
-    {
-        OnEnable();
-        tween.Pause();
-    }
+    private void OnDisable() => tween.Pause();
 
     private void Update()
     {

@@ -10,7 +10,4 @@ public class CameraTilt : MonoBehaviour
     private void Update() =>
         CameraMain.Camera.transform.localPosition = scale *
             (CameraMain.Camera.ScreenToViewportPoint(Input.mousePosition) - offset);
-
-    private void OnDisable() =>
-        CameraMain.Camera.transform.localPosition = Vector3.zero;
 }
