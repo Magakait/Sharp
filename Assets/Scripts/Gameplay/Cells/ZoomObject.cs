@@ -10,7 +10,7 @@ public class ZoomObject : SerializableObject
 
     private void Awake()
     {
-        tween = CameraMain.Camera.DOFieldOfView(CameraMain.Camera.fieldOfView, Constants.Time);
+        tween = CameraManager.Camera.DOFieldOfView(CameraManager.Camera.fieldOfView, Constants.Time);
 
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
@@ -30,7 +30,7 @@ public class ZoomObject : SerializableObject
             var fieldOfView = 45 - 15 * Zoom;
 
             tween.Kill();
-            tween = CameraMain.Camera
+            tween = CameraManager.Camera
                 .DOFieldOfView(fieldOfView, Constants.Time)
                 .Play();
 

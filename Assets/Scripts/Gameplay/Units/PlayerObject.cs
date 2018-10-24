@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerObject : SerializableObject
 {
-    private void Awake() => CameraFollow.Position = transform.position;
+    private void Awake() => CameraManager.Position = transform.position;
 
     private void Start() => CameraFollow.Target = transform;
 

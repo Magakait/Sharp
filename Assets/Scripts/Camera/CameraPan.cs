@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-using DG.Tweening;
-
 public class CameraPan : MonoBehaviour
 {
     [SerializeField]
@@ -14,23 +12,13 @@ public class CameraPan : MonoBehaviour
         if (EngineUtility.IsInput)
             return;
 
-        var offset = Vector2.zero;
+        var move = Vector2.zero;
         for (var i = 0; i < 4; i++)
             if (Input.GetKey(keys[i]))
-                offset += Constants.Directions[i];
+                move += Constants.Directions[i];
 
-        offset *= scale;
-        if (offset != Vector2.zero)
-        {
-            DOTween.To
-            (
-                () => CameraFollow.Position, 
-                v => CameraFollow.Position = v, 
-                (Vector2)EditorGrid.Clamp(CameraFollow.Position + offset), 
-                .35f * Constants.Time
-            )
-                .SetAutoKill()
-                .Play();
-        }
+        move *= scale;
+        if (move != Vector2.zero)
+            CameraManager.Move(EditorGrid.Clamp(CameraManager.Position + move), .35f);
     }
 }

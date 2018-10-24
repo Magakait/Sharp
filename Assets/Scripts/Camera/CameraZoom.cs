@@ -1,7 +1,5 @@
 using UnityEngine;
 
-using DG.Tweening;
-
 public class CameraZoom : MonoBehaviour
 {
     [SerializeField]
@@ -13,14 +11,6 @@ public class CameraZoom : MonoBehaviour
     [SerializeField]
     private float maxFOV;
 
-    private Tweener tween;
-
-    private void Start() => tween = CameraMain.Camera.DOFieldOfView(minFOV, .35f * Constants.Time);
-
-    private void OnDestroy() => tween.Kill();
-
-    private void OnDisable() => tween.Pause();
-
     private void Update()
     {
         if (EngineUtility.IsOverUI)
@@ -28,12 +18,6 @@ public class CameraZoom : MonoBehaviour
 
         var scroll = scale * Input.mouseScrollDelta.y;
         if (scroll != 0)
-            tween
-                .ChangeValues
-                (
-                    CameraMain.Camera.fieldOfView,
-                    Mathf.Clamp(CameraMain.Camera.fieldOfView - scroll, minFOV, maxFOV)
-                )
-                .Restart();
+            CameraManager.Zoom(Mathf.Clamp(CameraManager.Camera.fieldOfView - scroll, minFOV, maxFOV));
     }
 }
