@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 using DG.Tweening;
 
@@ -69,7 +68,7 @@ public class CameraManager : MonoBehaviour
         );
     }
 
-    public void ResetCamera()
+    public void ResetProperties()
     {
         FieldOfView = 45;
         Position = Vector3.zero;
@@ -81,7 +80,7 @@ public class CameraManager : MonoBehaviour
             .ChangeValues(Position, position, scale * Constants.Time)
             .Restart();
 
-    public static void Zoom(float fieldOfView, float scale = 0.35f) =>
+    public static void Zoom(float fieldOfView, float scale = 1) =>
         zoomTweener
             .ChangeValues(FieldOfView, fieldOfView, scale * Constants.Time)
             .Restart();

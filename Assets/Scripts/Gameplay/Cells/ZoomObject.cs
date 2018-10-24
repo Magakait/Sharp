@@ -6,12 +6,8 @@ using Newtonsoft.Json.Linq;
 
 public class ZoomObject : SerializableObject
 {
-    private Tweener tween;
-
     private void Awake()
     {
-        tween = CameraManager.Camera.DOFieldOfView(CameraManager.Camera.fieldOfView, Constants.Time);
-
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             DOTween.Sequence().Insert
@@ -28,11 +24,7 @@ public class ZoomObject : SerializableObject
         if (collision.GetComponent<PlayerObject>())
         {
             var fieldOfView = 45 - 15 * Zoom;
-
-            tween.Kill();
-            tween = CameraManager.Camera
-                .DOFieldOfView(fieldOfView, Constants.Time)
-                .Play();
+            CameraManager.Zoom(fieldOfView);
 
             if (fieldOfView > 45)
             {
@@ -43,8 +35,6 @@ public class ZoomObject : SerializableObject
                 animation[0].Restart();
         }
     }
-
-    private void OnDestroy() => tween.Kill();
 
     #region gameplay
 

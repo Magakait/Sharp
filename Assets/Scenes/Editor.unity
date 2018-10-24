@@ -986,7 +986,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000024855499
+      value: 0.000029737672
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -7033,8 +7033,6 @@ GameObject:
   - component: {fileID: 1410719125}
   - component: {fileID: 1410719124}
   - component: {fileID: 1410719123}
-  - component: {fileID: 1410719126}
-  - component: {fileID: 1410719122}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -7042,23 +7040,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1410719122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1410719120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b52a4c544810f84438ed3c74b1cbf3ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 1
-  keys:
-  - {fileID: 11400000, guid: 31b7af95854231d47b742cae4f8427bf, type: 2}
-  - {fileID: 11400000, guid: 48a2fc27a8a8edf4da2809c5e847a86b, type: 2}
-  - {fileID: 11400000, guid: c16990673ebfacb4da575862ded9da1a, type: 2}
-  - {fileID: 11400000, guid: 2d00cf3a39877b84c9a559daefc52453, type: 2}
 --- !u!114 &1410719123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7130,20 +7111,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1410719126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1410719120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a33e4f9e2b02d43b6b262ce4240098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 10
-  minFOV: 45
-  maxFOV: 135
 --- !u!1 &1418370410
 GameObject:
   m_ObjectHideFlags: 0
@@ -9974,7 +9941,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000007565303
+      value: 0.00005880576
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name

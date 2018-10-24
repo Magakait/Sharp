@@ -585,7 +585,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00006048652
+      value: 0.0000644875
       objectReference: {fileID: 0}
     - target: {fileID: 224393501016118530, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -1972,8 +1972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52a4c544810f84438ed3c74b1cbf3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 0
-  keys: []
+  scale: 1
+  keys:
+  - {fileID: 11400000, guid: 31b7af95854231d47b742cae4f8427bf, type: 2}
+  - {fileID: 11400000, guid: 48a2fc27a8a8edf4da2809c5e847a86b, type: 2}
+  - {fileID: 11400000, guid: c16990673ebfacb4da575862ded9da1a, type: 2}
+  - {fileID: 11400000, guid: 2d00cf3a39877b84c9a559daefc52453, type: 2}
 --- !u!114 &298274600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16964,7 +16968,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 0.9999992
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17040,7 +17044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00005945314}
+  m_AnchoredPosition: {x: 0, y: 0.00006165442}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -18130,31 +18134,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: set_enabled
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2140393272}
-        m_MethodName: ResetCamera
+        m_MethodName: ResetProperties
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: set_enabled
-        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
