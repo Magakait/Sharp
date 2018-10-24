@@ -7,6 +7,8 @@ public class CameraPan : MonoBehaviour
     [SerializeField]
     private KeyVariable[] keys;
 
+    private void Awake() => CameraModules.Pan.scale = scale;
+
     private void Update()
     {
         if (EngineUtility.IsInput)

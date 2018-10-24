@@ -11,6 +11,15 @@ public class CameraZoom : MonoBehaviour
     [SerializeField]
     private float maxFOV;
 
+    private void Awake()
+    {
+        CameraModules.Zoom.scale = scale;
+        CameraModules.Zoom.minFOV = minFOV;
+        CameraModules.Zoom.maxFOV = maxFOV;
+    }
+
+    private void Start() => CameraManager.FieldOfView = minFOV;
+
     private void Update()
     {
         if (EngineUtility.IsOverUI)
@@ -18,6 +27,6 @@ public class CameraZoom : MonoBehaviour
 
         var scroll = scale * Input.mouseScrollDelta.y;
         if (scroll != 0)
-            CameraManager.Zoom(Mathf.Clamp(CameraManager.Camera.fieldOfView - scroll, minFOV, maxFOV));
+            CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV));
     }
 }

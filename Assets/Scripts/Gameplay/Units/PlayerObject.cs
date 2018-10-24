@@ -6,7 +6,7 @@ public class PlayerObject : SerializableObject
 {
     private void Awake() => CameraManager.Position = transform.position;
 
-    private void Start() => CameraFollow.Target = transform;
+    private void Start() => CameraModules.Follow.Target = transform;
 
     private void Update()
     {
