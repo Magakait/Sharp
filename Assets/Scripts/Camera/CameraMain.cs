@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Camera))]
 public class CameraMain : MonoBehaviour
 {
-    [SerializeField]
-    private new Camera camera;
     public static Camera Camera { get; private set; }
 
     private void Awake()
@@ -12,7 +11,7 @@ public class CameraMain : MonoBehaviour
         if (Camera)
             return;
 
-        Camera = camera;
+        Camera = GetComponent<Camera>();
     }
 
     public void ResetCamera()

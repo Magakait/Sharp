@@ -2,7 +2,7 @@
 
 using DG.Tweening;
 
-public class CameraMove : MonoBehaviour
+public class CameraPan : MonoBehaviour
 {
     [SerializeField]
     private float scale;
