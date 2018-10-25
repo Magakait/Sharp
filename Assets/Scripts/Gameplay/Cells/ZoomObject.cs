@@ -12,8 +12,16 @@ public class ZoomObject : SerializableObject
         (
             DOTween.Sequence().Insert
             (
-                frame
-                    .DORotate(Constants.Eulers[1], Constants.Time)
+                frameIn.DORotate(Constants.Eulers[1], Constants.Time),
+                frameOut.DORotate(-Constants.Eulers[1], Constants.Time)
+            ),
+            DOTween.Sequence().Insert
+            (
+                frameIn.DOScale(0, Constants.Time)
+            ),
+            DOTween.Sequence().Insert
+            (
+                frameOut.DOScale(0, Constants.Time)
             )
         );
     }
@@ -22,16 +30,8 @@ public class ZoomObject : SerializableObject
     {
         if (collision.GetComponent<PlayerObject>())
         {
-            var fieldOfView = 45 - 15 * Zoom;
-            CameraManager.Zoom(fieldOfView);
-
-            if (fieldOfView > 45)
-            {
-                animation[0].Complete();
-                animation[0].SmoothRewind();
-            }
-            else
-                animation[0].Restart();
+            CameraManager.Zoom(45 - 15 * Zoom);
+            animation[0].Restart();
         }
     }
 
@@ -49,6 +49,9 @@ public class ZoomObject : SerializableObject
         private set
         {
             zoom = value;
+
+            animation[1].Play(Zoom >= 0);
+            animation[2].Play(Zoom <= 0);
         }
     }
 
@@ -58,7 +61,9 @@ public class ZoomObject : SerializableObject
 
     [Space(10)]
     [SerializeField]
-    private Transform frame;
+    private Transform frameIn;
+    [SerializeField]
+    private Transform frameOut;
 
     private new TweenArrayComponent animation;
 
