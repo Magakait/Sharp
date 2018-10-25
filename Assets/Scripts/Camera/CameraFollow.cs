@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform Target { get; set; }
+    public static Transform Target { get; set; }
 
     private void Update()
     {

@@ -986,7 +986,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000029737672
+      value: 0.000003606898
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -9941,7 +9941,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00005880576
+      value: 0.0000065442114
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -11022,6 +11022,49 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2050512179}
   m_Script: {fileID: 2109663825, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &2058828483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2058828485}
+  - component: {fileID: 2058828484}
+  m_Layer: 10
+  m_Name: CameraProfile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2058828484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2058828483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30a5de05c0c92a40872fb82d7b2dab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pan: 1
+  tilt: 1
+  zoom: 1
+--- !u!4 &2058828485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2058828483}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074501336
 GameObject:
   m_ObjectHideFlags: 0

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 19
-  zoom: 45
+  zoom: 0
   frame: {fileID: 4893964868264806}
 --- !u!212 &212080386868427168
 SpriteRenderer:

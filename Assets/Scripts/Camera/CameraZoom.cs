@@ -10,16 +10,7 @@ public class CameraZoom : MonoBehaviour
     private float minFOV;
     [SerializeField]
     private float maxFOV;
-
-    private void Awake()
-    {
-        CameraModules.Zoom.scale = scale;
-        CameraModules.Zoom.minFOV = minFOV;
-        CameraModules.Zoom.maxFOV = maxFOV;
-    }
-
-    private void Start() => CameraManager.FieldOfView = minFOV;
-
+    
     private void Update()
     {
         if (EngineUtility.IsOverUI)
