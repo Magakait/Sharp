@@ -18,6 +18,6 @@ public class CameraZoom : MonoBehaviour
 
         var scroll = scale * Input.mouseScrollDelta.y;
         if (scroll != 0)
-            CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV));
+            CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV), .35f);
     }
 }
