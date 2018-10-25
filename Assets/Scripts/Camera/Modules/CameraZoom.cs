@@ -10,7 +10,7 @@ public class CameraZoom : MonoBehaviour
     private float minFOV;
     [SerializeField]
     private float maxFOV;
-    
+
     private void Update()
     {
         if (EngineUtility.IsOverUI)
@@ -20,4 +20,6 @@ public class CameraZoom : MonoBehaviour
         if (scroll != 0)
             CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV), .35f);
     }
+
+    private void OnDisable() => CameraManager.FieldOfView = minFOV;
 }

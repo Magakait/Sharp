@@ -68,13 +68,6 @@ public class CameraManager : MonoBehaviour
         );
     }
 
-    public void ResetProperties()
-    {
-        FieldOfView = 45;
-        Position = Vector3.zero;
-        Rotation = Vector3.zero;
-    }
-
     public static void Move(Vector2 position, float scale = 2) =>
         positionTweener
             .ChangeValues(Position, position, scale * Constants.Time)

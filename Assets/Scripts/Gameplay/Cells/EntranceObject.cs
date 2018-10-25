@@ -19,11 +19,7 @@ public class EntranceObject : SerializableObject
     {
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
-            DOTween.Sequence().Insert
-            (
-                frame
-                    .DOScale(1.25f, .15f)
-            )
+            DOTween.Sequence().Insert(frame.DOScale(1.25f, .15f))
         );
     }
 
@@ -43,9 +39,17 @@ public class EntranceObject : SerializableObject
         collider.radius = 1;
     }
 
-    private void OnMouseEnter() => animation[0].Play(false);
+    private void OnMouseEnter()
+    {
+        if (enabled)
+            animation[0].Play(false);
+    }
 
-    private void OnMouseExit() => animation[0].Play(true);
+    private void OnMouseExit()
+    {
+        if (enabled)
+            animation[0].Play(true);
+    }
 
     private void OnMouseDown()
     {
