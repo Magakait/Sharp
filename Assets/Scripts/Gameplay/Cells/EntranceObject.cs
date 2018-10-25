@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
 public class EntranceObject : SerializableObject
@@ -13,6 +14,18 @@ public class EntranceObject : SerializableObject
     private new CircleCollider2D collider;
 
     public bool Passed { get; private set; }
+
+    private void Awake()
+    {
+        animation = gameObject.AddComponent<TweenArrayComponent>().Init
+        (
+            DOTween.Sequence().Insert
+            (
+                frame
+                    .DOScale(1.25f, .15f)
+            )
+        );
+    }
 
     private void Start()
     {
@@ -29,6 +42,10 @@ public class EntranceObject : SerializableObject
         enterButton.interactable = CollectionManager.Levels.Contains(Level);
         collider.radius = 1;
     }
+
+    private void OnMouseEnter() => animation[0].Play(false);
+
+    private void OnMouseExit() => animation[0].Play(true);
 
     private void OnMouseDown()
     {
@@ -66,6 +83,8 @@ public class EntranceObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
+    private Transform frame;
+    [SerializeField]
     private ParticleSystem coreEffect;
     [SerializeField]
     private LineRenderer connectionLine;
@@ -79,6 +98,8 @@ public class EntranceObject : SerializableObject
     private Text descriptionText;
     [SerializeField]
     private Button enterButton;
+
+    private new TweenArrayComponent animation;
 
     #endregion
 

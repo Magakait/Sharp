@@ -382,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 11
   collider: {fileID: 58645538801001102}
+  frame: {fileID: 4091460504586536}
   coreEffect: {fileID: 198885050216963842}
   connectionLine: {fileID: 120760523166981242}
   canvas: {fileID: 223271237410657112}
