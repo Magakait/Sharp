@@ -68,6 +68,12 @@ public class CameraManager : MonoBehaviour
         );
     }
 
+    public void Stop()
+    {
+        positionTweener.Pause();
+        zoomTweener.Pause();
+    }
+
     public static void Move(Vector2 position, float scale = 2) =>
         positionTweener
             .ChangeValues(Position, position, scale * Constants.Time)

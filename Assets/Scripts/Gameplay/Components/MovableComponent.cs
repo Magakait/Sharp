@@ -19,11 +19,9 @@ public class MovableComponent : MonoBehaviour
             Stop();
         }
     }
-    public Vector2 IntPosition =>
-        Vector2Int.RoundToInt(Position);
+    public Vector2 IntPosition => Vector2Int.RoundToInt(Position);
 
-    public bool IsMoving =>
-        tweener.IsPlaying();
+    public bool IsMoving => tweener.IsPlaying();
 
     [Space(10)]
     [SerializeField]
@@ -59,11 +57,9 @@ public class MovableComponent : MonoBehaviour
             .OnComplete(() => onComplete.Invoke());
     }
 
-    private void OnDestroy() =>
-        tweener.Kill();
+    private void OnDestroy() => tweener.Kill();
 
-    public void Stop() =>
-        tweener.Pause();
+    public void Stop() => tweener.Pause();
 
     public bool CanMove(int direction) =>
         CanMove(IntPosition + Constants.Directions[direction]);
