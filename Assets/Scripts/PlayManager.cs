@@ -2,27 +2,36 @@
 
 public class PlayManager : MonoBehaviour
 {
+    [SerializeField]
+    private BoolEvent onPause;
+
     private void Awake()
     {
         LevelManager.InstantiateAll();
         SetCursor(false);
     }
 
-    public void TogglePause()
-    {
-        Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-        SetCursor(Time.timeScale == 0);
-    }
-
     private void SetCursor(bool value)
     {
         Cursor.visible = value;
-        Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
+    private void SetTime(bool value) => Time.timeScale = value ? 1 : 0;
+
+    public void TogglePause()
+    {
+        bool pause = Time.timeScale != 0;
+
+        SetTime(!pause);
+        SetCursor(pause);
+
+        onPause.Invoke(pause);
     }
 
     private void OnDestroy()
     {
-        Time.timeScale = 1;
+        SetTime(true);
         SetCursor(true);
     }
 }
