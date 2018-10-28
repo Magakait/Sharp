@@ -8,11 +8,7 @@ public class EditorGrid : MonoBehaviour
     {
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
-            DOTween.Sequence().Insert
-            (
-                spriteRenderer
-                    .DOFade(0, .15f)
-            )
+            DOTween.Sequence().Insert(spriteRenderer.DOFade(0, .2f))
         );
 
         spriteRenderer.size = Vector2.one * (halfSide * 2 + 1);

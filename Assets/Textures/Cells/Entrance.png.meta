@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 0
@@ -100,7 +100,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc2c6efd684ed0848b8bab2acb7f1923
+      spriteID: b078723ec79017243b410fa9697df408
       vertices: []
       indices: 
       edges: []
@@ -120,7 +120,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7496b402d7e1714bbd86cd98092bfbd
+      spriteID: 453019af220a70f43a7add8d05e95cbf
       vertices: []
       indices: 
       edges: []

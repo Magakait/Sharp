@@ -8,16 +8,8 @@ public class EditorHighlight : MonoBehaviour
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
-            DOTween.Sequence().Insert
-            (
-                frameSprite
-                    .DOFade(1, .15f)
-            ),
-            DOTween.Sequence().Insert
-            (
-                selectionSprite
-                    .DOFade(0, .15f)
-            )
+            DOTween.Sequence().Insert(frameSprite.DOFade(1, .2f)),
+            DOTween.Sequence().Insert(selectionSprite.DOFade(0, .2f))
         );
 
     private void Update()

@@ -15,13 +15,11 @@ public class EntranceObject : SerializableObject
 
     public bool Passed { get; private set; }
 
-    private void Awake()
-    {
+    private void Awake() => 
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
-            DOTween.Sequence().Insert(frame.DOScale(1.25f, .15f))
+            DOTween.Sequence().Insert(frame.DOFade(0, .2f).From())
         );
-    }
 
     private void Start()
     {
@@ -87,7 +85,7 @@ public class EntranceObject : SerializableObject
 
     [Header("Animation")]
     [SerializeField]
-    private Transform frame;
+    private SpriteRenderer frame;
     [SerializeField]
     private ParticleSystem coreEffect;
     [SerializeField]
