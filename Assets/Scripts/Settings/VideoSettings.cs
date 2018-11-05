@@ -8,7 +8,6 @@ public class VideoSettings : MonoBehaviour
 {
     private void Awake()
     {
-        //Application.targetFrameRate = 120;
         file.Load(Constants.SettingsRoot + "Video.json");
         Load();
     }
@@ -52,7 +51,7 @@ public class VideoSettings : MonoBehaviour
 
     public void VSync(bool value) => QualitySettings.vSyncCount = value ? 1 : 0;
 
-    public void TargetFps(int value) => Application.targetFrameRate = 30 * value;
+    public void TargetFps(int value) => Application.targetFrameRate = 30 * (value + 1);
 
     #endregion
 
