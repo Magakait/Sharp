@@ -51,7 +51,7 @@ public class VideoSettings : MonoBehaviour
 
     public void VSync(bool value) => QualitySettings.vSyncCount = value ? 1 : 0;
 
-    public void TargetFps(int value) => Application.targetFrameRate = 30 * (value + 1);
+    public void TargetFps(int value) => Application.targetFrameRate = 30 * (value + 2);
 
     #endregion
 
