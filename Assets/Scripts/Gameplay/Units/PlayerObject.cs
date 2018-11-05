@@ -102,7 +102,6 @@ public class PlayerObject : SerializableObject
     private void Move()
     {
         bool moved = false;
-        moves.Reverse();
 
         foreach (var i in moves)
             if (movable.CanMove(i))

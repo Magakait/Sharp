@@ -42,7 +42,11 @@ public class PortalObject : SerializableObject
         {
             MovableComponent movable = collision.GetComponent<MovableComponent>();
             if (movable)
+            {
                 Teleport(movable);
+                if (movable.GetComponent<PlayerObject>())
+                    CameraManager.Position = Destination;
+            }
         }
     }
 
