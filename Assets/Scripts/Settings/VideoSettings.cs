@@ -8,7 +8,7 @@ public class VideoSettings : MonoBehaviour
 {
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        //Application.targetFrameRate = 120;
         file.Load(Constants.SettingsRoot + "Video.json");
         Load();
     }
@@ -18,8 +18,10 @@ public class VideoSettings : MonoBehaviour
 
     #region resolution
 
-    public JsonFile file;
-    public Dropdown dropdownResolutions;
+    [SerializeField]
+    private JsonFile file;
+    [SerializeField]
+    private Dropdown dropdownResolutions;
 
     private Resolution[] resolutions;
 
@@ -35,7 +37,6 @@ public class VideoSettings : MonoBehaviour
                 .Select(i => $"{i.width} x {i.height}")
                 .ToList()
         );
-
         dropdownResolutions.RefreshShownValue();
     }
 
@@ -47,9 +48,18 @@ public class VideoSettings : MonoBehaviour
 
     #endregion
 
+    #region render
+
+    public void VSync(bool value) => QualitySettings.vSyncCount = value ? 1 : 0;
+
+    public void TargetFps(int value) => Application.targetFrameRate = 30 * value;
+
+    #endregion
+
     #region effects
 
-    public PostProcessProfile postProcessProfile;
+    [SerializeField]
+    private PostProcessProfile postProcessProfile;
 
     private void ToggleEffect<T>(bool enabled) where T : PostProcessEffectSettings
     {
