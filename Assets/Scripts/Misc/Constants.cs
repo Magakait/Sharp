@@ -58,7 +58,8 @@ public static class Constants
         Quaternion.Euler(Eulers[3])
     };
 
-    public static readonly string CollectionRoot = "Collections\\";
-    public static readonly string EditorRoot = "Editor\\";
-    public static readonly string SettingsRoot = "Settings\\";
+    public static readonly string Root = Application.isEditor ? "Build\\" : string.Empty;
+    public static readonly string CollectionRoot = Root + "Collections\\";
+    public static readonly string EditorRoot = Root + "Editor\\";
+    public static readonly string SettingsRoot = Root + "Settings\\";
 }
