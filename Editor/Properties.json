@@ -1,0 +1,255 @@
+{
+  "3": [
+    {
+      "type": 2,
+      "name": "target",
+      "attributes": {}
+    }
+  ],
+  "4": [
+    {
+      "type": 0,
+      "name": "spread",
+      "attributes": {}
+    }
+  ],
+  "5": [
+    {
+      "type": 0,
+      "name": "open",
+      "attributes": {}
+    }
+  ],
+  "7": [
+    {
+      "type": 0,
+      "name": "enter",
+      "attributes": {}
+    },
+    {
+      "type": 0,
+      "name": "exit",
+      "attributes": {}
+    },
+    {
+      "type": 2,
+      "name": "origin",
+      "attributes": {}
+    },
+    {
+      "type": 2,
+      "name": "offset",
+      "attributes": {}
+    }
+  ],
+  "8": [
+    {
+      "type": 5,
+      "name": "direction",
+      "attributes": {}
+    }
+  ],
+  "9": [
+    {
+      "type": 2,
+      "name": "destination",
+      "attributes": {}
+    },
+    {
+      "type": 0,
+      "name": "active",
+      "attributes": {}
+    }
+  ],
+  "10": [
+    {
+      "type": 3,
+      "name": "text",
+      "attributes": {
+        "multiline": true
+      }
+    },
+    {
+      "type": 2,
+      "name": "size",
+      "attributes": {}
+    },
+    {
+      "type": 2,
+      "name": "offset",
+      "attributes": {}
+    },
+    {
+      "type": 0,
+      "name": "persistent",
+      "attributes": {}
+    }
+  ],
+  "11": [
+    {
+      "type": 3,
+      "name": "level",
+      "attributes": {
+        "multiline": false
+      }
+    },
+    {
+      "type": 3,
+      "name": "description",
+      "attributes": {
+        "multiline": true
+      }
+    },
+    {
+      "type": 1,
+      "name": "threshold",
+      "attributes": {
+        "decimals": 0,
+        "range": {
+          "min": 0,
+          "max": 7
+        }
+      }
+    },
+    {
+      "type": 3,
+      "name": "connections",
+      "attributes": {
+        "multiline": true
+      }
+    }
+  ],
+  "12": [
+    {
+      "type": 1,
+      "name": "transition",
+      "attributes": {
+        "decimals": 2,
+        "range": {
+          "min": 0.1,
+          "max": 1.5
+        }
+      }
+    },
+    {
+      "type": 6,
+      "name": "sequence",
+      "attributes": {}
+    }
+  ],
+  "13": [
+    {
+      "type": 1,
+      "name": "distance",
+      "attributes": {
+        "decimals": 0,
+        "range": {
+          "min": 0,
+          "max": 5
+        }
+      }
+    },
+    {
+      "type": 1,
+      "name": "delay",
+      "attributes": {
+        "decimals": 1,
+        "range": {
+          "min": 0.2,
+          "max": 5
+        }
+      }
+    }
+  ],
+  "14": [
+    {
+      "type": 0,
+      "name": "active",
+      "attributes": {}
+    }
+  ],
+  "16": [
+    {
+      "type": 5,
+      "name": "direction",
+      "attributes": {}
+    },
+    {
+      "type": 1,
+      "name": "distance",
+      "attributes": {
+        "decimals": 0,
+        "range": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    {
+      "type": 0,
+      "name": "persistent",
+      "attributes": {}
+    }
+  ],
+  "17": [
+    {
+      "type": 4,
+      "name": "movement",
+      "attributes": {
+        "options": [
+          "Base",
+          "Snake",
+          "Slide"
+        ]
+      }
+    },
+    {
+      "type": 1,
+      "name": "transition",
+      "attributes": {
+        "decimals": 2,
+        "range": {
+          "min": 0.1,
+          "max": 1.5
+        }
+      }
+    }
+  ],
+  "18": [
+    {
+      "type": 1,
+      "name": "transition",
+      "attributes": {
+        "decimals": 2,
+        "range": {
+          "min": 0.1,
+          "max": 1.5
+        }
+      }
+    },
+    {
+      "type": 1,
+      "name": "distance",
+      "attributes": {
+        "decimals": 0,
+        "range": {
+          "min": 1,
+          "max": 5
+        }
+      }
+    }
+  ],
+  "19": [
+    {
+      "type": 1,
+      "name": "zoom",
+      "attributes": {
+        "decimals": 0,
+        "range": {
+          "min": -2,
+          "max": 2
+        }
+      }
+    }
+  ]
+}

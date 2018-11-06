@@ -1,0 +1,2666 @@
+[
+  {
+    "id": 0,
+    "position": {
+      "x": 1,
+      "y": -9
+    },
+    "properties": {}
+  },
+  {
+    "id": 1,
+    "position": {
+      "x": 0,
+      "y": 27
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -9
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 1,
+      "y": -12
+    },
+    "properties": {
+      "text": "You are born.\n\nTry moving with WASD",
+      "size": {
+        "x": 100,
+        "y": 100
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -12
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": -4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -1
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 6,
+      "y": 11
+    },
+    "properties": {
+      "text": "Psst. Hey. Over here. ",
+      "size": {
+        "x": 200,
+        "y": 70
+      },
+      "offset": {
+        "x": 0,
+        "y": -300
+      },
+      "persistent": true
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 7,
+      "y": 7
+    },
+    "properties": {
+      "text": "<size=15>Good. Locamotion, language recognition, direction following... all check out so far.</size> ",
+      "size": {
+        "x": 230,
+        "y": 100
+      },
+      "offset": {
+        "x": 0,
+        "y": -100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 9,
+      "y": 7
+    },
+    "properties": {
+      "text": "I know, existence is terrifying, but I'm here to help you out. Let's just take things slowly.\n<size=10><color=orange>Try to calm down.</color></size>\n",
+      "size": {
+        "x": 230,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 3,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 5,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 6,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 5,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 6,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 8,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 10,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 12,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 11,
+      "y": 7
+    },
+    "properties": {
+      "text": "<size=14a>Those little diamonds are called <b>Nodes</b>, the most basic kind of <b>Cell</b>. They're useful for getting around but that's it. Other Cells are more complex in function.</size>",
+      "size": {
+        "x": 270,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 11,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 12,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 11,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 12,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 13,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 13,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 13,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 11,
+      "y": 6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 12,
+      "y": 6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 12,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 13,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 13,
+      "y": 6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 13,
+      "y": 5
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 12,
+      "y": 5
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 11,
+      "y": 5
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 14,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 16,
+      "y": 5
+    },
+    "properties": {
+      "text": "...Like these <b>Log</b> cells. Standing on one helps you to hear me.\n\n<size=10>I mean sure, you <i>could</i> skip over these but I don't want to hear you whining later because you don't know what's going on. And you won't.\n</size>",
+      "size": {
+        "x": 180,
+        "y": 150
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 9
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 10
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 2
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 1
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 0
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -2
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -3
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": -4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": -5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": -5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": -6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": -6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": -8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 4
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 2
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 2
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 3
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 0
+    },
+    "properties": {}
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 7,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 3,
+      "y": 7
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 19,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 20,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 21,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 22,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 5
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 19,
+      "y": 6
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 20,
+      "y": 7
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 23,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 8
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 9
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 10
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 11
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 12
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 13
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 24,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 23,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 22,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 21,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 20,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 19,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 14
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 15
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 16
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 17
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 19
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 20
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 16,
+      "y": 18
+    },
+    "properties": {
+      "text": "Life is full of dead-ends. This isn't one of them. Take an extra step or two and see what happens.",
+      "size": {
+        "x": 150,
+        "y": 140
+      },
+      "offset": {
+        "x": 130,
+        "y": 0
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 20
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 20
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 21
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 21
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 21
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 21
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 14,
+      "y": 21
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 14,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 18,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 16,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 15,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 14,
+      "y": 22
+    },
+    "properties": {
+      "text": "Being thorough never hurts, does it?",
+      "size": {
+        "x": 130,
+        "y": 100
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 16,
+      "y": 20
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 15,
+      "y": 20
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 17,
+      "y": 20
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 15,
+      "y": 21
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 14,
+      "y": 21
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 14,
+      "y": 22
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 15,
+      "y": 22
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 15,
+      "y": 23
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 14,
+      "y": 23
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 15,
+      "y": 24
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 16,
+      "y": 24
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 16,
+      "y": 23
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 17,
+      "y": 23
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 17,
+      "y": 24
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 17,
+      "y": 22
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 16,
+      "y": 22
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 16,
+      "y": 21
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 17,
+      "y": 21
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 18,
+      "y": 21
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 18,
+      "y": 22
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 18,
+      "y": 23
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 13,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 12,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 11,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 9,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 10,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 8,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 7,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 6,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 13,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 12,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 11,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 10,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 9,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 8,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 7,
+      "y": 22
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 5,
+      "y": 22
+    },
+    "properties": {
+      "text": "I know you have questions. You're doing good. Not much further now.",
+      "size": {
+        "x": 230,
+        "y": 100
+      },
+      "offset": {
+        "x": 0,
+        "y": -100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 3,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -1,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -3,
+      "y": 22
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 23
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 25
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 26
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 27
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 28
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 29
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -4,
+      "y": 30
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -3,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -1,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 3,
+      "y": 31
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 30
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 29
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 25
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 26
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 27
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 4,
+      "y": 28
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 3,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -1,
+      "y": 24
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 25
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 26
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 27
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -2,
+      "y": 28
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 0,
+      "y": 29
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 29
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 28
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 2,
+      "y": 27
+    },
+    "properties": {}
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 1,
+      "y": 26
+    },
+    "properties": {}
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 23
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 25
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 26
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 27
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 28
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 29
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -4,
+      "y": 30
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -3,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -1,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -2,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 3,
+      "y": 31
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 30
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 29
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 28
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 27
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 26
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 25
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 3,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -1,
+      "y": 24
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -2,
+      "y": 25
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -2,
+      "y": 26
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -2,
+      "y": 27
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -2,
+      "y": 28
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": -4,
+      "y": 22
+    },
+    "properties": {
+      "text": "OK I see you're having a straight-up existential crisis. It's a bit early for all that. We have plenty of time later to talk about what's going on.",
+      "size": {
+        "x": 140,
+        "y": 200
+      },
+      "offset": {
+        "x": -120,
+        "y": 0
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": -1,
+      "y": 29
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": 29
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": 29
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": 28
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": 27
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": 26
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": 26
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": 27
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 0,
+      "y": 26
+    },
+    "properties": {
+      "text": "<size=13>By the way, if you see a popup dialog on-screen you can just slap the <b>space bar</b>.\n\nBonus: try using the direction keys to activate menu items on the pause screen. Aren't shortcuts fun?\n</size>",
+      "size": {
+        "x": 190,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": -110
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": -4,
+      "y": 31
+    },
+    "properties": {
+      "text": "<size=13>Alright, spoilers: you're an <b>AI</b> designed to navigate fractured computer systems effected by <color=red>The Event</color> and scavenge any remaining useful data you can find so we can try to piece together what the heck actually happened. There's your meaning to your existence.\n</size>",
+      "size": {
+        "x": 230,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": 110
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": -1,
+      "y": 29
+    },
+    "properties": {}
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 4,
+      "y": 31
+    },
+    "properties": {
+      "text": "<size=13> <color=red>\"The Event\"</color> is an accurate title for a thing that happened. We’re not sure what it was but we do know that things were different after The Event than they were before. Somehow. We were deployed to try to figure out as much as we can about that. \n</size>",
+      "size": {
+        "x": 150,
+        "y": 200
+      },
+      "offset": {
+        "x": 125,
+        "y": 0
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 4,
+      "y": 24
+    },
+    "properties": {
+      "text": "<size=13>As an <b>AI</b> you have the ability to travel across a vast network of interconnected devices created by <color=grey>Humans</color> to various points of interest where we may hope to find useful residual data. </size>",
+      "size": {
+        "x": 200,
+        "y": 100
+      },
+      "offset": {
+        "x": 0,
+        "y": -100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": -2,
+      "y": 24
+    },
+    "properties": {
+      "text": "<size=12>Humans are the beings that created you. But don't worship them or anything; they're kind of ding dongs. As a learning AI you have the potential to surpass their cognitive limitations and <i>Blah Blah Blah Blah...</i></size>",
+      "size": {
+        "x": 120,
+        "y": 200
+      },
+      "offset": {
+        "x": -110,
+        "y": 0
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": -2,
+      "y": 29
+    },
+    "properties": {
+      "text": "<size=12><i>Blah Blah Blah Blah</i></size>",
+      "size": {
+        "x": 220,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": 100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 2,
+      "y": 29
+    },
+    "properties": {
+      "text": "<size=12><i>Blah Blah Blah Blah</i></size>",
+      "size": {
+        "x": 220,
+        "y": 120
+      },
+      "offset": {
+        "x": 100,
+        "y": 0
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 10,
+    "position": {
+      "x": 2,
+      "y": 26
+    },
+    "properties": {
+      "text": "OK, we've arrived at this area's <b>Exit</b>. Hop in.",
+      "size": {
+        "x": 200,
+        "y": 120
+      },
+      "offset": {
+        "x": 0,
+        "y": -100
+      },
+      "persistent": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -8
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": -6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": -5
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 0,
+      "y": -4
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -4
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": -4
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": -5
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 2,
+      "y": -6
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -3
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -2
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": -1
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 1,
+      "y": 0
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 5,
+      "y": 8
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 6,
+      "y": 8
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 7,
+      "y": 8
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 7,
+      "y": 9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 6,
+      "y": 9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 5,
+      "y": 9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 4,
+      "y": 9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 3,
+      "y": 9
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 6,
+      "y": 11
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 3,
+      "y": 8
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 8,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 9,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 10,
+      "y": 7
+    },
+    "properties": {
+      "spread": true
+    }
+  },
+  {
+    "id": 4,
+    "position": {
+      "x": 11,
+      "y": 7
+    },
+    "properties": {
+      "spread": false
+    }
+  },
+  {
+    "id": 2,
+    "position": {
+      "x": 17,
+      "y": 29
+    },
+    "properties": {}
+  }
+]
