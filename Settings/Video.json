@@ -1,0 +1,16 @@
+{
+  "resolution": {
+    "size": 14,
+    "fullscreen": true
+  },
+  "render": {
+    "vSync": false,
+    "targetFPS": 2
+  },
+  "effects": {
+    "lensDistortion": true,
+    "vignette": true,
+    "chromaticAberration": true,
+    "bloom": true
+  }
+}

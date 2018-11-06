@@ -10,9 +10,13 @@ public class SteamManager : MonoBehaviour
 
     private void Awake()
     {
+        if (client != null)
+            return;
+
         Facepunch.Steamworks.Config.ForUnity(Application.platform.ToString());
         client = new Facepunch.Steamworks.Client((uint)int.Parse(File.ReadAllText("steam_appid.txt")));
     }
+    private void Update() => client.Update();
 
     private void OnDestroy() => client.Dispose();
 

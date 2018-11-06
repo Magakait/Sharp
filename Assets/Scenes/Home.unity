@@ -263,7 +263,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00028365155
+      value: 0.00008083494
       objectReference: {fileID: 0}
     - target: {fileID: 114105428120321934, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -844,7 +844,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00004614993
+      value: 0.000018002878
       objectReference: {fileID: 0}
     - target: {fileID: 224393501016118530, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -17653,8 +17653,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533068705}
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17730,7 +17730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000115705325}
+  m_AnchoredPosition: {x: 0, y: -0.0000011235481}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -21716,6 +21716,7 @@ GameObject:
   - component: {fileID: 1953676424}
   - component: {fileID: 1953676426}
   - component: {fileID: 1953676425}
+  - component: {fileID: 1953676427}
   m_Layer: 1
   m_Name: Misc
   m_TagString: Untagged
@@ -21762,6 +21763,17 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1953676423}
   m_Enabled: 1
+--- !u!114 &1953676427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1953676423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886f6fe240bd9de44b0a7a30d95223d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1968001813
 Prefab:
   m_ObjectHideFlags: 0

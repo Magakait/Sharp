@@ -1,0 +1,9 @@
+{
+  "up": "W",
+  "right": "D",
+  "down": "S",
+  "left": "A",
+  "sprint": "LeftShift",
+  "action": "Space",
+  "pause": "Escape"
+}
