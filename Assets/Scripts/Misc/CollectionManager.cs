@@ -18,7 +18,7 @@ public class CollectionManager : ScriptableObject
     private JsonFile meta;
     public static JsonFile Meta => main.meta;
 
-    public static string GetMetaFullName => $"{Constants.CollectionRoot}{Category}.{Name}.json";
+    private static string GetMetaFullName => $"{Constants.CollectionRoot}{Category}.{Name}.json";
     public static string GetLevelFullName(string level) => $"{FullName}\\{level}.#";
 
     public static string Name => directory.Name;

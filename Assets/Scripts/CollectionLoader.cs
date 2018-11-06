@@ -74,10 +74,16 @@ public class CollectionLoader : MonoBehaviour
         CollectionManager.Meta.Save();
     }
 
+    public void CheckAchievement()
+    {
+        if (CollectionManager.Meta.ShortName == "Factory.BOOT Camp" && (bool)CollectionManager.Meta["completed"])
+            SteamManager.UnlockAchievement("BOOTed");
+    }
+
     public void Create()
     {
         var collection = EngineUtility.NextFile(path, "Collection");
-        
+
         CollectionManager.Create(collection);
         Load(Path.GetFileName(collection));
     }
