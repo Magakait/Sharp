@@ -28,9 +28,10 @@ public class MovableComponent : MonoBehaviour
         set
         {
             rigidbody.position = value;
-            Stop();
+            tweener.Pause();
         }
     }
+
     public Vector2 IntPosition => Vector2Int.RoundToInt(Position);
 
     public bool IsMoving => tweener.IsPlaying();
@@ -73,18 +74,22 @@ public class MovableComponent : MonoBehaviour
 
     private void OnDestroy() => tweener.Kill();
 
-    public void Stop() => tweener.Pause();
-
     public bool CanMove(int direction) =>
         CanMove(IntPosition + Constants.Directions[direction]);
 
+    public static bool CanMove(Vector2 position)
+    {
+        CellComponent cell = PhysicsUtility
+            .Overlap<CellComponent>(position, Constants.CellMask);
+        return cell && !cell.Hollowed;
+    }
+    
     public void Move(int direction) =>
         Move(IntPosition + Constants.Directions[direction]);
 
     public void Move(Vector2 destination)
     {
         tweener
-            .Pause()
             .ChangeValues(Position, destination, Transition * Vector2.Distance(Position, destination))
             .Restart();
 
@@ -98,12 +103,5 @@ public class MovableComponent : MonoBehaviour
             return destination.x > 0 ? 1 : 3;
         else
             return destination.y > 0 ? 0 : 2;
-    }
-
-    public static bool CanMove(Vector2 position)
-    {
-        CellComponent cell = PhysicsUtility
-            .Overlap<CellComponent>(position, Constants.CellMask);
-        return cell && !cell.Hollowed;
     }
 }
