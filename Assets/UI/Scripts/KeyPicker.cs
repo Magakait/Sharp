@@ -9,7 +9,8 @@ class KeyPicker : MonoBehaviour
 
     public void SetValue(string value)
     {
-        key.Value = (KeyCode)Enum.Parse(typeof(KeyCode), value);
+        if (!string.IsNullOrEmpty(value))
+            key.Value = (KeyCode)Enum.Parse(typeof(KeyCode), value);
         onValueChanged.Invoke(value);
     }
 }

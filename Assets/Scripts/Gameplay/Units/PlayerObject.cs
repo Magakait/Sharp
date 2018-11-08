@@ -12,7 +12,8 @@ public class PlayerObject : SerializableObject
     {
         if (Time.timeScale > 0)
         {
-            Read();
+            Rotate();
+            Buffer();
             if (!movable.IsMoving)
                 Move();
         }
@@ -28,7 +29,9 @@ public class PlayerObject : SerializableObject
     [SerializeField]
     private KeyVariable sprintKey;
     [SerializeField]
-    private KeyVariable[] directionKeys = new KeyVariable[4];
+    private KeyVariable[] directionKeys;
+    [SerializeField]
+    private KeyVariable[] rotationKeys;
 
     [Space(10)]
     [SerializeField]
@@ -58,7 +61,6 @@ public class PlayerObject : SerializableObject
         }
     }
 
-    [SerializeField]
     private CheckpointObject checkpoint;
     public CheckpointObject Checkpoint
     {
@@ -78,7 +80,7 @@ public class PlayerObject : SerializableObject
 
     private readonly List<int> moves = new List<int>();
 
-    private void Read()
+    private void Buffer()
     {
         var sprint = Input.GetKey(sprintKey);
         var stopSprint = Input.GetKeyUp(sprintKey);
@@ -97,6 +99,14 @@ public class PlayerObject : SerializableObject
             }
             else if (stopSprint || (sprint && Input.GetKeyUp(directionKeys[i])))
                 moves.Remove(i);
+    }
+
+    private void Rotate()
+    {
+        if (Input.GetKeyDown(rotationKeys[0]))
+            movable.Direction++;
+        else if (Input.GetKeyDown(rotationKeys[1]))
+            movable.Direction--;
     }
 
     private void Move()

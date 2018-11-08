@@ -5,7 +5,19 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovableComponent : MonoBehaviour
 {
-    public int Direction { get; private set; }
+    private int direction;
+    public int Direction
+    {
+        get
+        {
+            return direction;
+        }
+        set
+        {
+            direction = (int)Mathf.Repeat(value, 4);
+            onDirectionChange.Invoke(Direction);
+        }
+    }
 
     public Vector2 Position
     {
@@ -25,9 +37,11 @@ public class MovableComponent : MonoBehaviour
 
     [Space(10)]
     [SerializeField]
-    private IntEvent onMove;
+    private IntEvent onDirectionChange;
     [SerializeField]
-    private VoidEvent onComplete;
+    private VoidEvent onMoveStart;
+    [SerializeField]
+    private VoidEvent onMoveComplete;
 
     [SerializeField]
     private float transition = .15f;
@@ -54,7 +68,7 @@ public class MovableComponent : MonoBehaviour
             .DOMove(Position, 0)
             .SetEase(Ease.Linear)
             .SetUpdate(UpdateType.Fixed)
-            .OnComplete(() => onComplete.Invoke());
+            .OnComplete(() => onMoveComplete.Invoke());
     }
 
     private void OnDestroy() => tweener.Kill();
@@ -74,16 +88,16 @@ public class MovableComponent : MonoBehaviour
             .ChangeValues(Position, destination, Transition * Vector2.Distance(Position, destination))
             .Restart();
 
-        Direction = Index(destination - Position);
-        onMove.Invoke(Direction);
+        Direction = DirectionTo(destination - Position);
+        onMoveStart.Invoke();
     }
 
-    public static int Index(Vector2 vector)
+    public static int DirectionTo(Vector2 destination)
     {
-        if (Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
-            return vector.x > 0 ? 1 : 3;
+        if (Mathf.Abs(destination.x) > Mathf.Abs(destination.y))
+            return destination.x > 0 ? 1 : 3;
         else
-            return vector.y > 0 ? 0 : 2;
+            return destination.y > 0 ? 0 : 2;
     }
 
     public static bool CanMove(Vector2 position)

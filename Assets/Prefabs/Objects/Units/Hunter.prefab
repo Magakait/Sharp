@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3e2d29f84705f46af91f49dc87e063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMove:
+  onDirectionChange:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114702264621943814}
@@ -563,6 +563,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  onMoveStart:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 114032317868718696}
         m_MethodName: Shift
         m_Mode: 6
@@ -574,8 +578,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  onComplete:
+    m_TypeName: VoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  onMoveComplete:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114032317868718696}

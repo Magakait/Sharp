@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3e2d29f84705f46af91f49dc87e063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMove:
+  onDirectionChange:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114088651791869928}
@@ -271,7 +271,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: IntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  onComplete:
+  onMoveStart:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: VoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  onMoveComplete:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: VoidEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
@@ -331,10 +335,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48a2fc27a8a8edf4da2809c5e847a86b, type: 2}
   - {fileID: 11400000, guid: c16990673ebfacb4da575862ded9da1a, type: 2}
   - {fileID: 11400000, guid: 2d00cf3a39877b84c9a559daefc52453, type: 2}
+  rotationKeys:
+  - {fileID: 11400000, guid: c884253cae970214ab8c471bee42f1ba, type: 2}
+  - {fileID: 11400000, guid: 9a9dadea59696cd42ac29a888dade12b, type: 2}
   icon: {fileID: 212400583848088072}
   effect: {fileID: 198020077223855264, guid: ee31da93d49db2f48a38145b304aabcf, type: 2}
   movement: {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
-  checkpoint: {fileID: 0}
 --- !u!114 &114495047117984362
 MonoBehaviour:
   m_ObjectHideFlags: 1
