@@ -14,7 +14,7 @@ public class SteamManager : MonoBehaviour
             return;
 
         Facepunch.Steamworks.Config.ForcePlatform(OperatingSystem.Windows, Architecture.x64);
-        client = new Facepunch.Steamworks.Client((uint)int.Parse(File.ReadAllText("steam_appid.txt")));
+        client = new Facepunch.Steamworks.Client(uint.Parse(File.ReadAllText("steam_appid.txt")));
     }
 
     private void Update() => client.Update();
