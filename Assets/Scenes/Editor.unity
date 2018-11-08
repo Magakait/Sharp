@@ -986,7 +986,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000013242816
+      value: 0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -3097,7 +3097,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.00008960871
       objectReference: {fileID: 0}
     - target: {fileID: 114792197638362928, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
@@ -5820,7 +5820,7 @@ GameObject:
   - component: {fileID: 1118566613}
   - component: {fileID: 1118566615}
   m_Layer: 0
-  m_Name: Collection
+  m_Name: Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5872,7 +5872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2006cf2c8cb68ee448b19ebb14524c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputCollection: {fileID: 1632774492}
+  inputSet: {fileID: 1632774492}
   inputLevel: {fileID: 716505116}
   baseToggle: {fileID: 114893613133751914, guid: a12ac9087339c2743a08406adba01ee5,
     type: 2}
@@ -8574,7 +8574,7 @@ Prefab:
     - target: {fileID: 114109609210863380, guid: 3a6adf7432b3d644b8fbc6adeabd69fd,
         type: 2}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RenameCollection
+      value: RenameSet
       objectReference: {fileID: 0}
     - target: {fileID: 114109609210863380, guid: 3a6adf7432b3d644b8fbc6adeabd69fd,
         type: 2}
@@ -9027,7 +9027,7 @@ Prefab:
     - target: {fileID: 114040149198233880, guid: 8c09a71c049725a47ab1f10792bebf58,
         type: 2}
       propertyPath: m_Text
-      value: Collection
+      value: Set
       objectReference: {fileID: 0}
     - target: {fileID: 224334157842149228, guid: 8c09a71c049725a47ab1f10792bebf58,
         type: 2}
@@ -9934,7 +9934,7 @@ Prefab:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000023359375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1246267855635478, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 2}
       propertyPath: m_Name
@@ -11603,7 +11603,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1403016883398802, guid: ba9ef56e5a831864ba472ce3e9b5a330, type: 2}
       propertyPath: m_Name
-      value: Collection
+      value: Set
       objectReference: {fileID: 0}
     - target: {fileID: 114370449068959834, guid: ba9ef56e5a831864ba472ce3e9b5a330,
         type: 2}
@@ -11644,7 +11644,7 @@ Prefab:
     - target: {fileID: 114300828492417666, guid: ba9ef56e5a831864ba472ce3e9b5a330,
         type: 2}
       propertyPath: m_Text
-      value: Collection
+      value: Set
       objectReference: {fileID: 0}
     - target: {fileID: 224016315580098406, guid: ba9ef56e5a831864ba472ce3e9b5a330,
         type: 2}

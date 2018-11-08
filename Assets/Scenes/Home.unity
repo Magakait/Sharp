@@ -263,7 +263,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000013744578
+      value: 0.00005012969
       objectReference: {fileID: 0}
     - target: {fileID: 114105428120321934, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -844,7 +844,7 @@ Prefab:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000020480475
+      value: -0.0000029290043
       objectReference: {fileID: 0}
     - target: {fileID: 224393501016118530, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 2}
@@ -12237,7 +12237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748226693}
   m_Layer: 5
-  m_Name: Collection
+  m_Name: Set
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18380,8 +18380,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533068705}
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.9999999
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18457,7 +18457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000027611059}
+  m_AnchoredPosition: {x: 0, y: 0.000056386285}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -19502,7 +19502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   versionText: {fileID: 2142890633}
   levelManager: {fileID: 11400000, guid: e916e63420c81e44c80cd56daad457fe, type: 2}
-  collectionManager: {fileID: 11400000, guid: 3613bda42b6e7e14e8d6dcfd389dd5d6, type: 2}
+  setManager: {fileID: 11400000, guid: 3613bda42b6e7e14e8d6dcfd389dd5d6, type: 2}
   singletons:
   - {fileID: 1565475192}
   - {fileID: 2140393271}

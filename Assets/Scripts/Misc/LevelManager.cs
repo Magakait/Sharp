@@ -28,7 +28,7 @@ public class LevelManager : ScriptableObject
 
     #region level management
 
-    public static void Load(string level) => Level.Load(CollectionManager.GetLevelFullName(level));
+    public static void Load(string level) => Level.Load(SetManager.GetLevelFullName(level));
 
     public static void DestroyAll()
     {

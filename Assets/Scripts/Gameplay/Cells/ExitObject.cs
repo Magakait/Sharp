@@ -23,11 +23,11 @@ public class ExitObject : SerializableObject
     {
         Passed = true;
 
-        var passed = (JArray)CollectionManager.Meta["passed"];
+        var passed = (JArray)SetManager.Meta["passed"];
         if (!passed.Any(t => (string)t == LevelManager.Level.ShortName))
         {
             passed.Add(LevelManager.Level.ShortName);
-            CollectionManager.Meta.Save();
+            SetManager.Meta.Save();
         }
     }
 }

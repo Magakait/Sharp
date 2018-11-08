@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectionLoader : MonoBehaviour
+public class SetLoader : MonoBehaviour
 {
     [SerializeField]
     private Dropdown dropdownTitle;
@@ -16,7 +16,7 @@ public class CollectionLoader : MonoBehaviour
 
     public void List(string category)
     {
-        path = Constants.CollectionRoot + category;
+        path = Constants.SetRoot + category;
 
         dropdownTitle.ClearOptions();
         foreach (var option in new DirectoryInfo(path).GetDirectories()
@@ -39,14 +39,14 @@ public class CollectionLoader : MonoBehaviour
         }
     }
 
-    public void Load(string collection)
+    public void Load(string set)
     {
-        if (string.IsNullOrEmpty(collection))
-            collection = dropdownTitle.captionText.text;
+        if (string.IsNullOrEmpty(set))
+            set = dropdownTitle.captionText.text;
 
-        File.WriteAllText(path + "\\Selected.txt", collection);
+        File.WriteAllText(path + "\\Selected.txt", set);
 
-        CollectionManager.Load(path + "\\" + collection);
+        SetManager.Load(path + "\\" + set);
         LevelManager.Load("Map");
     }
 
@@ -69,22 +69,22 @@ public class CollectionLoader : MonoBehaviour
                     entrance.Connect(target);
             }
 
-        CollectionManager.Meta["completed"] = entrances.All(e => e.Passed);
-        CollectionManager.Meta["editable"] = CollectionManager.Category == "Local";
-        CollectionManager.Meta.Save();
+        SetManager.Meta["completed"] = entrances.All(e => e.Passed);
+        SetManager.Meta["editable"] = SetManager.Category == "Local";
+        SetManager.Meta.Save();
     }
 
     public void CheckAchievement(bool completed)
     {
-        if (completed && CollectionManager.Meta.ShortName == "Factory.BOOT Camp")
+        if (completed && SetManager.Meta.ShortName == "Factory.BOOT Camp")
             SteamManager.UnlockAchievement("BOOTed");
     }
 
     public void Create()
     {
-        var collection = EngineUtility.NextFile(path, "Collection");
+        var set = EngineUtility.NextFile(path, "Set");
 
-        CollectionManager.Create(collection);
-        Load(Path.GetFileName(collection));
+        SetManager.Create(set);
+        Load(Path.GetFileName(set));
     }
 }

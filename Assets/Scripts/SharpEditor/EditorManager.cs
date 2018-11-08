@@ -11,7 +11,7 @@ public class EditorManager : MonoBehaviour
 {
     private void Start()
     {
-        inputCollection.text = CollectionManager.Name;
+        inputSet.text = SetManager.Name;
 
         ListLevels(LevelManager.Level.ShortName);
         IgnoreCollisions(true);
@@ -25,28 +25,28 @@ public class EditorManager : MonoBehaviour
         Physics2D.IgnoreLayerCollision(Constants.UnitLayer, Constants.FogLayer, value);
     }
 
-    #region collection management
+    #region set management
 
-    [Header("Collection")]
+    [Header("Set")]
     [SerializeField]
-    private InputField inputCollection;
+    private InputField inputSet;
 
-    public void RenameCollection(string name)
+    public void RenameSet(string name)
     {
-        string path = CollectionManager.FullCategory + "\\" + name;
+        string path = SetManager.FullCategory + "\\" + name;
 
         if (Directory.Exists(path))
-            inputCollection.text = CollectionManager.Name;
+            inputSet.text = SetManager.Name;
         else
-            CollectionManager.MoveTo(path);
+            SetManager.MoveTo(path);
     }
 
-    private void UpdateCollection()
+    private void UpdateSet()
     {
-        CollectionManager.UpdateLevels();
+        SetManager.UpdateLevels();
 
-        ((JArray)CollectionManager.Meta["passed"]).ReplaceAll(CollectionManager.Levels);
-        CollectionManager.Meta.Save();
+        ((JArray)SetManager.Meta["passed"]).ReplaceAll(SetManager.Levels);
+        SetManager.Meta.Save();
     }
 
     #endregion
@@ -67,10 +67,10 @@ public class EditorManager : MonoBehaviour
 
     private void ListLevels(string selection)
     {
-        UpdateCollection();
+        UpdateSet();
         toggleGroup.transform.Clear();
 
-        foreach (var level in CollectionManager.Levels)
+        foreach (var level in SetManager.Levels)
         {
             Toggle toggle = Instantiate(baseToggle, toggleGroup.transform);
             toggle.group = toggleGroup;
@@ -82,7 +82,7 @@ public class EditorManager : MonoBehaviour
         }
 
         toggleGroup.transform
-            .GetChild(Mathf.Max(0, CollectionManager.Levels.IndexOf(selection)))
+            .GetChild(Mathf.Max(0, SetManager.Levels.IndexOf(selection)))
             .GetComponent<Toggle>()
             .isOn = true;
     }
@@ -101,25 +101,25 @@ public class EditorManager : MonoBehaviour
 
     public void AddLevel()
     {
-        string path = EngineUtility.NextFile(CollectionManager.FullName, "Level.#");
+        string path = EngineUtility.NextFile(SetManager.FullName, "Level.#");
 
-        File.Copy(Constants.EditorRoot + "Collection\\Level.#", path);
+        File.Copy(Constants.EditorRoot + "Set\\Level.#", path);
         ListLevels(Path.GetFileNameWithoutExtension(path));
     }
 
     public void CopyLevel()
     {
-        LevelManager.Level.SaveTo(EngineUtility.NextFile(CollectionManager.FullName, LevelManager.Level.ShortName + " - copy.#"));
+        LevelManager.Level.SaveTo(EngineUtility.NextFile(SetManager.FullName, LevelManager.Level.ShortName + " - copy.#"));
         ListLevels(LevelManager.Level.ShortName);
     }
 
     public void RenameLevel(string name)
     {
-        if (CollectionManager.Levels.Contains(name))
+        if (SetManager.Levels.Contains(name))
             inputLevel.text = LevelManager.Level.ShortName;
         else
         {
-            LevelManager.Level.MoveTo(CollectionManager.GetLevelFullName(name));
+            LevelManager.Level.MoveTo(SetManager.GetLevelFullName(name));
             ListLevels(name);
         }
     }
@@ -128,11 +128,11 @@ public class EditorManager : MonoBehaviour
     {
         LevelManager.Level.Delete();
 
-        if (CollectionManager.Levels.Count > 2)
+        if (SetManager.Levels.Count > 2)
             ListLevels(string.Empty);
         else
         {
-            CollectionManager.Delete();
+            SetManager.Delete();
             EngineUtility.Main.LoadScene("Home");
         }
     }

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 308bc96b36b5db24cab5b85084d14f58, type: 3}
-  m_Name: CollectionManager
+  m_Name: SetManager
   m_EditorClassIdentifier: 
-  level: {fileID: 11400000, guid: a9d50580a3ee5ac44810cbde0fd9b2a1, type: 2}
   info: {fileID: 11400000, guid: 054c7f9a0d7c0b6458831f3cbd8b202c, type: 2}
   meta: {fileID: 11400000, guid: 1c57ebdd31e3ebc4db1092bdba55aa3b, type: 2}

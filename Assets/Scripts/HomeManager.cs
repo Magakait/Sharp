@@ -14,7 +14,7 @@ class HomeManager : MonoBehaviour
     [SerializeField]
     private LevelManager levelManager;
     [SerializeField]
-    private CollectionManager collectionManager;
+    private SetManager setManager;
 
     [Space(10)]
     [SerializeField]
@@ -44,7 +44,7 @@ class HomeManager : MonoBehaviour
             DontDestroyOnLoad(singleton);
 
         levelManager.OnEnable();
-        collectionManager.OnEnable();
+        setManager.OnEnable();
 
         versionText.text = "Version " + Application.version;
     }

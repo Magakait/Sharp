@@ -23,7 +23,7 @@ public class EntranceObject : SerializableObject
 
     private void Start()
     {
-        if ((string)CollectionManager.Meta["selected"] == Level)
+        if ((string)SetManager.Meta["selected"] == Level)
             CameraManager.Position = transform.position;
 
         if (Connected == 0 && Threshold > 0)
@@ -33,7 +33,7 @@ public class EntranceObject : SerializableObject
         else if (Passed)
             coreEffect.Emission(true);
 
-        enterButton.interactable = CollectionManager.Levels.Contains(Level);
+        enterButton.interactable = SetManager.Levels.Contains(Level);
         collider.radius = 1;
     }
 
@@ -53,8 +53,8 @@ public class EntranceObject : SerializableObject
     {
         if (enabled && !EngineUtility.IsOverUI)
         {
-            CollectionManager.Meta["selected"] = Level;
-            CollectionManager.Meta.Save();
+            SetManager.Meta["selected"] = Level;
+            SetManager.Meta.Save();
 
             CameraManager.Move(transform.position);
         }
@@ -136,7 +136,7 @@ public class EntranceObject : SerializableObject
     public override void Deserialize(JToken token)
     {
         Level = (string)token["level"];
-        Passed = CollectionManager.Meta["passed"].Any(t => (string)t == Level);
+        Passed = SetManager.Meta["passed"].Any(t => (string)t == Level);
 
         descriptionText.text = (string)token["description"];
         Threshold = (int)token["threshold"];
