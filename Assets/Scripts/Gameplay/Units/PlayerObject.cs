@@ -104,9 +104,9 @@ public class PlayerObject : SerializableObject
     private void Rotate()
     {
         if (Input.GetKeyDown(rotationKeys[0]))
-            movable.Direction++;
-        else if (Input.GetKeyDown(rotationKeys[1]))
             movable.Direction--;
+        else if (Input.GetKeyDown(rotationKeys[1]))
+            movable.Direction++;
     }
 
     private void Move()
