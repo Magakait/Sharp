@@ -23,11 +23,11 @@ public class SeekerObject : SerializableObject
 
     private void Update()
     {
-        if (!movable.IsMoving && !string.IsNullOrEmpty(sequence))
-        {
-            Check();
-            Move();
-        }
+        if (string.IsNullOrEmpty(sequence))
+            return;
+
+        Check();
+        Move();
     }
 
     #region gameplay
@@ -43,16 +43,16 @@ public class SeekerObject : SerializableObject
     private static readonly bool[] checks = new bool[4];
     private void Check()
     {
-        for (int i = 0; i < checks.Length; i++)
+        for (var i = 0; i < checks.Length; i++)
             checks[i] = movable.CanMove(i);
     }
 
     private void Move()
     {
-        int index = this.index;
+        var index = this.index;
         do
         {
-            int direction = sequence[index] - '0';
+            var direction = sequence[index] - '0';
             if (checks[direction])
             {
                 movable.Move(direction);

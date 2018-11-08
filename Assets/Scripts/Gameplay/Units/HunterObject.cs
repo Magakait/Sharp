@@ -29,9 +29,6 @@ public class HunterObject : SerializableObject
 
     private void FixedUpdate()
     {
-        if (movable.IsMoving)
-            return;
-
         if (!ready)
         {
             ready = true;
@@ -94,6 +91,7 @@ public class HunterObject : SerializableObject
     public void Shift(bool active)
     {
         collider.enabled = active;
+        enabled = active;
         mark.Emission(!active);
         animation[0].Play(active);
     }
