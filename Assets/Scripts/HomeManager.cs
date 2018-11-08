@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -23,11 +26,11 @@ class HomeManager : MonoBehaviour
     [SerializeField]
     private BoolEvent onCheck;
 
-    private static bool loaded;
+    private static HomeManager main;
 
     private void Awake()
     {
-        if (loaded)
+        if (main)
         {
             gameObject.SetActive(false);
             foreach (var singleton in singletons)
@@ -35,10 +38,10 @@ class HomeManager : MonoBehaviour
             return;
         }
 
+        main = this;
+
         foreach (var singleton in singletons)
             DontDestroyOnLoad(singleton);
-
-        loaded = true;
 
         levelManager.OnEnable();
         collectionManager.OnEnable();
