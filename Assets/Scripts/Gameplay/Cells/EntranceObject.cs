@@ -74,7 +74,7 @@ public class EntranceObject : SerializableObject
 
         var position = (Vector2)transform.position;
         var destination = (Vector2)target.transform.position;
-        var offset = .75f * (destination - position).normalized;
+        var offset = .65f * (destination - position).normalized;
 
         line.SetPosition(0, position + offset);
         line.SetPosition(1, .5f * (position + destination));

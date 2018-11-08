@@ -60,6 +60,7 @@ public class SetManager : ScriptableObject
     {
         directory.MoveTo(path);
         Meta.MoveTo(GetMetaFullName);
+        Load(path);
     }
 
     public static void Delete() => directory.Delete(true);
