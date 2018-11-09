@@ -1,41 +1,51 @@
+using System.IO;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 using Facepunch.Steamworks;
-using System.Threading;
 
 public class EditorWorkshop : MonoBehaviour
 {
+    [SerializeField]
+    private InputField inputChangeNote;
+
     private Workshop.Editor item;
 
     private void Awake()
     {
         if (SetManager.Info["id"] != null)
             item = SteamManager.Client.Workshop.EditItem((ulong)SetManager.Info["id"]);
-    }
-
-    public void Upload()
-    {
-        if (item == null)
+        else
         {
             item = SteamManager.Client.Workshop.CreateItem
             (
                 SteamManager.Client.AppId,
                 Workshop.ItemType.Community
             );
+            item.Publish();
 
             SetManager.Info["id"] = item.Id;
             SetManager.Info.Save();
         }
+    }
 
-        item.Title = SetManager.Name;
-        item.Description = FixTags((string)SetManager.Info["description"]);
-        item.Folder = SetManager.FullName;
+    public void Upload()
+    {
         item.Type = Workshop.ItemType.Community;
-        item.Visibility = Workshop.Editor.VisibilityType.Public;
+        item.Title = SetManager.Name;
+        item.Description = RemoveTags((string)SetManager.Info["description"]);
+        item.ChangeNote = inputChangeNote.text;
+        item.Folder = SetManager.FullName;
+
+        var imagePath = SetManager.FullName + "\\Image.png";
+        if (File.Exists(imagePath))
+            item.PreviewImage = imagePath;
+
         item.Publish();
     }
 
-    private static string FixTags(string text)
+    private static string RemoveTags(string text)
     {
         text = text.Replace("<b>", "[b]");
         text = text.Replace("</b>", "[/b]");
