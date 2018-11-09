@@ -34,6 +34,11 @@ public class SetManager : ScriptableObject
 
     public void OnEnable() => main = this;
 
+    public void Update()
+    {
+        Debug.Log("updating set manager");
+    }
+
     public static void Create(string path)
     {
         Directory.CreateDirectory(path);

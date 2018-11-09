@@ -6,26 +6,26 @@ using Facepunch.Steamworks;
 
 public class SteamManager : MonoBehaviour
 {
-    private static Client client;
+    public static Client Client { get; private set; }
 
     private void Awake()
     {
-        if (client != null)
+        if (Client != null)
             return;
 
         Facepunch.Steamworks.Config.ForcePlatform(OperatingSystem.Windows, Architecture.x64);
-        client = new Facepunch.Steamworks.Client(uint.Parse(File.ReadAllText("steam_appid.txt")));
+        Client = new Facepunch.Steamworks.Client(uint.Parse(File.ReadAllText("steam_appid.txt")));
     }
 
-    private void Update() => client.Update();
+    private void Update() => Client.Update();
 
-    private void OnDestroy() => client.Dispose();
+    private void OnDestroy() => Client.Dispose();
 
     public static void UnlockAchievement(string id)
     {
         try
         {
-            client.Achievements.Find(id).Trigger();
+            Client.Achievements.Find(id).Trigger();
         }
         catch { }
     }
