@@ -9,14 +9,14 @@ public class EditorWorkshop : MonoBehaviour
 {
     [SerializeField]
     private InputField inputChangeNote;
+    [SerializeField]
+    private Button buttonPublish;
 
     private Workshop.Editor item;
 
-    private void Awake()
+    private void Start()
     {
-        if (SetManager.Info["id"] != null)
-            item = SteamManager.Client.Workshop.EditItem((ulong)SetManager.Info["id"]);
-        else
+        if (SetManager.Info["id"] == null)
         {
             item = SteamManager.Client.Workshop.CreateItem
             (
@@ -28,9 +28,11 @@ public class EditorWorkshop : MonoBehaviour
             SetManager.Info["id"] = item.Id;
             SetManager.Info.Save();
         }
+        else
+            item = SteamManager.Client.Workshop.EditItem((ulong)SetManager.Info["id"]);
     }
 
-    public void Upload()
+    public void Publish()
     {
         item.Type = Workshop.ItemType.Community;
         item.Title = SetManager.Name;
@@ -44,6 +46,8 @@ public class EditorWorkshop : MonoBehaviour
 
         item.Publish();
     }
+
+    private void Update() => buttonPublish.interactable = !item.Publishing;
 
     private static string RemoveTags(string text)
     {

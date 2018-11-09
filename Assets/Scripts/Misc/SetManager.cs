@@ -18,7 +18,6 @@ public class SetManager : ScriptableObject
     private JsonFile meta;
     public static JsonFile Meta => main.meta;
 
-    private static string GetMetaFullName => $"{Constants.SetRoot}{Category}.{Name}.json";
     public static string GetLevelFullName(string level) => $"{FullName}\\{level}.#";
 
     public static string Name => directory.Name;
@@ -50,25 +49,27 @@ public class SetManager : ScriptableObject
     public static void Load(string path)
     {
         directory = new DirectoryInfo(path);
-
-        var metaFullName = SetManager.GetMetaFullName;
-        if (!File.Exists(metaFullName))
-            File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
-
-        Meta.Load(metaFullName);
-        Info.Load(FullName + "\\Info.json");
-
+        UpdateFiles();
         UpdateLevels();
     }
 
     public static void MoveTo(string path)
     {
         directory.MoveTo(path);
-        Meta.MoveTo(GetMetaFullName);
-        Load(path);
+        UpdateFiles();
     }
 
     public static void Delete() => directory.Delete(true);
+
+    private static void UpdateFiles()
+    {
+        var metaFullName = $"{Constants.SetRoot}{Category}.{Name}.json";
+        if (!File.Exists(metaFullName))
+            File.Copy(Constants.EditorRoot + "Meta.json", metaFullName);
+
+        Meta.Load(metaFullName);
+        Info.Load(FullName + "\\Info.json");
+    }
 
     public static void UpdateLevels()
     {

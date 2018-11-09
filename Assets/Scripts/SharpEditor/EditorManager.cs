@@ -38,7 +38,10 @@ public class EditorManager : MonoBehaviour
         if (Directory.Exists(path))
             inputSet.text = SetManager.Name;
         else
+        {
             SetManager.MoveTo(path);
+            LevelManager.Load(LevelManager.Level.ShortName);
+        }
     }
 
     private void UpdateSet()
