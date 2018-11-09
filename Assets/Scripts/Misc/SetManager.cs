@@ -59,7 +59,11 @@ public class SetManager : ScriptableObject
         UpdateFiles();
     }
 
-    public static void Delete() => directory.Delete(true);
+    public static void Delete()
+    {
+        directory.Delete(true);
+        Meta.Delete();
+    }
 
     private static void UpdateFiles()
     {

@@ -8,8 +8,6 @@ using Facepunch.Steamworks;
 public class EditorWorkshop : MonoBehaviour
 {
     [SerializeField]
-    private InputField inputChangeNote;
-    [SerializeField]
     private Button buttonPublish;
 
     private Workshop.Editor item;
@@ -37,10 +35,9 @@ public class EditorWorkshop : MonoBehaviour
         item.Type = Workshop.ItemType.Community;
         item.Title = SetManager.Name;
         item.Description = RemoveTags((string)SetManager.Info["description"]);
-        item.ChangeNote = inputChangeNote.text;
         item.Folder = SetManager.FullName;
 
-        var imagePath = SetManager.FullName + "\\Image.png";
+        var imagePath = SetManager.FullName + "\\Preview.png";
         if (File.Exists(imagePath))
             item.PreviewImage = imagePath;
 
