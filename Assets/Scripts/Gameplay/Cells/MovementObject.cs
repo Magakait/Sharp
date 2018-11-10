@@ -7,7 +7,7 @@ public class MovementObject : SerializableObject
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerObject player = collision.GetComponent<PlayerObject>();
-        if (player && player.Checkpoint != this)
+        if (player)
         {
             player.Movement = movements[Movement];
             player.Movable.Transition = Transition;

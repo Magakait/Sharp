@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -16,12 +17,8 @@ public class PlayerObject : SerializableObject
             Buffer();
             if (!movable.IsMoving)
                 Move();
-
-            if (Input.GetKeyDown(actionKey))
-            {
-                action.Do(this);
-                Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
-            }
+            if (cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
+                StartCoroutine(Act());
         }
     }
 
@@ -48,15 +45,6 @@ public class PlayerObject : SerializableObject
     private KeyVariable actionKey;
 
     [Space(10)]
-    [SerializeField]
-    private SpriteRenderer icon;
-    [SerializeField]
-    private SpriteRenderer shape;
-    [SerializeField]
-    private ParticleSystem assignEffect;
-    [SerializeField]
-    private ParticleSystem actionEffect;
-
     [SerializeField]
     private BaseMovement movement;
     public BaseMovement Movement
@@ -89,6 +77,20 @@ public class PlayerObject : SerializableObject
         }
     }
 
+    [SerializeField]
+    private float cooldown;
+    public float Cooldown
+    {
+        get
+        {
+            return cooldown;
+        }
+        set
+        {
+            cooldown = value;
+        }
+    }
+
     private CheckpointObject checkpoint;
     public CheckpointObject Checkpoint
     {
@@ -102,6 +104,18 @@ public class PlayerObject : SerializableObject
             Instantiate(assignEffect, transform.position, Quaternion.identity);
         }
     }
+
+    [Space(10)]
+    [SerializeField]
+    private SpriteRenderer icon;
+    [SerializeField]
+    private SpriteRenderer shape;
+    [SerializeField]
+    private ParticleSystem assignEffect;
+    [SerializeField]
+    private ParticleSystem actionEffect;
+    [SerializeField]
+    private ParticleSystem cooldownEffect;
 
     private readonly List<int> moves = new List<int>();
 
@@ -150,6 +164,16 @@ public class PlayerObject : SerializableObject
             movement.Idle(movable);
 
         moves.Clear();
+    }
+
+    private IEnumerator Act()
+    {
+        action.Do(this);
+        cooldownEffect.Emission(false);
+        Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
+
+        yield return new WaitForSeconds(Cooldown);
+        cooldownEffect.Emission(true);
     }
 
     public void CheckSpawn()
