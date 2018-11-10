@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 1719074071199788}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4190003865078796}
   m_RootOrder: 1
@@ -201,7 +201,7 @@ Transform:
   m_GameObject: {fileID: 1841189301596954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4190003865078796}
   m_RootOrder: 0
@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 1726284952202490}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.25, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4190003865078796}
   m_RootOrder: 3
@@ -253,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 1099788300278738}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4190003865078796}
   m_RootOrder: 2
@@ -360,6 +360,7 @@ MonoBehaviour:
   actions:
   - {fileID: 11400000, guid: e41a7013d8d96e049a3d43c93cc31629, type: 2}
   - {fileID: 11400000, guid: 57409674952ff284285ea8259f9fb80a, type: 2}
+  - {fileID: 11400000, guid: 77d5990f6159d6243bc1e26ad94ac463, type: 2}
   shapes:
   - {fileID: 212586418405460936}
   - {fileID: 212741550221318602}
@@ -1269,7 +1270,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.75
+          value: 0.8
           inSlope: 0
           outSlope: 0
           tangentMode: 136
@@ -1287,7 +1288,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.75
+          value: 0.8
           inSlope: 0
           outSlope: 0
           tangentMode: 136
@@ -5013,7 +5014,7 @@ SpriteRenderer:
   m_SortingLayerID: 1162134233
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 945f06fb2fdeec648b95335bd05de2c1, type: 3}
+  m_Sprite: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5021,7 +5022,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212741550221318602
@@ -5059,7 +5060,7 @@ SpriteRenderer:
   m_SortingLayerID: 1162134233
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 945f06fb2fdeec648b95335bd05de2c1, type: 3}
+  m_Sprite: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5067,7 +5068,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212849502883012830
@@ -5105,7 +5106,7 @@ SpriteRenderer:
   m_SortingLayerID: 1162134233
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 945f06fb2fdeec648b95335bd05de2c1, type: 3}
+  m_Sprite: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5113,7 +5114,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212911230111972336
@@ -5151,7 +5152,7 @@ SpriteRenderer:
   m_SortingLayerID: 1162134233
   m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 945f06fb2fdeec648b95335bd05de2c1, type: 3}
+  m_Sprite: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5159,7 +5160,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212966374705543828

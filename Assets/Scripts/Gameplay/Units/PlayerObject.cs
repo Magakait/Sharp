@@ -67,12 +67,9 @@ public class PlayerObject : SerializableObject
         }
         set
         {
-            if (Movement != value)
-            {
-                movement = value;
-                icon.sprite = Movement.Icon;
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
-            }
+            movement = value;
+            icon.sprite = Movement.Icon;
+            Instantiate(assignEffect, transform.position, Quaternion.identity);
         }
     }
 
@@ -86,12 +83,9 @@ public class PlayerObject : SerializableObject
         }
         set
         {
-            if (Action != value)
-            {
-                action = value;
-                shape.sprite = Action.Shape;
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
-            }
+            action = value;
+            shape.sprite = Action.Shape;
+            Instantiate(assignEffect, transform.position, Quaternion.identity);
         }
     }
 
@@ -104,11 +98,8 @@ public class PlayerObject : SerializableObject
         }
         set
         {
-            if (Checkpoint != value)
-            {
-                checkpoint = value;
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
-            }
+            checkpoint = value;
+            Instantiate(assignEffect, transform.position, Quaternion.identity);
         }
     }
 
