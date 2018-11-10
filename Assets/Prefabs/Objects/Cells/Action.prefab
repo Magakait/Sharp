@@ -358,8 +358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 20
   actions:
-  - {fileID: 11400000, guid: 57409674952ff284285ea8259f9fb80a, type: 2}
   - {fileID: 11400000, guid: e41a7013d8d96e049a3d43c93cc31629, type: 2}
+  - {fileID: 11400000, guid: 57409674952ff284285ea8259f9fb80a, type: 2}
   shapes:
   - {fileID: 212586418405460936}
   - {fileID: 212741550221318602}
@@ -1774,7 +1774,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: f42b9ff040880bd4c8bc13072975ce71, type: 3}
+    - sprite: {fileID: 21300000, guid: bedb6272fed3b504092200396108649d, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -5021,7 +5021,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212741550221318602
@@ -5067,7 +5067,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212849502883012830
@@ -5113,7 +5113,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212911230111972336
@@ -5159,7 +5159,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!212 &212966374705543828

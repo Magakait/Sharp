@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5e8ee777260c446b38911c4f806913, type: 3}
   m_Name: Trigger
   m_EditorClassIdentifier: 
-  shape: {fileID: 21300000, guid: 945f06fb2fdeec648b95335bd05de2c1, type: 3}
+  shape: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
