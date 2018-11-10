@@ -1,6 +1,5 @@
 using UnityEngine;
 
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
 public class MovementObject : SerializableObject
@@ -11,7 +10,7 @@ public class MovementObject : SerializableObject
         if (player && player.Checkpoint != this)
         {
             player.Movement = movements[Movement];
-            player.GetComponent<MovableComponent>().Transition = Transition;
+            player.Movable.Transition = Transition;
         }
     }
 

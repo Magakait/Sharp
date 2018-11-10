@@ -16,12 +16,24 @@ public class PlayerObject : SerializableObject
             Buffer();
             if (!movable.IsMoving)
                 Move();
+
+            if (Input.GetKeyDown(actionKey))
+            {
+                action.Do(this);
+                Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
+            }
         }
     }
 
     [Space(10)]
     [SerializeField]
     private MovableComponent movable;
+    public MovableComponent Movable => movable;
+
+    [SerializeField]
+    private new Collider2D collider;
+    public Collider2D Collider => collider;
+
     [SerializeField]
     private Prompt prompt;
 
@@ -32,12 +44,18 @@ public class PlayerObject : SerializableObject
     private KeyVariable[] directionKeys;
     [SerializeField]
     private KeyVariable[] rotationKeys;
+    [SerializeField]
+    private KeyVariable actionKey;
 
     [Space(10)]
     [SerializeField]
     private SpriteRenderer icon;
     [SerializeField]
-    private ParticleSystem effect;
+    private SpriteRenderer shape;
+    [SerializeField]
+    private ParticleSystem assignEffect;
+    [SerializeField]
+    private ParticleSystem actionEffect;
 
     [SerializeField]
     private BaseMovement movement;
@@ -51,12 +69,28 @@ public class PlayerObject : SerializableObject
         {
             if (Movement != value)
             {
-                Movement.Dispose(movable);
                 movement = value;
-                Movement.Assign(movable);
-
                 icon.sprite = Movement.Icon;
-                Instantiate(effect, transform.position, Quaternion.identity);
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
+            }
+        }
+    }
+
+    [SerializeField]
+    private BaseAction action;
+    public BaseAction Action
+    {
+        get
+        {
+            return action;
+        }
+        set
+        {
+            if (Action != value)
+            {
+                action = value;
+                shape.sprite = Action.Shape;
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
     }
@@ -73,7 +107,7 @@ public class PlayerObject : SerializableObject
             if (Checkpoint != value)
             {
                 checkpoint = value;
-                Instantiate(effect, transform.position, Quaternion.identity);
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
     }

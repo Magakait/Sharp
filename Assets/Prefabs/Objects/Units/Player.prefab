@@ -328,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   movable: {fileID: 114004512183173264}
+  collider: {fileID: 58037687431684254}
   prompt: {fileID: 114208053780329140, guid: e324eeef860ae2b439df4899469b7570, type: 2}
   sprintKey: {fileID: 11400000, guid: 7cd5e52d9a251434d8c120e161e492a5, type: 2}
   directionKeys:
@@ -338,9 +339,15 @@ MonoBehaviour:
   rotationKeys:
   - {fileID: 11400000, guid: c884253cae970214ab8c471bee42f1ba, type: 2}
   - {fileID: 11400000, guid: 9a9dadea59696cd42ac29a888dade12b, type: 2}
+  actionKey: {fileID: 11400000, guid: 7683d8f7c5e333c4db303c8293331fbe, type: 2}
   icon: {fileID: 212400583848088072}
-  effect: {fileID: 198020077223855264, guid: ee31da93d49db2f48a38145b304aabcf, type: 2}
+  shape: {fileID: 212216298836003388}
+  assignEffect: {fileID: 198020077223855264, guid: ee31da93d49db2f48a38145b304aabcf,
+    type: 2}
+  actionEffect: {fileID: 198533261411071266, guid: 5bafb749eb6ca664e9719362cf96a685,
+    type: 2}
   movement: {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
+  action: {fileID: 11400000, guid: e41a7013d8d96e049a3d43c93cc31629, type: 2}
 --- !u!114 &114495047117984362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -438,7 +445,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

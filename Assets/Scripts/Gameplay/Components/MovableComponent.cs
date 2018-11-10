@@ -28,7 +28,7 @@ public class MovableComponent : MonoBehaviour
         set
         {
             rigidbody.position = value;
-            tweener.Pause();
+            Stop();
         }
     }
 
@@ -83,7 +83,7 @@ public class MovableComponent : MonoBehaviour
             .Overlap<CellComponent>(position, Constants.CellMask);
         return cell && !cell.Hollowed;
     }
-    
+
     public void Move(int direction) =>
         Move(IntPosition + Constants.Directions[direction]);
 
@@ -96,6 +96,8 @@ public class MovableComponent : MonoBehaviour
         Direction = DirectionTo(destination - Position);
         onMoveStart.Invoke();
     }
+
+    public void Stop() => tweener.Pause();
 
     public static int DirectionTo(Vector2 destination)
     {

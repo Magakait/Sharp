@@ -7,10 +7,6 @@ public class BaseMovement : ScriptableObject
     private Sprite icon;
     public Sprite Icon => icon;
 
-    public virtual void Assign(MovableComponent movable) { }
-
-    public virtual void Dispose(MovableComponent movable) { }
-
     public virtual void Idle(MovableComponent movable) { }
 
     public virtual void Move(MovableComponent movable, int direction) => movable.Move(direction);
