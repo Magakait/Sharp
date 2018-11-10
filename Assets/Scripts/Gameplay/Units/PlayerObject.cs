@@ -11,15 +11,15 @@ public class PlayerObject : SerializableObject
 
     private void Update()
     {
-        if (Time.timeScale > 0)
-        {
-            Rotate();
-            Buffer();
-            if (!movable.IsMoving)
-                Move();
-            if (cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
-                StartCoroutine(Act());
-        }
+        if (Time.timeScale == 0)
+            return;
+            
+        Rotate();
+        Buffer();
+        if (!movable.IsMoving)
+            Move();
+        if (Action && cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
+            StartCoroutine(Act());
     }
 
     [Space(10)]

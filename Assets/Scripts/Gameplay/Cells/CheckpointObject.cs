@@ -13,13 +13,23 @@ public class CheckpointObject : SerializableObject
 
     #region gameplay
 
+    private BaseAction action;
+    private float cooldown;
+    private BaseMovement movement;
+    private float transition;
+
     private void Activate(PlayerObject player)
     {
         if (player.Checkpoint)
             player.Checkpoint.spire.Emission(false);
 
+        action = player.Action;
+        cooldown = player.Cooldown;
+        movement = player.Movement;
+        transition = player.Movable.Transition;
+
         player.Checkpoint = this;
-        player.Checkpoint.spire.Emission(true);
+        spire.Emission(true);
     }
 
     public IEnumerator Spawn()
@@ -27,7 +37,12 @@ public class CheckpointObject : SerializableObject
         yield return new WaitForSeconds(2 * Constants.Time);
         CameraManager.Move(transform.position);
         yield return new WaitForSeconds(2 * Constants.Time);
-        LevelManager.AddInstance(0, transform.position);
+
+        var player = LevelManager.AddInstance(0, transform.position).GetComponent<PlayerObject>();
+        player.Action = action;
+        player.Cooldown = cooldown;
+        player.Movement = movement;
+        player.Movable.Transition = transition;
     }
 
     #endregion

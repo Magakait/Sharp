@@ -32,7 +32,6 @@ public class ActionObject : SerializableObject
         private set
         {
             action = value;
-
             foreach (var shape in shapes)
                 shape.sprite = actions[Action].Shape;
         }

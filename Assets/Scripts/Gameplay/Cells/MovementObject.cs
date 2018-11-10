@@ -32,7 +32,6 @@ public class MovementObject : SerializableObject
         private set
         {
             movement = value;
-
             foreach (var icon in icons)
                 icon.sprite = movements[Movement].Icon;
         }
