@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b0d883bf9005c449e3e9f03b23e36d, type: 3}
-  m_Name: Kick
+  m_Name: Push
   m_EditorClassIdentifier: 
-  shape: {fileID: 21300006, guid: bedb6272fed3b504092200396108649d, type: 3}
+  shape: {fileID: 21300008, guid: bedb6272fed3b504092200396108649d, type: 3}

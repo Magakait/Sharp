@@ -373,7 +373,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a9dadea59696cd42ac29a888dade12b, type: 2}
   actionKey: {fileID: 11400000, guid: 7683d8f7c5e333c4db303c8293331fbe, type: 2}
   movement: {fileID: 11400000, guid: ac962dd82b0eaa3439bcc7bed832a28d, type: 2}
-  action: {fileID: 11400000, guid: e41a7013d8d96e049a3d43c93cc31629, type: 2}
+  action: {fileID: 11400000, guid: 1e21f890016868c4b999554dc0238c84, type: 2}
   cooldown: 1
   icon: {fileID: 212400583848088072}
   shape: {fileID: 212216298836003388}
@@ -1219,7 +1219,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2

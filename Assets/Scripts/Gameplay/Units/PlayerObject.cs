@@ -13,12 +13,12 @@ public class PlayerObject : SerializableObject
     {
         if (Time.timeScale == 0)
             return;
-            
+
         Rotate();
         Buffer();
         if (!movable.IsMoving)
             Move();
-        if (Action && cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
+        if (cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
             StartCoroutine(Act());
     }
 
@@ -73,6 +73,7 @@ public class PlayerObject : SerializableObject
         {
             action = value;
             shape.sprite = Action.Shape;
+            cooldownEffect.Emission(Action.name != "Base");
             Instantiate(assignEffect, transform.position, Quaternion.identity);
         }
     }

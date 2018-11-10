@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Actions/Kick")]
-public class KickAction : BaseAction
+[CreateAssetMenu(menuName = "Actions/Push")]
+public class PushAction : BaseAction
 {
     public override void Do(PlayerObject player)
     {
@@ -9,10 +9,11 @@ public class KickAction : BaseAction
         (
             player.Movable.Position + .15f * Constants.Directions[player.Movable.Direction],
             player.Movable.Direction,
-            Constants.UnitMask
+            Constants.UnitMask,
+            1.15f
         );
 
-        if (target && Vector2.Distance(player.Movable.Position, target.Position) <= 1.15f)
-            target.Move(target.IntPosition + Constants.Directions[player.Movable.Direction]);
+        if (target && target.CanMove(player.Movable.Direction))
+            target.Move(player.Movable.Direction);
     }
 }

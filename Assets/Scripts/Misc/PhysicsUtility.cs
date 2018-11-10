@@ -6,7 +6,8 @@ using static Constants;
 
 public static class PhysicsUtility
 {
-    public static T Raycast<T>(Vector2 position, int direction, int mask) where T : Component
+    public static T Raycast<T>(Vector2 position, int direction, int mask, float distance = float.PositiveInfinity) 
+        where T : Component
     {
         Collider2D collider = Physics2D.Raycast
         (

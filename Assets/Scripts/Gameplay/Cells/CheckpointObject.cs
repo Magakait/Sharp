@@ -7,7 +7,7 @@ public class CheckpointObject : SerializableObject
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerObject player = collision.GetComponent<PlayerObject>();
-        if (player && player.Checkpoint != this)
+        if (player)
             Activate(player);
     }
 

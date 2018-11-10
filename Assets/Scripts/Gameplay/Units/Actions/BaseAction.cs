@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public abstract class BaseAction : ScriptableObject
+[CreateAssetMenu(menuName = "Actions/Base")]
+public class BaseAction : ScriptableObject
 {
     [SerializeField]
     private Sprite shape;
     public Sprite Shape => shape;
 
-    public abstract void Do(PlayerObject player);
+    public virtual void Do(PlayerObject player) { }
 }

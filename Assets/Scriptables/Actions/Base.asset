@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7000985b78eb0b448a7079ab88e2ca20, type: 3}
-  m_Name: Blink
+  m_Script: {fileID: 11500000, guid: 90480e6e1fbff3b4d9a3ca042dc47bbc, type: 3}
+  m_Name: Base
   m_EditorClassIdentifier: 
-  shape: {fileID: 21300006, guid: bedb6272fed3b504092200396108649d, type: 3}
+  shape: {fileID: 21300002, guid: bedb6272fed3b504092200396108649d, type: 3}
