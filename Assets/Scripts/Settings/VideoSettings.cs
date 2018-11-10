@@ -75,5 +75,7 @@ public class VideoSettings : MonoBehaviour
 
     public void LensDistortion(bool value) => ToggleEffect<LensDistortion>(value);
 
+    public void Grain(bool value) => ToggleEffect<Grain>(value);
+
     #endregion
 }
