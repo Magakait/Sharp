@@ -42,7 +42,7 @@ public class MovableComponent : MonoBehaviour
     [SerializeField]
     private VoidEvent onMoveStart;
     [SerializeField]
-    private VoidEvent onMoveComplete;
+    private VoidEvent onMoveStop;
 
     [SerializeField]
     private float transition = .15f;
@@ -69,13 +69,14 @@ public class MovableComponent : MonoBehaviour
             .DOMove(Position, 0)
             .SetEase(Ease.Linear)
             .SetUpdate(UpdateType.Fixed)
-            .OnComplete(() => onMoveComplete.Invoke());
+            .OnPlay(() => onMoveStart.Invoke())
+            .OnPause(() => onMoveStop.Invoke())
+            .OnComplete(() => onMoveStop.Invoke());
     }
 
     private void OnDestroy() => tweener.Kill();
 
-    public bool CanMove(int direction) =>
-        CanMove(IntPosition + Constants.Directions[direction]);
+    public bool CanMove(int direction) => CanMove(IntPosition + Constants.Directions[direction]);
 
     public static bool CanMove(Vector2 position)
     {
@@ -84,8 +85,7 @@ public class MovableComponent : MonoBehaviour
         return cell && !cell.Hollowed;
     }
 
-    public void Move(int direction) =>
-        Move(IntPosition + Constants.Directions[direction]);
+    public void Move(int direction) => Move(IntPosition + Constants.Directions[direction]);
 
     public void Move(Vector2 destination)
     {
@@ -94,7 +94,6 @@ public class MovableComponent : MonoBehaviour
             .Restart();
 
         Direction = DirectionTo(destination - Position);
-        onMoveStart.Invoke();
     }
 
     public void Stop() => tweener.Pause();
