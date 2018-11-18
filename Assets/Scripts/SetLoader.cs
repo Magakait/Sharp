@@ -74,12 +74,6 @@ public class SetLoader : MonoBehaviour
         SetManager.Meta.Save();
     }
 
-    public void CheckAchievement(bool completed)
-    {
-        if (completed && SetManager.Meta.ShortName == "Factory.BOOT Camp")
-            SteamManager.UnlockAchievement("BOOTed");
-    }
-
     public void Create()
     {
         var set = EngineUtility.NextFile(path, "Set");
