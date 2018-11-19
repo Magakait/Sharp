@@ -97,8 +97,6 @@ public class EntranceObject : SerializableObject
     [SerializeField]
     private Text titleText;
     [SerializeField]
-    private Text descriptionText;
-    [SerializeField]
     private Button enterButton;
 
     private new TweenArrayComponent animation;
@@ -128,7 +126,6 @@ public class EntranceObject : SerializableObject
     public override void Serialize(JToken token)
     {
         token["level"] = Level;
-        token["description"] = descriptionText.text;
         token["threshold"] = Threshold;
         token["connections"] = Connections;
     }
@@ -138,7 +135,6 @@ public class EntranceObject : SerializableObject
         Level = (string)token["level"];
         Passed = SetManager.Meta["passed"].Any(t => (string)t == Level);
 
-        descriptionText.text = (string)token["description"];
         Threshold = (int)token["threshold"];
         Connections = (string)token["connections"];
     }
