@@ -1,8 +1,9 @@
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using UnityEngine.Rendering.PostProcessing;
 
 public class VideoSettings : MonoBehaviour
 {
@@ -58,16 +59,16 @@ public class VideoSettings : MonoBehaviour
     #region effects
 
     [SerializeField]
-    private PostProcessProfile postProcessProfile;
+    private VolumeProfile postProcessProfile;
 
-    private void ToggleEffect<T>(bool enabled) where T : PostProcessEffectSettings
+    private void ToggleEffect<T>(bool enabled) where T : VolumeComponent
     {
         T component;
-        if (postProcessProfile.TryGetSettings(out component))
-            component.enabled.Override(enabled);
+        if (postProcessProfile.TryGet(out component))
+            component.active = enabled;
     }
 
-    public void Bloom(bool value) => ToggleEffect<Bloom>(value);
+    public void Bloom(bool value) => ToggleEffect<VolumeComponent>(value);
 
     public void ChromaticAberration(bool value) => ToggleEffect<ChromaticAberration>(value);
 
@@ -75,7 +76,7 @@ public class VideoSettings : MonoBehaviour
 
     public void LensDistortion(bool value) => ToggleEffect<LensDistortion>(value);
 
-    public void Grain(bool value) => ToggleEffect<Grain>(value);
+    public void Grain(bool value) => ToggleEffect<FilmGrain>(value);
 
     #endregion
 }
