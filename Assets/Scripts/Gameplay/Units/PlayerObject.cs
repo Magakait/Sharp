@@ -19,7 +19,7 @@ public class PlayerObject : SerializableObject
         Buffer();
         if (!movable.IsMoving)
             Move();
-        if (cooldownEffect.emission.enabled && Keyboard.current[actionKey].wasPressedThisFrame)
+        if (cooldownEffect.emission.enabled && actionKey.IsDown)
             StartCoroutine(Act());
     }
 
@@ -127,7 +127,7 @@ public class PlayerObject : SerializableObject
         var stopSprint = Keyboard.current[sprintKey].wasReleasedThisFrame;
 
         for (var i = 0; i < 4; i++)
-            if (Keyboard.current[directionKeys[i]].wasPressedThisFrame)
+            if (directionKeys[i].IsDown)
             {
                 moves.Remove(i);
                 moves.Add(i);
@@ -144,9 +144,9 @@ public class PlayerObject : SerializableObject
 
     private void Rotate()
     {
-        if (Keyboard.current[rotationKeys[0]].wasPressedThisFrame)
+        if (rotationKeys[0].IsDown)
             movable.Direction--;
-        else if (Keyboard.current[rotationKeys[1]].wasPressedThisFrame)
+        else if (rotationKeys[1].IsDown)
             movable.Direction++;
     }
 
