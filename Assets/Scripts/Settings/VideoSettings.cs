@@ -64,11 +64,11 @@ public class VideoSettings : MonoBehaviour
     private void ToggleEffect<T>(bool enabled) where T : VolumeComponent
     {
         T component;
-        if (postProcessProfile.TryGet(out component))
+        if (CameraManager.Camera.GetComponent<Volume>().profile.TryGet(out component))
             component.active = enabled;
     }
 
-    public void Bloom(bool value) => ToggleEffect<VolumeComponent>(value);
+    public void Bloom(bool value) => ToggleEffect<Bloom>(value);
 
     public void ChromaticAberration(bool value) => ToggleEffect<ChromaticAberration>(value);
 

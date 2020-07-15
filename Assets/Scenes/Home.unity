@@ -323,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00013592436
+      value: 0.00001821796
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00019307112
+      value: -0.000000855527
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -5793,7 +5793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   file: {fileID: 11400000, guid: 318ac68a4f4fccd429c0d15232442fe6, type: 2}
   dropdownResolutions: {fileID: 106816928}
-  postProcessProfile: {fileID: 11400000, guid: 87f61a1dab7a4a347a6852a0c6be991e, type: 2}
+  postProcessProfile: {fileID: 11400000, guid: 9866e3209ed164f4890a01fe8f700e99, type: 2}
 --- !u!224 &624662137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19357,7 +19357,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9977469
+  m_Size: 0.9978833
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19437,7 +19437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00021405195}
+  m_AnchoredPosition: {x: 0, y: 0.000056364934}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -25055,7 +25055,7 @@ Camera:
   m_GameObject: {fileID: 2140393271}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -25120,7 +25120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -25130,7 +25130,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
