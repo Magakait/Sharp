@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class EditorGrid : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class EditorGrid : MonoBehaviour
 
     public static Vector2 MousePosition()
     {
-        Ray ray = CameraManager.Camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraManager.Camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         float distance;
         plane.Raycast(ray, out distance);

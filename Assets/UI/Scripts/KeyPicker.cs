@@ -1,6 +1,7 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 class KeyPicker : MonoBehaviour
 {
@@ -13,7 +14,7 @@ class KeyPicker : MonoBehaviour
             onValueChanged.Invoke(key.Value.ToString());
         else
         {
-            key.Value = (KeyCode)Enum.Parse(typeof(KeyCode), value);
+            key.Value = (Key)Enum.Parse(typeof(Key), value);
             onValueChanged.Invoke(value);
         }
     }

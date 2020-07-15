@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraTilt : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class CameraTilt : MonoBehaviour
 
     private void Update()
     {
-        var mouse = CameraManager.Camera.ScreenToViewportPoint(Input.mousePosition);
+        var mouse = CameraManager.Camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
         CameraManager.Rotation = scale * new Vector3(.5f - mouse.y, mouse.x - .5f);
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class KeyListener : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class KeyListener : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(key) && LoadingScreen.Ready && !EngineUtility.IsInput)
+        if (Keyboard.current[key].isPressed && LoadingScreen.Ready && !EngineUtility.IsInput)
             Invoke();
     }
 

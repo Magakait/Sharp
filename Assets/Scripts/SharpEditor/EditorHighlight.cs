@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class EditorHighlight : MonoBehaviour
 {
@@ -89,7 +90,7 @@ public class EditorHighlight : MonoBehaviour
         {
             if (!collider)
             {
-                if (Input.GetKey(copyKey) && !copied && target.Id > 1)
+                if (Keyboard.current[copyKey].isPressed && !copied && target.Id > 1)
                 {
                     copied = true;
 
@@ -133,19 +134,19 @@ public class EditorHighlight : MonoBehaviour
     {
         if (target)
         {
-            if (!Dragging && Input.GetMouseButtonDown(0))
+            if (!Dragging && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 Dragging = true;
                 Selected = Selected == target ? null : target;
             }
-            else if (Dragging && !Input.GetMouseButton(0))
+            else if (Dragging && !Mouse.current.leftButton.wasPressedThisFrame)
             {
                 LevelManager.UpdateInstance(target);
 
                 Dragging = false;
                 copied = false;
             }
-            else if (Input.GetMouseButton(1) && target.Id > 1)
+            else if (Mouse.current.rightButton.isPressed && target.Id > 1)
             {
                 Dragging = false;
                 if (Selected == target)
@@ -155,7 +156,7 @@ public class EditorHighlight : MonoBehaviour
                 target = null;
             }
         }
-        else if (Input.GetMouseButton(0))
+        else if (Mouse.current.leftButton.isPressed)
             LevelManager.AddInstance(Id, frameSprite.transform.position, true);
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerObject : SerializableObject
 {
@@ -18,7 +19,7 @@ public class PlayerObject : SerializableObject
         Buffer();
         if (!movable.IsMoving)
             Move();
-        if (cooldownEffect.emission.enabled && Input.GetKeyDown(actionKey))
+        if (cooldownEffect.emission.enabled && Keyboard.current[actionKey].wasPressedThisFrame)
             StartCoroutine(Act());
     }
 
@@ -122,30 +123,30 @@ public class PlayerObject : SerializableObject
 
     private void Buffer()
     {
-        var sprint = Input.GetKey(sprintKey);
-        var stopSprint = Input.GetKeyUp(sprintKey);
+        var sprint = Keyboard.current[sprintKey].isPressed;
+        var stopSprint = Keyboard.current[sprintKey].wasReleasedThisFrame;
 
         for (var i = 0; i < 4; i++)
-            if (Input.GetKeyDown(directionKeys[i]))
+            if (Keyboard.current[directionKeys[i]].wasPressedThisFrame)
             {
                 moves.Remove(i);
                 moves.Add(i);
                 break;
             }
-            else if (sprint && Input.GetKey(directionKeys[i]))
+            else if (sprint && Keyboard.current[directionKeys[i]].isPressed)
             {
                 moves.Remove(i);
                 moves.Add(i);
             }
-            else if (stopSprint || (sprint && Input.GetKeyUp(directionKeys[i])))
+            else if (stopSprint || (sprint && Keyboard.current[directionKeys[i]].wasReleasedThisFrame))
                 moves.Remove(i);
     }
 
     private void Rotate()
     {
-        if (Input.GetKeyDown(rotationKeys[0]))
+        if (Keyboard.current[rotationKeys[0]].wasPressedThisFrame)
             movable.Direction--;
-        else if (Input.GetKeyDown(rotationKeys[1]))
+        else if (Keyboard.current[rotationKeys[1]].wasPressedThisFrame)
             movable.Direction++;
     }
 

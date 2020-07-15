@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraPan : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class CameraPan : MonoBehaviour
 
         var move = Vector2.zero;
         for (var i = 0; i < 4; i++)
-            if (Input.GetKey(keys[i]))
+            if (Keyboard.current[keys[i]].isPressed)
                 move += Constants.Directions[i];
 
         move *= scale;

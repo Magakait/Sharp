@@ -1,6 +1,7 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 class InputSettings : MonoBehaviour
@@ -38,9 +39,9 @@ class InputSettings : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKeyDown)
-            foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
-                if (Input.GetKeyDown(key))
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
+            foreach (Key key in Enum.GetValues(typeof(Key)))
+                if (Keyboard.current[key].wasPressedThisFrame)
                 {
                     string text = key.ToString();
                     if (!text.Contains("Mouse"))
