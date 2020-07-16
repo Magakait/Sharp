@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using AlKaitagi.SharpUI;
+using AlKaitagi.SharpCore.Variables;
 using DG.Tweening;
 
 public class EditorHighlight : MonoBehaviour
@@ -18,7 +19,7 @@ public class EditorHighlight : MonoBehaviour
         TargetGrid();
         DisplayInfo();
 
-        if (!EngineUtility.IsOverUI)
+        if (!UIUtility.IsOverUI)
             ProcessMouse();
     }
 

@@ -15,7 +15,7 @@ public class CameraZoom : MonoBehaviour
 
     private void Update()
     {
-        if (EngineUtility.IsOverUI)
+        if (UIUtility.IsOverUI)
             return;
 
         var scroll = scale * Mouse.current.scroll.ReadValue().y;

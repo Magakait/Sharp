@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using AlKaitagi.SharpUI;
+using AlKaitagi.SharpCore.Events;
 
 public class SetLoader : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class SetLoader : MonoBehaviour
 
     public void Create()
     {
-        var set = EngineUtility.NextFile(path, "Set");
+        var set = UIUtility.NextFile(path, "Set");
 
         SetManager.Create(set);
         Load(Path.GetFileName(set));

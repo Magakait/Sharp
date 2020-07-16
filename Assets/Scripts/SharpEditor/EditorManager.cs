@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using AlKaitagi.SharpUI;
 using Newtonsoft.Json.Linq;
+using AlKaitagi.SharpCore.Events;
 
 public class EditorManager : MonoBehaviour
 {
@@ -101,7 +102,7 @@ public class EditorManager : MonoBehaviour
 
     public void AddLevel()
     {
-        string path = EngineUtility.NextFile(SetManager.FullName, "Level.#");
+        string path = UIUtility.NextFile(SetManager.FullName, "Level.#");
 
         File.Copy(Constants.EditorRoot + "Set\\Level.#", path);
         ListLevels(Path.GetFileNameWithoutExtension(path));
@@ -109,7 +110,7 @@ public class EditorManager : MonoBehaviour
 
     public void CopyLevel()
     {
-        LevelManager.Level.SaveTo(EngineUtility.NextFile(SetManager.FullName, LevelManager.Level.ShortName + " - copy.#"));
+        LevelManager.Level.SaveTo(UIUtility.NextFile(SetManager.FullName, LevelManager.Level.ShortName + " - copy.#"));
         ListLevels(LevelManager.Level.ShortName);
     }
 
@@ -133,7 +134,7 @@ public class EditorManager : MonoBehaviour
         else
         {
             SetManager.Delete();
-            EngineUtility.Main.LoadScene("Home");
+            UIUtility.Main.LoadScene("Home");
         }
     }
 

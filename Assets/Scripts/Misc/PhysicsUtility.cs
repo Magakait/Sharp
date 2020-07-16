@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-
 using UnityEngine;
-
 using static Constants;
 
 public static class PhysicsUtility

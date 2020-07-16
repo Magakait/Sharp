@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using AlKaitagi.SharpCore.Events;
 using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -8,10 +8,7 @@ public class MovableComponent : MonoBehaviour
     private int direction;
     public int Direction
     {
-        get
-        {
-            return direction;
-        }
+        get => direction;
         set
         {
             direction = (int)Mathf.Repeat(value, 4);
@@ -21,10 +18,7 @@ public class MovableComponent : MonoBehaviour
 
     public Vector2 Position
     {
-        get
-        {
-            return rigidbody.position;
-        }
+        get => rigidbody.position;
         set
         {
             rigidbody.position = value;
@@ -48,14 +42,8 @@ public class MovableComponent : MonoBehaviour
     private float transition = .15f;
     public float Transition
     {
-        get
-        {
-            return transition;
-        }
-        set
-        {
-            transition = value;
-        }
+        get => transition;
+        set => transition = value;
     }
 
     private new Rigidbody2D rigidbody;
@@ -74,9 +62,11 @@ public class MovableComponent : MonoBehaviour
             .OnComplete(() => onMoveStop.Invoke());
     }
 
-    private void OnDestroy() => tweener.Kill();
+    private void OnDestroy() =>
+        tweener.Kill();
 
-    public bool CanMove(int direction) => CanMove(IntPosition + Constants.Directions[direction]);
+    public bool CanMove(int direction) =>
+        CanMove(IntPosition + Constants.Directions[direction]);
 
     public static bool CanMove(Vector2 position)
     {
@@ -85,12 +75,18 @@ public class MovableComponent : MonoBehaviour
         return cell && !cell.Hollowed;
     }
 
-    public void Move(int direction) => Move(IntPosition + Constants.Directions[direction]);
+    public void Move(int direction) =>
+        Move(IntPosition + Constants.Directions[direction]);
 
     public void Move(Vector2 destination)
     {
         tweener
-            .ChangeValues(Position, destination, Transition * Vector2.Distance(Position, destination))
+            .ChangeValues
+            (
+                Position,
+                destination,
+                Transition * Vector2.Distance(Position, destination)
+            )
             .Restart();
 
         Direction = DirectionTo(destination - Position);
@@ -98,11 +94,8 @@ public class MovableComponent : MonoBehaviour
 
     public void Stop() => tweener.Pause();
 
-    public static int DirectionTo(Vector2 destination)
-    {
-        if (Mathf.Abs(destination.x) > Mathf.Abs(destination.y))
-            return destination.x > 0 ? 1 : 3;
-        else
-            return destination.y > 0 ? 0 : 2;
-    }
+    public static int DirectionTo(Vector2 destination) =>
+        Mathf.Abs(destination.x) > Mathf.Abs(destination.y)
+            ? destination.x > 0 ? 1 : 3
+            : destination.y > 0 ? 0 : 2;
 }

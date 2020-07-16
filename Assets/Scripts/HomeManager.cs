@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using AlKaitagi.SharpCore.Events;
 
 class HomeManager : MonoBehaviour
 {

@@ -1,4 +1,6 @@
 using UnityEngine;
+using AlKaitagi.SharpCore;
+using AlKaitagi.SharpCore.Painters;
 
 public class ThemeSettings : MonoBehaviour
 {

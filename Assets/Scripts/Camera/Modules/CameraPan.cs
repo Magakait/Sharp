@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using AlKaitagi.SharpUI;
+using AlKaitagi.SharpCore.Variables;
 
 public class CameraPan : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CameraPan : MonoBehaviour
 
     private void Update()
     {
-        if (EngineUtility.IsInput)
+        if (UIUtility.IsInput)
             return;
 
         var move = Vector2.zero;

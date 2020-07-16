@@ -1,0 +1,11 @@
+{
+    "name": "com.alkaitagi.sharpcore",
+    "version": "0.1.0",
+    "displayName": "Sharp Core",
+    "description": "This package provides basic building block for more complex systems: Variables, JSONLoaders, Painters, Events.",
+    "author": {
+        "name": "Magomed Magomedov",
+        "url": "https://twitter.com/alkaitagi"
+    },
+    "hideInEditor": false
+}

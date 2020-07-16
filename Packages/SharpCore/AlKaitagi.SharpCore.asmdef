@@ -1,8 +1,8 @@
 {
-    "name": "AlKaitagi.SharpUI",
+    "name": "AlKaitagi.SharpCore",
     "references": [
         "Unity.InputSystem",
-        "AlKaitagi.SharpCore"
+        "Newtonsoft.Json"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

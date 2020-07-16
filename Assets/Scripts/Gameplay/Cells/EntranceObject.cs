@@ -49,7 +49,7 @@ public class EntranceObject : SerializableObject
 
     private void OnMouseDown()
     {
-        if (enabled && !EngineUtility.IsOverUI)
+        if (enabled && !UIUtility.IsOverUI)
         {
             SetManager.Meta["selected"] = Level;
             SetManager.Meta.Save();
@@ -61,7 +61,7 @@ public class EntranceObject : SerializableObject
     public void Enter()
     {
         LevelManager.Load(Level);
-        EngineUtility.Main.LoadScene("Play");
+        UIUtility.Main.LoadScene("Play");
     }
 
     public void Connect(EntranceObject target)

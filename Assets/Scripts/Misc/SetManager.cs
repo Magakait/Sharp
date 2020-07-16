@@ -1,11 +1,8 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-
 using UnityEngine;
-
-using Newtonsoft.Json.Linq;
+using AlKaitagi.SharpCore;
 
 [CreateAssetMenu]
 public class SetManager : ScriptableObject

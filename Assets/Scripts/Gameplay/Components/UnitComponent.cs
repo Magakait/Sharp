@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using AlKaitagi.SharpCore.Events;
 using DG.Tweening;
 
 public class UnitComponent : MonoBehaviour
@@ -12,14 +12,8 @@ public class UnitComponent : MonoBehaviour
     private bool killed;
     public bool Killed
     {
-        get
-        {
-            return killed;
-        }
-        set
-        {
-            killed = value;
-        }
+        get => killed;
+        set => killed = value;
     }
 
     public VoidEvent onKill;

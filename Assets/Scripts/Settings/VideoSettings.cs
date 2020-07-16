@@ -1,9 +1,9 @@
 using System.Linq;
-
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using AlKaitagi.SharpCore;
 
 public class VideoSettings : MonoBehaviour
 {
@@ -50,9 +50,11 @@ public class VideoSettings : MonoBehaviour
 
     #region render
 
-    public void VSync(bool value) => QualitySettings.vSyncCount = value ? 1 : 0;
+    public void VSync(bool value) =>
+        QualitySettings.vSyncCount = value ? 1 : 0;
 
-    public void TargetFps(int value) => Application.targetFrameRate = 30 * (value + 2);
+    public void TargetFps(int value) =>
+        Application.targetFrameRate = 30 * (value + 2);
 
     #endregion
 
@@ -68,15 +70,20 @@ public class VideoSettings : MonoBehaviour
             component.active = enabled;
     }
 
-    public void Bloom(bool value) => ToggleEffect<Bloom>(value);
+    public void Bloom(bool value) =>
+        ToggleEffect<Bloom>(value);
 
-    public void ChromaticAberration(bool value) => ToggleEffect<ChromaticAberration>(value);
+    public void ChromaticAberration(bool value) =>
+        ToggleEffect<ChromaticAberration>(value);
 
-    public void Vignette(bool value) => ToggleEffect<Vignette>(value);
+    public void Vignette(bool value) =>
+        ToggleEffect<Vignette>(value);
 
-    public void LensDistortion(bool value) => ToggleEffect<LensDistortion>(value);
+    public void LensDistortion(bool value) =>
+        ToggleEffect<LensDistortion>(value);
 
-    public void Grain(bool value) => ToggleEffect<FilmGrain>(value);
+    public void Grain(bool value) =>
+        ToggleEffect<FilmGrain>(value);
 
     #endregion
 }

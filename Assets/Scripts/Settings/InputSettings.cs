@@ -1,8 +1,9 @@
 using System;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using AlKaitagi.SharpUI;
+using AlKaitagi.SharpCore;
 
 class InputSettings : MonoBehaviour
 {
@@ -12,10 +13,7 @@ class InputSettings : MonoBehaviour
     private KeyPicker picker;
     public KeyPicker Picker
     {
-        get
-        {
-            return picker;
-        }
+        get => picker;
         set
         {
             if (value)

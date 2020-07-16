@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using AlKaitagi.SharpUI;
+using AlKaitagi.SharpCore.Variables;
 
 public class PlayerObject : SerializableObject
 {
-    private void Awake() => CameraManager.Position = transform.position;
+    private void Awake() =>
+        CameraManager.Position = transform.position;
 
-    private void Start() => CameraFollow.Target = transform;
+    private void Start() =>
+        CameraFollow.Target = transform;
 
     private void Update()
     {
@@ -50,10 +53,7 @@ public class PlayerObject : SerializableObject
     private BaseMovement movement;
     public BaseMovement Movement
     {
-        get
-        {
-            return movement;
-        }
+        get => movement;
         set
         {
             movement = value;
@@ -66,10 +66,7 @@ public class PlayerObject : SerializableObject
     private BaseAction action;
     public BaseAction Action
     {
-        get
-        {
-            return action;
-        }
+        get => action;
         set
         {
             action = value;
@@ -83,23 +80,14 @@ public class PlayerObject : SerializableObject
     private float cooldown;
     public float Cooldown
     {
-        get
-        {
-            return cooldown;
-        }
-        set
-        {
-            cooldown = value;
-        }
+        get => cooldown;
+        set => cooldown = value;
     }
 
     private CheckpointObject checkpoint;
     public CheckpointObject Checkpoint
     {
-        get
-        {
-            return checkpoint;
-        }
+        get => checkpoint;
         set
         {
             checkpoint = value;
@@ -182,11 +170,11 @@ public class PlayerObject : SerializableObject
     {
         if (ExitObject.Passed)
             Instantiate(this.prompt, movable.Position, Quaternion.identity)
-                .Setup("Home", () => EngineUtility.Main.LoadScene("Home"));
+                .Setup("Home", () => UIUtility.Main.LoadScene("Home"));
         else if (Checkpoint)
             Checkpoint.StartCoroutine(Checkpoint.Spawn());
         else
             Instantiate(this.prompt, movable.Position, Quaternion.identity)
-                .Setup("Restart", () => EngineUtility.Main.ReloadScene());
+                .Setup("Restart", () => UIUtility.Main.ReloadScene());
     }
 }
