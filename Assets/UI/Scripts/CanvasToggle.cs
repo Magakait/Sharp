@@ -1,63 +1,86 @@
 using UnityEngine;
 
-using DG.Tweening;
-
-[RequireComponent(typeof(CanvasGroup))]
-[RequireComponent(typeof(RectTransform))]
-public class CanvasToggle : MonoBehaviour
+namespace AlKaitagi.SharpUI
 {
-    [SerializeField]
-    private bool visible;
-    public bool Visible
+    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(RectTransform))]
+    public class CanvasToggle : MonoBehaviour
     {
-        get
+        [SerializeField]
+        private bool visible;
+        public bool Visible
         {
-            return visible;
+            get => visible;
+            set
+            {
+                visible = value;
+                canvasGroup.blocksRaycasts = Visible;
+                enabled = true;
+                onToggle.Invoke(Visible);
+            }
+        }
+        [SerializeField]
+        private float scale = 1;
+        [SerializeField]
+        private Vector3 offset = Vector3.zero;
+        [SerializeField]
+        private float duration = .1f;
+        [SerializeField]
+        private BoolEvent onToggle = null;
+
+        private float timer = 0;
+
+        private RectTransform rectTransform;
+        private CanvasGroup canvasGroup;
+
+        private Vector3 startPosition;
+        private Vector3 endPosition;
+
+        private Vector3 startScale;
+        private Vector3 endScale;
+
+        private void Awake()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            rectTransform = GetComponent<RectTransform>();
+
+            startPosition = rectTransform.anchoredPosition;
+            endPosition = startPosition + offset;
+
+            startScale = transform.localScale;
+            endScale = scale * startScale;
+
+            if (!Visible)
+            {
+                canvasGroup.blocksRaycasts = false;
+                timer = 1;
+                Assign();
+            }
         }
 
-        set
+        private void OnValidate() =>
+            GetComponent<CanvasGroup>().alpha = Visible ? 1 : 0;
+
+        private void Update()
         {
-            visible = value;
-
-            canvasGroup.blocksRaycasts = Visible;
-            animation.Play(Visible);
+            var timer = Mathf.Clamp01(this.timer + (Visible ? -1 : 1) * Time.unscaledDeltaTime / duration);
+            if (timer != this.timer)
+            {
+                this.timer = timer;
+                Assign();
+            }
+            else
+                enabled = false;
         }
+
+        private void Assign()
+        {
+            canvasGroup.alpha = Mathf.Lerp(1, 0, timer);
+            transform.localScale = Vector3.Lerp(startScale, endScale, timer);
+            rectTransform.anchoredPosition = Vector3.Lerp(startPosition, endPosition, timer);
+        }
+
+        public void Toggle() =>
+            Visible = !Visible;
     }
-
-    [Space(10)]
-    [SerializeField]
-    private float scale = 1;
-    [SerializeField]
-    private Vector2 offset;
-
-    private CanvasGroup canvasGroup;
-    private new Tween animation;
-
-    private void Awake()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-
-        animation = DOTween.Sequence().Insert
-        (
-            transform
-                .DOScale(scale * transform.localScale, .15f),
-            canvasGroup
-                .DOFade(0, .15f),
-            GetComponent<RectTransform>()
-                .DOAnchorPos(offset, .15f)
-                .SetRelative()
-        )
-            .SetEase(Ease.InOutQuad)
-            .SetUpdate(true);
-
-        Visible = Visible;
-        if (!Visible)
-            animation.Complete();
-    }
-
-    private void OnDestroy() =>
-        animation.Kill();
-
-    public void Toggle() =>
-        Visible = !Visible;
 }

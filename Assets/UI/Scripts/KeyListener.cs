@@ -1,19 +1,42 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
-public class KeyListener : MonoBehaviour
+namespace AlKaitagi.SharpUI
 {
-    [SerializeField]
-    private KeyVariable key;
-    [SerializeField]
-    private UnityEvent onDown;
-
-    private void Update()
+    public class KeyListener : MonoBehaviour
     {
-        if (Keyboard.current[key].isPressed && LoadingScreen.Ready && !EngineUtility.IsInput)
-            Invoke();
-    }
+        [SerializeField]
+        private KeyVariable key = null;
+        [SerializeField]
+        private VoidEvent onDown = null;
+        [SerializeField]
+        private VoidEvent onUp = null;
+        [SerializeField]
+        private BoolEvent onHold = null;
 
-    public void Invoke() => onDown.Invoke();
+        private void Update()
+        {
+            if (EngineUtility.IsInput)
+                return;
+
+            if (key.IsDown)
+            {
+                Down();
+                Hold(true);
+            }
+            else if (key.IsUp)
+            {
+                Up();
+                Hold(false);
+            }
+        }
+
+        public void Down() =>
+            onDown.Invoke();
+
+        public void Up() =>
+            onUp.Invoke();
+
+        public void Hold(bool value) =>
+            onHold.Invoke(value);
+    }
 }

@@ -1,27 +1,22 @@
 using System;
-
 using UnityEngine;
 
-public class DecimalSlider : BaseSlider
+namespace AlKaitagi.SharpUI
 {
-    [Range(0, 2)]
-    [SerializeField]
-    private int decimals;
-    public int Decimals
+    public class DecimalSlider : BaseSlider
     {
-        get
+        [SerializeField, Range(0, 2)]
+        private int decimals;
+        public int Decimals
         {
-            return decimals;
+            get => decimals;
+            set => decimals = value;
         }
-        set
-        {
-            decimals = value;
-        }
+
+        protected override float Number(float value) =>
+            (float)Math.Round(value, Decimals);
+
+        protected override string Text(float value) =>
+            value.ToString();
     }
-
-    protected override float Number(float value) => 
-        (float)Math.Round(value, Decimals);
-
-    protected override string Text(float value) => 
-        value.ToString();
 }

@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
-
 using UnityEngine;
-
 using DG.Tweening;
-using UnityEngine.Events;
 
 public class LoadingScreen : MonoBehaviour
 {
@@ -37,7 +35,7 @@ public class LoadingScreen : MonoBehaviour
         main.canvas.blocksRaycasts = !isBackwards;
     }
 
-    private IEnumerator Transition(UnityAction action)
+    private IEnumerator Transition(Action action)
     {
         Play(false);
         yield return Wait();
@@ -48,7 +46,7 @@ public class LoadingScreen : MonoBehaviour
 
     private WaitForSecondsRealtime Wait() => new WaitForSecondsRealtime(tween.Duration());
 
-    public static void MakeTransition(UnityAction action)
+    public static void MakeTransition(Action action)
     {
         if (Ready)
             main.StartCoroutine(main.Transition(action));
