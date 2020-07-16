@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using AlKaitagi.SharpUI;
 
 public class CameraPan : MonoBehaviour
 {

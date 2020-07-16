@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using AlKaitagi.SharpUI;
 
 public class Prompt : MonoBehaviour
 {

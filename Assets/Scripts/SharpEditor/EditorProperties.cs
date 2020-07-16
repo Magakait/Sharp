@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using AlKaitagi.SharpUI;
 using Newtonsoft.Json.Linq;
 
 public class EditorProperties : MonoBehaviour

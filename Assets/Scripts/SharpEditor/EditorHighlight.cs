@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-using DG.Tweening;
 using UnityEngine.InputSystem;
+using AlKaitagi.SharpUI;
+using DG.Tweening;
 
 public class EditorHighlight : MonoBehaviour
 {
