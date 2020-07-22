@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "com.alkaitagi.sharpcore": {
+      "version": "file:SharpCore",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.alkaitagi.sharpui": {
+      "version": "file:SharpUI",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

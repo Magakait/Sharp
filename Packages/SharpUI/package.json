@@ -1,10 +1,10 @@
 {
     "name": "com.alkaitagi.sharpui",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "displayName": "Sharp UI",
     "description": "This package provides a set of consistently-styled UI controls as well as an auxiliary utility scripable object.",
     "author": {
-        "name": "Magomed Magomedov",
+        "name": "AlKaitagi",
         "url": "https://twitter.com/alkaitagi"
     },
     "hideInEditor": false
