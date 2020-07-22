@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using Sharp.UI;
 using Sharp.Core.Variables;
 
-public class PlayerObject : SerializableObject
+public class PlayerObject : MonoBehaviour
 {
     private void Awake() =>
         CameraManager.Position = transform.position;

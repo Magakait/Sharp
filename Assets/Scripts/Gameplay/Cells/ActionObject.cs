@@ -2,7 +2,7 @@ using UnityEngine;
 
 using Newtonsoft.Json.Linq;
 
-public class ActionObject : SerializableObject
+public class ActionObject : MonoBehaviour, ISerializable
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,25 +39,15 @@ public class ActionObject : SerializableObject
 
     [SerializeField]
     private float cooldown;
-    public float Cooldown
-    {
-        get
-        {
-            return cooldown;
-        }
-        private set
-        {
-            cooldown = value;
-        }
-    }
+    public float Cooldown { get => cooldown; private set => cooldown = value; }
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["action"] = Action;
         token["cooldown"] = Cooldown;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Action = (int)token["action"];
         Cooldown = (float)token["cooldown"];

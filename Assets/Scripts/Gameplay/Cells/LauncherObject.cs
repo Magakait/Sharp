@@ -1,9 +1,8 @@
 using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class LauncherObject : SerializableObject
+public class LauncherObject : MonoBehaviour, ISerializable
 {
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -98,23 +97,17 @@ public class LauncherObject : SerializableObject
     private float scale;
     public float Scale
     {
-        get
-        {
-            return scale;
-        }
-        private set
-        {
-            scale = value;
-        }
+        get => scale;
+        private set => scale = value;
     }
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["direction"] = state.State;
         token["scale"] = Scale;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         state.State = (int)token["direction"];
         Scale = (float)token["scale"];

@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-
 using DG.Tweening;
-using Newtonsoft.Json.Linq;
 
-public class BarrierObject : SerializableObject
+public class BarrierObject : MonoBehaviour
 {
     [Space(10)]
     [SerializeField]
@@ -12,10 +10,7 @@ public class BarrierObject : SerializableObject
     private int charges;
     public int Charges
     {
-        get
-        {
-            return charges;
-        }
+        get => charges;
         set
         {
             charges = value;

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
-public class TrapObject : SerializableObject
+public class TrapObject : MonoBehaviour, ISerializable
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (state.State == 1)
             collision.GetComponent<UnitComponent>().Kill();
     }
-    
+
     #region gameplay
 
     [Header("Gameplay")]
@@ -22,7 +20,6 @@ public class TrapObject : SerializableObject
     public void Switch()
     {
         bool active = state.State == 1;
-
         if (active)
             foreach (UnitComponent unit in cell.GetCollisions<UnitComponent>())
                 unit.Kill();
@@ -42,10 +39,10 @@ public class TrapObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token) =>
+    public void Serialize(JToken token) =>
         token["active"] = state.State == 1;
 
-    public override void Deserialize(JToken token) =>
+    public void Deserialize(JToken token) =>
         state.State = (bool)token["active"] ? 1 : 0;
 
     #endregion

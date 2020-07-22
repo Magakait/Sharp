@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class GateObject : SerializableObject
+public class GateObject : MonoBehaviour, ISerializable
 {
     [Space(10)]
     [SerializeField]
@@ -41,20 +40,14 @@ public class GateObject : SerializableObject
 
     public bool Open
     {
-        get
-        {
-            return state.State == 1;
-        }
-        private set
-        {
-            state.State = value ? 1 : 0;
-        }
+        get => state.State == 1;
+        private set => state.State = value ? 1 : 0;
     }
 
-    public override void Serialize(JToken token) =>
+    public void Serialize(JToken token) =>
         token["open"] = Open;
 
-    public override void Deserialize(JToken token) =>
+    public void Deserialize(JToken token) =>
         Open = (bool)token["open"];
 
     #endregion

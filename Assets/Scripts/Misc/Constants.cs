@@ -6,7 +6,7 @@ using UnityEngine.Events;
 #region events
 
 [Serializable]
-public class SerializableObjectEvent : UnityEvent<SerializableObject> { }
+public class SerializableObjectEvent : UnityEvent<GameObject> { }
 
 #endregion
 

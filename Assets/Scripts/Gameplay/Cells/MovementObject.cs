@@ -1,8 +1,7 @@
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 
-public class MovementObject : SerializableObject
+public class MovementObject : MonoBehaviour, ISerializable
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,10 +24,7 @@ public class MovementObject : SerializableObject
     private int movement;
     public int Movement
     {
-        get
-        {
-            return movement;
-        }
+        get => movement;
         private set
         {
             movement = value;
@@ -41,23 +37,17 @@ public class MovementObject : SerializableObject
     private float transition;
     public float Transition
     {
-        get
-        {
-            return transition;
-        }
-        private set
-        {
-            transition = value;
-        }
+        get => transition;
+        private set => transition = value;
     }
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["movement"] = Movement;
         token["transition"] = Transition;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Movement = (int)token["movement"];
         Transition = (float)token["transition"];

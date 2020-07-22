@@ -1,9 +1,8 @@
 using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class PortalObject : SerializableObject
+public class PortalObject : MonoBehaviour, ISerializable
 {
     private void Awake()
     {
@@ -63,10 +62,7 @@ public class PortalObject : SerializableObject
     private Vector2 destination;
     public Vector2 Destination
     {
-        get
-        {
-            return destination;
-        }
+        get => destination;
         set
         {
             destination = value;
@@ -83,7 +79,6 @@ public class PortalObject : SerializableObject
     public void Switch()
     {
         bool active = state.State == 1;
-
         if (active)
         {
             foreach (MovableComponent movable in cell.GetCollisions<MovableComponent>())
@@ -114,13 +109,13 @@ public class PortalObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["destination"] = Destination.ToJToken();
         token["active"] = state.State == 1;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Destination = token["destination"].ToVector();
         state.State = (bool)token["active"] ? 1 : 0;

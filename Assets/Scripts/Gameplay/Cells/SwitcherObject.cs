@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-
 using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class SwitcherObject : SerializableObject
+public class SwitcherObject : MonoBehaviour, ISerializable
 {
     private void Awake()
     {
@@ -73,10 +71,7 @@ public class SwitcherObject : SerializableObject
     private bool enter;
     public bool Enter
     {
-        get
-        {
-            return enter;
-        }
+        get => enter;
         set
         {
             enter = value;
@@ -88,10 +83,7 @@ public class SwitcherObject : SerializableObject
     private bool exit;
     public bool Exit
     {
-        get
-        {
-            return exit;
-        }
+        get => exit;
         set
         {
             exit = value;
@@ -148,7 +140,7 @@ public class SwitcherObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["enter"] = Enter;
         token["exit"] = Exit;
@@ -157,7 +149,7 @@ public class SwitcherObject : SerializableObject
         token["offset"] = offset.ToJToken();
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Enter = (bool)token["enter"];
         Exit = (bool)token["exit"];

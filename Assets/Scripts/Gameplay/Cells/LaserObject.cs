@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class LaserObject : SerializableObject
+public class LaserObject : MonoBehaviour, ISerializable
 {
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -55,7 +52,7 @@ public class LaserObject : SerializableObject
         {
             var main = distanceScaler.ParticleSystem.main;
             main.startColor = main.startColor.color.Fade(0.3f);
-            
+
             enabled = false;
         }
     }
@@ -104,14 +101,8 @@ public class LaserObject : SerializableObject
 
     public int Direction
     {
-        get
-        {
-            return state.State;
-        }
-        private set
-        {
-            state.State = value;
-        }
+        get => state.State;
+        private set => state.State = value;
     }
 
     [Header("Serialization")]
@@ -119,10 +110,7 @@ public class LaserObject : SerializableObject
     private int distance;
     public int Distance
     {
-        get
-        {
-            return distance;
-        }
+        get => distance;
         private set
         {
             distance = value;
@@ -135,10 +123,7 @@ public class LaserObject : SerializableObject
     private bool persistent;
     public bool Persistent
     {
-        get
-        {
-            return persistent;
-        }
+        get => persistent;
         private set
         {
             persistent = value;
@@ -146,14 +131,14 @@ public class LaserObject : SerializableObject
         }
     }
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["direction"] = Direction;
         token["distance"] = Distance;
         token["persistent"] = Persistent;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Direction = (int)token["direction"];
         Distance = (int)token["distance"];

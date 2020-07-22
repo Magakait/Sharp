@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Sharp.UI;
 using Newtonsoft.Json.Linq;
 
-public class LogObject : SerializableObject
+public class LogObject : MonoBehaviour, ISerializable
 {
     private void Start() =>
         burst.transform.rotation = Quaternion.FromToRotation(Vector3.up, emptyRect.localPosition);
@@ -33,10 +33,7 @@ public class LogObject : SerializableObject
     private bool persistent;
     public bool Persistent
     {
-        get
-        {
-            return persistent;
-        }
+        get => persistent;
         set
         {
             persistent = value;
@@ -61,7 +58,7 @@ public class LogObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["text"] = text.text;
         token["size"] = ((Vector3)bodyRect.sizeDelta).ToJToken();
@@ -69,7 +66,7 @@ public class LogObject : SerializableObject
         token["persistent"] = Persistent;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         text.text = (string)token["text"];
         bodyRect.sizeDelta = token["size"].ToVector();

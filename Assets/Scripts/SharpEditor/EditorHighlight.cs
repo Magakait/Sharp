@@ -48,7 +48,7 @@ public class EditorHighlight : MonoBehaviour
         }
     }
 
-    public int Id { get; set; }
+    public string SourceName { get; set; }
 
     #region targeting
 
@@ -57,8 +57,8 @@ public class EditorHighlight : MonoBehaviour
     [SerializeField]
     private SerializableObjectEvent onSelect;
 
-    private SerializableObject selected;
-    private SerializableObject Selected
+    private GameObject selected;
+    private GameObject Selected
     {
         get => selected;
         set
@@ -70,7 +70,7 @@ public class EditorHighlight : MonoBehaviour
         }
     }
 
-    private SerializableObject target;
+    private GameObject target;
     private bool copied;
 
     private void TargetGrid()
@@ -82,11 +82,11 @@ public class EditorHighlight : MonoBehaviour
         {
             if (!collider)
             {
-                if (Keyboard.current[copyKey].isPressed && !copied && target.Id > 1)
+                if (Keyboard.current[copyKey].isPressed && !copied && SourceName != "Player" && SourceName != "Exit")
                 {
                     copied = true;
 
-                    SerializableObject copy = LevelManager.AddInstance(target.Id, target.transform.position, true);
+                    GameObject copy = LevelManager.AddInstance(target.name, target.transform.position, true);
                     LevelManager.CopyProperties(target, copy);
                 }
 
@@ -94,7 +94,7 @@ public class EditorHighlight : MonoBehaviour
             }
         }
         else
-            target = collider ? collider.GetComponent<SerializableObject>() : null;
+            target = collider ? collider.GetComponent<GameObject>() : null;
 
         frameSprite.transform.position = target ? target.transform.position : position;
         if (Selected)
@@ -117,7 +117,7 @@ public class EditorHighlight : MonoBehaviour
     {
         positionText.text = $"{frameSprite.transform.position.x}, {frameSprite.transform.position.y}";
         layerText.text = LayerMask.LayerToName(Layer);
-        objectText.text = target ? $"<b>{target.name}</b>" : LevelManager.Source(Id).name;
+        objectText.text = target ? $"<b>{target.name}</b>" : SourceName;
     }
 
     #endregion
@@ -138,7 +138,7 @@ public class EditorHighlight : MonoBehaviour
                 Dragging = false;
                 copied = false;
             }
-            else if (Mouse.current.rightButton.isPressed && target.Id > 1)
+            else if (Mouse.current.rightButton.isPressed && SourceName != "Player" && SourceName != "Exit")
             {
                 Dragging = false;
                 if (Selected == target)
@@ -149,7 +149,7 @@ public class EditorHighlight : MonoBehaviour
             }
         }
         else if (Mouse.current.leftButton.isPressed)
-            LevelManager.AddInstance(Id, frameSprite.transform.position, true);
+            LevelManager.AddInstance(SourceName, frameSprite.transform.position, true);
     }
 
     public void ClearInput()

@@ -1,11 +1,8 @@
 using UnityEngine;
-
-using System.Linq;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class FogObject : SerializableObject
+public class FogObject : MonoBehaviour, ISerializable
 {
     private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -14,7 +11,7 @@ public class FogObject : SerializableObject
             (
                 maskSprite
                     .DOFade(0, Constants.Time)
-            ) 
+            )
         );
 
     private void Start() =>
@@ -33,17 +30,7 @@ public class FogObject : SerializableObject
 
     [SerializeField]
     private bool spread;
-    public bool Spread
-    {
-        get
-        {
-            return spread;
-        }
-        set
-        {
-            spread = value;
-        }
-    }
+    public bool Spread { get => spread; set => spread = value; }
 
     private void Reveal()
     {
@@ -82,10 +69,10 @@ public class FogObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token) =>
+    public void Serialize(JToken token) =>
         token["spread"] = Spread;
 
-    public override void Deserialize(JToken token) =>
+    public void Deserialize(JToken token) =>
         Spread = (bool)token["spread"];
 
     #endregion

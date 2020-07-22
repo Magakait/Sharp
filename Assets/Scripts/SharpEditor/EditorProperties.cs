@@ -21,7 +21,7 @@ public class EditorProperties : MonoBehaviour
     [SerializeField]
     private BaseWidget[] widgets;
 
-    private SerializableObject selected;
+    private GameObject selected;
     private JToken buffer = new JObject();
 
     private void Awake()
@@ -30,7 +30,7 @@ public class EditorProperties : MonoBehaviour
         BaseWidget.editorProperties = this;
     }
 
-    public void Load(SerializableObject selected)
+    public void Load(GameObject selected)
     {
         parentPanel.Clear();
         if (!selected)
@@ -42,10 +42,10 @@ public class EditorProperties : MonoBehaviour
         this.selected = selected;
         header.text = selected.name;
 
-        var properties = (JArray)catalog[selected.Id.ToString()];
+        var properties = (JArray)catalog[selected.name];
         if (properties != null)
         {
-            selected.Serialize(buffer);
+            selected.GetComponent<ISerializable>()?.Serialize(buffer);
 
             foreach (var property in properties)
                 Instantiate(widgets[(int)property["type"]], parentPanel)
@@ -57,7 +57,7 @@ public class EditorProperties : MonoBehaviour
 
     public void Save()
     {
-        selected.Deserialize(buffer);
+        selected.GetComponent<ISerializable>()?.Deserialize(buffer);
         LevelManager.UpdateInstance(selected);
     }
 }

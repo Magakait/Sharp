@@ -5,7 +5,7 @@ using Sharp.UI;
 using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
-public class EntranceObject : SerializableObject
+public class EntranceObject : MonoBehaviour, ISerializable
 {
     [Space(10)]
     [SerializeField]
@@ -103,32 +103,21 @@ public class EntranceObject : SerializableObject
 
     #region serialization
 
-    public string Level
-    {
-        get
-        {
-            return titleText.text;
-        }
-        private set
-        {
-            titleText.text = value;
-        }
-    }
-
+    public string Level { get => titleText.text; private set => titleText.text = value; }
     public int Threshold { get; private set; }
 
     public int Connected { get; private set; }
 
     public string Connections { get; private set; }
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["level"] = Level;
         token["threshold"] = Threshold;
         token["connections"] = Connections;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Level = (string)token["level"];
         Passed = SetManager.Meta["passed"].Any(t => (string)t == Level);

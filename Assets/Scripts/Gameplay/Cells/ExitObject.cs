@@ -1,12 +1,11 @@
 using System.Linq;
-
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 
-public class ExitObject : SerializableObject
+public class ExitObject : MonoBehaviour
 {
-    private void Awake() => Passed = false;
+    private void Awake() =>
+        Passed = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

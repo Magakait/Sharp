@@ -94,7 +94,8 @@ public class EditorManager : MonoBehaviour
         LevelManager.InstantiateAll();
 
         foreach (var instance in LevelManager.Instances)
-            instance.enabled = false;
+            if (instance.GetComponent<ISerializable>() is MonoBehaviour mb)
+                mb.enabled = false;
 
         inputLevel.text = LevelManager.Level.ShortName;
         onLevelLoad.Invoke(LevelManager.Level.ShortName != "Map");

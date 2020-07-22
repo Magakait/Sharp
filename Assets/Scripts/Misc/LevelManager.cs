@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Sharp.Core;
@@ -12,18 +12,16 @@ public class LevelManager : ScriptableObject
     public static JsonFile Level => main.level;
 
     [SerializeField]
-    private SerializableObject[] source;
-    public static SerializableObject Source(int id) => main.source[id];
+    private GameObject[] source;
+    public static GameObject Source(string name) =>
+        main.source.First(s => s.name == name);
 
-    public static List<SerializableObject> Instances { get; private set; } = new List<SerializableObject>();
+    public static List<GameObject> Instances { get; private set; } = new List<GameObject>();
 
     private static LevelManager main;
 
-    public void OnEnable()
-    {
+    public void OnEnable() =>
         main = this;
-        Array.Sort(source, (a, b) => a.Id.CompareTo(b.Id));
-    }
 
     #region level management
 
@@ -45,10 +43,10 @@ public class LevelManager : ScriptableObject
 
         foreach (var token in Level.Root)
         {
-            var instance = AddInstance((int)token["id"], token["position"].ToVector());
+            var instance = AddInstance((string)token["name"], token["position"].ToVector());
             try
             {
-                instance.Deserialize(token["properties"]);
+                instance.GetComponent<ISerializable>()?.Deserialize(token["properties"]);
             }
             catch { }
         }
@@ -58,10 +56,10 @@ public class LevelManager : ScriptableObject
 
     #region instance management
 
-    public static SerializableObject AddInstance(int id, Vector2 position, bool save = false)
+    public static GameObject AddInstance(string name, Vector2 position, bool save = false)
     {
-        var instance = Instantiate(Source(id), position, Quaternion.identity);
-        instance.name = Source(id).name;
+        var instance = Instantiate(Source(name), position, Quaternion.identity);
+        instance.name = name;
         Instances.Add(instance);
 
         if (save)
@@ -69,8 +67,9 @@ public class LevelManager : ScriptableObject
             var data = SerializeInstance(instance);
             ((JArray)Level.Root).Add(data);
 
-            instance.Deserialize(data["properties"]);
-            instance.enabled = false;
+            instance.GetComponent<ISerializable>()?.Deserialize(data["properties"]);
+            if (instance.GetComponent<ISerializable>() is MonoBehaviour mb)
+                mb.enabled = false;
 
             Level.Save();
         }
@@ -78,7 +77,7 @@ public class LevelManager : ScriptableObject
         return instance;
     }
 
-    public static void RemoveInstance(SerializableObject instance)
+    public static void RemoveInstance(GameObject instance)
     {
         ((JArray)Level.Root)[Instances.IndexOf(instance)].Remove();
         Level.Save();
@@ -87,30 +86,30 @@ public class LevelManager : ScriptableObject
         Destroy(instance.gameObject);
     }
 
-    public static void CopyProperties(SerializableObject from, SerializableObject to)
+    public static void CopyProperties(GameObject from, GameObject to)
     {
         var properties = new JObject();
-        from.Serialize(properties);
-        to.Deserialize(properties);
+        from.GetComponent<ISerializable>()?.Serialize(properties);
+        to.GetComponent<ISerializable>()?.Deserialize(properties);
 
         UpdateInstance(to);
         Level.Save();
     }
 
-    public static void UpdateInstance(SerializableObject instance)
+    public static void UpdateInstance(GameObject instance)
     {
         ((JArray)Level.Root)[Instances.IndexOf(instance)].Replace(SerializeInstance(instance));
         Level.Save();
     }
 
-    private static JToken SerializeInstance(SerializableObject instance)
+    private static JToken SerializeInstance(GameObject instance)
     {
         var properties = new JObject();
-        instance.Serialize(properties);
+        instance.GetComponent<ISerializable>()?.Serialize(properties);
 
         return new JObject
         {
-            ["id"] = instance.Id,
+            ["name"] = instance.name,
             ["position"] = instance.transform.position.ToJToken(),
             ["properties"] = properties
         };

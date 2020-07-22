@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
-public class ZoomObject : SerializableObject
+public class ZoomObject : MonoBehaviour, ISerializable
 {
     private void Awake()
     {
@@ -42,14 +40,10 @@ public class ZoomObject : SerializableObject
     private int zoom;
     public int Zoom
     {
-        get
-        {
-            return zoom;
-        }
+        get => zoom;
         private set
         {
             zoom = value;
-
             animation[1].Play(Zoom >= 0);
             animation[2].Play(Zoom <= 0);
         }
@@ -71,9 +65,11 @@ public class ZoomObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token) => token["zoom"] = Zoom;
+    public void Serialize(JToken token) =>
+        token["zoom"] = Zoom;
 
-    public override void Deserialize(JToken token) => Zoom = (int)token["zoom"];
+    public void Deserialize(JToken token) =>
+        Zoom = (int)token["zoom"];
 
     #endregion
 }

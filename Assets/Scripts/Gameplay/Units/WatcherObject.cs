@@ -1,12 +1,10 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 using DG.Tweening;
 
-public class WatcherObject : SerializableObject
+public class WatcherObject : MonoBehaviour, ISerializable
 {
     private void Start() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -34,11 +32,7 @@ public class WatcherObject : SerializableObject
     private int distance;
     public int Distance
     {
-        get
-        {
-            return distance;
-        }
-
+        get => distance;
         set
         {
             distance = value;
@@ -91,13 +85,13 @@ public class WatcherObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["distance"] = Distance;
         token["delay"] = delay;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         Distance = (int)token["distance"];
         delay = (float)token["delay"];

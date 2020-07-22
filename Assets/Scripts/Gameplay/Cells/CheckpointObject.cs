@@ -1,8 +1,7 @@
 using System.Collections;
-
 using UnityEngine;
 
-public class CheckpointObject : SerializableObject
+public class CheckpointObject : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,7 +37,7 @@ public class CheckpointObject : SerializableObject
         CameraManager.Move(transform.position);
         yield return new WaitForSeconds(2 * Constants.Time);
 
-        var player = LevelManager.AddInstance(0, transform.position).GetComponent<PlayerObject>();
+        var player = LevelManager.AddInstance("Player", transform.position).GetComponent<PlayerObject>();
         player.Action = action;
         player.Cooldown = cooldown;
         player.Movement = movement;

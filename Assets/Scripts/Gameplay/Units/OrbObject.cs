@@ -1,8 +1,7 @@
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 
-public class OrbObject : SerializableObject
+public class OrbObject : MonoBehaviour, ISerializable
 {
     private void Start() =>
         Register();
@@ -12,7 +11,7 @@ public class OrbObject : SerializableObject
         if (other.GetComponent<PlayerObject>())
         {
             Unregister();
-            
+
             unit.Killed = false;
             unit.Kill();
         }
@@ -65,10 +64,10 @@ public class OrbObject : SerializableObject
 
     public Vector2 Target { get; private set; }
 
-    public override void Serialize(JToken token) =>
+    public void Serialize(JToken token) =>
         token["target"] = Target.ToJToken();
 
-    public override void Deserialize(JToken token) =>
+    public void Deserialize(JToken token) =>
         Target = token["target"].ToVector();
 
     #endregion

@@ -1,12 +1,9 @@
-using System.Linq;
 using System.Collections.Generic;
-
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 using DG.Tweening;
 
-public class HunterObject : SerializableObject
+public class HunterObject : MonoBehaviour, ISerializable
 {
     private void Start()
     {
@@ -63,11 +60,7 @@ public class HunterObject : SerializableObject
     private int distance;
     public int Distance
     {
-        get
-        {
-            return distance;
-        }
-
+        get => distance;
         set
         {
             distance = value;
@@ -114,13 +107,13 @@ public class HunterObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["transition"] = movable.Transition;
         token["distance"] = Distance;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         movable.Transition = (float)token["transition"];
         Distance = (int)token["distance"];

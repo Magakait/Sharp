@@ -1,9 +1,8 @@
 using UnityEngine;
-
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class SeekerObject : SerializableObject
+public class SeekerObject : MonoBehaviour, ISerializable
 {
     private void Start() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
@@ -81,13 +80,13 @@ public class SeekerObject : SerializableObject
 
     #region serialization
 
-    public override void Serialize(JToken token)
+    public void Serialize(JToken token)
     {
         token["transition"] = movable.Transition;
         token["sequence"] = sequence;
     }
 
-    public override void Deserialize(JToken token)
+    public void Deserialize(JToken token)
     {
         movable.Transition = (float)token["transition"];
         sequence = (string)token["sequence"];
