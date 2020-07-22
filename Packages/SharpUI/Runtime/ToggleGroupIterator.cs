@@ -7,10 +7,7 @@ public class ToggleGroupIterator : MonoBehaviour
     private int current;
     public int Current
     {
-        get
-        {
-            return current;
-        }
+        get => current;
         private set
         {
             current = value % toggles.Length;

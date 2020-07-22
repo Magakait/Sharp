@@ -25,7 +25,8 @@ namespace AlKaitagi.SharpUI
 
         private new RectTransform transform;
 
-        private void Awake() => transform = GetComponent<RectTransform>();
+        private void Awake() =>
+            transform = GetComponent<RectTransform>();
 
         private void Update() =>
             Detected = RectTransformUtility

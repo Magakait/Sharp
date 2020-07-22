@@ -323,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.4090614
+      value: 0.00002449843
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.4090147
+      value: 0.00007697636
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -19391,8 +19391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1533068705}
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.98467076
+  m_Value: 1
+  m_Size: 0.99949867
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -19472,7 +19472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.4090298}
+  m_AnchoredPosition: {x: 0, y: -0.000021485515}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -21295,12 +21295,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1207807647516066, guid: c9b6b5efa5c976d40a68c971d2343554, type: 3}
       propertyPath: m_Name
-      value: Repository
+      value: GitHub
       objectReference: {fileID: 0}
     - target: {fileID: 114001648251855838, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 3}
       propertyPath: m_Text
-      value: Repository
+      value: GitHub
       objectReference: {fileID: 0}
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 3}
@@ -21336,7 +21336,7 @@ PrefabInstance:
     - target: {fileID: 114234448205374618, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: https://github.com/TiredOfCoding/Sharp
+      value: https://github.com/alkaitagi/Sharp
       objectReference: {fileID: 0}
     - target: {fileID: 114299733352456506, guid: c9b6b5efa5c976d40a68c971d2343554,
         type: 3}

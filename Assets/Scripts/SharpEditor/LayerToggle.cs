@@ -5,27 +5,22 @@ public class LayerToggle : MonoBehaviour
     private bool visible;
     public bool Visible
     {
-        get
-        {
-            return visible;
-        }
+        get => visible;
         set
         {
             visible = value;
-
-            if (Visible)
-                CameraManager.Camera.cullingMask |= mask;
-            else
-                CameraManager.Camera.cullingMask &= ~mask;
+            CameraManager.Camera.cullingMask = Visible
+                ? CameraManager.Camera.cullingMask | mask
+                : CameraManager.Camera.cullingMask & ~mask;
         }
     }
 
     [SerializeField]
     private LayerMask mask;
 
-    private void Awake() => 
+    private void Awake() =>
         Visible = true;
 
-    private void OnDestroy() => 
+    private void OnDestroy() =>
         Awake();
 }

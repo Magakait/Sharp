@@ -29,10 +29,7 @@ public class EditorHighlight : MonoBehaviour
     private bool dragging;
     private bool Dragging
     {
-        get
-        {
-            return dragging;
-        }
+        get => dragging;
         set
         {
             dragging = value;
@@ -43,10 +40,7 @@ public class EditorHighlight : MonoBehaviour
     private int layer;
     public int Layer
     {
-        get
-        {
-            return layer;
-        }
+        get => layer;
         set
         {
             layer = value;
@@ -66,10 +60,7 @@ public class EditorHighlight : MonoBehaviour
     private SerializableObject selected;
     private SerializableObject Selected
     {
-        get
-        {
-            return selected;
-        }
+        get => selected;
         set
         {
             selected = value;
