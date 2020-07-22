@@ -5,51 +5,58 @@ using UnityEngine.UI;
 using AlKaitagi.SharpUI;
 using AlKaitagi.SharpCore;
 
-class InputSettings : MonoBehaviour
+namespace Sharp.Settings
 {
-    public InputField inputHold;
-    public JsonFile file;
-
-    private KeyPicker picker;
-    public KeyPicker Picker
+    public class InputSettings : MonoBehaviour
     {
-        get => picker;
-        set
+        public InputField inputHold;
+        public JsonFile file;
+
+        private KeyPicker picker;
+        public KeyPicker Picker
         {
-            if (value)
-                inputHold.Select();
-            else if (Picker)
-                Picker.onValueChanged.Invoke(Picker.key.Value.ToString());
+            get => picker;
+            set
+            {
+                if (value)
+                    inputHold.Select();
+                else if (Picker)
+                    Picker.onValueChanged.Invoke(Picker.key.Value.ToString());
 
-            picker = value;
-            enabled = Picker;
+                picker = value;
+                enabled = Picker;
+            }
         }
-    }
 
-    private void Awake() =>
-        file.Load(Constants.SettingsRoot + "Input.json");
+        private void Awake() =>
+            file.Load(Constants.SettingsRoot + "Input.json");
 
-    public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Input.json");
+        public void Reset() =>
+            file.LoadFrom(Constants.SettingsRoot + "Defaults\\Input.json");
 
-    public void Stop() =>
-        Picker = null;
+        public void Stop() =>
+            Picker = null;
 
-    private void Update()
-    {
-        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        private void Update()
+        {
+            if (!Keyboard.current.anyKey.wasPressedThisFrame)
+                return;
+
             foreach (Key key in Enum.GetValues(typeof(Key)))
-                if (Keyboard.current[key].wasPressedThisFrame)
-                {
-                    string text = key.ToString();
-                    if (!text.Contains("Mouse"))
-                    {
-                        Picker.SetValue(text);
-                        Picker = null;
+            {
+                if (!Keyboard.current[key].wasPressedThisFrame)
+                    continue;
 
-                        enabled = false;
-                        return;
-                    }
+                string text = key.ToString();
+                if (!text.Contains("Mouse"))
+                {
+                    Picker.SetValue(text);
+                    Picker = null;
+
+                    enabled = false;
+                    return;
                 }
+            }
+        }
     }
 }

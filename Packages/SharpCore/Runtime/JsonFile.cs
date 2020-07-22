@@ -16,14 +16,8 @@ namespace AlKaitagi.SharpCore
         public JToken Root { get; private set; }
         public JToken this[string path]
         {
-            get
-            {
-                return Root[path];
-            }
-            set
-            {
-                Root[path] = value;
-            }
+            get => Root[path];
+            set => Root[path] = value;
         }
 
         public void Load(string path)
@@ -38,7 +32,8 @@ namespace AlKaitagi.SharpCore
             Load(file.FullName);
         }
 
-        public void Save() => File.WriteAllText(file.FullName, Root.ToString());
+        public void Save() =>
+            File.WriteAllText(file.FullName, Root.ToString());
 
         public void SaveTo(string path)
         {
@@ -47,8 +42,10 @@ namespace AlKaitagi.SharpCore
             Load(path);
         }
 
-        public void MoveTo(string path) => file.MoveTo(path);
+        public void MoveTo(string path) =>
+            file.MoveTo(path);
 
-        public void Delete() => file.Delete();
+        public void Delete() =>
+            file.Delete();
     }
 }

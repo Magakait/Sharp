@@ -2,19 +2,23 @@ using UnityEngine;
 using AlKaitagi.SharpCore;
 using AlKaitagi.SharpCore.Painters;
 
-public class ThemeSettings : MonoBehaviour
+namespace Sharp.Settings
 {
-    public JsonFile file;
-
-    private void Awake() =>
-        file.Load(Constants.SettingsRoot + "Theme.json");
-
-    public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Theme.json");
-
-    public void RefreshPainters()
+    public class ThemeSettings : MonoBehaviour
     {
-        foreach (var painter in FindObjectsOfType<BasePainter>())
-            painter.Refresh();
+        [SerializeField]
+        private JsonFile file;
+
+        private void Awake() =>
+            file.Load(Constants.SettingsRoot + "Theme.json");
+
+        public void Reset() =>
+            file.LoadFrom(Constants.SettingsRoot + "Defaults\\Theme.json");
+
+        public void RefreshPainters()
+        {
+            foreach (var painter in FindObjectsOfType<BasePainter>())
+                painter.Refresh();
+        }
     }
 }
