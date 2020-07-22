@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Sharp.UI;
+using Sharp.Core;
 using Sharp.Core.Variables;
 using DG.Tweening;
 
@@ -138,7 +139,7 @@ public class EditorHighlight : MonoBehaviour
                 Dragging = false;
                 copied = false;
             }
-            else if (Mouse.current.rightButton.isPressed && SourceName != "Player" && SourceName != "Exit")
+            else if (Mouse.current.rightButton.isPressed && target.name != "Player" && target.name != "Exit")
             {
                 Dragging = false;
                 if (Selected == target)

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Sharp.Core;
 using DG.Tweening;
 
 public class BarrierObject : MonoBehaviour

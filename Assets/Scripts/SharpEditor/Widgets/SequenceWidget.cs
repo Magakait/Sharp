@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-
 using UnityEngine;
 using UnityEngine.UI;
-
 using Newtonsoft.Json.Linq;
 
 public class SequenceWidget : BaseWidget

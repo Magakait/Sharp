@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
 using Newtonsoft.Json.Linq;
 
 public class DirectionWidget : BaseWidget

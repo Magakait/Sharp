@@ -6,6 +6,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.sharp.editor": {
+      "version": "file:SharpEditor",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.sharp.ui": {
       "version": "file:SharpUI",
       "depth": 0,
