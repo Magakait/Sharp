@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AlKaitagi.SharpCore.Events
+namespace Sharp.Core.Events
 {
     [Serializable] public class VoidEvent : UnityEvent { };
     [Serializable] public class BoolEvent : UnityEvent<bool> { };

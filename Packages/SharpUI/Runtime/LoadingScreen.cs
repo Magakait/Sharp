@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     [RequireComponent(typeof(CanvasToggle))]
     public class LoadingScreen : MonoBehaviour

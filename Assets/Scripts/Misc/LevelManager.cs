@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using AlKaitagi.SharpCore;
+using Sharp.Core;
 using Newtonsoft.Json.Linq;
 
 [CreateAssetMenu]

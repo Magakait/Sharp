@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using AlKaitagi.SharpUI;
-using AlKaitagi.SharpCore.Variables;
+using Sharp.UI;
+using Sharp.Core.Variables;
 
 public class CameraPan : MonoBehaviour
 {

@@ -2,10 +2,10 @@ using System;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using AlKaitagi.SharpCore.Events;
-using AlKaitagi.SharpCore.Variables;
+using Sharp.Core.Events;
+using Sharp.Core.Variables;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     public class KeyPicker : MonoBehaviour
     {

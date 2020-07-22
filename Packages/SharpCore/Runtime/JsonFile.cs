@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace AlKaitagi.SharpCore
+namespace Sharp.Core
 {
     [CreateAssetMenu]
     public class JsonFile : ScriptableObject

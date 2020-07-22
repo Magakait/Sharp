@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     [RequireComponent(typeof(RectTransform))]
     public class MouseDetector : MonoBehaviour

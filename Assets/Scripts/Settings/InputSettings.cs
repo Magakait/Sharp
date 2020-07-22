@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using AlKaitagi.SharpUI;
-using AlKaitagi.SharpCore;
+using Sharp.UI;
+using Sharp.Core;
 
 namespace Sharp.Settings
 {

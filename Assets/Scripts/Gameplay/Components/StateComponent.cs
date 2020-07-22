@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 
 public class StateComponent : MonoBehaviour
 {

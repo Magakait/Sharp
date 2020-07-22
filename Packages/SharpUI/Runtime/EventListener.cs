@@ -1,7 +1,7 @@
 using UnityEngine;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     public class EventListener : MonoBehaviour
     {

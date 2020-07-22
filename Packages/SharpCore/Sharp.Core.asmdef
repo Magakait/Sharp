@@ -1,5 +1,5 @@
 {
-    "name": "AlKaitagi.SharpCore",
+    "name": "Sharp.Core",
     "references": [
         "Unity.InputSystem",
         "Newtonsoft.Json"

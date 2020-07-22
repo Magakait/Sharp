@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using AlKaitagi.SharpUI;
+using Sharp.UI;
 using Newtonsoft.Json.Linq;
 
 public class LogObject : SerializableObject

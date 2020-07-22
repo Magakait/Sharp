@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "com.alkaitagi.sharpcore": {
+    "com.sharp.core": {
       "version": "file:SharpCore",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
-    "com.alkaitagi.sharpui": {
+    "com.sharp.ui": {
       "version": "file:SharpUI",
       "depth": 0,
       "source": "embedded",

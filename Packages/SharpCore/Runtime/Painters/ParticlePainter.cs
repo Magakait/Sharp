@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpCore.Painters
+namespace Sharp.Core.Painters
 {
     [RequireComponent(typeof(ParticleSystem))]
     [AddComponentMenu("Painters/Particle Painter")]

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpCore.Variables
+namespace Sharp.Core.Variables
 {
     [CreateAssetMenu(menuName = "Variables/String")]
     public class StringVariable : BaseVariable<string> { }

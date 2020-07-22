@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 using DG.Tweening;
 
 public class UnitComponent : MonoBehaviour
@@ -7,7 +7,7 @@ public class UnitComponent : MonoBehaviour
     [SerializeField]
     private bool virus;
     public bool Virus => virus;
-    
+
     [SerializeField]
     private bool killed;
     public bool Killed

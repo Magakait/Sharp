@@ -1,6 +1,6 @@
 using UnityEngine;
-using AlKaitagi.SharpCore;
-using AlKaitagi.SharpCore.Painters;
+using Sharp.Core;
+using Sharp.Core.Painters;
 
 namespace Sharp.Settings
 {

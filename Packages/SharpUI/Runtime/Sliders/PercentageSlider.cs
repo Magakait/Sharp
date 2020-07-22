@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     public class PercentageSlider : BaseSlider
     {

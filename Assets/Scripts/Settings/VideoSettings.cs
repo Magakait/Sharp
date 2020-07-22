@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using AlKaitagi.SharpCore;
+using Sharp.Core;
 
 namespace Sharp.Settings
 {

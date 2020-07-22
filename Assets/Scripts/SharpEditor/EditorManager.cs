@@ -1,9 +1,9 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using AlKaitagi.SharpUI;
+using Sharp.UI;
 using Newtonsoft.Json.Linq;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 
 public class EditorManager : MonoBehaviour
 {

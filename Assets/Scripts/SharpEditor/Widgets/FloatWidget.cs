@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpUI;
+using Sharp.UI;
 using Newtonsoft.Json.Linq;
 
 public class FloatWidget : BaseWidget

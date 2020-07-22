@@ -2,8 +2,8 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using AlKaitagi.SharpUI;
-using AlKaitagi.SharpCore.Events;
+using Sharp.UI;
+using Sharp.Core.Events;
 
 public class SetLoader : MonoBehaviour
 {

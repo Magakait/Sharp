@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpCore.Variables;
+using Sharp.Core.Variables;
 
-namespace AlKaitagi.SharpCore.Painters
+namespace Sharp.Core.Painters
 {
     public abstract class BasePainter : MonoBehaviour
     {

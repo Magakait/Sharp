@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using AlKaitagi.SharpCore;
+using Sharp.Core;
 
 [CreateAssetMenu]
 public class SetManager : ScriptableObject

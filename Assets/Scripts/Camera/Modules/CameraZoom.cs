@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using AlKaitagi.SharpUI;
+using Sharp.UI;
 
 public class CameraZoom : MonoBehaviour
 {

@@ -1,5 +1,5 @@
 {
-    "name": "com.alkaitagi.sharpcore",
+    "name": "com.sharp.core",
     "version": "1.0.0",
     "displayName": "Sharp Core",
     "description": "This package provides basic building block for more complex systems: Variables, JSONLoaders, Painters, Events.",

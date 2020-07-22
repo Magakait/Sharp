@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Newtonsoft.Json.Linq;
 
-namespace AlKaitagi.SharpCore.JSONLoaders
+namespace Sharp.Core.JSONLoaders
 {
     public abstract class BaseLoader<T> : MonoBehaviour
     {

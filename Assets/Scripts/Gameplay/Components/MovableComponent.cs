@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]

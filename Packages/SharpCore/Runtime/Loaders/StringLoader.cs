@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 using Newtonsoft.Json.Linq;
 
-namespace AlKaitagi.SharpCore.JSONLoaders
+namespace Sharp.Core.JSONLoaders
 {
     [AddComponentMenu("Loaders/String Loader")]
     public class StringLoader : BaseLoader<string>

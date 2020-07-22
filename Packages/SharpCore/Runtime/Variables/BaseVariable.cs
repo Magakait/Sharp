@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpCore.Variables
+namespace Sharp.Core.Variables
 {
     public abstract class BaseVariable<T> : ScriptableObject
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace AlKaitagi.SharpCore.Variables
+namespace Sharp.Core.Variables
 {
     [CreateAssetMenu(menuName = "Variables/Key")]
     public class KeyVariable : BaseVariable<Key>

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using AlKaitagi.SharpCore.Events;
+using Sharp.Core.Events;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     [RequireComponent(typeof(Slider))]
     public abstract class BaseSlider : MonoBehaviour

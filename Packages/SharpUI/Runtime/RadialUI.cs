@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     [ExecuteInEditMode]
     public class RadialUI : MonoBehaviour

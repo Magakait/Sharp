@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AlKaitagi.SharpCore.Variables
+namespace Sharp.Core.Variables
 {
     [CreateAssetMenu(menuName = "Variables/Int")]
     public class IntVariable : BaseVariable<int> { }

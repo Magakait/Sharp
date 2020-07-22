@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-namespace AlKaitagi.SharpUI
+namespace Sharp.UI
 {
     [CreateAssetMenu(menuName = "Utility/UI")]
     public class UIUtility : ScriptableObject

@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using AlKaitagi.SharpUI;
+using Sharp.UI;
 using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +13,7 @@ public class EntranceObject : SerializableObject
 
     public bool Passed { get; private set; }
 
-    private void Awake() => 
+    private void Awake() =>
         animation = gameObject.AddComponent<TweenArrayComponent>().Init
         (
             DOTween.Sequence().Insert(frame.DOFade(0, .2f).From())
