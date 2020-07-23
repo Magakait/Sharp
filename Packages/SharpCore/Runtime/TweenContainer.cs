@@ -3,13 +3,13 @@ using DG.Tweening;
 
 namespace Sharp.Core
 {
-    public class TweenArrayComponent : MonoBehaviour
+    public class TweenContainer : MonoBehaviour
     {
         private Tween[] tweens;
 
         public Tween this[int index] => tweens[index];
 
-        public TweenArrayComponent Init(params Tween[] tweens)
+        public TweenContainer Init(params Tween[] tweens)
         {
             this.tweens = tweens;
             return this;

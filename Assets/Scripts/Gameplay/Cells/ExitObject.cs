@@ -1,32 +1,36 @@
 using System.Linq;
 using UnityEngine;
+using Sharp.Managers;
 using Newtonsoft.Json.Linq;
 
-public class ExitObject : MonoBehaviour
+namespace Sharp.Gameplay
 {
-    private void Awake() =>
-        Passed = false;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class ExitObject : MonoBehaviour
     {
-        if (!Passed && collision.GetComponent<PlayerObject>())
+        private void Awake() =>
+            Passed = false;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Pass();
-            collision.GetComponent<UnitComponent>().Kill();
+            if (!Passed && collision.GetComponent<PlayerObject>())
+            {
+                Pass();
+                collision.GetComponent<UnitComponent>().Kill();
+            }
         }
-    }
 
-    public static bool Passed { get; private set; }
+        public static bool Passed { get; private set; }
 
-    private void Pass()
-    {
-        Passed = true;
-
-        var passed = (JArray)SetManager.Meta["passed"];
-        if (!passed.Any(t => (string)t == LevelManager.Level.ShortName))
+        private void Pass()
         {
-            passed.Add(LevelManager.Level.ShortName);
-            SetManager.Meta.Save();
+            Passed = true;
+
+            var passed = (JArray)SetManager.Meta["passed"];
+            if (!passed.Any(t => (string)t == LevelManager.Level.ShortName))
+            {
+                passed.Add(LevelManager.Level.ShortName);
+                SetManager.Meta.Save();
+            }
         }
     }
 }

@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movements/Snake")]
-public class SnakeMovement : BaseMovement
+namespace Sharp.Gameplay
 {
-    public override void Idle(MovableComponent movable)
+    [CreateAssetMenu(menuName = "Movements/Snake")]
+    public class SnakeMovement : BaseMovement
     {
-        foreach (var i in new int[] { 0, 2, 1, 3 })
+        public override void Idle(MovableComponent movable)
         {
-            var direction = (movable.Direction + i) % 4;
-            if (movable.CanMove(direction))
+            foreach (var i in new int[] { 0, 2, 1, 3 })
             {
-                movable.Move(direction);
-                return;
+                var direction = (movable.Direction + i) % 4;
+                if (movable.CanMove(direction))
+                {
+                    movable.Move(direction);
+                    return;
+                }
             }
         }
     }

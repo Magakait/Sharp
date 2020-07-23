@@ -3,178 +3,182 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sharp.UI;
+using Sharp.Core;
 using Sharp.Core.Variables;
 
-public class PlayerObject : MonoBehaviour
+namespace Sharp.Gameplay
 {
-    private void Awake() =>
-        CameraManager.Position = transform.position;
-
-    private void Start() =>
-        CameraFollow.Target = transform;
-
-    private void Update()
+    public class PlayerObject : MonoBehaviour
     {
-        if (Time.timeScale == 0)
-            return;
+        private void Awake() =>
+            CameraManager.Position = transform.position;
 
-        Rotate();
-        Buffer();
-        if (!movable.IsMoving)
-            Move();
-        if (cooldownEffect.emission.enabled && actionKey.IsDown)
-            StartCoroutine(Act());
-    }
+        private void Start() =>
+            CameraFollow.Target = transform;
 
-    [Space(10)]
-    [SerializeField]
-    private MovableComponent movable;
-    public MovableComponent Movable => movable;
-
-    [SerializeField]
-    private new Collider2D collider;
-    public Collider2D Collider => collider;
-
-    [SerializeField]
-    private Prompt prompt;
-
-    [Space(10)]
-    [SerializeField]
-    private KeyVariable sprintKey;
-    [SerializeField]
-    private KeyVariable[] directionKeys;
-    [SerializeField]
-    private KeyVariable[] rotationKeys;
-    [SerializeField]
-    private KeyVariable actionKey;
-
-    [Space(10)]
-    [SerializeField]
-    private BaseMovement movement;
-    public BaseMovement Movement
-    {
-        get => movement;
-        set
+        private void Update()
         {
-            movement = value;
-            icon.sprite = Movement.Icon;
-            Instantiate(assignEffect, transform.position, Quaternion.identity);
-        }
-    }
+            if (Time.timeScale == 0)
+                return;
 
-    [SerializeField]
-    private BaseAction action;
-    public BaseAction Action
-    {
-        get => action;
-        set
+            Rotate();
+            Buffer();
+            if (!movable.IsMoving)
+                Move();
+            if (cooldownEffect.emission.enabled && actionKey.IsDown)
+                StartCoroutine(Act());
+        }
+
+        [Space(10)]
+        [SerializeField]
+        private MovableComponent movable;
+        public MovableComponent Movable => movable;
+
+        [SerializeField]
+        private new Collider2D collider;
+        public Collider2D Collider => collider;
+
+        [SerializeField]
+        private Prompt prompt;
+
+        [Space(10)]
+        [SerializeField]
+        private KeyVariable sprintKey;
+        [SerializeField]
+        private KeyVariable[] directionKeys;
+        [SerializeField]
+        private KeyVariable[] rotationKeys;
+        [SerializeField]
+        private KeyVariable actionKey;
+
+        [Space(10)]
+        [SerializeField]
+        private BaseMovement movement;
+        public BaseMovement Movement
         {
-            action = value;
-            shape.sprite = Action.Shape;
-            cooldownEffect.Emission(Action.name != "Base");
-            Instantiate(assignEffect, transform.position, Quaternion.identity);
+            get => movement;
+            set
+            {
+                movement = value;
+                icon.sprite = Movement.Icon;
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
+            }
         }
-    }
 
-    [SerializeField]
-    private float cooldown;
-    public float Cooldown
-    {
-        get => cooldown;
-        set => cooldown = value;
-    }
-
-    private CheckpointObject checkpoint;
-    public CheckpointObject Checkpoint
-    {
-        get => checkpoint;
-        set
+        [SerializeField]
+        private BaseAction action;
+        public BaseAction Action
         {
-            checkpoint = value;
-            Instantiate(assignEffect, transform.position, Quaternion.identity);
+            get => action;
+            set
+            {
+                action = value;
+                shape.sprite = Action.Shape;
+                cooldownEffect.Emission(Action.name != "Base");
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
+            }
         }
-    }
 
-    [Space(10)]
-    [SerializeField]
-    private SpriteRenderer icon;
-    [SerializeField]
-    private SpriteRenderer shape;
-    [SerializeField]
-    private ParticleSystem assignEffect;
-    [SerializeField]
-    private ParticleSystem actionEffect;
-    [SerializeField]
-    private ParticleSystem cooldownEffect;
+        [SerializeField]
+        private float cooldown;
+        public float Cooldown
+        {
+            get => cooldown;
+            set => cooldown = value;
+        }
 
-    private readonly List<int> moves = new List<int>();
-
-    private void Buffer()
-    {
-        var sprint = Keyboard.current[sprintKey].isPressed;
-        var stopSprint = Keyboard.current[sprintKey].wasReleasedThisFrame;
-
-        for (var i = 0; i < 4; i++)
-            if (directionKeys[i].IsDown)
+        private CheckpointObject checkpoint;
+        public CheckpointObject Checkpoint
+        {
+            get => checkpoint;
+            set
             {
-                moves.Remove(i);
-                moves.Add(i);
-                break;
+                checkpoint = value;
+                Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
-            else if (sprint && Keyboard.current[directionKeys[i]].isPressed)
-            {
-                moves.Remove(i);
-                moves.Add(i);
-            }
-            else if (stopSprint || (sprint && Keyboard.current[directionKeys[i]].wasReleasedThisFrame))
-                moves.Remove(i);
-    }
+        }
 
-    private void Rotate()
-    {
-        if (rotationKeys[0].IsDown)
-            movable.Direction--;
-        else if (rotationKeys[1].IsDown)
-            movable.Direction++;
-    }
+        [Space(10)]
+        [SerializeField]
+        private SpriteRenderer icon;
+        [SerializeField]
+        private SpriteRenderer shape;
+        [SerializeField]
+        private ParticleSystem assignEffect;
+        [SerializeField]
+        private ParticleSystem actionEffect;
+        [SerializeField]
+        private ParticleSystem cooldownEffect;
 
-    private void Move()
-    {
-        bool moved = false;
+        private readonly List<int> moves = new List<int>();
 
-        foreach (var i in moves)
-            if (movable.CanMove(i))
-            {
-                movement.Move(movable, i);
-                moved = true;
-                break;
-            }
+        private void Buffer()
+        {
+            var sprint = Keyboard.current[sprintKey].isPressed;
+            var stopSprint = Keyboard.current[sprintKey].wasReleasedThisFrame;
 
-        if (!moved)
-            movement.Idle(movable);
+            for (var i = 0; i < 4; i++)
+                if (directionKeys[i].IsDown)
+                {
+                    moves.Remove(i);
+                    moves.Add(i);
+                    break;
+                }
+                else if (sprint && Keyboard.current[directionKeys[i]].isPressed)
+                {
+                    moves.Remove(i);
+                    moves.Add(i);
+                }
+                else if (stopSprint || (sprint && Keyboard.current[directionKeys[i]].wasReleasedThisFrame))
+                    moves.Remove(i);
+        }
 
-        moves.Clear();
-    }
+        private void Rotate()
+        {
+            if (rotationKeys[0].IsDown)
+                movable.Direction--;
+            else if (rotationKeys[1].IsDown)
+                movable.Direction++;
+        }
 
-    private IEnumerator Act()
-    {
-        action.Do(this);
-        cooldownEffect.Emission(false);
-        Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
+        private void Move()
+        {
+            bool moved = false;
 
-        yield return new WaitForSeconds(Cooldown);
-        cooldownEffect.Emission(true);
-    }
+            foreach (var i in moves)
+                if (movable.CanMove(i))
+                {
+                    movement.Move(movable, i);
+                    moved = true;
+                    break;
+                }
 
-    public void CheckSpawn()
-    {
-        if (ExitObject.Passed)
-            Instantiate(this.prompt, movable.Position, Quaternion.identity)
-                .Setup("Home", () => UIUtility.Main.LoadScene("Home"));
-        else if (Checkpoint)
-            Checkpoint.StartCoroutine(Checkpoint.Spawn());
-        else
-            Instantiate(this.prompt, movable.Position, Quaternion.identity)
-                .Setup("Restart", () => UIUtility.Main.ReloadScene());
+            if (!moved)
+                movement.Idle(movable);
+
+            moves.Clear();
+        }
+
+        private IEnumerator Act()
+        {
+            action.Do(this);
+            cooldownEffect.Emission(false);
+            Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
+
+            yield return new WaitForSeconds(Cooldown);
+            cooldownEffect.Emission(true);
+        }
+
+        public void CheckSpawn()
+        {
+            if (ExitObject.Passed)
+                Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                    .Setup("Home", () => UIUtility.Main.LoadScene("Home"));
+            else if (Checkpoint)
+                Checkpoint.StartCoroutine(Checkpoint.Spawn());
+            else
+                Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                    .Setup("Restart", () => UIUtility.Main.ReloadScene());
+        }
     }
 }

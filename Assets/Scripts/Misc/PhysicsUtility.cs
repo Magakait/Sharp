@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static Constants;
+using static Sharp.Core.Constants;
 
 public static class PhysicsUtility
 {

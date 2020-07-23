@@ -1,7 +1,10 @@
 using Newtonsoft.Json.Linq;
 
-public interface ISerializable
+namespace Sharp.Gameplay
 {
-    public void Serialize(JToken token);
-    public void Deserialize(JToken token);
+    public interface ISerializable
+    {
+        public void Serialize(JToken token);
+        public void Deserialize(JToken token);
+    }
 }

@@ -1,14 +1,18 @@
 using UnityEngine;
+using Sharp.Core;
 
-[CreateAssetMenu(menuName = "Movements/Jump")]
-public class JumpMovement : BaseMovement
+namespace Sharp.Gameplay
 {
-    public override void Move(MovableComponent movable, int direction)
+    [CreateAssetMenu(menuName = "Movements/Jump")]
+    public class JumpMovement : BaseMovement
     {
-        var position = movable.IntPosition;
-        while (MovableComponent.CanMove(position + Constants.Directions[direction]))
-            position += Constants.Directions[direction];
+        public override void Move(MovableComponent movable, int direction)
+        {
+            var position = movable.IntPosition;
+            while (MovableComponent.CanMove(position + Constants.Directions[direction]))
+                position += Constants.Directions[direction];
 
-        movable.Move(position);
+            movable.Move(position);
+        }
     }
 }

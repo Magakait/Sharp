@@ -3,74 +3,77 @@ using Sharp.Core;
 using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
-public class ZoomObject : MonoBehaviour, ISerializable
+namespace Sharp.Gameplay
 {
-    private void Awake()
+    public class ZoomObject : MonoBehaviour, ISerializable
     {
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
-            (
-                frameIn.DORotate(Constants.Eulers[1], Constants.Time),
-                frameOut.DORotate(-Constants.Eulers[1], Constants.Time)
-            ),
-            DOTween.Sequence().Insert
-            (
-                frameIn.DOScale(0, Constants.Time)
-            ),
-            DOTween.Sequence().Insert
-            (
-                frameOut.DOScale(0, Constants.Time)
-            )
-        );
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerObject>())
+        private void Awake()
         {
-            CameraManager.Zoom(45 - 15 * Zoom);
-            animation[0].Restart();
+            animation = gameObject.AddComponent<TweenContainer>().Init
+            (
+                DOTween.Sequence().Insert
+                (
+                    frameIn.DORotate(Constants.Eulers[1], Constants.Time),
+                    frameOut.DORotate(-Constants.Eulers[1], Constants.Time)
+                ),
+                DOTween.Sequence().Insert
+                (
+                    frameIn.DOScale(0, Constants.Time)
+                ),
+                DOTween.Sequence().Insert
+                (
+                    frameOut.DOScale(0, Constants.Time)
+                )
+            );
         }
-    }
 
-    #region gameplay
-
-    [Space(10)]
-    [SerializeField]
-    private int zoom;
-    public int Zoom
-    {
-        get => zoom;
-        private set
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            zoom = value;
-            animation[1].Play(Zoom >= 0);
-            animation[2].Play(Zoom <= 0);
+            if (collision.GetComponent<PlayerObject>())
+            {
+                CameraManager.Zoom(45 - 15 * Zoom);
+                animation[0].Restart();
+            }
         }
+
+        #region gameplay
+
+        [Space(10)]
+        [SerializeField]
+        private int zoom;
+        public int Zoom
+        {
+            get => zoom;
+            private set
+            {
+                zoom = value;
+                animation[1].Play(Zoom >= 0);
+                animation[2].Play(Zoom <= 0);
+            }
+        }
+
+        #endregion
+
+        #region animation
+
+        [Space(10)]
+        [SerializeField]
+        private Transform frameIn;
+        [SerializeField]
+        private Transform frameOut;
+
+        private new TweenContainer animation;
+
+        #endregion
+
+        #region serialization
+
+        public void Serialize(JToken token) =>
+            token["zoom"] = Zoom;
+
+        public void Deserialize(JToken token) =>
+            Zoom = (int)token["zoom"];
+
+        #endregion
     }
-
-    #endregion
-
-    #region animation
-
-    [Space(10)]
-    [SerializeField]
-    private Transform frameIn;
-    [SerializeField]
-    private Transform frameOut;
-
-    private new TweenArrayComponent animation;
-
-    #endregion
-
-    #region serialization
-
-    public void Serialize(JToken token) =>
-        token["zoom"] = Zoom;
-
-    public void Deserialize(JToken token) =>
-        Zoom = (int)token["zoom"];
-
-    #endregion
 }

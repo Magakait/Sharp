@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Sharp.Core;
 using DG.Tweening;
 
 [RequireComponent(typeof(Camera))]
@@ -9,38 +9,20 @@ public class CameraManager : MonoBehaviour
 
     public static Vector2 Position
     {
-        get
-        {
-            return new Vector2(Camera.transform.localPosition.x, Camera.transform.localPosition.y);
-        }
-        set
-        {
-            Camera.transform.localPosition = new Vector3(value.x, value.y, -10);
-        }
+        get => new Vector2(Camera.transform.localPosition.x, Camera.transform.localPosition.y);
+        set => Camera.transform.localPosition = new Vector3(value.x, value.y, -10);
     }
 
     public static Vector3 Rotation
     {
-        get
-        {
-            return Camera.transform.localEulerAngles;
-        }
-        set
-        {
-            Camera.transform.localEulerAngles = value;
-        }
+        get => Camera.transform.localEulerAngles;
+        set => Camera.transform.localEulerAngles = value;
     }
 
     public static float FieldOfView
     {
-        get
-        {
-            return Camera.fieldOfView;
-        }
-        set
-        {
-            Camera.fieldOfView = value;
-        }
+        get => Camera.fieldOfView;
+        set => Camera.fieldOfView = value;
     }
 
     private static Tweener positionTweener;

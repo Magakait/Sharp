@@ -1,55 +1,57 @@
 using UnityEngine;
-
 using Newtonsoft.Json.Linq;
 
-public class ActionObject : MonoBehaviour, ISerializable
+namespace Sharp.Gameplay
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class ActionObject : MonoBehaviour, ISerializable
     {
-        PlayerObject player = collision.GetComponent<PlayerObject>();
-        if (player)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            player.Action = actions[Action];
-            player.Cooldown = Cooldown;
+            PlayerObject player = collision.GetComponent<PlayerObject>();
+            if (player)
+            {
+                player.Action = actions[Action];
+                player.Cooldown = Cooldown;
+            }
         }
-    }
 
-    [Space(10)]
-    [SerializeField]
-    private BaseAction[] actions;
-    [SerializeField]
-    private SpriteRenderer[] shapes;
+        [Space(10)]
+        [SerializeField]
+        private BaseAction[] actions;
+        [SerializeField]
+        private SpriteRenderer[] shapes;
 
-    [Space(10)]
-    [SerializeField]
-    private int action;
-    public int Action
-    {
-        get
+        [Space(10)]
+        [SerializeField]
+        private int action;
+        public int Action
         {
-            return action;
+            get
+            {
+                return action;
+            }
+            private set
+            {
+                action = value;
+                foreach (var shape in shapes)
+                    shape.sprite = actions[Action].Shape;
+            }
         }
-        private set
+
+        [SerializeField]
+        private float cooldown;
+        public float Cooldown { get => cooldown; private set => cooldown = value; }
+
+        public void Serialize(JToken token)
         {
-            action = value;
-            foreach (var shape in shapes)
-                shape.sprite = actions[Action].Shape;
+            token["action"] = Action;
+            token["cooldown"] = Cooldown;
         }
-    }
 
-    [SerializeField]
-    private float cooldown;
-    public float Cooldown { get => cooldown; private set => cooldown = value; }
-
-    public void Serialize(JToken token)
-    {
-        token["action"] = Action;
-        token["cooldown"] = Cooldown;
-    }
-
-    public void Deserialize(JToken token)
-    {
-        Action = (int)token["action"];
-        Cooldown = (float)token["cooldown"];
+        public void Deserialize(JToken token)
+        {
+            Action = (int)token["action"];
+            Cooldown = (float)token["cooldown"];
+        }
     }
 }

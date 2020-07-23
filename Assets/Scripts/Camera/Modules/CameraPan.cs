@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Sharp.UI;
+using Sharp.Editor;
+using Sharp.Core;
 using Sharp.Core.Variables;
 
 public class CameraPan : MonoBehaviour

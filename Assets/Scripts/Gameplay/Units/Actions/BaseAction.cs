@@ -1,11 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Actions/Base")]
-public class BaseAction : ScriptableObject
+namespace Sharp.Gameplay
 {
-    [SerializeField]
-    private Sprite shape;
-    public Sprite Shape => shape;
+    [CreateAssetMenu(menuName = "Actions/Base")]
+    public class BaseAction : ScriptableObject
+    {
+        [SerializeField]
+        private Sprite shape;
+        public Sprite Shape => shape;
 
-    public virtual void Do(PlayerObject player) { }
+        public virtual void Do(PlayerObject player) { }
+    }
 }
