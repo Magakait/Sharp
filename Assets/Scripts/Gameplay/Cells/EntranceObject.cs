@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Sharp.Core;
 using Sharp.UI;
 using Sharp.Managers;
+using Sharp.Camera;
 using Newtonsoft.Json.Linq;
 using DG.Tweening;
 

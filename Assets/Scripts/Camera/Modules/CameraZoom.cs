@@ -2,26 +2,29 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Sharp.UI;
 
-public class CameraZoom : MonoBehaviour
+namespace Sharp.Camera
 {
-    [SerializeField]
-    private float scale;
-
-    [Space(10)]
-    [SerializeField]
-    private float minFOV;
-    [SerializeField]
-    private float maxFOV;
-
-    private void Update()
+    public class CameraZoom : MonoBehaviour
     {
-        if (UIUtility.IsOverUI)
-            return;
+        [SerializeField]
+        private float scale;
 
-        var scroll = scale * Mouse.current.scroll.ReadValue().y;
-        if (scroll != 0)
-            CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV), .35f);
+        [Space(10)]
+        [SerializeField]
+        private float minFOV;
+        [SerializeField]
+        private float maxFOV;
+
+        private void Update()
+        {
+            if (UIUtility.IsOverUI)
+                return;
+
+            var scroll = scale * Mouse.current.scroll.ReadValue().y;
+            if (scroll != 0)
+                CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV), .35f);
+        }
+
+        private void OnDisable() => CameraManager.FieldOfView = minFOV;
     }
-
-    private void OnDisable() => CameraManager.FieldOfView = minFOV;
 }

@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+namespace Sharp.Camera
 {
-    public static Transform Target { get; set; }
-
-    private void Update()
+    public class CameraFollow : MonoBehaviour
     {
-        if (Target)
-            CameraManager.Move(Target.position);
+        public static Transform Target { get; set; }
+
+        private void Update()
+        {
+            if (Target)
+                CameraManager.Move(Target.position);
+        }
     }
 }

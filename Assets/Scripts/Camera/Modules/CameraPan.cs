@@ -5,25 +5,28 @@ using Sharp.Editor;
 using Sharp.Core;
 using Sharp.Core.Variables;
 
-public class CameraPan : MonoBehaviour
+namespace Sharp.Camera
 {
-    [SerializeField]
-    private float scale;
-    [SerializeField]
-    private KeyVariable[] keys;
-
-    private void Update()
+    public class CameraPan : MonoBehaviour
     {
-        if (UIUtility.IsInput)
-            return;
+        [SerializeField]
+        private float scale;
+        [SerializeField]
+        private KeyVariable[] keys;
 
-        var move = Vector2.zero;
-        for (var i = 0; i < 4; i++)
-            if (Keyboard.current[keys[i]].isPressed)
-                move += Constants.Directions[i];
+        private void Update()
+        {
+            if (UIUtility.IsInput)
+                return;
 
-        move *= scale;
-        if (move != Vector2.zero)
-            CameraManager.Move(EditorGrid.Clamp(CameraManager.Position + move), .35f);
+            var move = Vector2.zero;
+            for (var i = 0; i < 4; i++)
+                if (Keyboard.current[keys[i]].isPressed)
+                    move += Constants.Directions[i];
+
+            move *= scale;
+            if (move != Vector2.zero)
+                CameraManager.Move(EditorGrid.Clamp(CameraManager.Position + move), .35f);
+        }
     }
 }

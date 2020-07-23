@@ -1,6 +1,7 @@
 using System.Collections;
 using Sharp.Core;
 using Sharp.Managers;
+using Sharp.Camera;
 using UnityEngine;
 
 namespace Sharp.Gameplay

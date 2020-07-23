@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sharp.Core;
 using DG.Tweening;
+using Sharp.Camera;
 using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay

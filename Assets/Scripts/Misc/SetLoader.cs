@@ -6,6 +6,7 @@ using Sharp.UI;
 using Sharp.Core;
 using Sharp.Core.Events;
 using Sharp.Gameplay;
+using Sharp.Camera;
 
 namespace Sharp.Managers
 {

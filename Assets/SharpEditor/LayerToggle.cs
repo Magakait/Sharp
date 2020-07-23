@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sharp.Camera;
 
 namespace Sharp.Editor
 {

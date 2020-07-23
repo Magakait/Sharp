@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sharp.Core;
+using Sharp.Camera;
 using DG.Tweening;
 
 namespace Sharp.Editor

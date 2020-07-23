@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Sharp.UI;
 using Sharp.Core;
 using Sharp.Core.Variables;
+using Sharp.Camera;
 
 namespace Sharp.Gameplay
 {

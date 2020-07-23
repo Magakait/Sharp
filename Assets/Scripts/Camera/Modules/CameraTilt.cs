@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraTilt : MonoBehaviour
+namespace Sharp.Camera
 {
-    [SerializeField]
-    private float scale;
-
-    private void Update()
+    public class CameraTilt : MonoBehaviour
     {
-        var mouse = CameraManager.Camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        CameraManager.Rotation = scale * new Vector3(.5f - mouse.y, mouse.x - .5f);
-    }
+        [SerializeField]
+        private float scale;
 
-    private void OnDisable() => CameraManager.Rotation = Vector3.zero;
+        private void Update()
+        {
+            var mouse = CameraManager.Camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+            CameraManager.Rotation = scale * new Vector3(.5f - mouse.y, mouse.x - .5f);
+        }
+
+        private void OnDisable() => CameraManager.Rotation = Vector3.zero;
+    }
 }
