@@ -86,7 +86,7 @@ namespace Sharp.Editor
             {
                 if (!collider)
                 {
-                    if (Keyboard.current[copyKey].isPressed && !copied && SourceName != "Player" && SourceName != "Exit")
+                    if (Keyboard.current[copyKey].isPressed && !copied && target.name != "Player" && target.name != "Exit")
                     {
                         copied = true;
 
@@ -135,7 +135,7 @@ namespace Sharp.Editor
                     Dragging = true;
                     Selected = Selected == target ? null : target;
                 }
-                else if (Dragging && !Mouse.current.leftButton.wasPressedThisFrame)
+                else if (Dragging && !Mouse.current.leftButton.isPressed)
                 {
                     LevelManager.UpdateInstance(target);
 
