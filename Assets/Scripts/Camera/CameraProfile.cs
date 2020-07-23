@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class CameraProfile : MonoBehaviour
+namespace Sharp.Camera
 {
-    [SerializeField]
-    private bool pan;
-    [SerializeField]
-    private bool tilt;
-    [SerializeField]
-    private bool zoom;
-
-    private void Start()
+    public class CameraProfile : MonoBehaviour
     {
-        CameraManager.Camera.GetComponentInChildren<CameraPan>().enabled = pan;
-        CameraManager.Camera.GetComponentInChildren<CameraTilt>().enabled = tilt;
-        CameraManager.Camera.GetComponentInChildren<CameraZoom>().enabled = zoom;
+        [SerializeField]
+        private bool pan;
+        [SerializeField]
+        private bool tilt;
+        [SerializeField]
+        private bool zoom;
 
-        Destroy(gameObject);
+        private void Start()
+        {
+            CameraManager.Camera.GetComponentInChildren<CameraPan>().enabled = pan;
+            CameraManager.Camera.GetComponentInChildren<CameraTilt>().enabled = tilt;
+            CameraManager.Camera.GetComponentInChildren<CameraZoom>().enabled = zoom;
+
+            Destroy(gameObject);
+        }
     }
 }

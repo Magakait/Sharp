@@ -1,121 +1,123 @@
-using System;
+using System.Linq;
 using System.Collections.Generic;
-
 using UnityEngine;
-
+using Sharp.Core;
+using Sharp.Gameplay;
 using Newtonsoft.Json.Linq;
 
-[CreateAssetMenu]
-public class LevelManager : ScriptableObject
+namespace Sharp.Managers
 {
-    [SerializeField]
-    private JsonFile level;
-    public static JsonFile Level => main.level;
-
-    [SerializeField]
-    private SerializableObject[] source;
-    public static SerializableObject Source(int id) => main.source[id];
-
-    public static List<SerializableObject> Instances { get; private set; } = new List<SerializableObject>();
-
-    private static LevelManager main;
-
-    public void OnEnable()
+    [CreateAssetMenu]
+    public class LevelManager : ScriptableObject
     {
-        main = this;
-        Array.Sort(source, (a, b) => a.Id.CompareTo(b.Id));
-    }
+        [SerializeField]
+        private JsonFile level;
+        public static JsonFile Level => main.level;
 
-    #region level management
+        [SerializeField]
+        private GameObject[] source;
+        public static GameObject Source(string id) =>
+            main.source.First(s => s.name == id);
 
-    public static void Load(string level) => Level.Load(SetManager.GetLevelFullName(level));
+        public static List<GameObject> Instances { get; private set; } = new List<GameObject>();
 
-    public static void DestroyAll()
-    {
-        foreach (var instance in Instances)
-            if (instance)
-                Destroy(instance.gameObject);
+        private static LevelManager main;
 
-        Instances.Clear();
-        System.GC.Collect();
-    }
+        public void OnEnable() =>
+            main = this;
 
-    public static void InstantiateAll()
-    {
-        DestroyAll();
+        #region level management
 
-        foreach (var token in Level.Root)
+        public static void Load(string level) => Level.Load(SetManager.GetLevelFullName(level));
+
+        public static void DestroyAll()
         {
-            var instance = AddInstance((int)token["id"], token["position"].ToVector());
-            try
-            {
-                instance.Deserialize(token["properties"]);
-            }
-            catch { }
+            foreach (var instance in Instances)
+                if (instance)
+                    Destroy(instance.gameObject);
+
+            Instances.Clear();
+            System.GC.Collect();
         }
-    }
 
-    #endregion
-
-    #region instance management
-
-    public static SerializableObject AddInstance(int id, Vector2 position, bool save = false)
-    {
-        var instance = Instantiate(Source(id), position, Quaternion.identity);
-        instance.name = Source(id).name;
-        Instances.Add(instance);
-
-        if (save)
+        public static void InstantiateAll()
         {
-            var data = SerializeInstance(instance);
-            ((JArray)Level.Root).Add(data);
+            DestroyAll();
 
-            instance.Deserialize(data["properties"]);
-            instance.enabled = false;
+            foreach (var token in Level.Root)
+            {
+                var instance = AddInstance((string)token["id"], token["position"].ToVector());
+                try
+                {
+                    instance.GetComponent<ISerializable>()?.Deserialize(token["properties"]);
+                }
+                catch { }
+            }
+        }
 
+        #endregion
+
+        #region instance management
+
+        public static GameObject AddInstance(string name, Vector2 position, bool save = false)
+        {
+            var instance = Instantiate(Source(name), position, Quaternion.identity);
+            instance.name = name;
+            Instances.Add(instance);
+
+            if (save)
+            {
+                var data = SerializeInstance(instance);
+                ((JArray)Level.Root).Add(data);
+
+                instance.GetComponent<ISerializable>()?.Deserialize(data["properties"]);
+                if (instance.GetComponent<ISerializable>() is MonoBehaviour mb)
+                    mb.enabled = false;
+
+                Level.Save();
+            }
+
+            return instance;
+        }
+
+        public static void RemoveInstance(GameObject instance)
+        {
+            ((JArray)Level.Root)[Instances.IndexOf(instance)].Remove();
+            Level.Save();
+
+            Instances.Remove(instance);
+            Destroy(instance.gameObject);
+        }
+
+        public static void CopyProperties(GameObject from, GameObject to)
+        {
+            var properties = new JObject();
+            from.GetComponent<ISerializable>()?.Serialize(properties);
+            to.GetComponent<ISerializable>()?.Deserialize(properties);
+
+            UpdateInstance(to);
             Level.Save();
         }
 
-        return instance;
-    }
-
-    public static void RemoveInstance(SerializableObject instance)
-    {
-        ((JArray)Level.Root)[Instances.IndexOf(instance)].Remove();
-        Level.Save();
-
-        Instances.Remove(instance);
-        Destroy(instance.gameObject);
-    }
-
-    public static void CopyProperties(SerializableObject from, SerializableObject to)
-    {
-        var properties = new JObject();
-        from.Serialize(properties);
-        to.Deserialize(properties);
-
-        UpdateInstance(to);
-        Level.Save();
-    }
-
-    public static void UpdateInstance(SerializableObject instance)
-    {
-        ((JArray)Level.Root)[Instances.IndexOf(instance)].Replace(SerializeInstance(instance));
-        Level.Save();
-    }
-
-    private static JToken SerializeInstance(SerializableObject instance)
-    {
-        var properties = new JObject();
-        instance.Serialize(properties);
-
-        return new JObject
+        public static void UpdateInstance(GameObject instance)
         {
-            ["id"] = instance.Id,
-            ["position"] = instance.transform.position.ToJToken(),
-            ["properties"] = properties
-        };
-    }
+            ((JArray)Level.Root)[Instances.IndexOf(instance)].Replace(SerializeInstance(instance));
+            Level.Save();
+        }
 
-    #endregion
+        private static JToken SerializeInstance(GameObject instance)
+        {
+            var properties = new JObject();
+            instance.GetComponent<ISerializable>()?.Serialize(properties);
+
+            return new JObject
+            {
+                ["id"] = instance.name,
+                ["position"] = instance.transform.position.ToJToken(),
+                ["properties"] = properties
+            };
+        }
+
+        #endregion
+    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
-
 using DG.Tweening;
+using Sharp.Core;
 
 public class RotatorComponent : MonoBehaviour
 {

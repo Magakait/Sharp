@@ -1,130 +1,130 @@
 using UnityEngine;
-
-using DG.Tweening;
+using Sharp.Core;
+using Sharp.Camera;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class PortalObject : SerializableObject
+namespace Sharp.Gameplay
 {
-    private void Awake()
+    public class PortalObject : MonoBehaviour, ISerializable
     {
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
-            (
-                frameTransform
-                    .DORotate(Constants.Eulers[1], Constants.Time)
-                    .SetEase(Ease.Linear)
-            )
-                .OnComplete(() => { if (state.State == 1) animation[0].Restart(); })
-                .Play(),
-            DOTween.Sequence().Insert
-            (
-                frameTransform
-                    .DOScale(1.5f, Constants.Time),
-                outParticle.transform
-                    .DOScale(1.5f, Constants.Time)
-            )
-                .SetLoops(2, LoopType.Yoyo)
-        );
-
-        outParticle.transform.parent = null;
-    }
-
-    private void OnDestroy()
-    {
-        if (outParticle)
-            Destroy(outParticle.gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (state.State == 1)
+        private void Awake()
         {
-            MovableComponent movable = collision.GetComponent<MovableComponent>();
-            if (movable)
+            animation = gameObject.AddComponent<TweenContainer>().Init
+            (
+                DOTween.Sequence().Insert
+                (
+                    frameTransform
+                        .DORotate(Constants.Eulers[1], Constants.Time)
+                        .SetEase(Ease.Linear)
+                )
+                    .OnComplete(() => { if (state.State == 1) animation[0].Restart(); })
+                    .Play(),
+                DOTween.Sequence().Insert
+                (
+                    frameTransform
+                        .DOScale(1.5f, Constants.Time),
+                    outParticle.transform
+                        .DOScale(1.5f, Constants.Time)
+                )
+                    .SetLoops(2, LoopType.Yoyo)
+            );
+
+            outParticle.transform.parent = null;
+        }
+
+        private void OnDestroy()
+        {
+            if (outParticle)
+                Destroy(outParticle.gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (state.State == 1)
             {
-                Teleport(movable);
-                if (movable.GetComponent<PlayerObject>())
-                    CameraManager.Position = Destination;
+                MovableComponent movable = collision.GetComponent<MovableComponent>();
+                if (movable)
+                {
+                    Teleport(movable);
+                    if (movable.GetComponent<PlayerObject>())
+                        CameraManager.Position = Destination;
+                }
             }
         }
-    }
 
-    #region gameplay
+        #region gameplay
 
-    [Header("Gameplay")]
-    [SerializeField]
-    private CellComponent cell;
-    [SerializeField]
-    private StateComponent state;
+        [Header("Gameplay")]
+        [SerializeField]
+        private CellComponent cell;
+        [SerializeField]
+        private StateComponent state;
 
-    [Space(10)]
-    [SerializeField]
-    private Vector2 destination;
-    public Vector2 Destination
-    {
-        get
+        [Space(10)]
+        [SerializeField]
+        private Vector2 destination;
+        public Vector2 Destination
         {
-            return destination;
-        }
-        set
-        {
-            destination = value;
-            outParticle.transform.position = Destination;
-        }
-    }
-
-    public void Teleport(MovableComponent movable)
-    {
-        movable.Position = Destination;
-        animation[1].Restart();
-    }
-
-    public void Switch()
-    {
-        bool active = state.State == 1;
-
-        if (active)
-        {
-            foreach (MovableComponent movable in cell.GetCollisions<MovableComponent>())
-                Teleport(movable);
-
-            animation[0].Restart();
+            get => destination;
+            set
+            {
+                destination = value;
+                outParticle.transform.position = Destination;
+            }
         }
 
-        inParticle.Emission(active);
-        outParticle.Emission(active);
+        public void Teleport(MovableComponent movable)
+        {
+            movable.Position = Destination;
+            animation[1].Restart();
+        }
+
+        public void Switch()
+        {
+            bool active = state.State == 1;
+            if (active)
+            {
+                foreach (MovableComponent movable in cell.GetCollisions<MovableComponent>())
+                    Teleport(movable);
+
+                animation[0].Restart();
+            }
+
+            inParticle.Emission(active);
+            outParticle.Emission(active);
+        }
+
+        #endregion
+
+        #region animation
+
+        [Header("Animation")]
+        [SerializeField]
+        private Transform frameTransform;
+        [SerializeField]
+        private ParticleSystem inParticle;
+        [SerializeField]
+        private ParticleSystem outParticle;
+
+        private new TweenContainer animation;
+
+        #endregion
+
+        #region serialization
+
+        public void Serialize(JToken token)
+        {
+            token["destination"] = Destination.ToJToken();
+            token["active"] = state.State == 1;
+        }
+
+        public void Deserialize(JToken token)
+        {
+            Destination = token["destination"].ToVector();
+            state.State = (bool)token["active"] ? 1 : 0;
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region animation
-
-    [Header("Animation")]
-    [SerializeField]
-    private Transform frameTransform;
-    [SerializeField]
-    private ParticleSystem inParticle;
-    [SerializeField]
-    private ParticleSystem outParticle;
-
-    private new TweenArrayComponent animation;
-
-    #endregion
-
-    #region serialization
-
-    public override void Serialize(JToken token)
-    {
-        token["destination"] = Destination.ToJToken();
-        token["active"] = state.State == 1;
-    }
-
-    public override void Deserialize(JToken token)
-    {
-        Destination = token["destination"].ToVector();
-        state.State = (bool)token["active"] ? 1 : 0;
-    }
-
-    #endregion
 }

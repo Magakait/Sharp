@@ -1,0 +1,11 @@
+{
+    "name": "com.sharp.ui",
+    "version": "1.0.0",
+    "displayName": "Sharp UI",
+    "description": "This package provides a set of consistently-styled UI controls as well as an auxiliary utility scripable object.",
+    "author": {
+        "name": "Sharp",
+        "url": "https://github.com/alkaitagi/Sharp"
+    },
+    "hideInEditor": false
+}

@@ -1,56 +1,62 @@
 using System;
-
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Sharp.UI;
+using Sharp.Core;
 
-class InputSettings : MonoBehaviour
+namespace Sharp.Settings
 {
-    public InputField inputHold;
-    public JsonFile file;
-
-    private KeyPicker picker;
-    public KeyPicker Picker
+    public class InputSettings : MonoBehaviour
     {
-        get
+        public InputField inputHold;
+        public JsonFile file;
+
+        private KeyPicker picker;
+        public KeyPicker Picker
         {
-            return picker;
+            get => picker;
+            set
+            {
+                if (value)
+                    inputHold.Select();
+                else if (Picker)
+                    Picker.onValueChanged.Invoke(Picker.key.Value.ToString());
+
+                picker = value;
+                enabled = Picker;
+            }
         }
-        set
+
+        private void Awake() =>
+            file.Load(Constants.SettingsRoot + "Input.json");
+
+        public void Reset() =>
+            file.LoadFrom(Constants.SettingsRoot + "Defaults\\Input.json");
+
+        public void Stop() =>
+            Picker = null;
+
+        private void Update()
         {
-            if (value)
-                inputHold.Select();
-            else if (Picker)
-                Picker.onValueChanged.Invoke(Picker.key.Value.ToString());
+            if (!Keyboard.current.anyKey.wasPressedThisFrame)
+                return;
 
-            picker = value;
-            enabled = Picker;
-        }
-    }
+            foreach (Key key in Enum.GetValues(typeof(Key)))
+            {
+                if (!Keyboard.current[key].wasPressedThisFrame)
+                    continue;
 
-    private void Awake() =>
-        file.Load(Constants.SettingsRoot + "Input.json");
-
-    public void Reset() =>
-        file.LoadFrom(Constants.SettingsRoot + "Defaults\\Input.json");
-
-    public void Stop() =>
-        Picker = null;
-
-    private void Update()
-    {
-        if (Input.anyKeyDown)
-            foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
-                if (Input.GetKeyDown(key))
+                string text = key.ToString();
+                if (!text.Contains("Mouse"))
                 {
-                    string text = key.ToString();
-                    if (!text.Contains("Mouse"))
-                    {
-                        Picker.SetValue(text);
-                        Picker = null;
+                    Picker.SetValue(text);
+                    Picker = null;
 
-                        enabled = false;
-                        return;
-                    }
+                    enabled = false;
+                    return;
                 }
+            }
+        }
     }
 }

@@ -1,17 +1,21 @@
 using UnityEngine;
+using Sharp.Core;
 
-[CreateAssetMenu(menuName = "Actions/Switch")]
-public class SwitchAction : BaseAction
+namespace Sharp.Gameplay
 {
-    public override void Do(PlayerObject player)
+    [CreateAssetMenu(menuName = "Actions/Switch")]
+    public class SwitchAction : BaseAction
     {
-        var target = PhysicsUtility.Overlap<StateComponent>
-        (
-            player.Movable.IntPosition + Constants.Directions[player.Movable.Direction],
-            Constants.CellMask
-        );
+        public override void Do(PlayerObject player)
+        {
+            var target = PhysicsUtility.Overlap<StateComponent>
+            (
+                player.Movable.IntPosition + Constants.Directions[player.Movable.Direction],
+                Constants.CellMask
+            );
 
-        if (target)
-            target.State++;
+            if (target)
+                target.State++;
+        }
     }
 }

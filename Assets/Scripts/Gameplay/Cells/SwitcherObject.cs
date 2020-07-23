@@ -1,169 +1,165 @@
 ﻿using System.Collections.Generic;
-
 using UnityEngine;
-
-using DG.Tweening;
+using Sharp.Core;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class SwitcherObject : SerializableObject
+namespace Sharp.Gameplay
 {
-    private void Awake()
+    public class SwitcherObject : MonoBehaviour, ISerializable
     {
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
+        private void Awake()
+        {
+            animation = gameObject.AddComponent<TweenContainer>().Init
             (
-                innerTransform
-                    .DOScale(0, Constants.Time)
-            ),
-            DOTween.Sequence().Insert
+                DOTween.Sequence().Insert
+                (
+                    innerTransform
+                        .DOScale(0, Constants.Time)
+                ),
+                DOTween.Sequence().Insert
+                (
+                    outerTransform
+                        .DOScale(0, Constants.Time)
+                ),
+                DOTween.Sequence().Insert
+                (
+                    bodyTransform
+                        .DORotate(Constants.Eulers[1], Constants.Time)
+                )
+            );
+
+            effectTransform.parent = null;
+        }
+
+        private void Start() =>
+            PhysicsUtility.OverlapBox
             (
-                outerTransform
-                    .DOScale(0, Constants.Time)
-            ),
-            DOTween.Sequence().Insert
-            (
-                bodyTransform
-                    .DORotate(Constants.Eulers[1], Constants.Time)
-            )
-        );
+                targets,
+                effectTransform.position,
+                effectTransform.localScale,
+                Constants.CellMask
+            );
 
-        effectTransform.parent = null;
-    }
-
-    private void Start() =>
-        PhysicsUtility.OverlapBox
-        (
-            targets,
-            effectTransform.position,
-            effectTransform.localScale,
-            Constants.CellMask
-        );
-
-    private void OnDestroy()
-    {
-        if (effectTransform)
-            Destroy(effectTransform.gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (Enter)
+        private void OnDestroy()
         {
-            Switch(true);
-            animation[2].Restart();
+            if (effectTransform)
+                Destroy(effectTransform.gameObject);
         }
-    }
 
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (Exit)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Switch(false);
-
-            animation[2].Complete();
-            animation[2].SmoothRewind();
+            if (Enter)
+            {
+                Switch(true);
+                animation[2].Restart();
+            }
         }
-    }
 
-    #region gameplay
-
-    [Header("Gameplay")]
-    [SerializeField]
-    private bool enter;
-    public bool Enter
-    {
-        get
+        public void OnTriggerExit2D(Collider2D collision)
         {
-            return enter;
+            if (Exit)
+            {
+                Switch(false);
+
+                animation[2].Complete();
+                animation[2].SmoothRewind();
+            }
         }
-        set
+
+        #region gameplay
+
+        [Header("Gameplay")]
+        [SerializeField]
+        private bool enter;
+        public bool Enter
         {
-            enter = value;
-            animation[0].Play(Enter);
+            get => enter;
+            set
+            {
+                enter = value;
+                animation[0].Play(Enter);
+            }
         }
-    }
 
-    [SerializeField]
-    private bool exit;
-    public bool Exit
-    {
-        get
+        [SerializeField]
+        private bool exit;
+        public bool Exit
         {
-            return exit;
+            get => exit;
+            set
+            {
+                exit = value;
+                animation[1].Play(Exit);
+            }
         }
-        set
+
+        [SerializeField]
+        private Vector2 origin;
+        [SerializeField]
+        private Vector2 offset;
+
+        private readonly List<StateComponent> targets = new List<StateComponent>();
+
+        private void Place(Vector2 origin, Vector2 offset)
         {
-            exit = value;
-            animation[1].Play(Exit);
+            this.origin = origin;
+            this.offset = offset;
+
+            effectTransform.position = origin + .5f * offset;
+            effectTransform.localScale = Vector2.one + new Vector2(Mathf.Abs(offset.x), Mathf.Abs(offset.y));
+
+            foreach (var scaler in particleScalers)
+                scaler.Scale();
         }
+
+        private void Switch(bool isUp)
+        {
+            int delta = isUp ? 1 : -1;
+            targets.ForEach(i => i.State += delta);
+        }
+
+        #endregion
+
+        #region animation
+
+        [Header("Animation")]
+        [SerializeField]
+        private Transform bodyTransform;
+        [SerializeField]
+        private Transform innerTransform;
+        [SerializeField]
+        private Transform outerTransform;
+
+        [Space(10)]
+        [SerializeField]
+        private Transform effectTransform;
+        [SerializeField]
+        private ParticleScalerComponent[] particleScalers;
+
+        private new TweenContainer animation;
+
+        #endregion
+
+        #region serialization
+
+        public void Serialize(JToken token)
+        {
+            token["enter"] = Enter;
+            token["exit"] = Exit;
+
+            token["origin"] = origin.ToJToken();
+            token["offset"] = offset.ToJToken();
+        }
+
+        public void Deserialize(JToken token)
+        {
+            Enter = (bool)token["enter"];
+            Exit = (bool)token["exit"];
+
+            Place(token["origin"].ToVector(), token["offset"].ToVector());
+        }
+
+        #endregion
     }
-
-    [SerializeField]
-    private Vector2 origin;
-    [SerializeField]
-    private Vector2 offset;
-
-    private readonly List<StateComponent> targets = new List<StateComponent>();
-
-    private void Place(Vector2 origin, Vector2 offset)
-    {
-        this.origin = origin;
-        this.offset = offset;
-
-        effectTransform.position = origin + .5f * offset;
-        effectTransform.localScale = Vector2.one + new Vector2(Mathf.Abs(offset.x), Mathf.Abs(offset.y));
-
-        foreach (var scaler in particleScalers)
-            scaler.Scale();
-    }
-
-    private void Switch(bool isUp)
-    {
-        int delta = isUp ? 1 : -1;
-        targets.ForEach(i => i.State += delta);
-    }
-
-    #endregion
-
-    #region animation
-
-    [Header("Animation")]
-    [SerializeField]
-    private Transform bodyTransform;
-    [SerializeField]
-    private Transform innerTransform;
-    [SerializeField]
-    private Transform outerTransform;
-
-    [Space(10)]
-    [SerializeField]
-    private Transform effectTransform;
-    [SerializeField]
-    private ParticleScalerComponent[] particleScalers;
-
-    private new TweenArrayComponent animation;
-
-    #endregion
-
-    #region serialization
-
-    public override void Serialize(JToken token)
-    {
-        token["enter"] = Enter;
-        token["exit"] = Exit;
-
-        token["origin"] = origin.ToJToken();
-        token["offset"] = offset.ToJToken();
-    }
-
-    public override void Deserialize(JToken token)
-    {
-        Enter = (bool)token["enter"];
-        Exit = (bool)token["exit"];
-
-        Place(token["origin"].ToVector(), token["offset"].ToVector());
-    }
-
-    #endregion
 }

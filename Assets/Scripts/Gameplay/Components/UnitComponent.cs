@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-
+using Sharp.Core;
+using Sharp.Core.Events;
 using DG.Tweening;
 
 public class UnitComponent : MonoBehaviour
@@ -7,19 +8,13 @@ public class UnitComponent : MonoBehaviour
     [SerializeField]
     private bool virus;
     public bool Virus => virus;
-    
+
     [SerializeField]
     private bool killed;
     public bool Killed
     {
-        get
-        {
-            return killed;
-        }
-        set
-        {
-            killed = value;
-        }
+        get => killed;
+        set => killed = value;
     }
 
     public VoidEvent onKill;

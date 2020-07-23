@@ -1,92 +1,83 @@
 using UnityEngine;
-
-using System.Linq;
-
-using DG.Tweening;
+using Sharp.Core;
 using Newtonsoft.Json.Linq;
+using DG.Tweening;
 
-public class FogObject : SerializableObject
+namespace Sharp.Gameplay
 {
-    private void Awake() =>
-        animation = gameObject.AddComponent<TweenArrayComponent>().Init
-        (
-            DOTween.Sequence().Insert
+    public class FogObject : MonoBehaviour, ISerializable
+    {
+        private void Awake() =>
+            animation = gameObject.AddComponent<TweenContainer>().Init
             (
-                maskSprite
-                    .DOFade(0, Constants.Time)
-            ) 
-        );
+                DOTween.Sequence().Insert
+                (
+                    maskSprite
+                        .DOFade(0, Constants.Time)
+                )
+            );
 
-    private void Start() =>
-        collider.radius = 1;
+        private void Start() =>
+            collider.radius = 1;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerObject>())
-            Reveal();
-    }
-
-    #region gameplay
-
-    [Header("Gameplay")]
-    public new CircleCollider2D collider;
-
-    [SerializeField]
-    private bool spread;
-    public bool Spread
-    {
-        get
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            return spread;
+            if (collision.GetComponent<PlayerObject>())
+                Reveal();
         }
-        set
+
+        #region gameplay
+
+        [Header("Gameplay")]
+        public new CircleCollider2D collider;
+
+        [SerializeField]
+        private bool spread;
+        public bool Spread { get => spread; set => spread = value; }
+
+        private void Reveal()
         {
-            spread = value;
+            collider.enabled = false;
+
+            Destroy(gameObject, 0.1f);
+            if (Spread)
+                Invoke("Delay", .075f);
+
+            animation[0].Play(false);
         }
-    }
 
-    private void Reveal()
-    {
-        collider.enabled = false;
-
-        Destroy(gameObject, 0.1f);
-        if (Spread)
-            Invoke("Delay", .075f);
-
-        animation[0].Play(false);
-    }
-
-    private void Delay()
-    {
-        while (true)
+        private void Delay()
         {
-            Collider2D neighbor = Physics2D.OverlapPoint(transform.position, Constants.FogMask);
-            if (neighbor)
-                neighbor.GetComponent<FogObject>().Reveal();
-            else
-                break;
+            while (true)
+            {
+                Collider2D neighbor = Physics2D.OverlapPoint(transform.position, Constants.FogMask);
+                if (neighbor)
+                    neighbor.GetComponent<FogObject>().Reveal();
+                else
+                    break;
+            }
         }
+
+        #endregion
+
+        #region animation
+
+        [Header("Animation")]
+        [SerializeField]
+        private SpriteRenderer maskSprite;
+
+        private new TweenContainer animation;
+
+        #endregion
+
+        #region serialization
+
+        public void Serialize(JToken token) =>
+            token["spread"] = Spread;
+
+        public void Deserialize(JToken token) =>
+            Spread = (bool)token["spread"];
+
+        #endregion
     }
-
-    #endregion
-
-    #region animation
-
-    [Header("Animation")]
-    [SerializeField]
-    private SpriteRenderer maskSprite;
-
-    private new TweenArrayComponent animation;
-
-    #endregion
-
-    #region serialization
-
-    public override void Serialize(JToken token) =>
-        token["spread"] = Spread;
-
-    public override void Deserialize(JToken token) =>
-        Spread = (bool)token["spread"];
-
-    #endregion
 }

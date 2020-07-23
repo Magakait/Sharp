@@ -1,0 +1,11 @@
+{
+    "name": "com.sharp.core",
+    "version": "1.0.0",
+    "displayName": "Sharp Core",
+    "description": "This package provides basic building block for more complex systems: Variables, JSONLoaders, Painters, Events.",
+    "author": {
+        "name": "Sharp",
+        "url": "https://github.com/alkaitagi/Sharp"
+    },
+    "hideInEditor": false
+}

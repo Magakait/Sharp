@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Sharp.Core.Events;
 
 public class StateComponent : MonoBehaviour
 {
@@ -6,32 +7,24 @@ public class StateComponent : MonoBehaviour
     private int state;
     public int State
     {
-        get
-        {
-            return state;
-        }
+        get => state;
         set
         {
             state = (int)Mathf.Repeat(value, Capacity);
             onSwitch.Invoke(State);
         }
     }
-
     [SerializeField]
     private int capacity;
     public int Capacity
     {
-        get
-        {
-            return capacity;
-        }
+        get => capacity;
         set
         {
             capacity = value;
             State = State;
         }
     }
-
     [Space(10)]
     public IntEvent onSwitch;
 }
