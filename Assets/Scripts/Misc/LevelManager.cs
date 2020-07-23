@@ -16,8 +16,8 @@ namespace Sharp.Managers
 
         [SerializeField]
         private GameObject[] source;
-        public static GameObject Source(string name) =>
-            main.source.First(s => s.name == name);
+        public static GameObject Source(string id) =>
+            main.source.First(s => s.name == id);
 
         public static List<GameObject> Instances { get; private set; } = new List<GameObject>();
 
@@ -46,7 +46,7 @@ namespace Sharp.Managers
 
             foreach (var token in Level.Root)
             {
-                var instance = AddInstance((string)token["name"], token["position"].ToVector());
+                var instance = AddInstance((string)token["id"], token["position"].ToVector());
                 try
                 {
                     instance.GetComponent<ISerializable>()?.Deserialize(token["properties"]);
@@ -112,7 +112,7 @@ namespace Sharp.Managers
 
             return new JObject
             {
-                ["name"] = instance.name,
+                ["id"] = instance.name,
                 ["position"] = instance.transform.position.ToJToken(),
                 ["properties"] = properties
             };
