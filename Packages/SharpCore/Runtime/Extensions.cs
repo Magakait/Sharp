@@ -47,16 +47,12 @@ namespace Sharp.Core
         }
 
         public static Vector3 ToVector(this JToken token) =>
-            new Vector3((int)token["x"], (int)token["y"]);
+            new Vector3((int)token[0], (int)token[1]);
 
         public static JToken ToJToken(this Vector2 vector)
         {
             vector = Vector2Int.RoundToInt(vector);
-            return new JObject()
-            {
-                ["x"] = (int)vector.x,
-                ["y"] = (int)vector.y
-            };
+            return new JArray((int)vector.x, (int)vector.y);
         }
 
         public static JToken ToJToken(this Vector3 vector) =>

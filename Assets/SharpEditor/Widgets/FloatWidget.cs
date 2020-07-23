@@ -13,8 +13,8 @@ namespace Sharp.Editor.Widgets
         protected override void Read(JToken value, JToken attributes)
         {
             slider.Decimals = (int)attributes["decimals"];
-            slider.Slider.minValue = (float)attributes["range"]["min"];
-            slider.Slider.maxValue = (float)attributes["range"]["max"];
+            slider.Slider.minValue = (float)attributes["min"];
+            slider.Slider.maxValue = (float)attributes["max"];
 
             slider.Slider.value = (float)value;
         }
