@@ -1550,21 +1550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   copyKey: {fileID: 11400000, guid: 7cd5e52d9a251434d8c120e161e492a5, type: 2}
-  onSelect:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1418370412}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: Load
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  propertiesManager: {fileID: 1418370412}
   positionText: {fileID: 285829286}
   layerText: {fileID: 1085858519}
   objectText: {fileID: 2024747793}

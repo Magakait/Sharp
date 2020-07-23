@@ -98,7 +98,7 @@ namespace Sharp.Editor
                 }
             }
             else
-                target = collider ? collider.GetComponent<GameObject>() : null;
+                target = collider?.gameObject;
 
             frameSprite.transform.position = target ? target.transform.position : position;
             if (Selected)
