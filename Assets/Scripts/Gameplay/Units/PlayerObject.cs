@@ -6,10 +6,11 @@ using Sharp.UI;
 using Sharp.Core;
 using Sharp.Core.Variables;
 using Sharp.Camera;
+using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    public class PlayerObject : MonoBehaviour
+    public class PlayerObject : MonoBehaviour, ISerializable
     {
         private void Awake() =>
             CameraManager.Position = transform.position;
@@ -181,5 +182,8 @@ namespace Sharp.Gameplay
                 Instantiate(this.prompt, movable.Position, Quaternion.identity)
                     .Setup("Restart", () => UIUtility.Main.ReloadScene());
         }
+
+        public void Serialize(JToken token) { }
+        public void Deserialize(JToken token) { }
     }
 }

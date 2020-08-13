@@ -1,29 +1,15 @@
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
     public class LauncherObject : MonoBehaviour, ISerializable
     {
+        private Animator animator;
+
         private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    leftWing
-                        .DOLocalRotate(new Vector3(0, 0, 20), Constants.Time),
-                    rightWing
-                        .DOLocalRotate(new Vector3(0, 0, -20), Constants.Time)
-                ),
-                DOTween.Sequence().Insert
-                (
-                    pointer
-                        .DOLocalMoveY(.5f, Constants.Time)
-                )
-                    .SetLoops(2, LoopType.Yoyo)
-            );
+            animator = GetComponent<Animator>();
 
         private void Start()
         {
@@ -53,7 +39,7 @@ namespace Sharp.Gameplay
         {
             bool active = targets[state.State];
 
-            animation[0].Play(active);
+            animator.SetBool("Active", active);
             halo.Emission(active);
 
             if (active)
@@ -68,30 +54,16 @@ namespace Sharp.Gameplay
             movable.Transition /= Scale;
 
             Instantiate(burst, transform.position, Constants.Rotations[state.State]);
-            animation[1].Restart();
+            animator.SetTrigger("Launch");
         }
 
         #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform pointer;
-        [SerializeField]
-        private Transform leftWing;
-        [SerializeField]
-        private Transform rightWing;
 
         [Space(10)]
         [SerializeField]
         private ParticleSystem halo;
         [SerializeField]
         private ParticleSystem burst;
-
-        private new TweenContainer animation;
-
-        #endregion
 
         #region serialization
 
