@@ -7,11 +7,10 @@ namespace Sharp.Gameplay
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            PlayerObject player = collision.GetComponent<PlayerObject>();
-            if (player)
+            if (collision.GetComponent<PlayerObject>() is PlayerObject pl)
             {
-                player.Action = actions[Action];
-                player.Cooldown = Cooldown;
+                pl.Action = actions[Action];
+                pl.Cooldown = Cooldown;
             }
         }
 
@@ -26,10 +25,7 @@ namespace Sharp.Gameplay
         private int action;
         public int Action
         {
-            get
-            {
-                return action;
-            }
+            get => action;
             private set
             {
                 action = value;
