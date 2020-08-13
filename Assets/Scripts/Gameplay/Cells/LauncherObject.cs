@@ -4,12 +4,21 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CellComponent))]
+    [RequireComponent(typeof(StateComponent))]
     public class LauncherObject : MonoBehaviour, ISerializable
     {
         private Animator animator;
+        private CellComponent cell;
+        private StateComponent state;
 
-        private void Awake() =>
+        private void Awake()
+        {
             animator = GetComponent<Animator>();
+            cell = GetComponent<CellComponent>();
+            state = GetComponent<StateComponent>();
+        }
 
         private void Start()
         {
@@ -19,19 +28,15 @@ namespace Sharp.Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targets[state.State])
-            {
-                MovableComponent movable = collision.GetComponent<MovableComponent>();
-                if (movable)
-                    Launch(movable);
-            }
+            if (!targets[state.State])
+                return;
+
+            MovableComponent movable = collision.GetComponent<MovableComponent>();
+            if (movable)
+                Launch(movable);
         }
 
         #region gameplay
-
-        [Header("Gameplay")]
-        public CellComponent cell;
-        public StateComponent state;
 
         private readonly Transform[] targets = new Transform[4];
 
