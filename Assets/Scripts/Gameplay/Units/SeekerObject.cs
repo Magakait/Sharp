@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    [RequireComponent(typeof(Animation))]
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(MovableComponent))]
     public class SeekerObject : MonoBehaviour, ISerializable
     {
@@ -17,8 +17,7 @@ namespace Sharp.Gameplay
             movable = GetComponent<MovableComponent>();
 
         private void Start() =>
-            GetComponent<Animation>()["Spin"]
-                .speed = 1 / movable.Transition;
+            GetComponent<Animator>().SetFloat("Speed", 1 / movable.Transition);
 
         private void Update()
         {
