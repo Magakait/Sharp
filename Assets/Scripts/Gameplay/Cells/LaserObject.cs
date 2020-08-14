@@ -2,29 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(StateComponent))]
     public class LaserObject : MonoBehaviour, ISerializable
     {
-        private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    leftTransform
-                        .DOLocalMoveX(-.15f, Constants.Time),
-                    rightTransform
-                        .DOLocalMoveX(.15f, Constants.Time)
-                )
-                    .SetLoops(2, LoopType.Yoyo),
-                DOTween.Sequence().Insert
-                (
-                    persistencyTransform
-                        .DOScale(0, Constants.Time)
-                )
-            );
+        [SerializeField]
+        private ParticleScalerComponent distanceScaler;
+
+        private Animator animator;
+        private StateComponent state;
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+            state = GetComponent<StateComponent>();
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -35,7 +30,7 @@ namespace Sharp.Gameplay
             main.startColor = main.startColor.color.Fade(1);
 
             distanceScaler.ParticleSystem.Refresh();
-            animation[0].Restart();
+            animator.SetTrigger("Burst");
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -55,16 +50,9 @@ namespace Sharp.Gameplay
             {
                 var main = distanceScaler.ParticleSystem.main;
                 main.startColor = main.startColor.color.Fade(0.3f);
-
                 enabled = false;
             }
         }
-
-        #region gameplay
-
-        [Space(10)]
-        [SerializeField]
-        private StateComponent state;
 
         private readonly static List<UnitComponent> units = new List<UnitComponent>();
 
@@ -80,35 +68,12 @@ namespace Sharp.Gameplay
                 unit.Kill();
         }
 
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform leftTransform;
-        [SerializeField]
-        private Transform rightTransform;
-        [SerializeField]
-        private Transform persistencyTransform;
-
-        [Space(10)]
-        [SerializeField]
-        private ParticleScalerComponent distanceScaler;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
-
         public int Direction
         {
             get => state.State;
             private set => state.State = value;
         }
 
-        [Header("Serialization")]
         [SerializeField]
         private int distance;
         public int Distance
@@ -121,7 +86,6 @@ namespace Sharp.Gameplay
                 distanceScaler.transform.localPosition = .5f * new Vector3(0, Distance, 0);
             }
         }
-
         [SerializeField]
         private bool persistent;
         public bool Persistent
@@ -130,7 +94,7 @@ namespace Sharp.Gameplay
             private set
             {
                 persistent = value;
-                animation[1].Play(Persistent);
+                animator.SetBool("Persistent", Persistent);
             }
         }
 
@@ -147,7 +111,5 @@ namespace Sharp.Gameplay
             Distance = (int)token["distance"];
             Persistent = (bool)token["persistent"];
         }
-
-        #endregion
     }
 }
