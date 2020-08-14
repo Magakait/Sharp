@@ -5492,8 +5492,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4137887037576950}
   - component: {fileID: 58645538801001102}
-  - component: {fileID: 114421921248546010}
   - component: {fileID: 6643199282557999975}
+  - component: {fileID: 114421921248546010}
   m_Layer: 8
   m_Name: Entrance
   m_TagString: Untagged
@@ -5536,23 +5536,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &114421921248546010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742398349221448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a208c9dd20d3e34aa7c2fb41346d770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coreEffect: {fileID: 198885050216963842}
-  connectionLine: {fileID: 120760523166981242}
-  canvas: {fileID: 223271237410657112}
-  titleText: {fileID: 114579005856377140}
-  enterButton: {fileID: 114443499287779796}
 --- !u!95 &6643199282557999975
 Animator:
   serializedVersion: 3
@@ -5572,6 +5555,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114421921248546010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742398349221448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a208c9dd20d3e34aa7c2fb41346d770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coreEffect: {fileID: 198885050216963842}
+  connectionLine: {fileID: 120760523166981242}
+  canvas: {fileID: 223271237410657112}
+  titleText: {fileID: 114579005856377140}
+  enterButton: {fileID: 114443499287779796}
 --- !u!1 &1991655798653696
 GameObject:
   m_ObjectHideFlags: 0
