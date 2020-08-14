@@ -6,23 +6,19 @@ using Sharp.UI;
 using Sharp.Managers;
 using Sharp.Camera;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Animator))]
     public class EntranceObject : MonoBehaviour, ISerializable
     {
-        [Space(10)]
-        [SerializeField]
-        private new CircleCollider2D collider;
+        private Animator animator;
 
         public bool Passed { get; private set; }
 
         private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert(frame.DOFade(0, .2f).From())
-            );
+            animator = GetComponent<Animator>();
 
         private void Start()
         {
@@ -37,19 +33,19 @@ namespace Sharp.Gameplay
                 coreEffect.Emission(true);
 
             enterButton.interactable = SetManager.Levels.Contains(Level);
-            collider.radius = 1;
+            GetComponent<CircleCollider2D>().radius = 1;
         }
 
         private void OnMouseEnter()
         {
             if (enabled)
-                animation[0].Play(false);
+                animator.SetBool("Hover", true);
         }
 
         private void OnMouseExit()
         {
             if (enabled)
-                animation[0].Play(true);
+                animator.SetBool("Hover", false);
         }
 
         private void OnMouseDown()
@@ -84,11 +80,7 @@ namespace Sharp.Gameplay
             line.SetPosition(2, destination - offset);
         }
 
-        #region animation
-
         [Header("Animation")]
-        [SerializeField]
-        private SpriteRenderer frame;
         [SerializeField]
         private ParticleSystem coreEffect;
         [SerializeField]
@@ -102,17 +94,13 @@ namespace Sharp.Gameplay
         [SerializeField]
         private Button enterButton;
 
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
-
-        public string Level { get => titleText.text; private set => titleText.text = value; }
+        public string Level
+        {
+            get => titleText.text;
+            private set => titleText.text = value;
+        }
         public int Threshold { get; private set; }
-
         public int Connected { get; private set; }
-
         public string Connections { get; private set; }
 
         public void Serialize(JToken token)
@@ -130,7 +118,5 @@ namespace Sharp.Gameplay
             Threshold = (int)token["threshold"];
             Connections = (string)token["connections"];
         }
-
-        #endregion
     }
 }

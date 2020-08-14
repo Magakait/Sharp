@@ -11,6 +11,7 @@ namespace Sharp.Gameplay
 
         public virtual void Idle(MovableComponent movable) { }
 
-        public virtual void Move(MovableComponent movable, int direction) => movable.Move(direction);
+        public virtual void Move(MovableComponent movable, int direction) =>
+            movable.Move(direction);
     }
 }
