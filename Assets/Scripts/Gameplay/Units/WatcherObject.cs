@@ -3,34 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
     public class WatcherObject : MonoBehaviour, ISerializable
     {
-        private void Start() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    delayTransform
-                        .DOScale(1, delay),
-                    spikesTransform
-                        .DOScale(1, Constants.Time)
-                )
-                    .OnComplete(() => Explode())
-            );
-
-        private void FixedUpdate()
-        {
-            Cast();
-            animation[0].Play(!units.FirstOrDefault(unit => unit.GetComponent<PlayerObject>()));
-        }
-
-        #region gameplay
-
-        [Header("Gameplay")]
         [SerializeField]
         private int distance;
         public int Distance
@@ -42,11 +20,40 @@ namespace Sharp.Gameplay
                 maskTransform.localScale = 2 * Distance * Vector3.one;
             }
         }
-
         [SerializeField]
         private float delay;
 
+        [Space(10)]
+        [SerializeField]
+        private Transform maskTransform;
+        [SerializeField]
+        private Transform delayTransform;
+        [SerializeField]
+        private ParticleSystem burstParticle;
+
         private static readonly List<UnitComponent> units = new List<UnitComponent>();
+        private Animator animator;
+
+        private void Awake() =>
+            animator = GetComponent<Animator>();
+
+        private void FixedUpdate()
+        {
+            Cast();
+
+            var scale = delayTransform.localScale.x;
+            var step = Time.fixedDeltaTime / delay;
+
+            var watching = units.FirstOrDefault(unit => unit.GetComponent<PlayerObject>());
+            animator.SetBool("Watching", watching);
+            if (!watching)
+                step *= -1;
+
+            scale = Mathf.Clamp01(scale + step);
+            delayTransform.localScale = scale * Vector2.one;
+            if (scale == 1)
+                Explode();
+        }
 
         private void Cast() =>
             PhysicsUtility.OverlapBox
@@ -66,28 +73,6 @@ namespace Sharp.Gameplay
             Instantiate(burstParticle, maskTransform);
         }
 
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform spikesTransform;
-        [SerializeField]
-        private Transform delayTransform;
-        [SerializeField]
-        private Transform maskTransform;
-
-        [Space(10)]
-        [SerializeField]
-        private ParticleSystem burstParticle;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
-
         public void Serialize(JToken token)
         {
             token["distance"] = Distance;
@@ -99,7 +84,5 @@ namespace Sharp.Gameplay
             Distance = (int)token["distance"];
             delay = (float)token["delay"];
         }
-
-        #endregion
     }
 }
