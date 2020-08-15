@@ -2,33 +2,51 @@
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
     public class SwitcherObject : MonoBehaviour, ISerializable
     {
+        [Header("Gameplay")]
+        [SerializeField]
+        private bool enter;
+        public bool Enter
+        {
+            get => enter;
+            set
+            {
+                enter = value;
+                animator.SetBool("Enter", Enter);
+            }
+        }
+        [SerializeField]
+        private bool exit;
+        public bool Exit
+        {
+            get => exit;
+            set
+            {
+                exit = value;
+                animator.SetBool("Exit", Exit);
+            }
+        }
+        [SerializeField]
+        private Vector2 origin;
+        [SerializeField]
+        private Vector2 offset;
+
+        [Space(10)]
+        [SerializeField]
+        private Transform effectTransform;
+        [SerializeField]
+        private ParticleScalerComponent[] particleScalers;
+
+        private Animator animator;
+
         private void Awake()
         {
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    innerTransform
-                        .DOScale(0, Constants.Time)
-                ),
-                DOTween.Sequence().Insert
-                (
-                    outerTransform
-                        .DOScale(0, Constants.Time)
-                ),
-                DOTween.Sequence().Insert
-                (
-                    bodyTransform
-                        .DORotate(Constants.Eulers[1], Constants.Time)
-                )
-            );
-
+            animator = GetComponent<Animator>();
             effectTransform.parent = null;
         }
 
@@ -49,55 +67,21 @@ namespace Sharp.Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (Enter)
-            {
-                Switch(true);
-                animation[2].Restart();
-            }
+            if (!Enter)
+                return;
+
+            Switch(true);
+            animator.SetTrigger("StepIn");
         }
 
         public void OnTriggerExit2D(Collider2D collision)
         {
-            if (Exit)
-            {
-                Switch(false);
+            if (!Exit)
+                return;
 
-                animation[2].Complete();
-                animation[2].SmoothRewind();
-            }
+            Switch(false);
+            animator.SetTrigger("StepOut");
         }
-
-        #region gameplay
-
-        [Header("Gameplay")]
-        [SerializeField]
-        private bool enter;
-        public bool Enter
-        {
-            get => enter;
-            set
-            {
-                enter = value;
-                animation[0].Play(Enter);
-            }
-        }
-
-        [SerializeField]
-        private bool exit;
-        public bool Exit
-        {
-            get => exit;
-            set
-            {
-                exit = value;
-                animation[1].Play(Exit);
-            }
-        }
-
-        [SerializeField]
-        private Vector2 origin;
-        [SerializeField]
-        private Vector2 offset;
 
         private readonly List<StateComponent> targets = new List<StateComponent>();
 
@@ -119,30 +103,6 @@ namespace Sharp.Gameplay
             targets.ForEach(i => i.State += delta);
         }
 
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform bodyTransform;
-        [SerializeField]
-        private Transform innerTransform;
-        [SerializeField]
-        private Transform outerTransform;
-
-        [Space(10)]
-        [SerializeField]
-        private Transform effectTransform;
-        [SerializeField]
-        private ParticleScalerComponent[] particleScalers;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
-
         public void Serialize(JToken token)
         {
             token["enter"] = Enter;
@@ -159,7 +119,5 @@ namespace Sharp.Gameplay
 
             Place(token["origin"].ToVector(), token["offset"].ToVector());
         }
-
-        #endregion
     }
 }
