@@ -2,34 +2,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using Sharp.UI;
-using Sharp.Core;
 using Sharp.Core.Variables;
 using Sharp.Managers;
-using DG.Tweening;
 
 namespace Sharp.Editor
 {
+    [RequireComponent(typeof(Animator))]
     public class EditorHighlight : MonoBehaviour
     {
-        private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert(frameSprite.DOFade(frameSprite.color.a * 2, Constants.Time)),
-                DOTween.Sequence().Insert(selectionSprite.DOFade(0, Constants.Time))
-            );
+        [SerializeField]
+        private SpriteRenderer frameSprite;
+        [SerializeField]
+        private SpriteRenderer selectionSprite;
+        [Space(10)]
+        [SerializeField]
+        private Text positionText;
+        [SerializeField]
+        private Text layerText;
+        [SerializeField]
+        private Text objectText;
+        [Space(10)]
+        [SerializeField]
+        private KeyVariable copyKey;
+        [SerializeField]
+        private EditorProperties propertiesManager;
 
-        private void Update()
-        {
-            TargetGrid();
-            DisplayInfo();
-
-            if (!UIUtility.IsOverUI)
-                ProcessMouse();
-        }
-
-        #region gameplay
-
-        [Header("Gameplay")]
         private bool dragging;
         private bool Dragging
         {
@@ -37,10 +34,9 @@ namespace Sharp.Editor
             set
             {
                 dragging = value;
-                animation[0].Play(!Dragging);
+                animator.SetBool("Dragging", Dragging);
             }
         }
-
         private int layer;
         public int Layer
         {
@@ -51,15 +47,7 @@ namespace Sharp.Editor
                 ClearInput();
             }
         }
-
         public string SourceName { get; set; }
-
-        #region targeting
-
-        [SerializeField]
-        private KeyVariable copyKey;
-        [SerializeField]
-        private EditorProperties propertiesManager;
 
         private GameObject selected;
         private GameObject Selected
@@ -70,12 +58,25 @@ namespace Sharp.Editor
                 selected = value;
 
                 propertiesManager.Load(Selected);
-                animation[1].Play(Selected);
+                animator.SetBool("Selected", Selected);
             }
         }
 
-        private GameObject target;
         private bool copied;
+        private GameObject target;
+        private Animator animator;
+
+        private void Awake() =>
+            animator = GetComponent<Animator>();
+
+        private void Update()
+        {
+            TargetGrid();
+            DisplayInfo();
+
+            if (!UIUtility.IsOverUI)
+                ProcessMouse();
+        }
 
         private void TargetGrid()
         {
@@ -105,26 +106,12 @@ namespace Sharp.Editor
                 selectionSprite.transform.position = Selected.transform.position;
         }
 
-        #endregion
-
-        #region info
-
-        [Space(10)]
-        [SerializeField]
-        private Text positionText;
-        [SerializeField]
-        private Text layerText;
-        [SerializeField]
-        private Text objectText;
-
         private void DisplayInfo()
         {
             positionText.text = $"{frameSprite.transform.position.x}, {frameSprite.transform.position.y}";
             layerText.text = LayerMask.LayerToName(Layer);
             objectText.text = target ? $"<b>{target.name}</b>" : SourceName;
         }
-
-        #endregion
 
         private void ProcessMouse()
         {
@@ -162,19 +149,5 @@ namespace Sharp.Editor
             copied = false;
             Selected = null;
         }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private SpriteRenderer frameSprite;
-        [SerializeField]
-        private SpriteRenderer selectionSprite;
-
-        private new TweenContainer animation;
-
-        #endregion
     }
 }

@@ -1023,7 +1023,7 @@ PrefabInstance:
     - target: {fileID: 224871931222777496, guid: c967fb8827d171e4ca80d70c6c8260a5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c967fb8827d171e4ca80d70c6c8260a5, type: 3}
@@ -1513,6 +1513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167259469}
+  - component: {fileID: 167259470}
   - component: {fileID: 167259473}
   m_Layer: 0
   m_Name: Highlight
@@ -1537,6 +1538,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &167259470
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167259468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b33f8eda4eba6b64a91b30f5c2f26c5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &167259473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,13 +1569,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5670096057b5a9041969e0a8531db74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  copyKey: {fileID: 11400000, guid: 7cd5e52d9a251434d8c120e161e492a5, type: 2}
-  propertiesManager: {fileID: 1418370412}
+  frameSprite: {fileID: 978561447}
+  selectionSprite: {fileID: 214570211}
   positionText: {fileID: 285829286}
   layerText: {fileID: 1085858519}
   objectText: {fileID: 2024747793}
-  frameSprite: {fileID: 978561447}
-  selectionSprite: {fileID: 214570211}
+  copyKey: {fileID: 11400000, guid: 7cd5e52d9a251434d8c120e161e492a5, type: 2}
+  propertiesManager: {fileID: 1418370412}
 --- !u!1 &214570209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,7 +1649,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300002, guid: 4b8f60d30bf8bbd41af0403ba4484174, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
