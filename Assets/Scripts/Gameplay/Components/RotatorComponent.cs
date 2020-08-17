@@ -32,7 +32,7 @@ public class RotatorComponent : MonoBehaviour
         if (!target.HasValue)
             return;
 
-        Rotation = Quaternion.Lerp(Rotation, target.Value, 12.5 * Time.fixedDeltaTime);
+        Rotation = Quaternion.Lerp(Rotation, target.Value, 12.5f * Time.fixedDeltaTime);
         if (Mathf.Abs(target.Value.eulerAngles.z - Rotation.eulerAngles.z) <= 1)
             target = null;
     }
