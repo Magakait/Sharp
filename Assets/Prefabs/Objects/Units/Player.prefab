@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4646432451965554}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &212400583848088072
 SpriteRenderer:
@@ -127,7 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4646432451965554}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &198939634758701092
 ParticleSystem:
@@ -136,7 +136,7 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291077965675628}
-  serializedVersion: 7
+  serializedVersion: 6
   lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
@@ -3717,20 +3717,19 @@ ParticleSystem:
     range: {x: 0, y: 1}
   CollisionModule:
     enabled: 0
-    serializedVersion: 4
+    serializedVersion: 3
     type: 0
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
-    m_Planes:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    plane0: {fileID: 0}
+    plane1: {fileID: 0}
+    plane2: {fileID: 0}
+    plane3: {fileID: 0}
+    plane4: {fileID: 0}
+    plane5: {fileID: 0}
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
@@ -3904,20 +3903,17 @@ ParticleSystem:
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
-    serializedVersion: 2
+    collisionShape0: {fileID: 0}
+    collisionShape1: {fileID: 0}
+    collisionShape2: {fileID: 0}
+    collisionShape3: {fileID: 0}
+    collisionShape4: {fileID: 0}
+    collisionShape5: {fileID: 0}
     inside: 1
     outside: 0
     enter: 0
     exit: 0
-    colliderQueryMode: 0
     radiusScale: 1
-    primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -4948,7 +4944,6 @@ GameObject:
   - component: {fileID: 114239492685431162}
   - component: {fileID: 96711353300923764}
   - component: {fileID: 114070602452298116}
-  - component: {fileID: 114088651791869928}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -5154,18 +5149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 2bbe78f7b2a503a4f8630f8681c69519, type: 2}
---- !u!114 &114088651791869928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613020967853726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 385f3fa00d09d734698d71fa9e4bef38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1846781511608042
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,6 +5162,7 @@ GameObject:
   - component: {fileID: 50192373197077226}
   - component: {fileID: 114892075849192640}
   - component: {fileID: 114004512183173264}
+  - component: {fileID: 4487813484606115109}
   - component: {fileID: 114472221765468056}
   m_Layer: 9
   m_Name: Player
@@ -5199,8 +5183,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4191218868910922}
-  - {fileID: 4584199480079246}
   - {fileID: 4021678605604102}
+  - {fileID: 4584199480079246}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5302,8 +5286,8 @@ MonoBehaviour:
   onDirectionChange:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114088651791869928}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 4487813484606115109}
+        m_TargetAssemblyTypeName: RotatorComponent, Assembly-CSharp
         m_MethodName: Rotate
         m_Mode: 0
         m_Arguments:
@@ -5321,6 +5305,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   transition: 0.15
+--- !u!114 &4487813484606115109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846781511608042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 385f3fa00d09d734698d71fa9e4bef38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114472221765468056
 MonoBehaviour:
   m_ObjectHideFlags: 0
