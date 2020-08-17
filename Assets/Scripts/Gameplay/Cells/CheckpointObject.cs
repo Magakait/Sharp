@@ -38,9 +38,9 @@ namespace Sharp.Gameplay
 
         public IEnumerator Spawn()
         {
-            yield return new WaitForSeconds(2 * Constants.Time);
+            yield return new WaitForSeconds(2 * .2f);
             CameraManager.Move(transform.position);
-            yield return new WaitForSeconds(2 * Constants.Time);
+            yield return new WaitForSeconds(2 * .2f);
 
             var player = LevelManager.AddInstance("Player", transform.position).GetComponent<PlayerObject>();
             player.Action = action;

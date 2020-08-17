@@ -12,8 +12,6 @@ namespace Sharp.Core
         public const int UnitMask = 1 << UnitLayer;
         public const int FogMask = 1 << FogLayer;
 
-        public const float Time = .2f;
-
         public static readonly Vector2[] Directions =
         {
             Vector2.up,

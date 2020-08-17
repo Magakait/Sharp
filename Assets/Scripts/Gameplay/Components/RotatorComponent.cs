@@ -1,22 +1,48 @@
 using UnityEngine;
-using DG.Tweening;
 using Sharp.Core;
 
 public class RotatorComponent : MonoBehaviour
 {
-    private Tweener tweener;
+    private new Rigidbody2D rigidbody;
+    private Quaternion? target = null;
 
-    private void Awake() => tweener = transform.DORotate(Vector3.zero, Constants.Time);
+    public Quaternion Rotation
+    {
+        get => rigidbody
+            ? Quaternion.Euler(0, 0, rigidbody.rotation)
+            : transform.rotation;
+        set
+        {
+            if (rigidbody)
+                rigidbody.rotation = value.eulerAngles.z;
+            else
+                transform.rotation = value;
+        }
+    }
 
-    private void Start() => tweener.Complete();
+    public Vector2 Position => rigidbody
+        ? rigidbody.position
+        : (Vector2)transform.position;
 
-    private void OnDestroy() => tweener.Kill();
+    private void Awake() =>
+        rigidbody = GetComponent<Rigidbody2D>();
 
-    public void Rotate(int direction) => Rotate(Constants.Eulers[direction]);
+    private void FixedUpdate()
+    {
+        if (!target.HasValue)
+            return;
 
-    public void Rotate(Vector3 eulerAngles) =>
-        tweener
-            .ChangeValues(transform.eulerAngles, eulerAngles)
-            .Restart();
+        Rotation = Quaternion.Lerp(Rotation, target.Value, 12.5 * Time.fixedDeltaTime);
+        if (Mathf.Abs(target.Value.eulerAngles.z - Rotation.eulerAngles.z) <= 1)
+            target = null;
+    }
 
+    public void Rotate(int rotation) =>
+        Rotate(Constants.Rotations[rotation]);
+
+    public void Rotate(Quaternion rotation) =>
+        target = rotation;
+
+    public void Rotate(Vector2 point) =>
+        Rotate(Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, point - Position)));
 }
