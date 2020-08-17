@@ -14,7 +14,7 @@ public class RotatorComponent : MonoBehaviour
         set
         {
             if (rigidbody)
-                rigidbody.rotation = value.eulerAngles.z;
+                rigidbody.MoveRotation(value.eulerAngles.z);
             else
                 transform.rotation = value;
         }
