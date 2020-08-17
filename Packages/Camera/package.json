@@ -1,0 +1,11 @@
+{
+  "name": "com.alkaitagi.camera",
+  "version": "1.0.0",
+  "displayName": "Camera Utils",
+  "description": "This package provides additional 2d camera functionality built on Cinemachine.",
+  "author": {
+    "name": "Sharp",
+    "url": "https://github.com/alkaitagi/Sharp"
+  },
+  "hideInEditor": false
+}

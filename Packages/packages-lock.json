@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.alkaitagi.camera": {
+      "version": "file:Camera",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.sharp.core": {
       "version": "file:SharpCore",
       "depth": 0,
@@ -25,7 +31,7 @@
       "dependencies": {}
     },
     "com.unity.cinemachine": {
-      "version": "2.6.0",
+      "version": "2.6.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

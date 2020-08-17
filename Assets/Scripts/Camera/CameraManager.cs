@@ -1,6 +1,4 @@
 using UnityEngine;
-using Sharp.Core;
-using DG.Tweening;
 
 namespace Sharp.Camera
 {
@@ -27,45 +25,42 @@ namespace Sharp.Camera
             set => Camera.fieldOfView = value;
         }
 
-        private static Tweener positionTweener;
-        private static Tweener zoomTweener;
-
         private void Awake()
         {
             if (Camera)
                 return;
             Camera = GetComponent<UnityEngine.Camera>();
 
-            positionTweener = DOTween.To
-            (
-                () => Position,
-                v => Position = v,
-                Position,
-                .2f
-            );
-            zoomTweener = DOTween.To
-            (
-                () => FieldOfView,
-                f => FieldOfView = f,
-                FieldOfView,
-                .2f
-            );
+            // positionTweener = DOTween.To
+            // (
+            //     () => Position,
+            //     v => Position = v,
+            //     Position,
+            //     .2f
+            // );
+            // zoomTweener = DOTween.To
+            // (
+            //     () => FieldOfView,
+            //     f => FieldOfView = f,
+            //     FieldOfView,
+            //     .2f
+            // );
         }
 
         public void Stop()
         {
-            positionTweener.Pause();
-            zoomTweener.Pause();
+            // positionTweener.Pause();
+            // zoomTweener.Pause();
         }
 
-        public static void Move(Vector2 position, float scale = 2) =>
-            positionTweener
-                .ChangeValues(Position, position, scale * .2f)
-                .Restart();
+        public static void Move(Vector2 position, float scale = 2) { }
+        // positionTweener
+        //     .ChangeValues(Position, position, scale * .2f)
+        //     .Restart();
 
-        public static void Zoom(float fieldOfView, float scale = 1) =>
-            zoomTweener
-                .ChangeValues(FieldOfView, fieldOfView, scale * .2f)
-                .Restart();
+        public static void Zoom(float fieldOfView, float scale = 1) { }
+        // zoomTweener
+        //         .ChangeValues(FieldOfView, fieldOfView, scale * .2f)
+        //         .Restart();
     }
 }
