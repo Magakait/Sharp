@@ -21,6 +21,16 @@ namespace Sharp.Gameplay
                 area.Scale(2 * Distance * Vector3.one);
             }
         }
+        [SerializeField] private bool local;
+        public bool Local
+        {
+            get => local;
+            set
+            {
+                local = value;
+                animator.SetBool("Local", Local);
+            }
+        }
 
         [Space(10)]
         [SerializeField] private ParticleSystem mark;
@@ -33,14 +43,18 @@ namespace Sharp.Gameplay
 
         private bool ready;
 
-        private void Start()
+        private void Awake()
         {
             collider = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
             movable = GetComponent<MovableComponent>();
             rotator = GetComponent<RotatorComponent>();
+        }
 
-            mark.transform.SetParent(null);
+        private void Start()
+        {
+            area.transform.parent = null;
+            mark.transform.parent = null;
             mark.transform.localScale = Vector3.one;
             ready = true;
         }
@@ -78,7 +92,7 @@ namespace Sharp.Gameplay
             PhysicsUtility.OverlapBox
             (
                 players,
-                transform.position,
+                area.transform.position,
                 area.transform.localScale,
                 Constants.UnitMask
             );
@@ -88,19 +102,23 @@ namespace Sharp.Gameplay
             collider.enabled = shift;
             enabled = shift;
             mark.Emission(!shift);
-            animator.SetBool("Shift", shift);
+            if (shift && !Local)
+                area.transform.position = transform.position;
+            animator.SetBool("Shift", !shift);
         }
 
         public void Serialize(JToken token)
         {
             token["transition"] = movable.Transition;
             token["distance"] = Distance;
+            token["local"] = Local;
         }
 
         public void Deserialize(JToken token)
         {
             movable.Transition = (float)token["transition"];
             Distance = (int)token["distance"];
+            Local = (bool)token["local"];
         }
     }
 }
