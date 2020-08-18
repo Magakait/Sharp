@@ -9,10 +9,8 @@ namespace Sharp.Camera
 {
     public class CameraPan : MonoBehaviour
     {
-        [SerializeField]
-        private float scale;
-        [SerializeField]
-        private KeyVariable[] keys;
+        [SerializeField] private float speed;
+        [SerializeField] private KeyVariable[] keys;
 
         private void Update()
         {
@@ -24,7 +22,7 @@ namespace Sharp.Camera
                 if (Keyboard.current[keys[i]].isPressed)
                     move += Constants.Directions[i];
 
-            move *= scale;
+            move *= speed;
             if (move != Vector2.zero)
                 CameraManager.Move(EditorGrid.Clamp(CameraManager.Position + move), .35f);
         }

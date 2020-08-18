@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.alkaitagi.camera": {
-      "version": "file:Camera",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.sharp.core": {
       "version": "file:SharpCore",
       "depth": 0,
@@ -29,13 +23,6 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {}
-    },
-    "com.unity.cinemachine": {
-      "version": "2.6.1",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
       "version": "1.2.1",
@@ -114,15 +101,6 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {}
-    },
-    "com.unity.modules.director": {
-      "version": "1.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.modules.audio": "1.0.0",
-        "com.unity.modules.animation": "1.0.0"
-      }
     },
     "com.unity.modules.imgui": {
       "version": "1.0.0",

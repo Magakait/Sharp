@@ -6,25 +6,28 @@ namespace Sharp.Camera
 {
     public class CameraZoom : MonoBehaviour
     {
-        [SerializeField]
-        private float scale;
-
+        [SerializeField] private float speed;
         [Space(10)]
-        [SerializeField]
-        private float minFOV;
-        [SerializeField]
-        private float maxFOV;
+        [SerializeField] private float minFOV;
+        [SerializeField] private float maxFOV;
 
         private void Update()
         {
             if (UIUtility.IsOverUI)
                 return;
 
-            var scroll = scale * Mouse.current.scroll.ReadValue().y;
-            if (scroll != 0)
-                CameraManager.Zoom(Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV), .35f);
+            var scroll = speed * Mouse.current.scroll.ReadValue().y;
+            if (scroll == 0)
+                return;
+
+            var zoom = Mathf.Clamp(CameraManager.FieldOfView - scroll, minFOV, maxFOV);
+            CameraManager.Zoom(zoom, .5f);
         }
 
-        private void OnDisable() => CameraManager.FieldOfView = minFOV;
+        private void OnEnable() =>
+            CameraManager.FieldOfView = minFOV;
+
+        private void OnDisable() =>
+             OnEnable();
     }
 }

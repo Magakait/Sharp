@@ -25,42 +25,53 @@ namespace Sharp.Camera
             set => Camera.fieldOfView = value;
         }
 
+        private static Vector2? targetPosition = null;
+        private static float positionSpeed = 1;
+
+        private static float? targetFOV = null;
+        private static float fovSpeed = 1;
+
         private void Awake()
         {
             if (Camera)
                 return;
             Camera = GetComponent<UnityEngine.Camera>();
-
-            // positionTweener = DOTween.To
-            // (
-            //     () => Position,
-            //     v => Position = v,
-            //     Position,
-            //     .2f
-            // );
-            // zoomTweener = DOTween.To
-            // (
-            //     () => FieldOfView,
-            //     f => FieldOfView = f,
-            //     FieldOfView,
-            //     .2f
-            // );
         }
 
         public void Stop()
         {
-            // positionTweener.Pause();
-            // zoomTweener.Pause();
+            targetPosition = null;
+            targetFOV = null;
         }
 
-        public static void Move(Vector2 position, float scale = 2) { }
-        // positionTweener
-        //     .ChangeValues(Position, position, scale * .2f)
-        //     .Restart();
+        private void LateUpdate()
+        {
+            if (targetPosition.HasValue)
+            {
+                var step = positionSpeed * Time.deltaTime;
+                Position = Vector3.Lerp(Position, targetPosition.Value, step);
+                if (Position == targetPosition.Value)
+                    targetPosition = null;
+            }
+            if (targetFOV.HasValue)
+            {
+                var step = fovSpeed * Time.deltaTime;
+                FieldOfView = Mathf.Lerp(FieldOfView, targetFOV.Value, step);
+                if (FieldOfView == targetFOV.Value)
+                    targetFOV = null;
+            }
+        }
 
-        public static void Zoom(float fieldOfView, float scale = 1) { }
-        // zoomTweener
-        //         .ChangeValues(FieldOfView, fieldOfView, scale * .2f)
-        //         .Restart();
+        public static void Move(Vector2 position, float transition = 1)
+        {
+            targetPosition = position;
+            positionSpeed = 1 / (.2f * transition);
+        }
+
+        public static void Zoom(float fieldOfView, float transition = 1)
+        {
+            targetFOV = fieldOfView;
+            fovSpeed = 1 / (.2f * transition);
+        }
     }
 }
