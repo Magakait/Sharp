@@ -12,14 +12,19 @@ namespace Sharp.Managers
         {
             if (client != null)
                 return;
-
-            Facepunch.Steamworks.Config.ForcePlatform(OperatingSystem.Windows, Architecture.x64);
-            client = new Facepunch.Steamworks.Client(uint.Parse(File.ReadAllText("steam_appid.txt")));
+            try
+            {
+                Facepunch.Steamworks.Config.ForcePlatform(OperatingSystem.Windows, Architecture.x64);
+                client = new Facepunch.Steamworks.Client(uint.Parse(File.ReadAllText("steam_appid.txt")));
+            }
+            catch { }
         }
 
-        private void Update() => client.Update();
+        private void Update() =>
+            client.Update();
 
-        private void OnDestroy() => client.Dispose();
+        private void OnDestroy() =>
+            client.Dispose();
 
         private void Unlock(string id)
         {
@@ -36,6 +41,7 @@ namespace Sharp.Managers
                 Unlock(SetManager.Name);
         }
 
-        public void UnlockRoll() => Unlock("TiredOfRolling");
+        public void UnlockRoll() =>
+            Unlock("alkaitagi");
     }
 }
