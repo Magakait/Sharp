@@ -58,8 +58,9 @@ public class MovableComponent : MonoBehaviour
             return;
 
         var step = 1 / (transition * transitionScale) * Time.fixedDeltaTime;
-        rigidbody.MovePosition(Vector2.MoveTowards(Position, target.Value, step));
-        if (Position == target.Value)
+        var position = Vector2.MoveTowards(Position, target.Value, step);
+        rigidbody.MovePosition(position);
+        if (position == target.Value)
             Stop();
     }
 

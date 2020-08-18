@@ -1,0 +1,11 @@
+{
+    "name": "com.sharp.camera",
+    "version": "1.0.0",
+    "displayName": "Sharp Camera",
+    "description": "This package provides simple camera system.",
+    "author": {
+        "name": "Sharp",
+        "url": "https://github.com/alkaitagi/Sharp"
+    },
+    "hideInEditor": false
+}

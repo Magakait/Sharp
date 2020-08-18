@@ -73,7 +73,7 @@ namespace Sharp.Camera
             }
         }
 
-        public static void Move(Vector2 position, float transition = 1)
+        public static void Move(Vector2 position, float transition = 2)
         {
             targetPosition = position;
             positionSpeed = 1 / (.1f * transition);

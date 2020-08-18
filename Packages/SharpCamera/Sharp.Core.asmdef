@@ -1,0 +1,17 @@
+{
+    "name": "Sharp.Camera",
+    "references": [
+        "Unity.InputSystem",
+        "Sharp.Core",
+        "Sharp.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Sharp.UI;
-using Sharp.Editor;
 using Sharp.Core;
 using Sharp.Core.Variables;
 
@@ -26,7 +25,7 @@ namespace Sharp.Camera
 
             move *= speed;
             if (move != Vector2.zero)
-                CameraManager.Move(Clamp(CameraManager.Position + move), .5f);
+                CameraManager.Move(Clamp(CameraManager.Position + move), .25f);
         }
 
         public static Vector2 Clamp(Vector2 point)
