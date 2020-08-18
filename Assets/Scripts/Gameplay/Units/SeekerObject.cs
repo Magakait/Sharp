@@ -1,27 +1,23 @@
 using UnityEngine;
-using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(MovableComponent))]
     public class SeekerObject : MonoBehaviour, ISerializable
     {
+        [SerializeField]
+        private string sequence;
+
+        private int index;
+        private MovableComponent movable;
+
+        private void Awake() =>
+            movable = GetComponent<MovableComponent>();
+
         private void Start() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    transformBody1
-                        .DORotate(Constants.Eulers[1], movable.Transition)
-                        .SetEase(Ease.Linear),
-                    transformBody2
-                        .DORotate(-Constants.Eulers[1], movable.Transition)
-                        .SetEase(Ease.Linear)
-                )
-                    .SetLoops(-1)
-                    .Play()
-            );
+            GetComponent<Animator>().SetFloat("Speed", 1 / movable.Transition);
 
         private void Update()
         {
@@ -31,16 +27,6 @@ namespace Sharp.Gameplay
             Check();
             Move();
         }
-
-        #region gameplay
-
-        [Header("Gameplay")]
-        public MovableComponent movable;
-
-        [Space(10)]
-        public string sequence;
-
-        private int index;
 
         private static readonly bool[] checks = new bool[4];
         private void Check()
@@ -59,29 +45,12 @@ namespace Sharp.Gameplay
                 {
                     movable.Move(direction);
                     this.index = index;
-
                     break;
                 }
                 else
                     index = (index + 1) % sequence.Length;
             } while (index != this.index);
         }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform transformBody1;
-        [SerializeField]
-        private Transform transformBody2;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
 
         public void Serialize(JToken token)
         {
@@ -94,7 +63,5 @@ namespace Sharp.Gameplay
             movable.Transition = (float)token["transition"];
             sequence = (string)token["sequence"];
         }
-
-        #endregion
     }
 }

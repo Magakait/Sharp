@@ -1,59 +1,26 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Sharp.Core;
 using Sharp.Camera;
-using DG.Tweening;
 
 namespace Sharp.Editor
 {
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Animator))]
     public class EditorGrid : MonoBehaviour
     {
+        private const int Side = 126;
+
+        private Animator animator;
+
         private void Awake()
         {
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert(spriteRenderer.DOFade(0, .2f))
-            );
-
-            spriteRenderer.size = Vector2.one * (halfSide * 2 + 1);
+            GetComponent<SpriteRenderer>().size = Vector2.one * (Side + 1);
+            animator = GetComponent<Animator>();
         }
 
-        #region gameplay
+        private void Start() =>
+            CameraPan.Side = Side;
 
-        private const int halfSide = 63;
-        private readonly static Plane plane = new Plane(Vector3.forward, Vector3.zero);
-
-        public void Toggle(bool value) =>
-            animation[0].Play(value);
-
-        public static Vector3 Clamp(Vector3 position)
-        {
-            position.x = Mathf.Clamp(position.x, -halfSide, halfSide);
-            position.y = Mathf.Clamp(position.y, -halfSide, halfSide);
-
-            return position;
-        }
-
-        public static Vector2 MousePosition()
-        {
-            Ray ray = CameraManager.Camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            float distance;
-            plane.Raycast(ray, out distance);
-
-            return ray.GetPoint(distance);
-        }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
-
-        private new TweenContainer animation;
-
-        #endregion
+        public void Toggle(bool visible) =>
+            animator.SetBool("Visible", visible);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class CellComponent : MonoBehaviour
@@ -9,14 +8,8 @@ public class CellComponent : MonoBehaviour
     private bool hollowed;
     public bool Hollowed
     {
-        get
-        {
-            return hollowed;
-        }
-        set
-        {
-            hollowed = value;
-        }
+        get => hollowed;
+        set => hollowed = value;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) =>

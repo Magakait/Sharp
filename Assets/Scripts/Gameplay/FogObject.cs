@@ -1,24 +1,24 @@
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Animator))]
     public class FogObject : MonoBehaviour, ISerializable
     {
-        private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    maskSprite
-                        .DOFade(0, Constants.Time)
-                )
-            );
+        private new CircleCollider2D collider;
+        private Animator animator;
+
+        private void Awake()
+        {
+            collider = GetComponent<CircleCollider2D>();
+            animator = GetComponent<Animator>();
+        }
 
         private void Start() =>
-            collider.radius = 1;
+            collider.radius = 1f;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -26,58 +26,37 @@ namespace Sharp.Gameplay
                 Reveal();
         }
 
-        #region gameplay
-
-        [Header("Gameplay")]
-        public new CircleCollider2D collider;
-
         [SerializeField]
         private bool spread;
-        public bool Spread { get => spread; set => spread = value; }
+        public bool Spread
+        {
+            get => spread;
+            set => spread = value;
+        }
 
         private void Reveal()
         {
             collider.enabled = false;
-
-            Destroy(gameObject, 0.1f);
             if (Spread)
                 Invoke("Delay", .075f);
 
-            animation[0].Play(false);
+            animator.SetTrigger("Reveal");
+            Destroy(gameObject, 1);
         }
 
         private void Delay()
         {
-            while (true)
+            if (Physics2D.OverlapPoint(transform.position, Constants.FogMask) is Collider2D cd)
             {
-                Collider2D neighbor = Physics2D.OverlapPoint(transform.position, Constants.FogMask);
-                if (neighbor)
-                    neighbor.GetComponent<FogObject>().Reveal();
-                else
-                    break;
+                cd.GetComponent<FogObject>().Reveal();
+                Delay();
             }
         }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private SpriteRenderer maskSprite;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
 
         public void Serialize(JToken token) =>
             token["spread"] = Spread;
 
         public void Deserialize(JToken token) =>
             Spread = (bool)token["spread"];
-
-        #endregion
     }
 }

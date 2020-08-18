@@ -1,5 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
 using Newtonsoft.Json.Linq;
 
 namespace Sharp.Core
@@ -28,22 +27,6 @@ namespace Sharp.Core
                 Object.Destroy(child.gameObject);
 
             transform.DetachChildren();
-        }
-
-        public static Tween Play(this Tween tween, bool isBackwards)
-        {
-            tween.isBackwards = isBackwards;
-            tween.Play();
-
-            return tween;
-        }
-
-        public static Sequence Insert(this Sequence sequence, params Tween[] tweens)
-        {
-            foreach (var tween in tweens)
-                sequence.Insert(0, tween);
-
-            return sequence;
         }
 
         public static Vector3 ToVector(this JToken token) =>

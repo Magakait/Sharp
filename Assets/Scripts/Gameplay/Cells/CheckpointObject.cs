@@ -8,19 +8,19 @@ namespace Sharp.Gameplay
 {
     public class CheckpointObject : MonoBehaviour
     {
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            PlayerObject player = collision.GetComponent<PlayerObject>();
-            if (player)
-                Activate(player);
-        }
-
-        #region gameplay
+        [SerializeField]
+        private ParticleSystem spire;
 
         private BaseAction action;
         private float cooldown;
         private BaseMovement movement;
         private float transition;
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.GetComponent<PlayerObject>() is PlayerObject pl)
+                Activate(pl);
+        }
 
         private void Activate(PlayerObject player)
         {
@@ -38,9 +38,9 @@ namespace Sharp.Gameplay
 
         public IEnumerator Spawn()
         {
-            yield return new WaitForSeconds(2 * Constants.Time);
+            yield return new WaitForSeconds(2 * .2f);
             CameraManager.Move(transform.position);
-            yield return new WaitForSeconds(2 * Constants.Time);
+            yield return new WaitForSeconds(2 * .2f);
 
             var player = LevelManager.AddInstance("Player", transform.position).GetComponent<PlayerObject>();
             player.Action = action;
@@ -48,15 +48,5 @@ namespace Sharp.Gameplay
             player.Movement = movement;
             player.Movable.Transition = transition;
         }
-
-        #endregion
-
-        #region animation
-
-        [Space(10)]
-        [SerializeField]
-        private ParticleSystem spire;
-
-        #endregion
     }
 }

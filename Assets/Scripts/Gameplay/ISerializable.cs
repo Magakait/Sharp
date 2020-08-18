@@ -4,7 +4,7 @@ namespace Sharp.Gameplay
 {
     public interface ISerializable
     {
-        public void Serialize(JToken token);
-        public void Deserialize(JToken token);
+        void Serialize(JToken token);
+        void Deserialize(JToken token);
     }
 }

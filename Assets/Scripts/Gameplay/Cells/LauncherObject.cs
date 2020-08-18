@@ -1,29 +1,35 @@
 using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CellComponent))]
+    [RequireComponent(typeof(StateComponent))]
     public class LauncherObject : MonoBehaviour, ISerializable
     {
-        private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    leftWing
-                        .DOLocalRotate(new Vector3(0, 0, 20), Constants.Time),
-                    rightWing
-                        .DOLocalRotate(new Vector3(0, 0, -20), Constants.Time)
-                ),
-                DOTween.Sequence().Insert
-                (
-                    pointer
-                        .DOLocalMoveY(.5f, Constants.Time)
-                )
-                    .SetLoops(2, LoopType.Yoyo)
-            );
+        [SerializeField] private float scale;
+        public float Scale
+        {
+            get => scale;
+            private set => scale = value;
+        }
+        
+        [Space(10)]
+        [SerializeField] private ParticleSystem halo;
+        [SerializeField] private ParticleSystem burst;
+
+        private Animator animator;
+        private CellComponent cell;
+        private StateComponent state;
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+            cell = GetComponent<CellComponent>();
+            state = GetComponent<StateComponent>();
+        }
 
         private void Start()
         {
@@ -33,19 +39,13 @@ namespace Sharp.Gameplay
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targets[state.State])
-            {
-                MovableComponent movable = collision.GetComponent<MovableComponent>();
-                if (movable)
-                    Launch(movable);
-            }
+            if (!targets[state.State])
+                return;
+
+            MovableComponent movable = collision.GetComponent<MovableComponent>();
+            if (movable)
+                Launch(movable);
         }
-
-        #region gameplay
-
-        [Header("Gameplay")]
-        public CellComponent cell;
-        public StateComponent state;
 
         private readonly Transform[] targets = new Transform[4];
 
@@ -53,7 +53,7 @@ namespace Sharp.Gameplay
         {
             bool active = targets[state.State];
 
-            animation[0].Play(active);
+            animator.SetBool("Active", active);
             halo.Emission(active);
 
             if (active)
@@ -63,45 +63,10 @@ namespace Sharp.Gameplay
 
         public void Launch(MovableComponent movable)
         {
-            movable.Transition *= Scale;
-            movable.Move(targets[state.State].position);
-            movable.Transition /= Scale;
+            movable.Move(targets[state.State].position, Scale);
 
             Instantiate(burst, transform.position, Constants.Rotations[state.State]);
-            animation[1].Restart();
-        }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform pointer;
-        [SerializeField]
-        private Transform leftWing;
-        [SerializeField]
-        private Transform rightWing;
-
-        [Space(10)]
-        [SerializeField]
-        private ParticleSystem halo;
-        [SerializeField]
-        private ParticleSystem burst;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
-
-        [Space(10)]
-        [SerializeField]
-        private float scale;
-        public float Scale
-        {
-            get => scale;
-            private set => scale = value;
+            animator.SetTrigger("Launch");
         }
 
         public void Serialize(JToken token)
@@ -115,7 +80,5 @@ namespace Sharp.Gameplay
             state.State = (int)token["direction"];
             Scale = (float)token["scale"];
         }
-
-        #endregion
     }
 }

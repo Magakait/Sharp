@@ -6,13 +6,20 @@ using Sharp.UI;
 using Sharp.Core;
 using Sharp.Core.Variables;
 using Sharp.Camera;
+using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    public class PlayerObject : MonoBehaviour
+    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(MovableComponent))]
+    public class PlayerObject : MonoBehaviour, ISerializable
     {
-        private void Awake() =>
+        private void Awake()
+        {
+            collider = GetComponent<Collider2D>();
+            Movable = GetComponent<MovableComponent>();
             CameraManager.Position = transform.position;
+        }
 
         private void Start() =>
             CameraFollow.Target = transform;
@@ -24,25 +31,15 @@ namespace Sharp.Gameplay
 
             Rotate();
             Buffer();
-            if (!movable.IsMoving)
+            if (!Movable.IsMoving)
                 Move();
             if (cooldownEffect.emission.enabled && actionKey.IsDown)
                 StartCoroutine(Act());
         }
 
-        [Space(10)]
-        [SerializeField]
-        private MovableComponent movable;
-        public MovableComponent Movable => movable;
-
-        [SerializeField]
+        public MovableComponent Movable { get; private set; }
         private new Collider2D collider;
-        public Collider2D Collider => collider;
 
-        [SerializeField]
-        private Prompt prompt;
-
-        [Space(10)]
         [SerializeField]
         private KeyVariable sprintKey;
         [SerializeField]
@@ -53,8 +50,8 @@ namespace Sharp.Gameplay
         private KeyVariable actionKey;
 
         [Space(10)]
-        [SerializeField]
-        private BaseMovement movement;
+        [SerializeField] private Prompt prompt;
+        [SerializeField] private BaseMovement movement;
         public BaseMovement Movement
         {
             get => movement;
@@ -65,9 +62,7 @@ namespace Sharp.Gameplay
                 Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
-
-        [SerializeField]
-        private BaseAction action;
+        [SerializeField] private BaseAction action;
         public BaseAction Action
         {
             get => action;
@@ -79,9 +74,7 @@ namespace Sharp.Gameplay
                 Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
-
-        [SerializeField]
-        private float cooldown;
+        [SerializeField] private float cooldown;
         public float Cooldown
         {
             get => cooldown;
@@ -137,9 +130,9 @@ namespace Sharp.Gameplay
         private void Rotate()
         {
             if (rotationKeys[0].IsDown)
-                movable.Direction--;
+                Movable.Direction--;
             else if (rotationKeys[1].IsDown)
-                movable.Direction++;
+                Movable.Direction++;
         }
 
         private void Move()
@@ -147,15 +140,15 @@ namespace Sharp.Gameplay
             bool moved = false;
 
             foreach (var i in moves)
-                if (movable.CanMove(i))
+                if (Movable.CanMove(i))
                 {
-                    movement.Move(movable, i);
+                    movement.Move(Movable, i);
                     moved = true;
                     break;
                 }
 
             if (!moved)
-                movement.Idle(movable);
+                movement.Idle(Movable);
 
             moves.Clear();
         }
@@ -164,7 +157,7 @@ namespace Sharp.Gameplay
         {
             action.Do(this);
             cooldownEffect.Emission(false);
-            Instantiate(actionEffect, transform.position, Constants.Rotations[movable.Direction]);
+            Instantiate(actionEffect, transform.position, Constants.Rotations[Movable.Direction]);
 
             yield return new WaitForSeconds(Cooldown);
             cooldownEffect.Emission(true);
@@ -173,13 +166,16 @@ namespace Sharp.Gameplay
         public void CheckSpawn()
         {
             if (ExitObject.Passed)
-                Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                Instantiate(this.prompt, Movable.Position, Quaternion.identity)
                     .Setup("Home", () => UIUtility.Main.LoadScene("Home"));
             else if (Checkpoint)
                 Checkpoint.StartCoroutine(Checkpoint.Spawn());
             else
-                Instantiate(this.prompt, movable.Position, Quaternion.identity)
+                Instantiate(this.prompt, Movable.Position, Quaternion.identity)
                     .Setup("Restart", () => UIUtility.Main.ReloadScene());
         }
+
+        public void Serialize(JToken token) { }
+        public void Deserialize(JToken token) { }
     }
 }

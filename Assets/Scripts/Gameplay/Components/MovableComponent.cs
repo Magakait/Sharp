@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Sharp.Core;
 using Sharp.Core.Events;
-using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovableComponent : MonoBehaviour
@@ -28,8 +27,7 @@ public class MovableComponent : MonoBehaviour
     }
 
     public Vector2 IntPosition => Vector2Int.RoundToInt(Position);
-
-    public bool IsMoving => tweener.IsPlaying();
+    public bool IsMoving => target.HasValue;
 
     [Space(10)]
     [SerializeField]
@@ -48,23 +46,23 @@ public class MovableComponent : MonoBehaviour
     }
 
     private new Rigidbody2D rigidbody;
-    private Tweener tweener;
+    private Vector2? target = null;
+    private float transitionScale = 1;
 
-    private void Awake()
-    {
+    private void Awake() =>
         rigidbody = GetComponent<Rigidbody2D>();
 
-        tweener = rigidbody
-            .DOMove(Position, 0)
-            .SetEase(Ease.Linear)
-            .SetUpdate(UpdateType.Fixed)
-            .OnPlay(() => onMoveStart.Invoke())
-            .OnPause(() => onMoveStop.Invoke())
-            .OnComplete(() => onMoveStop.Invoke());
-    }
+    private void FixedUpdate()
+    {
+        if (!target.HasValue)
+            return;
 
-    private void OnDestroy() =>
-        tweener.Kill();
+        var step = 1 / (transition * transitionScale) * Time.fixedDeltaTime;
+        var position = Vector2.MoveTowards(Position, target.Value, step);
+        rigidbody.MovePosition(position);
+        if (position == target.Value)
+            Stop();
+    }
 
     public bool CanMove(int direction) =>
         CanMove(IntPosition + Constants.Directions[direction]);
@@ -76,24 +74,22 @@ public class MovableComponent : MonoBehaviour
         return cell && !cell.Hollowed;
     }
 
-    public void Move(int direction) =>
-        Move(IntPosition + Constants.Directions[direction]);
+    public void Move(int direction, float scale = 1) =>
+        Move(IntPosition + Constants.Directions[direction], scale);
 
-    public void Move(Vector2 destination)
+    public void Move(Vector2 point, float scale = 1)
     {
-        tweener
-            .ChangeValues
-            (
-                Position,
-                destination,
-                Transition * Vector2.Distance(Position, destination)
-            )
-            .Restart();
-
-        Direction = DirectionTo(destination - Position);
+        target = point;
+        transitionScale = scale;
+        Direction = DirectionTo(point - Position);
+        onMoveStart.Invoke();
     }
 
-    public void Stop() => tweener.Pause();
+    public void Stop()
+    {
+        target = null;
+        onMoveStop.Invoke();
+    }
 
     public static int DirectionTo(Vector2 destination) =>
         Mathf.Abs(destination.x) > Mathf.Abs(destination.y)

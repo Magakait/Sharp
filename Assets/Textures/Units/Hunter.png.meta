@@ -11,6 +11,12 @@ TextureImporter:
   - first:
       213: 21300004
     second: Hunter_2
+  - first:
+      213: -3085747607584028519
+    second: Hunter_0
+  - first:
+      213: -8086155015952426270
+    second: Hunter_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,8 +70,6 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -114,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2964746cddafe414091f6c92d51a32db
-      internalID: 21300000
+      spriteID: 998417f56e83d25d0800000000000000
+      internalID: -3085747607584028519
       vertices: []
       indices: 
       edges: []
@@ -135,8 +139,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e782870399ac2174d8236cf69879235f
-      internalID: 21300002
+      spriteID: 2ea9963fad438cf80800000000000000
+      internalID: -8086155015952426270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hunter_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []

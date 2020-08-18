@@ -2,36 +2,45 @@ using UnityEngine;
 using Sharp.Core;
 using Sharp.Camera;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CellComponent))]
+    [RequireComponent(typeof(StateComponent))]
     public class PortalObject : MonoBehaviour, ISerializable
     {
+        [Space(10)]
+        [SerializeField] private Vector2 destination;
+        public Vector2 Destination
+        {
+            get => destination;
+            set
+            {
+                destination = value;
+                outParticle.transform.position = Destination;
+            }
+        }
+
+        [Space(10)]
+        [SerializeField] private ParticleSystem inParticle;
+        [SerializeField] private ParticleSystem outParticle;
+
+        private Animator animator;
+        private CellComponent cell;
+        private StateComponent state;
+
         private void Awake()
         {
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    frameTransform
-                        .DORotate(Constants.Eulers[1], Constants.Time)
-                        .SetEase(Ease.Linear)
-                )
-                    .OnComplete(() => { if (state.State == 1) animation[0].Restart(); })
-                    .Play(),
-                DOTween.Sequence().Insert
-                (
-                    frameTransform
-                        .DOScale(1.5f, Constants.Time),
-                    outParticle.transform
-                        .DOScale(1.5f, Constants.Time)
-                )
-                    .SetLoops(2, LoopType.Yoyo)
-            );
+            animator = GetComponent<Animator>();
+            cell = GetComponent<CellComponent>();
+            state = GetComponent<StateComponent>();
 
             outParticle.transform.parent = null;
         }
+
+        private void Start() =>
+            outParticle.transform.parent = transform;
 
         private void OnDestroy()
         {
@@ -44,74 +53,32 @@ namespace Sharp.Gameplay
             if (state.State == 1)
             {
                 MovableComponent movable = collision.GetComponent<MovableComponent>();
-                if (movable)
+                if (collision.GetComponent<MovableComponent>() is MovableComponent mv)
                 {
-                    Teleport(movable);
-                    if (movable.GetComponent<PlayerObject>())
+                    Teleport(mv);
+                    if (mv.GetComponent<PlayerObject>())
                         CameraManager.Position = Destination;
                 }
-            }
-        }
-
-        #region gameplay
-
-        [Header("Gameplay")]
-        [SerializeField]
-        private CellComponent cell;
-        [SerializeField]
-        private StateComponent state;
-
-        [Space(10)]
-        [SerializeField]
-        private Vector2 destination;
-        public Vector2 Destination
-        {
-            get => destination;
-            set
-            {
-                destination = value;
-                outParticle.transform.position = Destination;
             }
         }
 
         public void Teleport(MovableComponent movable)
         {
             movable.Position = Destination;
-            animation[1].Restart();
+            animator.SetTrigger("Teleport");
         }
 
         public void Switch()
         {
             bool active = state.State == 1;
             if (active)
-            {
                 foreach (MovableComponent movable in cell.GetCollisions<MovableComponent>())
                     Teleport(movable);
 
-                animation[0].Restart();
-            }
-
+            animator.SetBool("Active", active);
             inParticle.Emission(active);
             outParticle.Emission(active);
         }
-
-        #endregion
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform frameTransform;
-        [SerializeField]
-        private ParticleSystem inParticle;
-        [SerializeField]
-        private ParticleSystem outParticle;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
 
         public void Serialize(JToken token)
         {
@@ -124,7 +91,5 @@ namespace Sharp.Gameplay
             Destination = token["destination"].ToVector();
             state.State = (bool)token["active"] ? 1 : 0;
         }
-
-        #endregion
     }
 }

@@ -1,45 +1,29 @@
 ﻿using UnityEngine;
-using Sharp.Core;
 using Newtonsoft.Json.Linq;
-using DG.Tweening;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CellComponent))]
+    [RequireComponent(typeof(StateComponent))]
     public class GateObject : MonoBehaviour, ISerializable
     {
-        [Space(10)]
-        [SerializeField]
+        private Animator animator;
         private CellComponent cell;
-        [SerializeField]
         private StateComponent state;
 
-        private void Awake() =>
-            animation = gameObject.AddComponent<TweenContainer>().Init
-            (
-                DOTween.Sequence().Insert
-                (
-                    cellTransform
-                        .DOScale(0, Constants.Time)
-                )
-            );
+        private void Awake()
+        {
+            cell = GetComponent<CellComponent>();
+            state = GetComponent<StateComponent>();
+            animator = GetComponent<Animator>();
+        }
 
         public void Switch()
         {
             cell.Hollowed = !Open;
-            animation[0].Play(Open);
+            animator.SetBool("Open", Open);
         }
-
-        #region animation
-
-        [Header("Animation")]
-        [SerializeField]
-        private Transform cellTransform;
-
-        private new TweenContainer animation;
-
-        #endregion
-
-        #region serialization
 
         public bool Open
         {
@@ -52,7 +36,5 @@ namespace Sharp.Gameplay
 
         public void Deserialize(JToken token) =>
             Open = (bool)token["open"];
-
-        #endregion
     }
 }
