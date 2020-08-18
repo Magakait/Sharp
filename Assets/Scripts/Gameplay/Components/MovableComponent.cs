@@ -47,6 +47,7 @@ public class MovableComponent : MonoBehaviour
 
     private new Rigidbody2D rigidbody;
     private Vector2? target = null;
+    private float transitionScale = 1;
 
     private void Awake() =>
         rigidbody = GetComponent<Rigidbody2D>();
@@ -56,7 +57,7 @@ public class MovableComponent : MonoBehaviour
         if (!target.HasValue)
             return;
 
-        var step = 1 / transition * Time.fixedDeltaTime;
+        var step = 1 / (transition * transitionScale) * Time.fixedDeltaTime;
         rigidbody.MovePosition(Vector2.MoveTowards(Position, target.Value, step));
         if (Position == target.Value)
             Stop();
@@ -72,12 +73,13 @@ public class MovableComponent : MonoBehaviour
         return cell && !cell.Hollowed;
     }
 
-    public void Move(int direction) =>
-        Move(IntPosition + Constants.Directions[direction]);
+    public void Move(int direction, float scale = 1) =>
+        Move(IntPosition + Constants.Directions[direction], scale);
 
-    public void Move(Vector2 point)
+    public void Move(Vector2 point, float scale = 1)
     {
         target = point;
+        transitionScale = scale;
         Direction = DirectionTo(point - Position);
         onMoveStart.Invoke();
     }

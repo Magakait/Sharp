@@ -12,6 +12,8 @@ namespace Sharp.Camera
         [SerializeField] private float speed;
         [SerializeField] private KeyVariable[] keys;
 
+        public static float Side { get; set; }
+
         private void Update()
         {
             if (UIUtility.IsInput)
@@ -24,7 +26,15 @@ namespace Sharp.Camera
 
             move *= speed;
             if (move != Vector2.zero)
-                CameraManager.Move(EditorGrid.Clamp(CameraManager.Position + move), .35f);
+                CameraManager.Move(Clamp(CameraManager.Position + move), .5f);
+        }
+
+        public static Vector2 Clamp(Vector2 point)
+        {
+            var halfSide = Side / 2;
+            point.x = Mathf.Clamp(point.x, -halfSide, halfSide);
+            point.y = Mathf.Clamp(point.y, -halfSide, halfSide);
+            return point;
         }
     }
 }

@@ -76,13 +76,13 @@ namespace Sharp.Camera
         public static void Move(Vector2 position, float transition = 1)
         {
             targetPosition = position;
-            positionSpeed = 1 / (.2f * transition);
+            positionSpeed = 1 / (.1f * transition);
         }
 
         public static void Zoom(float fieldOfView, float transition = 1)
         {
             targetFOV = fieldOfView;
-            fovSpeed = 1 / (.2f * transition);
+            fovSpeed = 1 / (.1f * transition);
         }
     }
 }

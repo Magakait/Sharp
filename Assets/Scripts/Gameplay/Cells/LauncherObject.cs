@@ -9,6 +9,17 @@ namespace Sharp.Gameplay
     [RequireComponent(typeof(StateComponent))]
     public class LauncherObject : MonoBehaviour, ISerializable
     {
+        [SerializeField] private float scale;
+        public float Scale
+        {
+            get => scale;
+            private set => scale = value;
+        }
+        
+        [Space(10)]
+        [SerializeField] private ParticleSystem halo;
+        [SerializeField] private ParticleSystem burst;
+
         private Animator animator;
         private CellComponent cell;
         private StateComponent state;
@@ -36,8 +47,6 @@ namespace Sharp.Gameplay
                 Launch(movable);
         }
 
-        #region gameplay
-
         private readonly Transform[] targets = new Transform[4];
 
         public void Check()
@@ -54,31 +63,10 @@ namespace Sharp.Gameplay
 
         public void Launch(MovableComponent movable)
         {
-            movable.Transition *= Scale;
-            movable.Move(targets[state.State].position);
-            movable.Transition /= Scale;
+            movable.Move(targets[state.State].position, Scale);
 
             Instantiate(burst, transform.position, Constants.Rotations[state.State]);
             animator.SetTrigger("Launch");
-        }
-
-        #endregion
-
-        [Space(10)]
-        [SerializeField]
-        private ParticleSystem halo;
-        [SerializeField]
-        private ParticleSystem burst;
-
-        #region serialization
-
-        [Space(10)]
-        [SerializeField]
-        private float scale;
-        public float Scale
-        {
-            get => scale;
-            private set => scale = value;
         }
 
         public void Serialize(JToken token)
@@ -92,7 +80,5 @@ namespace Sharp.Gameplay
             state.State = (int)token["direction"];
             Scale = (float)token["scale"];
         }
-
-        #endregion
     }
 }

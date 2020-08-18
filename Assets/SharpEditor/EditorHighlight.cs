@@ -81,7 +81,7 @@ namespace Sharp.Editor
 
         private void TargetGrid()
         {
-            Vector3 position = Vector3Int.RoundToInt(EditorGrid.Clamp(CameraManager.WorldMouse));
+            Vector3 position = Vector3Int.RoundToInt(CameraPan.Clamp(CameraManager.WorldMouse));
             Collider2D collider = Physics2D.OverlapPoint(position, 1 << Layer);
 
             if (Dragging)
