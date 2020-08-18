@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using Sharp.UI;
 using Sharp.Core.Variables;
 using Sharp.Managers;
+using Sharp.Camera;
 
 namespace Sharp.Editor
 {
@@ -80,7 +81,7 @@ namespace Sharp.Editor
 
         private void TargetGrid()
         {
-            Vector3 position = Vector3Int.RoundToInt(EditorGrid.Clamp(EditorGrid.MousePosition()));
+            Vector3 position = Vector3Int.RoundToInt(EditorGrid.Clamp(CameraManager.WorldMouse));
             Collider2D collider = Physics2D.OverlapPoint(position, 1 << Layer);
 
             if (Dragging)

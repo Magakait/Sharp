@@ -13,6 +13,7 @@ namespace Sharp.Camera
             CameraManager.Rotation = speed * new Vector3(.5f - mouse.y, mouse.x - .5f);
         }
 
-        private void OnDisable() => CameraManager.Rotation = Vector3.zero;
+        private void OnDisable() =>
+            CameraManager.Rotation = Vector3.zero;
     }
 }

@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using Sharp.Core;
 using Sharp.UI;
 using Sharp.Managers;
@@ -9,7 +10,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    [RequireComponent(typeof(CircleCollider2D))]
     [RequireComponent(typeof(Animator))]
     public class EntranceObject : MonoBehaviour, ISerializable
     {
@@ -33,30 +33,23 @@ namespace Sharp.Gameplay
                 coreEffect.Emission(true);
 
             enterButton.interactable = SetManager.Levels.Contains(Level);
-            GetComponent<CircleCollider2D>().radius = 1;
         }
 
-        private void OnMouseEnter()
+        private void LateUpdate()
         {
-            if (enabled)
-                animator.SetBool("Hover", true);
-        }
+            var mouse = CameraManager.WorldMouse;
+            var distance = ((Vector2)transform.position - mouse).sqrMagnitude;
+            animator.SetBool("Hover", distance <= 1);
 
-        private void OnMouseExit()
-        {
-            if (enabled)
-                animator.SetBool("Hover", false);
-        }
-
-        private void OnMouseDown()
-        {
-            if (enabled && !UIUtility.IsOverUI)
+            if (distance <= 1
+                && !UIUtility.IsOverUI
+                && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 SetManager.Meta["selected"] = Level;
                 SetManager.Meta.Save();
-
                 CameraManager.Move(transform.position);
             }
+
         }
 
         public void Enter()

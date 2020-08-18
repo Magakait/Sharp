@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Sharp.Camera
 {
@@ -25,6 +26,8 @@ namespace Sharp.Camera
             set => Camera.fieldOfView = value;
         }
 
+        public static Vector2 WorldMouse { get; private set; }
+
         private static Vector2? targetPosition = null;
         private static float positionSpeed = 1;
 
@@ -42,6 +45,14 @@ namespace Sharp.Camera
         {
             targetPosition = null;
             targetFOV = null;
+        }
+
+        private void Update()
+        {
+            Ray ray = Camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            float distance;
+            new Plane(Vector3.forward, Vector3.zero).Raycast(ray, out distance);
+            WorldMouse = ray.GetPoint(distance);
         }
 
         private void LateUpdate()

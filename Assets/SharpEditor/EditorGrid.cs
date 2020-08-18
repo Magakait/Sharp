@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Sharp.Camera;
 
 namespace Sharp.Editor
 {
@@ -9,7 +7,6 @@ namespace Sharp.Editor
     public class EditorGrid : MonoBehaviour
     {
         private const int halfSide = 63;
-        private readonly static Plane plane = new Plane(Vector3.forward, Vector3.zero);
 
         private Animator animator;
 
@@ -27,16 +24,6 @@ namespace Sharp.Editor
             position.x = Mathf.Clamp(position.x, -halfSide, halfSide);
             position.y = Mathf.Clamp(position.y, -halfSide, halfSide);
             return position;
-        }
-
-        public static Vector2 MousePosition()
-        {
-            Ray ray = CameraManager.Camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            float distance;
-            plane.Raycast(ray, out distance);
-
-            return ray.GetPoint(distance);
         }
     }
 }

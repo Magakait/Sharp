@@ -24,10 +24,10 @@ namespace Sharp.Camera
             CameraManager.Zoom(zoom, .5f);
         }
 
-        private void OnEnable() =>
+        private void Start() =>
             CameraManager.FieldOfView = minFOV;
 
         private void OnDisable() =>
-             OnEnable();
+             Start();
     }
 }
