@@ -83,7 +83,6 @@ namespace Sharp.Gameplay
             {
                 distance = value;
                 distanceScaler.Scale(new Vector3(Distance, 0, 0));
-                distanceScaler.transform.localPosition = .5f * new Vector3(0, Distance, 0);
             }
         }
         [SerializeField]
