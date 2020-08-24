@@ -7,8 +7,7 @@ namespace Sharp.UI
     [RequireComponent(typeof(RectTransform))]
     public class CanvasToggle : MonoBehaviour
     {
-        [SerializeField]
-        private bool visible;
+        [SerializeField] private bool visible;
         public bool Visible
         {
             get => visible;
@@ -20,19 +19,15 @@ namespace Sharp.UI
                 onToggle.Invoke(Visible);
             }
         }
-        [SerializeField]
-        private float scale = 1;
-        [SerializeField]
-        private Vector3 offset = Vector3.zero;
-        [SerializeField]
-        private float duration = .1f;
+        [SerializeField] private float scale = 1;
+        [SerializeField] private Vector3 offset = Vector3.zero;
+        [SerializeField] private float duration = .1f;
         public float Duration
         {
             get => duration;
             set => duration = value;
         }
-        [SerializeField]
-        private BoolEvent onToggle = null;
+        [SerializeField] private BoolEvent onToggle = null;
 
         private float timer = 0;
 

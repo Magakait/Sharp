@@ -3258,6 +3258,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: 0, y: -50, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
@@ -5794,6 +5795,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: -50, y: 0, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
@@ -6107,6 +6109,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: -50, y: 0, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
@@ -7487,6 +7490,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: 50, y: 0, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
@@ -8327,6 +8331,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: 0, y: -50, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
@@ -10373,6 +10378,7 @@ MonoBehaviour:
   scale: 1
   offset: {x: 0, y: -50, z: 0}
   duration: 0.1
+  sound: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   onToggle:
     m_PersistentCalls:
       m_Calls: []
