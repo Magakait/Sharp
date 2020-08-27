@@ -9,8 +9,7 @@ namespace Sharp.Gameplay
     public class SwitcherObject : MonoBehaviour, ISerializable
     {
         [Header("Gameplay")]
-        [SerializeField]
-        private bool enter;
+        [SerializeField] private bool enter;
         public bool Enter
         {
             get => enter;
@@ -20,8 +19,7 @@ namespace Sharp.Gameplay
                 animator.SetBool("Enter", Enter);
             }
         }
-        [SerializeField]
-        private bool exit;
+        [SerializeField] private bool exit;
         public bool Exit
         {
             get => exit;
@@ -31,16 +29,12 @@ namespace Sharp.Gameplay
                 animator.SetBool("Exit", Exit);
             }
         }
-        [SerializeField]
-        private Vector2 origin;
-        [SerializeField]
-        private Vector2 offset;
+        [SerializeField] private Vector2 origin;
+        [SerializeField] private Vector2 offset;
 
         [Space(10)]
-        [SerializeField]
-        private Transform effectTransform;
-        [SerializeField]
-        private ParticleScalerComponent[] particleScalers;
+        [SerializeField] private Transform effectTransform;
+        [SerializeField] private ParticleScalerComponent[] particleScalers;
 
         private Animator animator;
 
