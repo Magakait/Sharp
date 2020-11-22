@@ -16,8 +16,11 @@ namespace Sharp.Gameplay
         private void Awake() =>
             movable = GetComponent<MovableComponent>();
 
-        private void Start() =>
+        private void Start()
+        {
             GetComponent<Animator>().SetFloat("Speed", 1 / movable.Transition);
+            GetComponent<AudioSource>()?.Play();
+        }
 
         private void Update()
         {

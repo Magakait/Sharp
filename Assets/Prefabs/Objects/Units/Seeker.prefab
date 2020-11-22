@@ -451,18 +451,18 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 53348c36a82e7d4438691dca938c7cfa, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.5
-  m_Pitch: 3
+  m_audioClip: {fileID: 8300000, guid: c778848528aef9a47a622050b16e0d85, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3
-  MaxDistance: 15
+  MinDistance: 1
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -549,12 +549,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb62c27c572dc5c45be90e77cbc184ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPitch: -1
+  minPitch: 0.75
   maxPitch: 1
   randomize: 1
   clips:
-  - {fileID: 8300000, guid: 65f0c4b4608050c4a9f82a9fe9f4364f, type: 3}
-  - {fileID: 8300000, guid: 53348c36a82e7d4438691dca938c7cfa, type: 3}
+  - {fileID: 8300000, guid: c778848528aef9a47a622050b16e0d85, type: 3}
 --- !u!114 &114384113115664946
 MonoBehaviour:
   m_ObjectHideFlags: 0

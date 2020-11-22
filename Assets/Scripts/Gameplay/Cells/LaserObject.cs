@@ -7,6 +7,7 @@ namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(StateComponent))]
+    [RequireComponent(typeof(AudioSource))]
     public class LaserObject : MonoBehaviour, ISerializable
     {
         [SerializeField]
@@ -14,11 +15,13 @@ namespace Sharp.Gameplay
 
         private Animator animator;
         private StateComponent state;
+        private new AudioSource audio;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
             state = GetComponent<StateComponent>();
+            audio = GetComponent<AudioSource>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +46,8 @@ namespace Sharp.Gameplay
         {
             if (active)
             {
+                if (!audio.isPlaying)
+                    audio.Play();
                 Burst();
                 active = false;
             }
