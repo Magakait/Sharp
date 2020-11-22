@@ -3,8 +3,6 @@ using Sharp.Core;
 
 public class RotatorComponent : MonoBehaviour
 {
-    [SerializeField] new private AudioClip audio;
-
     private new Rigidbody2D rigidbody;
     private Quaternion? target = null;
 
@@ -39,12 +37,8 @@ public class RotatorComponent : MonoBehaviour
             target = null;
     }
 
-    public void Rotate(int rotation)
-    {
-        if (audio)
-            AudioSource.PlayClipAtPoint(audio, transform.position);
-        Rotate(Constants.Rotations[rotation]);
-    }
+    public void Rotate(int rotation) =>
+         Rotate(Constants.Rotations[rotation]);
 
     public void Rotate(Quaternion rotation) =>
         target = rotation;

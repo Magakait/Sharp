@@ -7,6 +7,7 @@ namespace Sharp.Gameplay
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CellComponent))]
     [RequireComponent(typeof(StateComponent))]
+    [RequireComponent(typeof(AudioSource))]
     public class LauncherObject : MonoBehaviour, ISerializable
     {
         [SerializeField] private float scale;
@@ -15,7 +16,7 @@ namespace Sharp.Gameplay
             get => scale;
             private set => scale = value;
         }
-        
+
         [Space(10)]
         [SerializeField] private ParticleSystem halo;
         [SerializeField] private ParticleSystem burst;
@@ -23,12 +24,14 @@ namespace Sharp.Gameplay
         private Animator animator;
         private CellComponent cell;
         private StateComponent state;
+        private new AudioSource audio;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
             cell = GetComponent<CellComponent>();
             state = GetComponent<StateComponent>();
+            audio = GetComponent<AudioSource>();
         }
 
         private void Start()
@@ -67,6 +70,7 @@ namespace Sharp.Gameplay
 
             Instantiate(burst, transform.position, Constants.Rotations[state.State]);
             animator.SetTrigger("Launch");
+            audio.Play();
         }
 
         public void Serialize(JToken token)

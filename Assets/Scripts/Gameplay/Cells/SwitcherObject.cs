@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class SwitcherObject : MonoBehaviour, ISerializable
     {
         [Header("Gameplay")]
@@ -37,10 +38,12 @@ namespace Sharp.Gameplay
         [SerializeField] private ParticleScalerComponent[] particleScalers;
 
         private Animator animator;
+        private new AudioSource audio;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
             effectTransform.parent = null;
         }
 
@@ -95,6 +98,7 @@ namespace Sharp.Gameplay
         {
             int delta = isUp ? 1 : -1;
             targets.ForEach(i => i.State += delta);
+            audio.Play();
         }
 
         public void Serialize(JToken token)
