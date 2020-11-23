@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class WatcherObject : MonoBehaviour, ISerializable
     {
         [SerializeField]
@@ -33,9 +34,13 @@ namespace Sharp.Gameplay
 
         private static readonly List<UnitComponent> units = new List<UnitComponent>();
         private Animator animator;
+        private new AudioSource audio;
 
-        private void Awake() =>
+        private void Awake()
+        {
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
+        }
 
         private void FixedUpdate()
         {
@@ -50,6 +55,7 @@ namespace Sharp.Gameplay
                 step *= -1;
 
             scale = Mathf.Clamp01(scale + step);
+            audio.volume = scale * 0.25f;
             delayTransform.localScale = scale * Vector2.one;
             if (scale == 1)
                 Explode();
