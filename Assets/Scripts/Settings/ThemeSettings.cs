@@ -1,4 +1,5 @@
 using System.IO;
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,9 +26,12 @@ namespace Sharp.Settings
                 .GetFiles(Constants.ThemesRoot, "*.json")
                 .Select(f => Path.GetFileNameWithoutExtension(f))
                 .ToList();
-            themes.Remove("Custom");
-            themes.Remove("Default");
-            themes.Insert(0, "Custom");
+
+            foreach (var s in new[] { "Default", "Custom" })
+            {
+                themes.Remove(s);
+                themes.Insert(0, s);
+            }
             dropdownThemes.AddOptions(themes);
 
             var index = themes.IndexOf(File.ReadAllText(Constants.ThemesRoot + "Selected.txt"));
