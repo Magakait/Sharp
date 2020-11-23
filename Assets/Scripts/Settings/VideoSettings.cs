@@ -20,10 +20,8 @@ namespace Sharp.Settings
 
         #region resolution
 
-        [SerializeField]
-        private JsonFile file;
-        [SerializeField]
-        private Dropdown dropdownResolutions;
+        [SerializeField] private JsonFile file;
+        [SerializeField] private Dropdown dropdownResolutions;
 
         private Resolution[] resolutions;
 

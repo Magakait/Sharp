@@ -40,5 +40,6 @@ namespace Sharp.Core
         public static readonly string SetRoot = Root + "Sets\\";
         public static readonly string EditorRoot = Root + "Editor\\";
         public static readonly string SettingsRoot = Root + "Settings\\";
+        public static readonly string ThemesRoot = Root + "Themes\\";
     }
 }
