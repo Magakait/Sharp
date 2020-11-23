@@ -99,6 +99,7 @@ namespace Sharp.Gameplay
             {
                 persistent = value;
                 animator.SetBool("Persistent", Persistent);
+                audio.volume = Persistent ? 0.05f : 0.2f;
             }
         }
 

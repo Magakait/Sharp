@@ -5,12 +5,17 @@ using Newtonsoft.Json.Linq;
 namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class ZoomObject : MonoBehaviour, ISerializable
     {
         private Animator animator;
+        private new AudioSource audio;
 
-        private void Awake() =>
+        private void Awake()
+        {
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -19,6 +24,7 @@ namespace Sharp.Gameplay
 
             CameraManager.Zoom(45 - 15 * Zoom);
             animator.SetTrigger("Rotate");
+            audio.Play();
         }
 
         [SerializeField]

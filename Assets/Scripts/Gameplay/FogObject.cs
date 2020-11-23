@@ -6,15 +6,18 @@ namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(CircleCollider2D))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class FogObject : MonoBehaviour, ISerializable
     {
         private new CircleCollider2D collider;
         private Animator animator;
+        private new AudioSource audio;
 
         private void Awake()
         {
             collider = GetComponent<CircleCollider2D>();
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
         }
 
         private void Start() =>
@@ -26,6 +29,12 @@ namespace Sharp.Gameplay
                 Reveal();
         }
 
+        private void FixedUpdate()
+        {
+            if (!(collider.enabled || audio.isPlaying))
+                Destroy(gameObject, 1);
+        }
+
         [SerializeField]
         private bool spread;
         public bool Spread
@@ -34,6 +43,7 @@ namespace Sharp.Gameplay
             set => spread = value;
         }
 
+
         private void Reveal()
         {
             collider.enabled = false;
@@ -41,7 +51,7 @@ namespace Sharp.Gameplay
                 Invoke("Delay", .075f);
 
             animator.SetTrigger("Reveal");
-            Destroy(gameObject, 1);
+            audio.Play();
         }
 
         private void Delay()
