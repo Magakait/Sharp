@@ -8,6 +8,7 @@ namespace Sharp.Gameplay
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CellComponent))]
     [RequireComponent(typeof(StateComponent))]
+    [RequireComponent(typeof(AudioSource))]
     public class PortalObject : MonoBehaviour, ISerializable
     {
         [Space(10)]
@@ -27,12 +28,14 @@ namespace Sharp.Gameplay
         [SerializeField] private ParticleSystem outParticle;
 
         private Animator animator;
+        private new AudioSource audio;
         private CellComponent cell;
         private StateComponent state;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
             cell = GetComponent<CellComponent>();
             state = GetComponent<StateComponent>();
 
@@ -52,6 +55,7 @@ namespace Sharp.Gameplay
         {
             if (state.State == 1)
             {
+                audio.Play();
                 MovableComponent movable = collision.GetComponent<MovableComponent>();
                 if (collision.GetComponent<MovableComponent>() is MovableComponent mv)
                 {

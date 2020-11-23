@@ -11,14 +11,19 @@ using Newtonsoft.Json.Linq;
 namespace Sharp.Gameplay
 {
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     public class EntranceObject : MonoBehaviour, ISerializable
     {
         private Animator animator;
+        private new AudioSource audio;
 
         public bool Passed { get; private set; }
 
-        private void Awake() =>
+        private void Awake()
+        {
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
+        }
 
         private void Start()
         {
@@ -39,17 +44,19 @@ namespace Sharp.Gameplay
         {
             var mouse = CameraManager.WorldMouse;
             var distance = ((Vector2)transform.position - mouse).sqrMagnitude;
-            animator.SetBool("Hover", distance <= 1);
 
-            if (distance <= 1
+            var hover = distance <= 1;
+            animator.SetBool("Hover", hover);
+
+            if (hover
                 && !UIUtility.IsOverUI
                 && Mouse.current.leftButton.wasPressedThisFrame)
             {
+                audio.Play();
                 SetManager.Meta["selected"] = Level;
                 SetManager.Meta.Save();
                 CameraManager.Move(transform.position);
             }
-
         }
 
         public void Enter()

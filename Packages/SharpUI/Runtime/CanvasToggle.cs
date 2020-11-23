@@ -17,6 +17,8 @@ namespace Sharp.UI
                 canvasGroup.blocksRaycasts = Visible;
                 enabled = true;
                 onToggle.Invoke(Visible);
+                if (audio)
+                    audio.Play();
             }
         }
         [SerializeField] private float scale = 1;
@@ -31,6 +33,7 @@ namespace Sharp.UI
 
         private float timer = 0;
 
+        private new AudioSource audio;
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
 
@@ -42,6 +45,7 @@ namespace Sharp.UI
 
         private void Awake()
         {
+            audio = GetComponent<AudioSource>();
             canvasGroup = GetComponent<CanvasGroup>();
             rectTransform = GetComponent<RectTransform>();
 

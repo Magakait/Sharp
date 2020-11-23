@@ -34,6 +34,7 @@ namespace Sharp.Gameplay
 
             distanceScaler.ParticleSystem.Refresh();
             animator.SetTrigger("Burst");
+            audio.Play();
         }
 
         private void OnTriggerStay2D(Collider2D other)
@@ -46,8 +47,6 @@ namespace Sharp.Gameplay
         {
             if (active)
             {
-                if (!audio.isPlaying)
-                    audio.Play();
                 Burst();
                 active = false;
             }
@@ -99,7 +98,6 @@ namespace Sharp.Gameplay
             {
                 persistent = value;
                 animator.SetBool("Persistent", Persistent);
-                audio.volume = Persistent ? 0.05f : 0.2f;
             }
         }
 
