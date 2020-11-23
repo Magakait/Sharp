@@ -100,8 +100,6 @@ namespace Sharp.Gameplay
         [SerializeField]
         private ParticleSystem assignEffect;
         [SerializeField]
-        private ParticleSystem actionEffect;
-        [SerializeField]
         private ParticleSystem cooldownEffect;
 
         private readonly List<int> moves = new List<int>();
@@ -157,7 +155,13 @@ namespace Sharp.Gameplay
         {
             action.Do(this);
             cooldownEffect.Emission(false);
-            Instantiate(actionEffect, transform.position, Constants.Rotations[Movable.Direction]);
+            if (action.Effect)
+                Instantiate
+                (
+                    action.Effect,
+                    transform.position,
+                    Constants.Rotations[Movable.Direction]
+                );
 
             yield return new WaitForSeconds(Cooldown);
             cooldownEffect.Emission(true);

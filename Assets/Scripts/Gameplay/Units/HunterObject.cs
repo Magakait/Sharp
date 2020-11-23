@@ -9,6 +9,7 @@ namespace Sharp.Gameplay
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(MovableComponent))]
     [RequireComponent(typeof(RotatorComponent))]
+    [RequireComponent(typeof(AudioSource))]
     public class HunterObject : MonoBehaviour, ISerializable
     {
         [SerializeField] private int distance;
@@ -38,6 +39,7 @@ namespace Sharp.Gameplay
 
         private new Collider2D collider;
         private Animator animator;
+        private new AudioSource audio;
         private MovableComponent movable;
         private RotatorComponent rotator;
 
@@ -47,6 +49,7 @@ namespace Sharp.Gameplay
         {
             collider = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
             movable = GetComponent<MovableComponent>();
             rotator = GetComponent<RotatorComponent>();
         }
@@ -83,7 +86,9 @@ namespace Sharp.Gameplay
 
                 movable.Move(destination);
                 rotator.Rotate(destination);
+
             }
+            audio.mute = players.Count == 0;
         }
 
         private static readonly List<PlayerObject> players = new List<PlayerObject>();
@@ -102,8 +107,7 @@ namespace Sharp.Gameplay
             collider.enabled = shift;
             enabled = shift;
             mark.Emission(!shift);
-            if (shift && !Local)
-                area.transform.position = transform.position;
+            if (shift && !Local) area.transform.position = transform.position;
             animator.SetBool("Shift", !shift);
         }
 
