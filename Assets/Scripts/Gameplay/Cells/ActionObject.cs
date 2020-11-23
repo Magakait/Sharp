@@ -3,14 +3,22 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
+    [RequireComponent(typeof(AudioSource))]
     public class ActionObject : MonoBehaviour, ISerializable
     {
+        private new AudioSource audio;
+
+        private void Awake() =>
+            audio = GetComponent<AudioSource>();
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<PlayerObject>() is PlayerObject pl)
+            if (collision.GetComponent<PlayerObject>() is PlayerObject p)
             {
-                pl.Action = actions[Action];
-                pl.Cooldown = Cooldown;
+                if (p.Action != actions[Action])
+                    audio.Play();
+                p.Action = actions[Action];
+                p.Cooldown = Cooldown;
             }
         }
 
