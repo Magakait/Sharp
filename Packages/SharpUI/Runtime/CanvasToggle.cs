@@ -17,7 +17,7 @@ namespace Sharp.UI
                 canvasGroup.blocksRaycasts = Visible;
                 enabled = true;
                 onToggle.Invoke(Visible);
-                if (audio)
+                if (Visible && audio)
                     audio.Play();
             }
         }
