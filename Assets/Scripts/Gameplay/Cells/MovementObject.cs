@@ -3,34 +3,24 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    [RequireComponent(typeof(AudioSource))]
     public class MovementObject : MonoBehaviour, ISerializable
     {
-        private new AudioSource audio;
-
-        private void Awake() =>
-            audio = GetComponent<AudioSource>();
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<PlayerObject>() is PlayerObject p)
+            if (collision.GetComponent<PlayerObject>() is PlayerObject p
+                && p.Movement != movements[Movement])
             {
-                if (p.Movement != movements[Movement])
-                    audio.Play();
                 p.Movement = movements[Movement];
                 p.Movable.Transition = Transition;
             }
         }
 
         [Space(10)]
-        [SerializeField]
-        private BaseMovement[] movements;
-        [SerializeField]
-        private SpriteRenderer[] icons;
+        [SerializeField] private BaseMovement[] movements;
+        [SerializeField] private SpriteRenderer[] icons;
 
         [Space(10)]
-        [SerializeField]
-        private int movement;
+        [SerializeField] private int movement;
         public int Movement
         {
             get => movement;
@@ -42,8 +32,7 @@ namespace Sharp.Gameplay
             }
         }
 
-        [SerializeField]
-        private float transition;
+        [SerializeField] private float transition;
         public float Transition
         {
             get => transition;

@@ -6,30 +6,20 @@ using UnityEngine;
 
 namespace Sharp.Gameplay
 {
-    [RequireComponent(typeof(AudioSource))]
     public class CheckpointObject : MonoBehaviour
     {
-        [SerializeField]
-        private ParticleSystem spire;
-
-        private new AudioSource audio;
+        [SerializeField] private ParticleSystem spire;
 
         private BaseAction action;
         private float cooldown;
         private BaseMovement movement;
         private float transition;
-
-        private void Awake() =>
-            audio = GetComponent<AudioSource>();
-
+        
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<PlayerObject>() is PlayerObject pl)
-            {
-                if (pl.Checkpoint != this)
-                    audio.Play();
-                Activate(pl);
-            }
+            if (collision.GetComponent<PlayerObject>() is PlayerObject p
+                && p.Checkpoint != this)
+                Activate(p);
         }
 
         private void Activate(PlayerObject player)

@@ -3,34 +3,24 @@ using Newtonsoft.Json.Linq;
 
 namespace Sharp.Gameplay
 {
-    [RequireComponent(typeof(AudioSource))]
     public class ActionObject : MonoBehaviour, ISerializable
     {
-        private new AudioSource audio;
-
-        private void Awake() =>
-            audio = GetComponent<AudioSource>();
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<PlayerObject>() is PlayerObject p)
+            if (collision.GetComponent<PlayerObject>() is PlayerObject p
+                && p.Action != actions[Action])
             {
-                if (p.Action != actions[Action])
-                    audio.Play();
                 p.Action = actions[Action];
                 p.Cooldown = Cooldown;
             }
         }
 
         [Space(10)]
-        [SerializeField]
-        private BaseAction[] actions;
-        [SerializeField]
-        private SpriteRenderer[] shapes;
+        [SerializeField] private BaseAction[] actions;
+        [SerializeField] private SpriteRenderer[] shapes;
 
         [Space(10)]
-        [SerializeField]
-        private int action;
+        [SerializeField] private int action;
         public int Action
         {
             get => action;
@@ -42,8 +32,7 @@ namespace Sharp.Gameplay
             }
         }
 
-        [SerializeField]
-        private float cooldown;
+        [SerializeField] private float cooldown;
         public float Cooldown { get => cooldown; private set => cooldown = value; }
 
         public void Serialize(JToken token)
