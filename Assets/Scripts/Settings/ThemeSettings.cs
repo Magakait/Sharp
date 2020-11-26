@@ -34,8 +34,8 @@ namespace Sharp.Settings
             }
             dropdownThemes.AddOptions(themes);
 
-            var index = themes.IndexOf(File.ReadAllText(Constants.ThemesRoot + "Selected.txt"));
-            dropdownThemes.value = Mathf.Max(index, 0);
+            var i = themes.IndexOf(File.ReadAllText(Constants.ThemesRoot + "Selected.txt"));
+            dropdownThemes.value = Mathf.Max(i, 0);
             dropdownThemes.RefreshShownValue();
 
             onMultiple.Invoke(themes.Count > 1);

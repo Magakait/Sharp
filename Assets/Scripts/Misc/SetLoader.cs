@@ -24,17 +24,19 @@ namespace Sharp.Managers
             path = Constants.SetRoot + category;
 
             dropdownTitle.ClearOptions();
-            foreach (var option in new DirectoryInfo(path).GetDirectories()
+
+            dropdownTitle.AddOptions(
+                new DirectoryInfo(path).GetDirectories()
                     .OrderBy(d => d.CreationTime)
                     .Reverse()
-                    .Select(d => new Dropdown.OptionData(d.Name)))
-                dropdownTitle.options.Add(option);
+                    .Select(d => d.Name).ToList());
             dropdownTitle.RefreshShownValue();
 
             if (dropdownTitle.options.Count > 0)
             {
                 var selected = File.ReadAllText(path + "\\Selected.txt");
-                dropdownTitle.value = dropdownTitle.options.FindIndex(o => o.text == selected);
+                var i = dropdownTitle.options.FindIndex(o => o.text == selected);
+                dropdownTitle.value = Mathf.Max(i, 0);
                 dropdownTitle.onValueChanged.Invoke(dropdownTitle.value);
             }
             else
