@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Pitch
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: -3740738875001944809, guid: 1493ba24be7dbb640ad5253fb1592079,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1056560984796660, guid: 1493ba24be7dbb640ad5253fb1592079, type: 3}
       propertyPath: m_Name
       value: HunterCollapse

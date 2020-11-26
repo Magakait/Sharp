@@ -178,7 +178,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-    value: 0.75
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].inSlope
@@ -226,7 +226,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
-    value: 0
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: spreadCustomCurve.m_Curve.Array.data[0].inSlope
@@ -312,4 +312,8 @@ Preset:
     propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
     value: 4
     objectReference: {fileID: 0}
-  m_ExcludedProperties: []
+  m_ExcludedProperties:
+  - m_audioClip
+  - m_Volume
+  - Priority
+  - m_Pitch
