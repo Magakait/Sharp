@@ -323,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00009918213
+      value: 0.00010681152
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000024795532
+      value: 0.00005722046
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -19056,7 +19056,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000017166138
+      value: 0.000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -22066,7 +22066,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5ca547eb0384629408e888fbb329e5c4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 1
   m_Pitch: 0.5
   Loop: 0
   Mute: 0
@@ -22074,7 +22074,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.5
+  MinDistance: 0
   MaxDistance: 1
   Pan2D: 0
   rolloffMode: 2
@@ -22091,17 +22091,8 @@ AudioSource:
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -22110,7 +22101,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.75
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -22125,7 +22116,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

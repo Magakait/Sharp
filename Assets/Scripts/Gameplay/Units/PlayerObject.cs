@@ -21,8 +21,13 @@ namespace Sharp.Gameplay
             CameraManager.Position = transform.position;
         }
 
-        private void Start() =>
+        private bool started = false;
+
+        private void Start()
+        {
+            started = true;
             CameraFollow.Target = transform;
+        }
 
         private void Update()
         {
@@ -59,7 +64,8 @@ namespace Sharp.Gameplay
             {
                 movement = value;
                 icon.sprite = Movement.Icon;
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
+                if (started)
+                    Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
         [SerializeField] private BaseAction action;
@@ -71,7 +77,8 @@ namespace Sharp.Gameplay
                 action = value;
                 shape.sprite = Action.Shape;
                 cooldownEffect.Emission(Action.name != "Base");
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
+                if (started)
+                    Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
         [SerializeField] private float cooldown;
@@ -88,7 +95,8 @@ namespace Sharp.Gameplay
             set
             {
                 checkpoint = value;
-                Instantiate(assignEffect, transform.position, Quaternion.identity);
+                if (started)
+                    Instantiate(assignEffect, transform.position, Quaternion.identity);
             }
         }
 

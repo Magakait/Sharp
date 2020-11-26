@@ -55,7 +55,7 @@ namespace Sharp.Gameplay
                 step *= -1;
 
             scale = Mathf.Clamp01(scale + step);
-            audio.volume = scale * 0.25f;
+            audio.volume = scale * 0.5f;
             delayTransform.localScale = scale * Vector2.one;
             if (scale == 1)
                 Explode();
