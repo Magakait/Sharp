@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using Sharp.Core;
 using Newtonsoft.Json.Linq;
 
@@ -24,8 +25,11 @@ namespace Sharp.Gameplay
         {
             bool active = state.State == 1;
             if (active)
-                foreach (UnitComponent unit in cell.GetCollisions<UnitComponent>())
-                    unit.Kill();
+            {
+                var targets = cell.GetCollisions<UnitComponent>().ToArray();
+                for (int i = 0; i < targets.Length; i++)
+                    targets[i]?.Kill();
+            }
 
             effect.Emission(active);
         }
