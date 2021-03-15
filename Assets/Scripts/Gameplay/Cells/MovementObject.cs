@@ -8,8 +8,8 @@ namespace Sharp.Gameplay
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.GetComponent<PlayerObject>() is PlayerObject p
-                && !(p.Movement == movements[Movement]
-                     || p.Movable.Transition != Transition))
+                && (p.Movement != movements[Movement]
+                    || p.Movable.Transition != Transition))
             {
                 p.Movement = movements[Movement];
                 p.Movable.Transition = Transition;
