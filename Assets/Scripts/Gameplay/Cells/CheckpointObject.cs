@@ -14,7 +14,8 @@ namespace Sharp.Gameplay
         private float cooldown;
         private BaseMovement movement;
         private float transition;
-        
+        private int direction;
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.GetComponent<PlayerObject>() is PlayerObject p
@@ -31,6 +32,7 @@ namespace Sharp.Gameplay
             cooldown = player.Cooldown;
             movement = player.Movement;
             transition = player.Movable.Transition;
+            direction = player.Movable.Direction;
 
             player.Checkpoint = this;
             spire.Emission(true);
@@ -47,6 +49,7 @@ namespace Sharp.Gameplay
             player.Cooldown = cooldown;
             player.Movement = movement;
             player.Movable.Transition = transition;
+            player.Movable.Direction = direction;
         }
     }
 }
