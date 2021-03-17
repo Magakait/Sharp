@@ -68,8 +68,11 @@ namespace Sharp.Camera
             {
                 var step = fovSpeed * Time.deltaTime;
                 FieldOfView = Mathf.Lerp(FieldOfView, targetFOV.Value, step);
-                if (FieldOfView == targetFOV.Value)
+                if (Mathf.Approximately(FieldOfView, targetFOV.Value))
+                {
+                    FieldOfView = targetFOV.Value;
                     targetFOV = null;
+                }
             }
         }
 
