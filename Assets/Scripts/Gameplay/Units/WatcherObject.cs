@@ -40,6 +40,7 @@ namespace Sharp.Gameplay
         {
             animator = GetComponent<Animator>();
             audio = GetComponent<AudioSource>();
+            audio.volume = 0;
         }
 
         private void FixedUpdate()
