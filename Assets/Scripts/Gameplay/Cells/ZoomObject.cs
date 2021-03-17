@@ -22,7 +22,11 @@ namespace Sharp.Gameplay
             if (!collision.GetComponent<PlayerObject>())
                 return;
 
-            CameraManager.Zoom(45 - 15 * Zoom);
+            var fieldOfView = 45 - 15 * Zoom;
+            if (CameraManager.FieldOfView == fieldOfView)
+                return;
+
+            CameraManager.Zoom(fieldOfView);
             animator.SetTrigger("Rotate");
             audio.Play();
         }
