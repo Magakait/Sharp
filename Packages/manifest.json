@@ -1,15 +1,11 @@
 {
   "dependencies": {
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.inputsystem": "1.0.2",
-    "com.unity.mathematics": "1.2.1",
     "com.unity.nuget.newtonsoft-json": "2.0.0",
-    "com.unity.render-pipelines.core": "10.4.0",
-    "com.unity.render-pipelines.universal": "10.4.0",
-    "com.unity.searcher": "4.3.2",
-    "com.unity.shadergraph": "10.4.0",
+    "com.unity.render-pipelines.core": "11.0.0",
+    "com.unity.render-pipelines.universal": "11.0.0",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.audio": "1.0.0",
