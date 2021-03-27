@@ -66,6 +66,8 @@ namespace Sharp.Gameplay
         {
             if (mark)
                 Destroy(mark);
+            if (area)
+                Destroy(area);
         }
 
         private void FixedUpdate()
