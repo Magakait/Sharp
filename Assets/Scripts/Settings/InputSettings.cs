@@ -44,7 +44,8 @@ namespace Sharp.Settings
 
             foreach (Key key in Enum.GetValues(typeof(Key)))
             {
-                if (!Keyboard.current[key].wasPressedThisFrame)
+                if (key == Key.None
+                    || !Keyboard.current[key].wasPressedThisFrame)
                     continue;
 
                 string text = key.ToString();

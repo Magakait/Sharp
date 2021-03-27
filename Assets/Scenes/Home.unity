@@ -323,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000022888184
+      value: -0.000091552734
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000024795532
+      value: -0.00004386902
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -4383,12 +4383,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 418880683}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -6442,12 +6442,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 609197092}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -7850,6 +7850,7 @@ ParticleSystemRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -7911,19 +7912,19 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700040323}
-  serializedVersion: 7
+  serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
+  emitterVelocityMode: 1
   looping: 1
   prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 1
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -8473,6 +8474,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 1000
+    customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -14244,12 +14246,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 846253551}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -14790,12 +14792,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 941118512}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -16098,12 +16100,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1088609566}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -17681,12 +17683,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1219711472}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -18636,12 +18638,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1367356066}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -19056,7 +19058,7 @@ PrefabInstance:
     - target: {fileID: 224505283711477866, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000049591064
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 224831635605770490, guid: 40fa7e4603ec31341ab9fc058af93207,
         type: 3}
@@ -20551,7 +20553,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1533068704}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.94
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -20631,7 +20633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000051025414}
+  m_AnchoredPosition: {x: 0, y: 0.000024795532}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1533068703
@@ -24128,12 +24130,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1689050294}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
@@ -26000,12 +26002,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1410665673}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: Sharp.Settings.InputSettings, Assembly-CSharp
         m_MethodName: set_Picker
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1975419231}
-          m_ObjectArgumentAssemblyTypeName: KeyPicker, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Sharp.UI.KeyPicker, Sharp.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Editor
