@@ -65,9 +65,9 @@ namespace Sharp.Gameplay
         private void OnDestroy()
         {
             if (mark)
-                Destroy(mark);
+                Destroy(mark.gameObject);
             if (area)
-                Destroy(area);
+                Destroy(area.gameObject);
         }
 
         private void FixedUpdate()
